@@ -130,7 +130,7 @@ config:
         #url: http://localhost:8000
 
   workflow:
-    useMinimalDamUpdateAssetWorkflow: false
+    useMinimalDamUpdateAssetWorkflow: true
 
 
 # Example tenant configuration. Tenant name = primary host name/server name
