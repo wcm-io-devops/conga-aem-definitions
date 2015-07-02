@@ -42,6 +42,15 @@
 {{/block}}
 
 
+{{~#block "tenantSpecificVHostConfig"}}
+{{#if dispatcher.tenantSpecificVHostConfig ~}}
+#### Configuration specific for this tenant ####
+
+{{dispatcher.tenantSpecificVHostConfig}}
+{{~/if}}
+{{/block}}
+
+
 {{~#block "rewriteSlingShortUrlMapping"}}
 {{~#if slingMappingPath}}
   # Short URL configuration according to http://www.cognifide.com/blogs/cq/multidomain-cq-mappings-and-apache-configuration/
@@ -68,13 +77,4 @@
   # Root redirect to homepage
   RewriteRule ^/$ {{dispatcher.rootRedirectUrl}} [R={{dispatcher.rootRedirectHttpStatus}},L]
 {{/if ~}}
-{{/block}}
-
-
-{{~#block "tenantSpecificVHostConfig"}}
-{{#if dispatcher.tenantSpecificVHostConfig ~}}
-#### Configuration specific for this tenant ####
-
-{{dispatcher.tenantSpecificVHostConfig}}
-{{~/if}}
 {{/block}}

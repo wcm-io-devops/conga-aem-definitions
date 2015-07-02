@@ -24,6 +24,13 @@ RewriteEngine On
 </Directory>
 
 
+#### Content Disposition Header for downloads ####
+
+<LocationMatch "^.*/dam/.*\.download_attachment\..*$">
+  Header set Content-Disposition: attachment
+</LocationMatch>
+
+
 #### Deny access to sensitive areas ####
 
 <Location "/admin">
