@@ -31,6 +31,7 @@ files:
   variants:
   - ssl
   - no-ssl+ssl
+  condition: "${dispatcher.sslCertificateFile}"
   template: vhost_publish_tenant.ssl.conf.hbs
   # Mulitply file for each tenant that has the given roles
   multiply: tenant
