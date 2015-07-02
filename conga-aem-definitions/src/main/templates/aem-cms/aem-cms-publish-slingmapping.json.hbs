@@ -1,7 +1,7 @@
 {
-  "jcr:primaryType": "sling:Folder",
+  "jcr:primaryType": "sling:Folder"
 
-{{#eachIf tenants "config.slingMappingPath"}}
+{{#eachIf tenants "config.slingMappingPath"}},
   "{{this.tenant}}": {
     "jcr:primaryType": "sling:Mapping",
     "sling:match": "(
@@ -10,7 +10,7 @@
       {{~#each this.config.serverAliasNames}}|{{regexQuote this}}{{/each ~}}
       )",
     "sling:internalRedirect": ["{{this.config.slingMappingPath}}","/"]
-  }{{#unless @last}},{{/unless}}
+  }
 {{/eachIf}}
 
 }
