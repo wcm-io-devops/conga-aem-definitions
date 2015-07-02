@@ -69,6 +69,19 @@ files:
         #- rule: exclude
         #  pattern: /etc/replication/agents\.publish/(outbox|s7delivery)
 
+# Minimal "DAM Update Asset" Workfow (Author)
+- file: aem-cms-author-dam-update-asset-workflow-minimal.json
+  dir: packages
+  template: aem-cms-author-dam-update-asset-workflow-minimal.json.hbs
+  variants:
+  - aem-author
+  postProcessors:
+  - aem-contentpackage
+  postProcessorOptions:
+    contentPackage:
+      name: aem-cms-author-dam-update-asset-workflow-minimal
+      rootPath: /etc/workflow/models/dam/update_asset
+
 # AEM Quickstart start script
 - file: start
   dir: bin
