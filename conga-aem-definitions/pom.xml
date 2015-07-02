@@ -32,7 +32,7 @@
 
   <groupId>io.wcm.devops.conga.definitions</groupId>
   <artifactId>io.wcm.devops.conga.definitions.aem</artifactId>
-  <packaging>jar</packaging>
+  <packaging>config-definition</packaging>
 
   <name>CONGA Roles and Templates for AEM</name>
   <description>wcm.io DevOps CONfiguration GenerAtor Roles and Templates for Adobe Experience Manager (AEM).</description>
@@ -43,5 +43,19 @@
     <url>https://github.com/wcm-io-devops/wcm-io-devops-conga-aem-definitions</url>
     <tag>HEAD</tag>
   </scm>
+
+  <build>
+    <plugins>
+
+      <!-- Configure CONGA maven plugin to support CONGA-specific packaging types -->
+      <plugin>
+        <groupId>io.wcm.devops.conga</groupId>
+        <artifactId>conga-maven-plugin</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <extensions>true</extensions>
+      </plugin>
+
+    </plugins>
+  </build>
 
 </project>
