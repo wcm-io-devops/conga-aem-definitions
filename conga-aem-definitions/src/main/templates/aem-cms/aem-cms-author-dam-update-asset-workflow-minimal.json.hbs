@@ -104,7 +104,12 @@
     "model": {
       "jcr:primaryType": "cq:WorkflowModel",
       "description": "This workflow manages the update of assets",
+      "jcr:versionHistory": "32c039c6-84af-4fb6-babd-b82e90875921",
+      "jcr:predecessors": [],
       "title": "DAM Update Asset",
+      "jcr:baseVersion": "0454a654-2719-4335-8869-e8b167ab6869",
+      "jcr:isCheckedOut": false,
+      "jcr:uuid": "01001f76-9ea5-45ed-934f-dca169e9c9b6",
       "sling:resourceType": "cq/workflow/components/model",
       "metaData": {
         "jcr:primaryType": "nt:unstructured"
@@ -142,39 +147,6 @@
           },
         "node3": {
           "jcr:primaryType": "cq:WorkflowNode",
-          "description": "Dynamic Media On-Premise process to extract Image Info",
-          "type": "PROCESS",
-          "title": "Dynamic Media On-Premise extract image info",
-          "metaData": {
-            "jcr:primaryType": "nt:unstructured",
-            "PROCESS": "com.day.cq.dam.s7dam.onprem.process.S7damExtractImageInfoProcess",
-            "PROCESS_AUTO_ADVANCE": "true"
-            }
-          },
-        "node4": {
-          "jcr:primaryType": "cq:WorkflowNode",
-          "description": "Dynamic Media On-Premise process to write out CSS assets to s7dam nfs mount for use with Scene7 Image Server.",
-          "type": "PROCESS",
-          "title": "Dynamic Media On-Premise Process CSS",
-          "metaData": {
-            "jcr:primaryType": "nt:unstructured",
-            "PROCESS": "com.day.cq.dam.s7dam.onprem.process.S7damCssProcess",
-            "PROCESS_AUTO_ADVANCE": "true"
-            }
-          },
-        "node5": {
-          "jcr:primaryType": "cq:WorkflowNode",
-          "description": "Generates the optimized cqdam.pyramid.tiff rendition for Dynamic Imaging if Dynamic Media is enabled.",
-          "type": "PROCESS",
-          "title": "Create PTIFF Rendition (Dynamic Media)",
-          "metaData": {
-            "jcr:primaryType": "nt:unstructured",
-            "PROCESS": "com.adobe.cq.dam.s7imaging.impl.is.CreatePTIFFProcess",
-            "PROCESS_AUTO_ADVANCE": "true"
-            }
-          },
-        "node6": {
-          "jcr:primaryType": "cq:WorkflowNode",
           "description": "Extracts video poster frame",
           "type": "PROCESS",
           "title": "FFmpeg thumbnails",
@@ -185,31 +157,7 @@
             "PROCESS_AUTO_ADVANCE": "true"
             }
           },
-        "node7": {
-          "jcr:primaryType": "cq:WorkflowNode",
-          "description": "Generate thumbnails for eps files using image magick",
-          "type": "PROCESS",
-          "title": "EPS thumbnails (powered by ImageMagick)",
-          "metaData": {
-            "jcr:primaryType": "nt:unstructured",
-            "THUMBNAILS": [
-              "48:48",
-              "140:100",
-              "319:319"
-            ],
-            "MIME_TYPES": [
-              "image/eps",
-              "image/x-eps",
-              "application/postscript",
-              "application/eps",
-              "application/x-eps"
-            ],
-            "COMMANDS": "convert -define jpeg:size=319x319 ${filename} -thumbnail 319x319 cq5dam.thumbnail.319.319.png",
-            "PROCESS": "com.day.cq.dam.core.process.CommandLineProcess",
-            "PROCESS_AUTO_ADVANCE": "true"
-            }
-          },
-        "node8": {
+        "node4": {
           "jcr:primaryType": "cq:WorkflowNode",
           "description": "Create web enabled video formats",
           "type": "PROCESS",
@@ -221,85 +169,7 @@
             "PROCESS_AUTO_ADVANCE": "true"
             }
           },
-        "node9": {
-          "jcr:primaryType": "cq:WorkflowNode",
-          "description": "Indesign Media Extraction",
-          "type": "EXTERNAL_PROCESS",
-          "title": "Media Extraction",
-          "metaData": {
-            "jcr:primaryType": "nt:unstructured",
-            "EXTERNAL_PROCESS": "com.day.cq.dam.indd.process.INDDMediaExtractProcess",
-            "timeout": "3600",
-            "period": "10",
-            "advanceOnTimeout": "true",
-            "scriptPaths": [
-              "/etc/dam/indesign/scripts/ThumbnailExport.jsx",
-              "/etc/dam/indesign/scripts/XHTMLExport.jsx",
-              "/etc/dam/indesign/scripts/IDMLExport.jsx",
-              "/etc/dam/indesign/scripts/JPEGPagesExport.jsx",
-              "/etc/dam/indesign/scripts/XMLExport.jsx"
-            ],
-            "PROCESS_ARGS": "test",
-            "libPath": "/etc/dam/indesign/scripts/cq-lib.jsx",
-            "linkPath": "/Links",
-            "PROCESS_AUTO_ADVANCE": "true"
-            }
-          },
-        "node10": {
-          "jcr:primaryType": "cq:WorkflowNode",
-          "description": "This process will fragment an asset in its subassets",
-          "type": "PROCESS",
-          "title": "Create Sub Asset",
-          "metaData": {
-            "jcr:primaryType": "nt:unstructured",
-            "PROCESS": "com.day.cq.dam.core.process.CreateSubAssetsProcess",
-            "PROCESS_AUTO_ADVANCE": "true"
-            }
-          },
-        "node11": {
-          "jcr:primaryType": "cq:WorkflowNode",
-          "description": "This step will check for the thumbnail existence. It will create new thumbnails from thumbnail.jpg rendition",
-          "type": "PROCESS",
-          "title": "INDD Verify Thumbnail",
-          "metaData": {
-            "jcr:primaryType": "nt:unstructured",
-            "PROCESS_ARGS": "[140:100],[48:48],[319:319]",
-            "PROCESS": "com.day.cq.dam.indd.process.INDDCreateThumbnailProcess",
-            "PROCESS_AUTO_ADVANCE": "true"
-            }
-          },
-        "node12": {
-          "jcr:primaryType": "cq:WorkflowNode",
-          "description": "InDesign Page Extraction",
-          "type": "PROCESS",
-          "title": "Page Extraction",
-          "metaData": {
-            "jcr:primaryType": "nt:unstructured",
-            "PROCESS": "com.day.cq.dam.indd.process.INDDPageExtractProcess",
-            "pageDesign": "/etc/designs/geometrixx",
-            "pageTitle": "IDML Extraction",
-            "pageTemplate": "/apps/geometrixx/templates/contentpage",
-            "extractionHandler": "com.day.cq.dam.indd.impl.idml.IDMLExtractionHandler",
-            "PROCESS_AUTO_ADVANCE": "true"
-            }
-          },
-        "node13": {
-          "jcr:primaryType": "cq:WorkflowNode",
-          "description": "Uploads and processes videos through the Adobe Dynamic Media Video Service.",
-          "type": "PROCESS",
-          "title": "Dynamic Media Video Service Process",
-          "metaData": {
-            "jcr:primaryType": "nt:unstructured",
-            "PROCESS": "com.day.cq.dam.s7dam.common.process.VideoProxyServiceProcess",
-            "CONFIGS": [
-              "160:90",
-              "48:27",
-              "320:180"
-            ],
-            "PROCESS_AUTO_ADVANCE": "true"
-            }
-          },
-        "node14": {
+        "node5": {
           "jcr:primaryType": "cq:WorkflowNode",
           "description": "This process will create one or more thumbnails for the asset, create web enabled rendition and update folder thumbnail.",
           "type": "PROCESS",
@@ -323,29 +193,7 @@
             "HEIGHT": "1280"
             }
           },
-        "node15": {
-          "jcr:primaryType": "cq:WorkflowNode",
-          "description": "Dynamic Media On-Premise apply image profile",
-          "type": "PROCESS",
-          "title": "Dynamic Media On-Premise Apply Image Profile",
-          "metaData": {
-            "jcr:primaryType": "nt:unstructured",
-            "PROCESS": "com.day.cq.dam.s7dam.onprem.process.ApplyImageProfileProcess",
-            "PROCESS_AUTO_ADVANCE": "true"
-            }
-          },
-        "node16": {
-          "jcr:primaryType": "cq:WorkflowNode",
-          "description": "This process will extract and upload the product assets",
-          "type": "PROCESS",
-          "title": "Product Asset Upload",
-          "metaData": {
-            "jcr:primaryType": "nt:unstructured",
-            "PROCESS": "com.day.cq.dam.pim.impl.sourcing.upload.process.ProductAssetsUploadProcess",
-            "PROCESS_AUTO_ADVANCE": "true"
-            }
-          },
-        "node17": {
+        "node6": {
           "jcr:primaryType": "cq:WorkflowNode",
           "type": "END",
           "title": "End",
@@ -393,83 +241,6 @@
           "jcr:primaryType": "cq:WorkflowTransition",
           "to": "node6",
           "from": "node5",
-          "rule": "",
-          "metaData": {"jcr:primaryType": "nt:unstructured"}
-          },
-        "node6#node7": {
-          "jcr:primaryType": "cq:WorkflowTransition",
-          "to": "node7",
-          "from": "node6",
-          "rule": "",
-          "metaData": {"jcr:primaryType": "nt:unstructured"}
-          },
-        "node7#node8": {
-          "jcr:primaryType": "cq:WorkflowTransition",
-          "to": "node8",
-          "from": "node7",
-          "rule": "",
-          "metaData": {"jcr:primaryType": "nt:unstructured"}
-          },
-        "node8#node9": {
-          "jcr:primaryType": "cq:WorkflowTransition",
-          "to": "node9",
-          "from": "node8",
-          "rule": "",
-          "metaData": {"jcr:primaryType": "nt:unstructured"}
-          },
-        "node9#node10": {
-          "jcr:primaryType": "cq:WorkflowTransition",
-          "to": "node10",
-          "from": "node9",
-          "rule": "",
-          "metaData": {"jcr:primaryType": "nt:unstructured"}
-          },
-        "node10#node11": {
-          "jcr:primaryType": "cq:WorkflowTransition",
-          "to": "node11",
-          "from": "node10",
-          "rule": "",
-          "metaData": {"jcr:primaryType": "nt:unstructured"}
-          },
-        "node11#node12": {
-          "jcr:primaryType": "cq:WorkflowTransition",
-          "to": "node12",
-          "from": "node11",
-          "rule": "",
-          "metaData": {"jcr:primaryType": "nt:unstructured"}
-          },
-        "node12#node13": {
-          "jcr:primaryType": "cq:WorkflowTransition",
-          "to": "node13",
-          "from": "node12",
-          "rule": "",
-          "metaData": {"jcr:primaryType": "nt:unstructured"}
-          },
-        "node13#node14": {
-          "jcr:primaryType": "cq:WorkflowTransition",
-          "to": "node14",
-          "from": "node13",
-          "rule": "",
-          "metaData": {"jcr:primaryType": "nt:unstructured"}
-          },
-        "node14#node15": {
-          "jcr:primaryType": "cq:WorkflowTransition",
-          "to": "node15",
-          "from": "node14",
-          "rule": "",
-          "metaData": {"jcr:primaryType": "nt:unstructured"}
-          },
-        "node15#node16": {
-          "jcr:primaryType": "cq:WorkflowTransition",
-          "to": "node16",
-          "from": "node15",
-          "rule": "",
-          "metaData": {"jcr:primaryType": "nt:unstructured"}
-          },
-        "node16#node17": {
-          "jcr:primaryType": "cq:WorkflowTransition",
-          "to": "node17",
-          "from": "node16",
           "metaData": {"jcr:primaryType": "nt:unstructured"}
           }
         }
