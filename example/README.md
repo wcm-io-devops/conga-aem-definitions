@@ -1,5 +1,5 @@
-CONGA Example
-=============
+CONGA AEM Definitions Example
+=============================
 
 You can generate the sample configuration by executing
 
