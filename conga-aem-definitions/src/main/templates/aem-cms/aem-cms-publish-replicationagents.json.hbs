@@ -1,0 +1,46 @@
+{
+  "jcr:primaryType": "sling:OrderedFolder",
+  "jcr:title": "Replication",
+  "sling:resourceType": "cq/replication/components/home",
+
+  "agents.publish": {
+    "jcr:primaryType": "cq:Page",
+    "jcr:content": {
+      "jcr:primaryType": "nt:unstructured",
+      "jcr:title": "Agents on publish",
+      "cq:template": "/libs/cq/replication/templates/agents",
+      "sling:resourceType": "cq/replication/components/agents"
+    }
+
+{{#with replication.publish.flushTarget}}{{#if this.name}},
+    "flush_{{this.name}}": {
+      "jcr:primaryType": "cq:Page",
+      "jcr:content": {
+        "jcr:primaryType": "nt:unstructured",
+        "jcr:title": "Publish Dispatcher Flush",
+        "jcr:description": "Agent that is triggered on modification and sends flush requests to the publish dispatcher {{this.name}}.",
+        "cq:template": "/libs/cq/replication/templates/agent",
+        "sling:resourceType": "cq/replication/components/agent",
+        "enabled": "true",
+        "transportUri": "{{this.url}}/dispatcher/invalidate.cache",
+        "serializationType": "flush",
+        "retryDelay": "60000",
+        "triggerReceive": "true",
+        "triggerSpecific": "true",
+        "noVersioning": "true",
+        "protocolHTTPMethod": "GET",
+        "protocolHTTPHeaders": [
+          "CQ-Action:{action}",
+          "CQ-Handle:{path}",
+          "CQ-Path: {path}"
+        ],
+        "logLevel": "error",
+        "ssl": "relaxed",
+        "protocolHTTPExpired": true
+      }
+    }
+{{/if}}{{/with}}
+
+  }
+
+}

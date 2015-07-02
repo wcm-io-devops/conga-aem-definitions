@@ -1,0 +1,67 @@
+{
+  "jcr:primaryType": "sling:OrderedFolder",
+  "jcr:title": "Replication",
+  "sling:resourceType": "cq/replication/components/home",
+
+  "agents.author": {
+    "jcr:primaryType": "cq:Page",
+    "jcr:content": {
+      "jcr:primaryType": "nt:unstructured",
+      "jcr:title": "Agents on author",
+      "cq:template": "/libs/cq/replication/templates/agents",
+      "sling:resourceType": "cq/replication/components/agents"
+    }
+
+{{#each replication.author.publishTargets}},
+    "publish_{{this.name}}": {
+      "jcr:primaryType": "cq:Page",
+      "jcr:content": {
+        "jcr:primaryType": "nt:unstructured",
+        "jcr:title": "Publish Agent",
+        "jcr:description": "Agent that replicates to the {{this.name}} publish instance.",
+        "cq:template": "/libs/cq/replication/templates/agent",
+        "sling:resourceType": "cq/replication/components/agent",
+        "enabled": "true",
+        "transportUri": "{{this.url}}/bin/receive?sling:authRequestLogin=1",
+        "transportUser": "{{this.transportUser}}",
+        "transportPassword": "{{this.tranportPassword}}",
+        "serializationType": "durbo",
+        "retryDelay": "60000",
+        "logLevel": "error"
+      }
+    }
+{{/each}}
+
+{{#with replication.author.flushTarget}}{{#if this.name}},
+    "flush_{{this.name}}": {
+      "jcr:primaryType": "cq:Page",
+      "jcr:content": {
+        "jcr:primaryType": "nt:unstructured",
+        "jcr:title": "Author Dispatcher Flush",
+        "jcr:description": "Agent that is triggered on modification and sends flush requests to the author dispatcher {{this.name}}.",
+        "cq:template": "/libs/cq/replication/templates/agent",
+        "sling:resourceType": "cq/replication/components/agent",
+        "enabled": "true",
+        "transportUri": "{{this.url}}/dispatcher/invalidate.cache",
+        "serializationType": "flush",
+        "retryDelay": "60000",
+        "triggerSpecific": "true",
+        "triggerModified": "true",
+        "noVersioning": "true",
+        "noStatusUpdate": "true",
+        "protocolHTTPMethod": "GET",
+        "protocolHTTPHeaders": [
+          "CQ-Action:{action}",
+          "CQ-Handle:{path}",
+          "CQ-Path: {path}"
+        ],
+        "logLevel": "error",
+        "ssl": "relaxed",
+        "protocolHTTPExpired": true
+      }
+    }
+{{/if}}{{/with}}
+
+  }
+
+}

@@ -1,0 +1,51 @@
+# Webserverver with Dispatcher module for AEM author instance
+# Generates configuration additions for the tenant's vhosts and dispatcher configuration
+
+templateDir: aem-dispatcher/author
+
+variants:
+- variant: no-ssl
+- variant: ssl
+- variant: no-ssl+ssl
+
+files:
+
+# Dispatcher configuration
+- file: "dispatcher_author.any"
+  dir: conf.d
+  template: dispatcher_author.any.hbs
+
+# httpd vhost (HTTP)
+- file: "vhost_author.conf"
+  dir: sites-available
+  variants:
+  - no-ssl
+  - no-ssl+ssl
+  template: vhost_author.conf.hbs
+
+# httpd vhost (HTTPS)
+- file: "vhost_author.ssl.conf"
+  dir: sites-available
+  variants:
+  - ssl
+  - no-ssl+ssl
+  template: vhost_author.ssl.conf.hbs
+
+
+config:
+
+  cmsAuthorHostname: author-host
+  cmsAuthorHostnameSsl: "${cmsAuthorHostname}"
+  dispatcher:
+    moduleFile: modules/mod_dispatcher.so
+    cacheRootPath: /path/to/dispatcher/cache
+    renderInstance:
+      host: localhost
+      port: 4502
+    #allowAdminAccessFrom: 10.0.0.0/255.0.0.0
+    #allowFlushFrom: 127.0.0.1 localhost
+    cacheDamAssets: false
+    sslCertificateFile: /path/to/sslCertificateFile
+    sslCertificateKeyFile: /path/to/sslCertificateKeyFile
+    sslCACertificatePath: /path/to/sslCACertificates
+    sslCACertificateFile: /path/to/sslCACertificateFile

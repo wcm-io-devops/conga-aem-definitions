@@ -1,0 +1,124 @@
+# Adobe Experience Manager (AEM) Instance.
+# AEM quickstart runs directly from command line with embedded Jetty Servlet Container.
+
+variants:
+- variant: aem-author
+- variant: aem-publish
+
+templateDir: aem-cms
+
+files:
+
+# Sling Mapping for Publish Instance
+- file: aem-cms-publish-slingmapping.json
+  dir: packages
+  template: aem-cms-publish-slingmapping.json.hbs
+  variants:
+  - aem-publish
+  postProcessors:
+  - aem-contentpackage
+  postProcessorOptions:
+    contentPackage:
+      name: aem-cms-publish-slingmapping
+      rootPath: /etc/map/http
+      filters:
+      - filter: /etc/map/http
+        rules:
+        - rule: exclude
+          pattern: /etc/map/http
+        - rule: include
+          pattern: /etc/map/http/.*
+        - rule: exclude
+          pattern: /etc/map/http/AppMeasurementBridge
+
+# AEM Replication (Author)
+- file: aem-cms-author-replicationagents.json
+  dir: packages
+  template: aem-cms-author-replicationagents.json.hbs
+  variants:
+  - aem-author
+  postProcessors:
+  - aem-contentpackage
+  postProcessorOptions:
+    contentPackage:
+      name: aem-cms-author-replicationagents
+      rootPath: /etc/replication
+      filters:
+      - filter: /etc/replication/agents.author
+        # Uncomment this to keep the built-in special agents
+        #rules:
+        #- rule: exclude
+        #  pattern: /etc/replication/agents\.author/(flush|publish_reverse|static|test_and_target|dynamic_media_replication|s7delivery|offloading_outbox)
+
+# AEM Replication (Publish)
+- file: aem-cms-publish-replicationagents.json
+  dir: packages
+  template: aem-cms-publish-replicationagents.json.hbs
+  variants:
+  - aem-publish
+  postProcessors:
+  - aem-contentpackage
+  postProcessorOptions:
+    contentPackage:
+      name: aem-cms-publish-replicationagents
+      rootPath: /etc/replication
+      filters:
+      - filter: /etc/replication/agents.publish
+        # Uncomment this to keep the built-in special agents
+        #rules:
+        #- rule: exclude
+        #  pattern: /etc/replication/agents\.publish/(outbox|s7delivery)
+
+# AEM Quickstart start script
+- file: start
+  dir: bin
+  template: start.hbs
+  fileHeader: unixShellScript
+
+
+# Defines configuration parameters and default values
+config:
+  contentPackage:
+    group: conga-aem-cms
+    version: "${version}"
+
+  jvm:
+    path: /path/to/java
+    heapspace:
+      min: 2048m
+      max: 2048m
+    permgenspace:
+      max: 256m
+
+  quickstart:
+    port: 4502
+    runmodesAuthor:
+    - author
+    - nosamplecontent
+    runmodesPublish:
+    - publish
+    - nosamplecontent
+
+  replication:
+    author:
+      publishTargets:
+      #- name: publish1
+      #  url: http://localhost:4503
+      #  transportUser: admin
+      #  # Has to be encrypted with the correct key, see http://www.wemblog.com/2012/03/how-to-use-crypto-support-in-cq55.html
+      #  tranportPassword: "{bb696f1ac8643072c0bcf45dbc66d782e37a5ed8bc3f55fc51c012fc469bf6cc}"
+      flushTarget:
+        #name: dispatcherAuthor1
+        #url: http://localhost:8000
+    publish:
+      flushTarget:
+        #name: dispatcherPublish1
+        #url: http://localhost:8000
+
+# Example tenant configuration. Tenant name = primary host name/server name
+#config:
+#  serverNameSsl:
+#  aliasNames:
+#  - alias1
+#  - alias2
+#  slingMappingPath: /content/path

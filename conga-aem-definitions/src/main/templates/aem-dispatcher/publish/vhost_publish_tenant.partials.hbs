@@ -1,0 +1,80 @@
+{{!-- Contains configuration snippets that can be used when building the vhost publish tenant template --}}
+
+
+{{~#block "serverName"}}
+  # Primary hostname
+  ServerName {{tenant}}
+{{/block}}
+
+
+{{~#block "serverAliasNames"}}
+  # Alternative hostnames
+{{~#each serverAliasNames}}
+  ServerAlias {{this}}
+{{~/each}}
+{{/block}}
+
+
+{{~#block "documentRoot"}}
+  # Cache Root
+  DocumentRoot "{{dispatcher.cacheRootPath}}"
+{{/block}}
+
+
+{{~#block "logSettings"}}
+  # Possible values include: debug, info, notice, warn, error, crit, alert, emerg.
+  LogLevel warn
+  ErrorLog ${APACHE_LOG_DIR}/vhost_publish_{{tenant}}_error.log
+  CustomLog ${APACHE_LOG_DIR}/vhost_publish_{{tenant}}_access.log combined
+{{/block}}
+
+
+{{~#block "publishSharedConfig"}}
+  # Include shared publish configuration for all vhosts
+  Include sites-available/_publish_shared_include.conf
+{{/block}}
+
+
+{{~#block "rewriteEnforcePrimaryHostname"}}
+  # Make sure primary hostname is always used
+  RewriteCond %{HTTP_HOST} ^({{#each serverAliasNames}}{{regexQuote this}}{{#unless @last}},{{/unless}}{{/each}}) [NC] 
+  RewriteRule ^(.*)$ http://{{tenant}}$1 [R=301,L]
+{{/block}}
+
+
+{{~#block "rewriteSlingShortUrlMapping"}}
+{{~#if slingMappingPath}}
+  # Short URL configuration according to http://www.cognifide.com/blogs/cq/multidomain-cq-mappings-and-apache-configuration/
+  RewriteCond %{REQUEST_URI} !^/apps
+  RewriteCond %{REQUEST_URI} !^/bin
+  RewriteCond %{REQUEST_URI} !^/content
+  RewriteCond %{REQUEST_URI} !^/etc
+  RewriteCond %{REQUEST_URI} !^/home
+  RewriteCond %{REQUEST_URI} !^/libs
+  RewriteCond %{REQUEST_URI} !^/tmp
+  RewriteCond %{REQUEST_URI} !^/var
+  RewriteRule ^/(.+)$ {{slingMappingPath}}/$1 [PT,L]  
+
+  # Cross-domain injection threat
+  RewriteCond %{REQUEST_URI} ^/content
+  RewriteCond %{REQUEST_URI} !^/content/dam
+  RewriteRule !^{{slingMappingPath}} - [R=404,L,NC]
+{{/if ~}}
+{{/block}}
+
+
+{{~#block "rewriteHomepageRedirect"}}
+{{~#if dispatcher.rootRedirectUrl}}
+  # Root redirect to homepage
+  RewriteRule ^/$ {{dispatcher.rootRedirectUrl}} [R={{dispatcher.rootRedirectHttpStatus}},L]
+{{/if ~}}
+{{/block}}
+
+
+{{~#block "tenantSpecificVHostConfig"}}
+{{#if dispatcher.tenantSpecificVHostConfig ~}}
+#### Configuration specific for this tenant ####
+
+{{dispatcher.tenantSpecificVHostConfig}}
+{{~/if}}
+{{/block}}

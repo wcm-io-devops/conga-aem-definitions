@@ -1,0 +1,82 @@
+# Global configuration to be included once in the dispatcher webserver
+
+<IfModule disp_apache2.c>
+
+  # location of the configuration file. eg: 'conf/dispatcher.any'
+  DispatcherConfig conf.d/dispatcher.any
+
+  # location of the dispatcher log file. eg: 'logs/dispatcher.log'
+  DispatcherLog    ${APACHE_LOG_DIR}/dispatcher.log 
+
+  # log level for the dispatcher log, can be either specified
+  # as a string or an integer (in parentheses)
+  # error(0): Errors
+  # warn(1):  Warnings
+  # info(2):  Infos
+  # debug(3): Debug
+  DispatcherLogLevel warn
+
+  # if turned on, the dispatcher looks like a normal module
+  DispatcherNoServerHeader Off
+
+  # if turned on, request to / are not handled by the dispatcher
+  # use the mod_alias then for the correct mapping
+  DispatcherDeclineRoot On
+
+  # if turned on, the dispatcher uses the URL already processed 
+  # by handlers preceeding the dispatcher (i.e. mod_rewrite) 
+  # instead of the original one passed to the web server. 
+  DispatcherUseProcessedURL On
+
+  # if turned to 1, the dispatcher does not spool an error
+  # response to the client (where the status code is greater
+  # or equal than 400), but passes the status code to
+  # Apache, which e.g. allows an ErrorDocument directive
+  # to process such a status code. 
+  #
+  # Additionally, one can specify the status code ranges that should
+  # be left to web server to handle, e.g.
+  #
+  # DispatcherPassError 400-404,501
+  DispatcherPassError 0
+
+</IfModule>
+
+
+# Set default charset to UTF-8
+AddDefaultCharset UTF-8
+AddCharset UTF-8 .json
+AddCharset UTF-8 .js
+AddCharset UTF-8 .css
+
+# Enable gzip compression for HTML/CSS/JavaScript/XML/JSON/SVG
+AddOutputFilterByType DEFLATE text/html
+AddOutputFilterByType DEFLATE text/css
+AddOutputFilterByType DEFLATE text/javascript
+AddOutputFilterByType DEFLATE application/x-javascript
+AddOutputFilterByType DEFLATE application/javascript
+AddOutputFilterByType DEFLATE text/xml
+AddOutputFilterByType DEFLATE text/plain
+AddOutputFilterByType DEFLATE application/json
+AddOutputFilterByType DEFLATE image/svg+xml
+
+# Set proper mime types
+AddType application/javascript              js jsonp
+AddType text/cache-manifest                 appcache manifest
+AddType text/x-component                    htc
+AddType application/x-chrome-extension      crx
+AddType application/x-opera-extension       oex
+AddType application/x-xpinstall             xpi
+AddType application/octet-stream            safariextz
+AddType application/x-web-app-manifest+json webapp
+AddType text/vtt                            vtt
+
+# Force the latest IE version, in various cases when it may fall back to IE7 mode
+#  github.com/rails/rails/commit/123eb25#commitcomment-118920
+# Use ChromeFrame if it's installed for a better experience for the poor IE folk
+
+Header set X-UA-Compatible "IE=Edge,chrome=1"
+# mod_headers can't match by content-type, but we don't want to send this header on *everything*...
+<FilesMatch "\.(js|css|gif|png|jpe?g|pdf|xml|oga|ogg|m4a|ogv|mp4|m4v|webm|svg|svgz|eot|ttf|otf|woff|ico|webp|appcache|manifest|htc|crx|oex|xpi|safariextz|vcf)$" >
+  Header unset X-UA-Compatible
+</FilesMatch>

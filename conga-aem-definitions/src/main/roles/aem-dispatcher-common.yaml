@@ -1,0 +1,27 @@
+# Webserverver with Dispatcher module for AEM author instance
+# Generates general dispatcher configuration
+
+templateDir: aem-dispatcher/common
+
+files:
+
+# global httpd dispatcher config
+- file: "dispatcher.conf"
+  dir: conf.d
+  template: dispatcher.conf.hbs
+
+# global dispatcher config
+- file: "dispatcher.any"
+  dir: conf.d
+  template: dispatcher.any.hbs
+
+# load snippte for dispatcher module
+- file: "dispatcher.load"
+  dir: mods-available
+  template: dispatcher.load.hbs
+
+
+config:
+
+  dispatcher:
+    moduleFile: modules/mod_dispatcher.so

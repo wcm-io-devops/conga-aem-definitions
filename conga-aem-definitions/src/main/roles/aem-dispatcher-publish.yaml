@@ -1,0 +1,72 @@
+# Webserverver with Dispatcher module for AEM publish instance
+# Generates configuration additions for the tenant's vhosts and dispatcher configuration
+
+templateDir: aem-dispatcher/publish
+
+variants:
+- variant: no-ssl
+- variant: ssl
+- variant: no-ssl+ssl
+
+files:
+
+# Dispatcher configuration
+- file: "dispatcher_publish.any"
+  dir: conf.d
+  template: dispatcher_publish.any.hbs
+
+# httpd vhost per tenant (HTTP)
+- file: "vhost_publish_${tenant}.conf"
+  dir: sites-available
+  variants:
+  - no-ssl
+  - no-ssl+ssl
+  template: vhost_publish_tenant.conf.hbs
+  # Mulitply file for each tenant that has the given roles
+  multiply: tenant
+
+# httpd vhost per tenant (HTTPS)
+- file: "vhost_publish_${tenant}.ssl.conf"
+  dir: sites-available
+  variants:
+  - ssl
+  - no-ssl+ssl
+  template: vhost_publish_tenant.ssl.conf.hbs
+  # Mulitply file for each tenant that has the given roles
+  multiply: tenant
+
+# httpd config that is shared by all vhosts per tenant
+- file: "_publish_shared_include.conf"
+  dir: sites-available
+  template: _publish_shared_include.conf.hbs
+
+
+config:
+
+  dispatcher:
+    cacheRootPath: /path/to/dispatcher/cache
+    renderInstance:
+      host: localhost
+      port: 4502
+    #statFilesLevel: 3
+    #allowFlushFrom: 127.0.0.1 localhost
+    rootRedirectHttpStatus: 301
+
+
+# Example tenant configuration. Tenant name = primary host name/server name
+#config:
+#  serverNameSsl:
+#  serverAliasNames:
+#  - alias1
+#  - alias2
+#  slingMappingPath: /content/path
+#  dispatcher:
+#    rootRedirectUrl: /en.html
+#    rootRedirectHttpStatus: 301
+#    tenantSpecificVHostConfig: |
+#      Custom Config Line 1
+#      Custom Config Line 2
+#    sslCertificateFile: /path/to/sslCertificateFile
+#    sslCertificateKeyFile: /path/to/sslCertificateKeyFile
+#    sslCACertificateFile: /path/to/sslCACertificateFile
+#    sslCACertificatePath: /path/to/sslCACertificates

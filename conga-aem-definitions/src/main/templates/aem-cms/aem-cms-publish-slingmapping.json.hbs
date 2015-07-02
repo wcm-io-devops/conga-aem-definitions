@@ -1,0 +1,16 @@
+{
+  "jcr:primaryType": "sling:Folder",
+
+{{#eachIf tenants "config.slingMappingPath"}}
+  "{{this.tenant}}": {
+    "jcr:primaryType": "sling:Mapping",
+    "sling:match": "(
+      {{~ regexQuote this.tenant ~}}
+      {{~#if this.config.serverNameSsl}}|{{regexQuote this.config.serverNameSsl}}{{/if ~}}
+      {{~#each this.config.serverAliasNames}}|{{regexQuote this}}{{/each ~}}
+      )",
+    "sling:internalRedirect": ["{{this.config.slingMappingPath}}","/"]
+  }{{#unless @last}},{{/unless}}
+{{/eachIf}}
+
+}

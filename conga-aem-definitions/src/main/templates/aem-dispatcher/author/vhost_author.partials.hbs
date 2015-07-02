@@ -1,0 +1,84 @@
+{{!-- Contains configuration snippets that can be used when building the vhost author template --}}
+
+
+{{~#block "serverName"}}
+  ServerName {{cmsAuthorHostname}}
+{{/block}}
+
+
+{{~#block "documentRoot"}}
+  # Cache Root
+  DocumentRoot "{{dispatcher.cacheRootPath}}"
+{{/block}}
+
+
+{{~#block "logSettings"}}
+  # Possible values include: debug, info, notice, warn, error, crit, alert, emerg.
+  LogLevel warn
+  ErrorLog ${APACHE_LOG_DIR}/error.log
+  CustomLog ${APACHE_LOG_DIR}/access.log combined
+{{/block}}
+
+
+{{~#block "enableDispatcher"}}
+  # Enable AEM Dispatcher
+  <Directory />
+    <IfModule disp_apache2.c>
+      ModMimeUsePathInfo On
+      # enable dispatcher for ALL request. if this is too restrictive,
+      # move it to another location
+      SetHandler dispatcher-handler
+    </IfModule>
+    Options FollowSymLinks
+    AllowOverride None
+  </Directory>
+{{/block}}
+
+
+{{~#block "damContentDispositionHeader"}}
+  # Set content disposition header for downloads
+  <LocationMatch "^.*/dam/.*\.download_attachment\..*$">
+    Header set Content-Disposition: attachment
+  </LocationMatch>
+{{/block}}
+
+
+{{~#block "accessRestrictions"}}
+  # Deny external access to system console, but allow access to logout
+  <LocationMatch "/admin/.*">
+    Order deny,allow
+    Deny from all
+{{~#if dispatcher.allowAdminAccessFrom}}
+    Allow from {{dispatcher.allowAdminAccessFrom}}
+{{~/if}}
+  </LocationMatch>
+  <LocationMatch "/system/.*">
+    Order deny,allow
+    Deny from all
+{{~#if dispatcher.allowAdminAccessFrom}}
+    Allow from {{dispatcher.allowAdminAccessFrom}}
+{{~/if}}
+  </LocationMatch>
+  <LocationMatch "/system/sling/logout.*">
+    Order deny,allow
+    Allow from all
+  </LocationMatch>
+
+  # Deny external access to CRX web application
+  <LocationMatch "/crx.*">
+    Order deny,allow
+    Deny from all
+{{~#if dispatcher.allowAdminAccessFrom}}
+    Allow from {{dispatcher.allowAdminAccessFrom}}
+{{~/if}}
+  </LocationMatch>
+
+  # Allow dispatcher flushing only from defined hosts
+  <Location "/dispatcher">
+    Order Deny,Allow
+    Deny from all
+  {{~#if dispatcher.allowFlushFrom}}
+    Allow from {{dispatcher.allowFlushFrom}}
+  {{~/if}}
+  </Location>
+{{/block}}
