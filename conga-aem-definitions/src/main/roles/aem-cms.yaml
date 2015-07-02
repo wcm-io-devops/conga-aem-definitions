@@ -75,6 +75,7 @@ files:
   template: aem-cms-author-dam-update-asset-workflow-minimal.json.hbs
   variants:
   - aem-author
+  condition: "${workflow.useMinimalDamUpdateAssetWorkflow}"
   postProcessors:
   - aem-contentpackage
   postProcessorOptions:
@@ -127,6 +128,10 @@ config:
       flushTarget:
         #name: dispatcherPublish1
         #url: http://localhost:8000
+
+  workflow:
+    useMinimalDamUpdateAssetWorkflow: false
+
 
 # Example tenant configuration. Tenant name = primary host name/server name
 #config:

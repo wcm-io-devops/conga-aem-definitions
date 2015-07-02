@@ -56,6 +56,8 @@ config:
     sslCertificateKeyFile: /etc/ssl/private/sample.key
     sslCACertificatePath: /etc/ssl/certs
     sslCACertificateFile: /etc/ssl/certs/sample.pem
+  workflow:
+    useMinimalDamUpdateAssetWorkflow: true
 
 
 tenants:
