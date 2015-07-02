@@ -1,4 +1,4 @@
-# Webserverver with Dispatcher module for AEM author instance
+# Webserverver with Dispatcher module for AEM author and/or publish instance
 # Generates general dispatcher configuration
 
 templateDir: aem-dispatcher/common

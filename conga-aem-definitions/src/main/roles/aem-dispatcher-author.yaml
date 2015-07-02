@@ -1,5 +1,5 @@
 # Webserverver with Dispatcher module for AEM author instance
-# Generates configuration additions for the tenant's vhosts and dispatcher configuration
+# Generates dispatcher module configuration and vhost for an AEM author instance
 
 templateDir: aem-dispatcher/author
 

@@ -1,5 +1,5 @@
 # Webserverver with Dispatcher module for AEM publish instance
-# Generates configuration additions for the tenant's vhosts and dispatcher configuration
+# Generates dispatcher module configuration and vhosts for all tenants
 
 templateDir: aem-dispatcher/publish
 
