@@ -103,6 +103,7 @@ config:
       max: 2048m
     permgenspace:
       max: 256m
+    #timezone: Europe/Berlin
 
   quickstart:
     port: 4502

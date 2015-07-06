@@ -3,13 +3,16 @@
 export JAVA_HOME="{{jvm.path}}"
 export PATH="$JAVA_HOME/bin:$PATH"
 export CQ_PORT="{{quickstart.port}}"
-{{#ifEquals nodeRoleVariant "author" ~}}
+{{#ifEquals nodeRoleVariant "aem-author" ~}}
   export CQ_RUNMODE="{{join quickstart.runmodesAuthor ','}}"
 {{~ else ~}}
   export CQ_RUNMODE="{{join quickstart.runmodesPublish ','}}"
 {{~/ifEquals}}
 export CQ_JVM_OPTS="-server -Xms{{jvm.heapspace.min}} -Xmx{{jvm.heapspace.max}} -XX:MaxPermSize={{jvm.permgenspace.max}}"
 export CQ_JVM_OPTS="$CQ_JVM_OPTS -Djava.awt.headless=true -XX:+UseG1GC -XX:+UseStringDeduplication"
+{{#if jvm.timezone ~}}
+export CQ_JVM_OPTS="$CQ_JVM_OPTS -Duser.timezone={{jvm.timezone}}"
+{{~/if}}
 ### END customized AEM quickstart settings
 
 #
