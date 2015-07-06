@@ -37,9 +37,9 @@ files:
   multiply: tenant
 
 # httpd config that is shared by all vhosts per tenant
-- file: "_publish_shared_include.conf"
-  dir: sites-available
-  template: _publish_shared_include.conf.hbs
+- file: "_vhost_publish_shared_include.conf"
+  dir: sites-available-shared
+  template: _vhost_publish_shared_include.conf.hbs
 
 
 config:
