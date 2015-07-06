@@ -6,6 +6,13 @@
   ServerName {{cmsAuthorHostnameSsl}}
 {{/partial ~}}
 
+{{~#partial "rewriteEnforcePrimaryHostname"}}
+  # Make sure primary hostname is always used
+  RewriteEngine On
+  RewriteCond %{HTTP_HOST} !^{{regexQuote cmsAuthorHostnameSsl}}$ [NC] 
+  RewriteRule ^(.*)$ https://{{cmsAuthorHostnameSsl}}$1 [R=301,L]
+{{/partial}}
+
 
 {{> aem-dispatcher/author/vhost_author.partials.hbs}}
 

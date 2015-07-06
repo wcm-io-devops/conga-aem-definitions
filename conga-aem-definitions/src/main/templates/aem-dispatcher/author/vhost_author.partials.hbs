@@ -15,8 +15,16 @@
 {{~#block "logSettings"}}
   # Possible values include: debug, info, notice, warn, error, crit, alert, emerg.
   LogLevel warn
-  ErrorLog ${APACHE_LOG_DIR}/error.log
-  CustomLog ${APACHE_LOG_DIR}/access.log combined
+  ErrorLog ${APACHE_LOG_DIR}/vhost_author_error.log
+  CustomLog ${APACHE_LOG_DIR}/vhost_author_access.log combined
+{{/block}}
+
+
+{{~#block "rewriteEnforcePrimaryHostname"}}
+  # Make sure primary hostname is always used
+  RewriteEngine On
+  RewriteCond %{HTTP_HOST} !^{{regexQuote cmsAuthorHostname}}$ [NC] 
+  RewriteRule ^(.*)$ http://{{cmsAuthorHostname}}$1 [R=301,L]
 {{/block}}
 
 
