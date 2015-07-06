@@ -10,7 +10,7 @@
 
 {{#partial "rewriteEnforcePrimaryHostname"}}
   # Make sure primary hostname is always used
-  RewriteCond %{HTTP_HOST} ^({{#each serverAliasNames}}{{regexQuote this}}{{#unless @last}},{{/unless}}{{/each}}) [NC] 
+  RewriteCond %{HTTP_HOST} !^{{#if serverNameSsl}}{{regexQuote serverNameSsl}}{{else}}{{regexQuote tenant}}{{/if}}$ [NC] 
   RewriteRule ^(.*)$ https://{{#if serverNameSsl}}{{serverNameSsl}}{{else}}{{tenant}}{{/if}}$1 [R=301,L]
 {{/partial ~}}
 
