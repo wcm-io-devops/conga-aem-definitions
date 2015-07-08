@@ -56,20 +56,6 @@
       </plugin>
 
     </plugins>
-    <pluginManagement>
-      <plugins>
-
-        <plugin>
-          <groupId>external.atlassian.jgitflow</groupId>
-          <artifactId>jgitflow-maven-plugin</artifactId>
-          <configuration>
-            <scmCommentPrefix>[jgitflow-maven-plugin] </scmCommentPrefix>
-            <autoVersionSubmodules>true</autoVersionSubmodules>
-          </configuration>
-        </plugin>
-    
-      </plugins>
-    </pluginManagement>
   </build>
 
   <profiles>
