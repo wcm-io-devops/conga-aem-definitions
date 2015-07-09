@@ -37,6 +37,7 @@
 
   <modules>
     <module>conga-aem-definitions</module>
+    <module>example</module>
   </modules>
 
   <build>

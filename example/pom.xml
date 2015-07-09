@@ -33,7 +33,7 @@
   <groupId>io.wcm.devops.conga.definitions</groupId>
   <artifactId>io.wcm.devops.conga.definitions.aem.example</artifactId>
   <packaging>config</packaging>
-  <version>1</version>
+  <version>0.5.1-SNAPSHOT</version>
 
   <name>CONGA AEM Definitions Example</name>
   <description>Example environment definition.</description>
@@ -44,7 +44,7 @@
     <dependency>
       <groupId>io.wcm.devops.conga.definitions</groupId>
       <artifactId>io.wcm.devops.conga.definitions.aem</artifactId>
-      <version>0.5.0</version>
+      <version>0.5.1-SNAPSHOT</version>
     </dependency>
 
   </dependencies>
@@ -68,6 +68,16 @@
           </dependency>
 
         </dependencies>
+      </plugin>
+
+      <!-- do not deploy this example into maven repository -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <inherited>false</inherited>
+        <configuration>
+          <skip>true</skip>
+        </configuration>
       </plugin>
 
     </plugins>
