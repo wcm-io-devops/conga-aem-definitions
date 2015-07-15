@@ -38,9 +38,9 @@
   <description>wcm.io DevOps CONfiguration GenerAtor Roles and Templates for Adobe Experience Manager (AEM).</description>
 
   <scm>
-    <connection>scm:git:https://github.com/wcm-io-devops/wcm-io-devops-conga-aem-definitions.git</connection>
-    <developerConnection>scm:git:https://github.com/wcm-io-devops/wcm-io-devops-conga-aem-definitions.git</developerConnection>
-    <url>https://github.com/wcm-io-devops/wcm-io-devops-conga-aem-definitions</url>
+    <connection>scm:git:https://github.com/wcm-io-devops/conga-aem-definitions.git</connection>
+    <developerConnection>scm:git:https://github.com/wcm-io-devops/conga-aem-definitions.git</developerConnection>
+    <url>https://github.com/wcm-io-devops/conga-aem-definitions</url>
     <tag>HEAD</tag>
   </scm>
 

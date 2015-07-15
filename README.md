@@ -1,6 +1,6 @@
 <img src="http://wcm.io/images/favicon-16@2x.png"/> CONGA Roles and Templates for AEM
 ======
-[![Build Status](https://travis-ci.org/wcm-io-devops/wcm-io-devops-conga-aem-definitions.png?branch=master)](https://travis-ci.org/wcm-io-devops/wcm-io-devops-conga-aem-definitions)
+[![Build Status](https://travis-ci.org/wcm-io-devops/conga-aem-definitions.png?branch=develop)](https://travis-ci.org/wcm-io-devops/conga-aem-definitions)
 
 
 ## Overview
