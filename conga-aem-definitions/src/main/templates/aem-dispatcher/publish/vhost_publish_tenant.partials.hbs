@@ -42,6 +42,28 @@
 {{/block}}
 
 
+{{~#block "corsHeader"}}
+{{~#if dispatcher.corsHeader.enabled}}
+  # Send CORS header to client for certain requests
+  <Location ~ "{{dispatcher.corsHeader.locationMatch}}">
+    {{~#if dispatcher.corsHeader.allowAllHosts}}
+    Header add Access-Control-Allow-Origin "*"
+    {{~else}}
+    SetEnvIf Origin "^(
+      {{~#if dispatcher.corsHeader.hostWhiteList ~}}
+        {{~#each dispatcher.corsHeader.hostWhiteList}}{{regexQuote this}}{{#unless @last}}|{{/unless}}{{/each ~}}
+      {{~else ~}}
+        .*
+      {{~/if ~}}
+    )$" AccessControlAllowOrigin=$0
+    Header add Access-Control-Allow-Origin "%{AccessControlAllowOrigin}e" env=AccessControlAllowOrigin
+    Header merge Vary Origin
+    {{~/if}}
+  </Location>
+{{~/if}}
+{{/block}}
+
+
 {{~#block "tenantSpecificVHostConfig"}}
 {{#if dispatcher.tenantSpecificVHostConfig ~}}
 #### Configuration specific for this tenant ####

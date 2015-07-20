@@ -23,6 +23,12 @@
     xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/plugins/maven-changes-plugin/xsd/changes-1.0.0.xsd">
   <body>
 
+    <release version="0.5.2" date="not released">
+      <action type="update" dev="sseifert">
+        aem-dispatcher-publish: Add support for CORS header in dispatcher vhost config.
+      </action>
+    </release>
+
     <release version="0.5.0" date="2015-07-08">
       <action type="add" dev="sseifert">
         Initial release.
