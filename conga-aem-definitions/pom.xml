@@ -51,8 +51,18 @@
       <plugin>
         <groupId>io.wcm.devops.conga</groupId>
         <artifactId>conga-maven-plugin</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1-SNAPSHOT</version>
         <extensions>true</extensions>
+        <dependencies>
+
+          <!-- Activate further CONGA plugins for special file types -->
+          <dependency>
+            <groupId>io.wcm.devops.conga.plugins</groupId>
+            <artifactId>io.wcm.devops.conga.plugins.aem</artifactId>            
+            <version>1.0.0</version>
+          </dependency>
+
+        </dependencies>
       </plugin>
 
     </plugins>
