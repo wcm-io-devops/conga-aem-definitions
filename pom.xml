@@ -32,9 +32,13 @@
   <version>0.5.1-SNAPSHOT</version>
   <packaging>pom</packaging>
 
-  <name>CONGA Roles and Templates for AEM Root</name>
+  <name>CONGA AEM Definitions</name>
   <description>Root POM for wcm.io CONGA Roles and Templates for AEM.</description>
 
+  <properties>
+    <site.url.module.prefix>conga/definitions/aem</site.url.module.prefix>
+  </properties>
+  
   <modules>
     <module>conga-aem-definitions</module>
     <module>example</module>
@@ -52,16 +56,14 @@
         </configuration>
       </plugin>
 
-      <!-- do not generate site for this project -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-site-plugin</artifactId>
-        <configuration>
-          <skipDeploy>true</skipDeploy>
-        </configuration>
-      </plugin>
-
     </plugins>
   </build>
+
+  <distributionManagement>
+    <site>
+      <id>${site.deploy.id}</id>
+      <url>${site.deploy.url}${site.url.module.prefix}</url>
+    </site>
+  </distributionManagement>
 
 </project>
