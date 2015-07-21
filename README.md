@@ -1,30 +1,21 @@
 <img src="http://wcm.io/images/favicon-16@2x.png"/> CONGA Roles and Templates for AEM
 ======
-[![Build Status](https://travis-ci.org/wcm-io-devops/conga-aem-definitions.png?branch=develop)](https://travis-ci.org/wcm-io-devops/conga-aem-definitions)
+[![Build Status](https://travis-ci.org/conga-aem-definitions.png?branch=develop)](https://travis-ci.org/conga-aem-definitions)
+
+Documentation: http://devops.wcm.io/conga/definitions/aem/<br/>
+Issues: https://wcm-io.atlassian.net/projects/WDCONGA<br/>
+Wiki: https://wcm-io.atlassian.net/wiki/<br/>
+Continuous Integration: https://travis-ci.org/conga-aem-definitions
 
 
-## Overview
+## Build from sources
 
-This repository contains generic role definitions and templates for CONGA-based AEM configurations. 
+If you want to build from sources make sure you have configured all [Maven Repositories](http://devops.wcm.io/maven.html) in your settings.xml.
 
-The definitions can be used by [CONGA - CONfiguration GenerAtor][conga] for configuring [Adobe Experience Manager (AEM)][aem] environments.
+See [Travis Maven settings.xml](https://github.com/conga-aem-definitions/blob/master/.travis.maven-settings.xml) for an example with a full configuration.
 
-The [CONGA Plugin for AEM][conga-aem] is required.
+Then you can build using
 
-
-
-## Examples
-
-See [example/](example/) for a commented example with an environment definition using the CONGA AEM roles and templats.
-
-
-
-## Issue Tracking
-
-Issue tracking in wcm.io JIRA: https://wcm-io.atlassian.net/projects/WDCONGA
-
-
-
-[conga]: https://github.com/wcm-io-devops/wcm-io-devops-conga
-[conga-aem]: https://github.com/wcm-io-devops/wcm-io-devops-conga-aem-plugin
-[aem]: http://www.adobe.com/de/marketing-cloud/enterprise-content-management.html
+```
+mvn clean install
+```
