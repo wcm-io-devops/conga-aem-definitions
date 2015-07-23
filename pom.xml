@@ -21,22 +21,27 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>io.wcm.maven</groupId>
-    <artifactId>io.wcm.maven.global-parent</artifactId>
-    <version>8</version>
+    <groupId>io.wcm.devops</groupId>
+    <artifactId>io.wcm.devops.parent_toplevel</artifactId>
+    <version>1.0.0</version>
     <relativePath />
   </parent>
 
   <groupId>io.wcm.devops.conga.definitions</groupId>
   <artifactId>io.wcm.devops.conga.definitions.aem.root</artifactId>
-  <version>0.5.0</version>
+  <version>0.6.0</version>
   <packaging>pom</packaging>
 
-  <name>CONGA Roles and Templates for AEM Root</name>
+  <name>CONGA AEM Definitions</name>
   <description>Root POM for wcm.io CONGA Roles and Templates for AEM.</description>
 
+  <properties>
+    <site.url.module.prefix>conga/definitions/aem</site.url.module.prefix>
+  </properties>
+  
   <modules>
     <module>conga-aem-definitions</module>
+    <module>example</module>
   </modules>
 
   <build>
@@ -51,41 +56,14 @@
         </configuration>
       </plugin>
 
-      <!-- do not generate site for this project -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-site-plugin</artifactId>
-        <configuration>
-          <skipDeploy>true</skipDeploy>
-        </configuration>
-      </plugin>
-
     </plugins>
-    <pluginManagement>
-      <plugins>
-
-        <!-- license check -->
-        <plugin>
-          <groupId>org.codehaus.mojo</groupId>
-          <artifactId>license-maven-plugin</artifactId>
-          <configuration>
-            <licenseName>apache_v2</licenseName>
-            <addJavaLicenseAfterPackage>false</addJavaLicenseAfterPackage>
-            <projectName>wcm.io</projectName>
-          </configuration>
-        </plugin>
-
-        <plugin>
-          <groupId>external.atlassian.jgitflow</groupId>
-          <artifactId>jgitflow-maven-plugin</artifactId>
-          <configuration>
-            <scmCommentPrefix>[jgitflow-maven-plugin] </scmCommentPrefix>
-            <autoVersionSubmodules>true</autoVersionSubmodules>
-          </configuration>
-        </plugin>
-    
-      </plugins>
-    </pluginManagement>
   </build>
+
+  <distributionManagement>
+    <site>
+      <id>${site.deploy.id}</id>
+      <url>${site.deploy.url}${site.url.module.prefix}</url>
+    </site>
+  </distributionManagement>
 
 </project>

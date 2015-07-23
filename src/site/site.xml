@@ -19,21 +19,13 @@
   #L%
   -->
 
-<document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/changes/1.0.0"
-    xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/plugins/maven-changes-plugin/xsd/changes-1.0.0.xsd">
-  <body>
+<project name="CONGA AEM Definitions"
+  xmlns="http://maven.apache.org/DECORATION/1.3.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/DECORATION/1.3.0 http://maven.apache.org/xsd/decoration-1.3.0.xsd">
 
-    <release version="0.6.0" date="not released">
-      <action type="add" dev="sseifert">
-        aem-dispatcher-publish: Add support for CORS header in dispatcher vhost config.
-      </action>
-    </release>
+  <bannerRight>
+    <name><![CDATA[<img src="http://devops.wcm.io/conga/images/conga.png" style="height:120px"/>]]></name>
+  </bannerRight>
 
-    <release version="0.5.0" date="2015-07-08">
-      <action type="add" dev="sseifert">
-        Initial release.
-      </action>
-    </release>
-
-  </body>
-</document>
+</project>
