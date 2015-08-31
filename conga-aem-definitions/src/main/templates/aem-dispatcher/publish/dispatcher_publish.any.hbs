@@ -22,6 +22,9 @@
     #   myhost:8888/mysite
 {{~#each tenants}}
     "{{this.tenant}}"
+{{~#if this.config.serverNameSsl}}
+    "{{this.config.serverNameSsl}}"
+{{~/if}}
 {{~/each}}
     }
     
