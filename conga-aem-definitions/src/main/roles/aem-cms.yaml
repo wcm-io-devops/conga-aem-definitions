@@ -4,6 +4,12 @@
 variants:
 - variant: aem-author
 - variant: aem-publish
+  config:
+    quickstart:
+      port: 4503
+      runmodes:
+      - publish
+      - nosamplecontent
 
 templateDir: aem-cms
 
@@ -107,11 +113,8 @@ config:
 
   quickstart:
     port: 4502
-    runmodesAuthor:
+    runmodes:
     - author
-    - nosamplecontent
-    runmodesPublish:
-    - publish
     - nosamplecontent
 
   replication:
