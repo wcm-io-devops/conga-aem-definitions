@@ -47,5 +47,5 @@ config:
     cacheDamAssets: false
     sslCertificateFile: /path/to/sslCertificateFile
     sslCertificateKeyFile: /path/to/sslCertificateKeyFile
-    sslCACertificatePath: /path/to/sslCACertificates
-    sslCACertificateFile: /path/to/sslCACertificateFile
+    #sslCACertificatePath: /path/to/sslCACertificates
+    #sslCACertificateFile: /path/to/sslCACertificateFile

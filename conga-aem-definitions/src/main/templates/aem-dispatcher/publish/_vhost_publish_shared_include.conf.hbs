@@ -15,8 +15,7 @@ RewriteEngine On
 <Directory />
   <IfModule disp_apache2.c>
     ModMimeUsePathInfo On
-    # enable dispatcher for ALL request. if this is too restrictive,
-    # move it to another location
+    # enable dispatcher for ALL requests.
     SetHandler dispatcher-handler
   </IfModule>
   Options FollowSymLinks
@@ -76,41 +75,41 @@ RewriteEngine On
 #### Deny access to dangerous selectors ####
 
 #match *.infinity.json
-<LocationMatch "/.*\.infinity\.json.*">
+<LocationMatch "^/.*\.infinity\.json.*$">
   Deny from all
 </LocationMatch>
 
 # match *.-1.json and similar
-<LocationMatch "/.*\.-[0-9]+\.json.*">
+<LocationMatch "^/.*\.-[0-9]+\.json.*$">
   Deny from all
 </LocationMatch>
 
 # match *.tidy.json
-<LocationMatch "/.*\.tidy\.json.*">
+<LocationMatch "^/.*\.tidy\.json.*$">
   Deny from all
 </LocationMatch>
 
 # match *.query.json
-<LocationMatch "/.*\.query\.json.*">
+<LocationMatch "^/.*\.query\.json.*$">
   Deny from all
 </LocationMatch>
 
 # match sysview.xml
-<LocationMatch "/.*\.sysview\.xml.*">
+<LocationMatch "^/.*\.sysview\.xml.*$">
   Deny from all
 </LocationMatch>
 
 # match docview.json
-<LocationMatch "/.*\.docview\.json.*">
+<LocationMatch "^/.*\.docview\.json.*$">
   Deny from all
 </LocationMatch>
 
 # match docview.xml
-<LocationMatch "/.*\.docview\.xml.*">
+<LocationMatch "^/.*\.docview\.xml.*$">
   Deny from all
 </LocationMatch>
 
 # match feed/feedentry.*
-<LocationMatch "/.*\.feed(entry)?\.*">
+<LocationMatch "^/.*\.feed(entry)?\.*$">
   Deny from all
 </LocationMatch>
