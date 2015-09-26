@@ -52,27 +52,27 @@
 
 {{~#block "accessRestrictions"}}
   # Deny external access to system console, but allow access to logout
-  <LocationMatch "/admin/.*">
+  <LocationMatch "^/admin/.*$">
     Order deny,allow
     Deny from all
 {{~#if dispatcher.allowAdminAccessFrom}}
     Allow from {{dispatcher.allowAdminAccessFrom}}
 {{~/if}}
   </LocationMatch>
-  <LocationMatch "/system/.*">
+  <LocationMatch "^/system/.*$">
     Order deny,allow
     Deny from all
 {{~#if dispatcher.allowAdminAccessFrom}}
     Allow from {{dispatcher.allowAdminAccessFrom}}
 {{~/if}}
   </LocationMatch>
-  <LocationMatch "/system/sling/logout.*">
+  <LocationMatch "^/system/sling/logout.*$">
     Order deny,allow
     Allow from all
   </LocationMatch>
 
   # Deny external access to CRX web application
-  <LocationMatch "/crx.*">
+  <LocationMatch "^/crx.*$">
     Order deny,allow
     Deny from all
 {{~#if dispatcher.allowAdminAccessFrom}}
