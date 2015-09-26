@@ -33,8 +33,7 @@
   <Directory />
     <IfModule disp_apache2.c>
       ModMimeUsePathInfo On
-      # enable dispatcher for ALL request. if this is too restrictive,
-      # move it to another location
+      # enable dispatcher for ALL requests.
       SetHandler dispatcher-handler
     </IfModule>
     Options FollowSymLinks
