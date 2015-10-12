@@ -26,10 +26,14 @@ files:
   postProcessorOptions:
     contentPackage:
       name: aem-cms-publish-slingmapping
-      rootPath: /etc/map/http
+      rootPath: /etc/map
       filters:
-      - filter: /etc/map/http
+      - filter: /etc/map
         rules:
+        - rule: exclude
+          pattern: /etc/map
+        - rule: include
+          pattern: /etc/map/.*
         - rule: exclude
           pattern: /etc/map/http
         - rule: include

@@ -1,16 +1,47 @@
 {
-  "jcr:primaryType": "sling:Folder"
+  "jcr:primaryType": "sling:Folder",
+
+  "http": {
+    "jcr:primaryType": "sling:Folder"
 
 {{#eachIf tenants "config.slingMappingPath"}},
-  "{{this.tenant}}": {
-    "jcr:primaryType": "sling:Mapping",
-    "sling:match": "(
-      {{~ regexQuote this.tenant ~}}
-      {{~#if this.config.serverNameSsl}}|{{regexQuote this.config.serverNameSsl}}{{/if ~}}
-      {{~#each this.config.serverAliasNames}}|{{regexQuote this}}{{/each ~}}
-      )",
-    "sling:internalRedirect": ["{{this.config.slingMappingPath}}","/"]
-  }
+    "{{this.tenant}}": {
+      "jcr:primaryType": "sling:Mapping",
+      "sling:internalRedirect": ["{{this.config.slingMappingPath}}","/"]
+    }
+  {{~#each this.config.serverAliasNames}},
+    "{{this}}": {
+      "jcr:primaryType": "sling:Mapping",
+      "sling:internalRedirect": ["{{../this.config.slingMappingPath}}","/"]
+    }
+  {{/each ~}}
 {{/eachIf}}
+
+  },
+
+  "https": {
+    "jcr:primaryType": "sling:Folder"
+
+{{#eachIf tenants "config.slingMappingPath"}},
+  {{~#if this.config.serverNameSsl}}
+    "{{this.config.serverNameSsl}}": {
+      "jcr:primaryType": "sling:Mapping",
+      "sling:internalRedirect": ["{{this.config.slingMappingPath}}","/"]
+    }
+  {{~ else ~}}
+    "{{this.tenant}}": {
+      "jcr:primaryType": "sling:Mapping",
+      "sling:internalRedirect": ["{{this.config.slingMappingPath}}","/"]
+    }
+  {{/if ~}}
+  {{~#each this.config.serverAliasNames}},
+    "{{this}}": {
+      "jcr:primaryType": "sling:Mapping",
+      "sling:internalRedirect": ["{{../this.config.slingMappingPath}}","/"]
+    }
+  {{/each ~}}
+{{/eachIf}}
+
+  }
 
 }
