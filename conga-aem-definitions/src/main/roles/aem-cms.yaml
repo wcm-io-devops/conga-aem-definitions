@@ -26,10 +26,14 @@ files:
   postProcessorOptions:
     contentPackage:
       name: aem-cms-publish-slingmapping
-      rootPath: /etc/map/http
+      rootPath: /etc/map
       filters:
-      - filter: /etc/map/http
+      - filter: /etc/map
         rules:
+        - rule: exclude
+          pattern: /etc/map
+        - rule: include
+          pattern: /etc/map/.*
         - rule: exclude
           pattern: /etc/map/http
         - rule: include
@@ -124,7 +128,7 @@ config:
       #  url: http://localhost:4503
       #  transportUser: admin
       #  # Has to be encrypted with the correct key, see http://www.wemblog.com/2012/03/how-to-use-crypto-support-in-cq55.html
-      #  tranportPassword: "{bb696f1ac8643072c0bcf45dbc66d782e37a5ed8bc3f55fc51c012fc469bf6cc}"
+      #  transportPassword: "{bb696f1ac8643072c0bcf45dbc66d782e37a5ed8bc3f55fc51c012fc469bf6cc}"
       flushTarget:
         #name: dispatcherAuthor1
         #url: http://localhost:8000

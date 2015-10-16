@@ -14,7 +14,7 @@ wcm.io DevOps CONfiguration GenerAtor Roles and Templates for [Adobe Experience 
     <dependency>
       <groupId>io.wcm.devops.conga.plugins</groupId>
       <artifactId>io.wcm.devops.conga.definitions.aem</artifactId>
-      <version>0.6.2</version>
+      <version>0.6.6</version>
     </dependency>
   </dependencies>
 </plugin>
