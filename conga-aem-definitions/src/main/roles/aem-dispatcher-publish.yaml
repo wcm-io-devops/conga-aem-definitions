@@ -52,6 +52,8 @@ config:
     #statFilesLevel: 3
     #allowFlushFrom: 127.0.0.1 localhost
     rootRedirectHttpStatus: 301
+    forwardClientHeaders:
+    - "*"
 
     # Configure CORS header to be sent to the client
     corsHeader:

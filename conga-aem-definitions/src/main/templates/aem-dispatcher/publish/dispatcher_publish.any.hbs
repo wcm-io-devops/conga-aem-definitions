@@ -6,7 +6,9 @@
     # Forward all request headers that are end-to-end. If you want
     # to forward a specific set of headers, you'll have to list
     # them here.
-    "*"
+{{~#each dispatcher.forwardClientHeaders}}
+    "{{this}}"
+{{~/each}}
     }
     
   # Hostname globbing for farm selection (virtual domain addressing)

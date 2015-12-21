@@ -27,6 +27,9 @@
       <action type="update" dev="mrozati" issue="WDCONGA-3">
         Use optimistic auto-invlaidation rules in publish dispatcher.any instead of pessimistic ones.
       </action>
+      <action type="update" dev="sseifert" issue="WDCONGA-4">
+        Add dispatcher.forwardClientHeaders option for author and publish dispatcher configurations. Defaults to "*".
+      </action>
     </release>
 
     <release version="0.6.6" date="2015-10-16">
