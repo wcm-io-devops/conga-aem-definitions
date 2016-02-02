@@ -2,23 +2,8 @@
 
 wcm.io DevOps CONfiguration GenerAtor Roles and Templates for [Adobe Experience Manager (AEM)][aem].
 
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.wcm.devops.conga.plugins/io.wcm.devops.conga.definitions.aem/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.wcm.devops.conga.plugins/io.wcm.devops.conga.definitions.aem)
 
-### Maven Dependency
-
-```xml
-<plugin>
-  <groupId>io.wcm.devops.conga</groupId>
-  <artifactId>conga-maven-plugin</artifactId>
-  <extensions>true</extensions>
-  <dependencies>
-    <dependency>
-      <groupId>io.wcm.devops.conga.plugins</groupId>
-      <artifactId>io.wcm.devops.conga.definitions.aem</artifactId>
-      <version>0.6.6</version>
-    </dependency>
-  </dependencies>
-</plugin>
-```
 
 ### Documentation
 
