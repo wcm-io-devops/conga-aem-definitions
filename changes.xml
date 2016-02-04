@@ -30,6 +30,9 @@
       <action type="update" dev="sseifert" issue="WDCONGA-4">
         Add dispatcher.forwardClientHeaders option for author and publish dispatcher configurations. Defaults to "*".
       </action>
+      <action type="update" dev="sseifert">
+        Deny access to /bin on publish dispatcher.
+      </action>
     </release>
 
     <release version="0.6.6" date="2015-10-16">
