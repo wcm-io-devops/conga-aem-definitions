@@ -3,4 +3,8 @@
   
 {{> aem-dispatcher/publish/vhost_publish_tenant.partials.hbs}}
 
+{{#if dispatcher.sslRedirect}}
+  # Redirect requests to SSL
+  Redirect permanent / https://{{serverNameSsl}}/
+{{/if}}
 </VirtualHost>
