@@ -42,6 +42,19 @@
 {{/block}}
 
 
+{{~#block "robotsHeader"}}
+{{~#if dispatcher.robotsHeader.enabled}}
+# do not index css, js
+<FilesMatch "\.(css|js)$">
+    Header set X-Robots-Tag "noindex"
+</FilesMatch>
+# do not index sitemap.xml
+<FilesMatch ".*\.sitemap\.xml$">
+    Header set X-Robots-Tag "noindex"
+</FilesMatch>
+{{~/if}}
+{{/block}}
+
 {{~#block "corsHeader"}}
 {{~#if dispatcher.corsHeader.enabled}}
   # Send CORS header to client for certain requests
