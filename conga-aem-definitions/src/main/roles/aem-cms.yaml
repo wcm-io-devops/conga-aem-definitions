@@ -114,6 +114,7 @@ config:
     permgenspace:
       max: 256m
     #timezone: Europe/Berlin
+    #args: additional custom JVM args
 
   quickstart:
     port: 4502
