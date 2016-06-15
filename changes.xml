@@ -23,6 +23,21 @@
     xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/plugins/maven-changes-plugin/xsd/changes-1.0.0.xsd">
   <body>
 
+    <release version="0.6.8" date="2016-06-15">
+      <action type="update" dev="mrozati" issue="WDCONGA-3">
+        Use optimistic auto-invlaidation rules in publish dispatcher.any instead of pessimistic ones.
+      </action>
+      <action type="update" dev="sseifert" issue="WDCONGA-4">
+        Add dispatcher.forwardClientHeaders option for author and publish dispatcher configurations. Defaults to "*".
+      </action>
+      <action type="update" dev="sseifert">
+        Deny access to /bin on publish dispatcher.
+      </action>
+      <action type="update" dev="sseifert">
+        Add "jvm.args" optional parameter for AEM start script.
+      </action>
+    </release>
+
     <release version="0.6.6" date="2015-10-16">
       <action type="fix" dev="twolfart">
         Fix typo in dispatcher transportPassword.

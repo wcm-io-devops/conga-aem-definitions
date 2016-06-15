@@ -9,6 +9,9 @@ export CQ_JVM_OPTS="$CQ_JVM_OPTS -Djava.awt.headless=true -XX:+UseG1GC -XX:+UseS
 {{#if jvm.timezone ~}}
 export CQ_JVM_OPTS="$CQ_JVM_OPTS -Duser.timezone={{jvm.timezone}}"
 {{~/if}}
+{{#if jvm.args ~}}
+export CQ_JVM_OPTS="$CQ_JVM_OPTS {{jvm.args}}"
+{{~/if}}
 ### END customized AEM quickstart settings
 
 #

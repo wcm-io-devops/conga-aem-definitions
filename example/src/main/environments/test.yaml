@@ -46,6 +46,15 @@ nodes:
           host: localhost
           port: 4503
         allowAdminAccessFrom: 10.0.0.0/255.0.0.0
+        forwardClientHeaders:
+        - referer
+        - content-type
+        - content-length
+        - accept-charset
+        - accept-encoding
+        - accept-language
+        - accept
+        - host
 
 config:
   jvm.path: "/usr/lib/jvm/jdk-8-oracle-x64"

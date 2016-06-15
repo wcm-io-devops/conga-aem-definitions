@@ -42,6 +42,8 @@ config:
     renderInstance:
       host: localhost
       port: 4502
+    forwardClientHeaders:
+    - "*"
     #allowAdminAccessFrom: 10.0.0.0/255.0.0.0
     #allowFlushFrom: 127.0.0.1 localhost
     cacheDamAssets: false
