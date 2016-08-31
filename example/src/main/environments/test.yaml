@@ -12,7 +12,7 @@ nodes:
       url: http://localhost:4503
       transportUser: admin
       # Has to be encrypted with the correct key, see http://www.wemblog.com/2012/03/how-to-use-crypto-support-in-cq55.html
-      tranportPassword: "{443a90a7ed2bf085c7a4a5947013b32bf617b87025bbca44786ac2b926a59f6c}"
+      transportPassword: "{443a90a7ed2bf085c7a4a5947013b32bf617b87025bbca44786ac2b926a59f6c}"
 
 - node: aem-publish
   roles:
