@@ -78,6 +78,7 @@ tenants:
     slingMappingPath: /content/sample1
     dispatcher:
       rootRedirectUrl: /en.html
+      enforceSsl: true
 
 - tenant: sample2.com
   config:

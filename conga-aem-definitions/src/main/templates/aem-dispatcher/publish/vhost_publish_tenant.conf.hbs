@@ -1,6 +1,11 @@
 # Virtual host for publish site of tenant {{tenant}} (HTTP)
 <VirtualHost *:80>
   
+{{#if dispatcher.enforceSsl}}
+  # Redirect all requests to SSL
+  Redirect permanent / https://{{#if serverNameSsl}}{{serverNameSsl}}{{else}}{{tenant}}{{/if}}/
+{{/if~}}
+
 {{> aem-dispatcher/publish/vhost_publish_tenant.partials.hbs}}
 
 </VirtualHost>
