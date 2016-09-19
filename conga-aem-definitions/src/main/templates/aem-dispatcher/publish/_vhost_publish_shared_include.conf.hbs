@@ -108,11 +108,11 @@ RewriteEngine On
 </LocationMatch>
 
 # match feed/feedentry.*
-<LocationMatch "^/.*\.feed(entry)?\.*$">
+<LocationMatch "^/.*\.feed(entry)?\.*.*$">
   Deny from all
 </LocationMatch>
 
 # match form.*
-<LocationMatch "^/.*\.form?\.*$">
+<LocationMatch "^/.*\.form\.*.*$">
   Deny from all
 </LocationMatch>
