@@ -24,6 +24,12 @@
   <body>
 
     <release version="0.6.8" date="2016-06-15">
+      <action type="fix" dev="sseifert">
+        Disable .form extension in dispatcher.
+      </action>
+    </release>
+
+    <release version="0.6.8" date="2016-06-15">
       <action type="update" dev="mrozati" issue="WDCONGA-3">
         Use optimistic auto-invlaidation rules in publish dispatcher.any instead of pessimistic ones.
       </action>

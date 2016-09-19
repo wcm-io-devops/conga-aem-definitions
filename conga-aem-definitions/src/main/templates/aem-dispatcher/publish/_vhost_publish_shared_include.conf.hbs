@@ -102,17 +102,17 @@ RewriteEngine On
   Deny from all
 </LocationMatch>
 
-# match docview.json
-<LocationMatch "^/.*\.docview\.json.*$">
-  Deny from all
-</LocationMatch>
-
-# match docview.xml
-<LocationMatch "^/.*\.docview\.xml.*$">
+# match docview.json/xml
+<LocationMatch "^/.*\.docview\.(json|xml).*$">
   Deny from all
 </LocationMatch>
 
 # match feed/feedentry.*
 <LocationMatch "^/.*\.feed(entry)?\.*$">
+  Deny from all
+</LocationMatch>
+
+# match form.*
+<LocationMatch "^/.*\.form?\.*$">
   Deny from all
 </LocationMatch>
