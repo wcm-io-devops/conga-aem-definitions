@@ -27,6 +27,9 @@
       <action type="add" dev="sseifert">
         Add dispatcher.enforceSsl flag to enforce redirect to HTTPS, and enable HSTS.
       </action>
+      <action type="update" dev="sseifert">
+        Add default cache-control header and set noindex for some non-html files.
+      </action>
       <action type="fix" dev="sseifert">
         Disable .form, .feed and .feedentry extensions in dispatcher.
       </action>
