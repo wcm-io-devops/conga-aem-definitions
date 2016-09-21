@@ -54,6 +54,8 @@ config:
     rootRedirectHttpStatus: 301
     forwardClientHeaders:
     - "*"
+    # If set to true all requests are redirectd to HTTPS and HSTS is enabled
+    enforceSsl: false
 
     # Configure CORS header to be sent to the client
     corsHeader:

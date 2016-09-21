@@ -18,6 +18,13 @@
 {{> aem-dispatcher/publish/vhost_publish_tenant.partials.hbs}}
 
 
+{{~#if dispatcher.enforceSsl}}
+  # Enable HSTS if SSL is enforced
+  <IfModule mod_headers.c>
+    Header always set Strict-Transport-Security "max-age=7884000"
+  </IfModule>
+{{/if}}
+
   # SSL configuration
   SSLEngine on
   SSLCertificateFile      {{dispatcher.sslCertificateFile}}
