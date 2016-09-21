@@ -31,7 +31,7 @@
 
   <groupId>io.wcm.devops.conga.definitions</groupId>
   <artifactId>io.wcm.devops.conga.definitions.aem</artifactId>
-  <version>0.7.1-SNAPSHOT</version>
+  <version>0.7.0</version>
   <packaging>config-definition</packaging>
 
   <name>CONGA AEM Definitions</name>
