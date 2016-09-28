@@ -21,7 +21,7 @@
 {{~#if dispatcher.enforceSsl}}
   # Enable HSTS if SSL is enforced
   <IfModule mod_headers.c>
-    Header always set Strict-Transport-Security "max-age=7884000"
+    Header always set Strict-Transport-Security "max-age=31536000"
   </IfModule>
 {{/if}}
 
