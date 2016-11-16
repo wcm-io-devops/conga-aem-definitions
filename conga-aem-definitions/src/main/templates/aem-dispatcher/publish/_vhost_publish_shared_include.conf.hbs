@@ -12,7 +12,7 @@ RewriteEngine On
 
 #### Enable AEM dispatcher module ####
 
-<Directory />
+<Location />
   <IfModule disp_apache2.c>
     ModMimeUsePathInfo On
     # enable dispatcher for ALL requests.
@@ -20,7 +20,7 @@ RewriteEngine On
   </IfModule>
   Options FollowSymLinks
   AllowOverride None
-</Directory>
+</Location>
 
 
 #### Content disposition header for downloads ####
