@@ -28,7 +28,10 @@
         HSTS support in dispatcher: Increase timeout to 31536000 seconds (one year).
       </action>
       <action type="update" dev="twolfart">
-        switch from filesystem to webspace directives
+        VHost templates: Switch from filesystem to webspace directives.
+      </action>
+      <action type="update" dev="twolfart">
+        VHost templates: Remove document root, not required because dispatcher handles all requests.
       </action>
     </release>
 
