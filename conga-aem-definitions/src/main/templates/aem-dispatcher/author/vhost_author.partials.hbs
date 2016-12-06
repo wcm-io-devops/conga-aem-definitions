@@ -17,7 +17,7 @@
 {{~#block "rewriteEnforcePrimaryHostname"}}
   # Make sure primary hostname is always used
   RewriteEngine On
-  RewriteCond %{HTTP_HOST} !^{{regexQuote cmsAuthorHostname}}$ [NC] 
+  RewriteCond %{HTTP_HOST} !^{{regexQuote cmsAuthorHostname}}$ [NC]
   RewriteRule ^(.*)$ http://{{cmsAuthorHostname}}$1 [R=301,L]
 {{/block}}
 
@@ -30,8 +30,6 @@
       # enable dispatcher for ALL requests.
       SetHandler dispatcher-handler
     </IfModule>
-    Options FollowSymLinks
-    AllowOverride None
   </Location>
 {{/block}}
 
@@ -47,39 +45,77 @@
 {{~#block "accessRestrictions"}}
   # Deny external access to system console, but allow access to logout
   <LocationMatch "^/admin/.*$">
-    Order deny,allow
-    Deny from all
+    <IfVersion < 2.4>
+      Order deny,allow
+      Deny from all
 {{~#if dispatcher.allowAdminAccessFrom}}
-    Allow from {{dispatcher.allowAdminAccessFrom}}
+      Allow from {{dispatcher.allowAdminAccessFrom}}
 {{~/if}}
+    </IfVersion>
+    <IfVersion >= 2.4>
+      Require all denied
+{{~#if dispatcher.allowAdminAccessFrom}}
+      Require host {{dispatcher.allowAdminAccessFrom}}
+{{~/if}}
+    </IfVersion>
   </LocationMatch>
   <LocationMatch "^/system/.*$">
-    Order deny,allow
-    Deny from all
+    <IfVersion < 2.4>
+      Order deny,allow
+      Deny from all
 {{~#if dispatcher.allowAdminAccessFrom}}
-    Allow from {{dispatcher.allowAdminAccessFrom}}
+      Allow from {{dispatcher.allowAdminAccessFrom}}
 {{~/if}}
+    </IfVersion>
+    <IfVersion >= 2.4>
+      Require all denied
+{{~#if dispatcher.allowAdminAccessFrom}}
+      Require host {{dispatcher.allowAdminAccessFrom}}
+{{~/if}}
+    </IfVersion>
   </LocationMatch>
   <LocationMatch "^/system/sling/logout.*$">
-    Order deny,allow
-    Allow from all
+    <IfVersion < 2.4>
+      Order deny,allow
+      Allow from all
+    </IfVersion>
+    <IfVersion >= 2.4>
+      Require all granted
+    </IfVersion>
   </LocationMatch>
 
   # Deny external access to CRX web application
   <LocationMatch "^/crx.*$">
-    Order deny,allow
-    Deny from all
+    <IfVersion < 2.4>
+      Order deny,allow
+      Deny from all
 {{~#if dispatcher.allowAdminAccessFrom}}
-    Allow from {{dispatcher.allowAdminAccessFrom}}
+      Allow from {{dispatcher.allowAdminAccessFrom}}
 {{~/if}}
+    </IfVersion>
+    <IfVersion >= 2.4>
+      Require all denied
+{{~#if dispatcher.allowAdminAccessFrom}}
+      Require host {{dispatcher.allowAdminAccessFrom}}
+{{~/if}}
+    </IfVersion>
   </LocationMatch>
 
   # Allow dispatcher flushing only from defined hosts
   <Location "/dispatcher">
-    Order Deny,Allow
-    Deny from all
-  {{~#if dispatcher.allowFlushFrom}}
-    Allow from {{dispatcher.allowFlushFrom}}
-  {{~/if}}
+    <IfVersion < 2.4>
+      Order Deny,Allow
+      Deny from all
+{{~#if dispatcher.allowFlushFrom}}
+      Allow from {{dispatcher.allowFlushFrom}}
+{{~/if}}
+    </IfVersion>
+    <IfVersion >= 2.4>
+      Require all denied
+{{~#if dispatcher.allowFlushFrom}}
+      Require host {{dispatcher.allowFlushFrom}}
+{{~/if}}
+    </IfVersion>
+
   </Location>
 {{/block}}

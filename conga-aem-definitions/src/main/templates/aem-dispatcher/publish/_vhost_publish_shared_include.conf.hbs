@@ -18,8 +18,6 @@ RewriteEngine On
     # enable dispatcher for ALL requests.
     SetHandler dispatcher-handler
   </IfModule>
-  Options FollowSymLinks
-  AllowOverride None
 </Location>
 
 
@@ -44,45 +42,103 @@ Header set Cache-Control "public, must-revalidate"
 #### Deny access to sensitive areas ####
 
 <Location "/admin">
-  Deny from all
+  <IfVersion < 2.4>
+    Deny from all
+  </IfVersion>
+  <IfVersion >= 2.4>
+    Require all denied
+  </IfVersion>
 </Location>
 <Location "/apps">
-  Deny from all
+  <IfVersion < 2.4>
+    Deny from all
+  </IfVersion>
+  <IfVersion >= 2.4>
+    Require all denied
+  </IfVersion>
 </Location>
 <Location "/bin">
-  Deny from all
+  <IfVersion < 2.4>
+    Deny from all
+  </IfVersion>
+  <IfVersion >= 2.4>
+    Require all denied
+  </IfVersion>
 </Location>
 <Location "/crx">
-  Deny from all
+  <IfVersion < 2.4>
+    Deny from all
+  </IfVersion>
+  <IfVersion >= 2.4>
+    Require all denied
+  </IfVersion>
 </Location>
 <Location "/etc">
-  Deny from all
+  <IfVersion < 2.4>
+    Deny from all
+  </IfVersion>
+  <IfVersion >= 2.4>
+    Require all denied
+  </IfVersion>
 </Location>
 <Location "/home">
-  Deny from all
+  <IfVersion < 2.4>
+    Deny from all
+  </IfVersion>
+  <IfVersion >= 2.4>
+    Require all denied
+  </IfVersion>
 </Location>
 <Location "/libs">
-  Deny from all
+  <IfVersion < 2.4>
+    Deny from all
+  </IfVersion>
+  <IfVersion >= 2.4>
+    Require all denied
+  </IfVersion>
 </Location>
 <Location "/system/console">
-  Deny from all
+  <IfVersion < 2.4>
+    Deny from all
+  </IfVersion>
+  <IfVersion >= 2.4>
+    Require all denied
+  </IfVersion>
 </Location>
 <Location "/var">
-  Deny from all
+  <IfVersion < 2.4>
+    Deny from all
+  </IfVersion>
+  <IfVersion >= 2.4>
+    Require all denied
+  </IfVersion>
 </Location>
 
 # Allow access to clientlibs
 <Location "/etc/clientlibs">
-  Allow from all
+  <IfVersion < 2.4>
+    Allow from all
+  </IfVersion>
+  <IfVersion >= 2.4>
+    Require all granted
+  </IfVersion>
 </Location>
 
 # Allow dispatcher flushing only from defined hosts
 <Location "/dispatcher">
-  Order Deny,Allow
-  Deny from all
+  <IfVersion < 2.4>
+    Order Deny,Allow
+    Deny from all
 {{~#if dispatcher.allowFlushFrom}}
-  Allow from {{dispatcher.allowFlushFrom}}
+    Allow from {{dispatcher.allowFlushFrom}}
 {{~/if}}
+  </IfVersion>
+  <IfVersion >= 2.4>
+    Require all denied
+{{~#if dispatcher.allowFlushFrom}}
+    Require host {{dispatcher.allowFlushFrom}}
+{{~/if}}
+  </IfVersion>
 </Location>
 
 
@@ -90,40 +146,80 @@ Header set Cache-Control "public, must-revalidate"
 
 #match *.infinity.json
 <LocationMatch "^/.*\.infinity\.json.*$">
-  Deny from all
+  <IfVersion < 2.4>
+    Deny from all
+  </IfVersion>
+  <IfVersion >= 2.4>
+    Require all denied
+  </IfVersion>
 </LocationMatch>
 
 # match *.-1.json and similar
 <LocationMatch "^/.*\.-[0-9]+\.json.*$">
-  Deny from all
+  <IfVersion < 2.4>
+    Deny from all
+  </IfVersion>
+  <IfVersion >= 2.4>
+    Require all denied
+  </IfVersion>
 </LocationMatch>
 
 # match *.tidy.json
 <LocationMatch "^/.*\.tidy\.json.*$">
-  Deny from all
+  <IfVersion < 2.4>
+    Deny from all
+  </IfVersion>
+  <IfVersion >= 2.4>
+    Require all denied
+  </IfVersion>
 </LocationMatch>
 
 # match *.query.json
 <LocationMatch "^/.*\.query\.json.*$">
-  Deny from all
+  <IfVersion < 2.4>
+    Deny from all
+  </IfVersion>
+  <IfVersion >= 2.4>
+    Require all denied
+  </IfVersion>
 </LocationMatch>
 
 # match sysview.xml
 <LocationMatch "^/.*\.sysview\.xml.*$">
-  Deny from all
+  <IfVersion < 2.4>
+    Deny from all
+  </IfVersion>
+  <IfVersion >= 2.4>
+    Require all denied
+  </IfVersion>
 </LocationMatch>
 
 # match docview.json/xml
 <LocationMatch "^/.*\.docview\.(json|xml).*$">
-  Deny from all
+  <IfVersion < 2.4>
+    Deny from all
+  </IfVersion>
+  <IfVersion >= 2.4>
+    Require all denied
+  </IfVersion>
 </LocationMatch>
 
 # match feed/feedentry.*
 <LocationMatch "^/.*\.feed(entry)?\.*.*$">
-  Deny from all
+  <IfVersion < 2.4>
+    Deny from all
+  </IfVersion>
+  <IfVersion >= 2.4>
+    Require all denied
+  </IfVersion>
 </LocationMatch>
 
 # match form.*
 <LocationMatch "^/.*\.form\.*.*$">
-  Deny from all
+  <IfVersion < 2.4>
+    Deny from all
+  </IfVersion>
+  <IfVersion >= 2.4>
+    Require all denied
+  </IfVersion>
 </LocationMatch>
