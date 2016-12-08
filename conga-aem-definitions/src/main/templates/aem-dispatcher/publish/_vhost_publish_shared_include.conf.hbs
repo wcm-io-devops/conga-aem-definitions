@@ -132,11 +132,17 @@ Header set Cache-Control "public, must-revalidate"
 {{~#if dispatcher.allowFlushFrom}}
     Allow from {{dispatcher.allowFlushFrom}}
 {{~/if}}
+{{~#if dispatcher.allowFlushFromHost}}
+    Allow from {{dispatcher.allowFlushFromHost}}
+{{~/if}}
   </IfVersion>
   <IfVersion >= 2.4>
     Require all denied
 {{~#if dispatcher.allowFlushFrom}}
-    Require host {{dispatcher.allowFlushFrom}}
+    Require ip {{dispatcher.allowFlushFrom}}
+{{~/if}}
+{{~#if dispatcher.allowFlushFromHost}}
+    Require host {{dispatcher.allowFlushFromHost}}
 {{~/if}}
   </IfVersion>
 </Location>

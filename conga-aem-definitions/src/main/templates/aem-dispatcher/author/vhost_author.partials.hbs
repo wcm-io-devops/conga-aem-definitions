@@ -51,11 +51,17 @@
 {{~#if dispatcher.allowAdminAccessFrom}}
       Allow from {{dispatcher.allowAdminAccessFrom}}
 {{~/if}}
+{{~#if dispatcher.allowAdminAccessFromHost}}
+      Allow from {{dispatcher.allowAdminAccessFromHost}}
+{{~/if}}
     </IfVersion>
     <IfVersion >= 2.4>
       Require all denied
 {{~#if dispatcher.allowAdminAccessFrom}}
-      Require host {{dispatcher.allowAdminAccessFrom}}
+      Require ip {{dispatcher.allowAdminAccessFrom}}
+{{~/if}}
+{{~#if dispatcher.allowAdminAccessFromHost}}
+      Require host {{dispatcher.allowAdminAccessFromHost}}
 {{~/if}}
     </IfVersion>
   </LocationMatch>
@@ -66,11 +72,17 @@
 {{~#if dispatcher.allowAdminAccessFrom}}
       Allow from {{dispatcher.allowAdminAccessFrom}}
 {{~/if}}
+{{~#if dispatcher.allowAdminAccessFromHost}}
+      Allow from {{dispatcher.allowAdminAccessFromHost}}
+{{~/if}}
     </IfVersion>
     <IfVersion >= 2.4>
       Require all denied
 {{~#if dispatcher.allowAdminAccessFrom}}
-      Require host {{dispatcher.allowAdminAccessFrom}}
+      Require ip {{dispatcher.allowAdminAccessFrom}}
+{{~/if}}
+{{~#if dispatcher.allowAdminAccessFromHost}}
+      Require host {{dispatcher.allowAdminAccessFromHost}}
 {{~/if}}
     </IfVersion>
   </LocationMatch>
@@ -92,11 +104,17 @@
 {{~#if dispatcher.allowAdminAccessFrom}}
       Allow from {{dispatcher.allowAdminAccessFrom}}
 {{~/if}}
+{{~#if dispatcher.allowAdminAccessFromHost}}
+      Allow from {{dispatcher.allowAdminAccessFromHost}}
+{{~/if}}
     </IfVersion>
     <IfVersion >= 2.4>
       Require all denied
 {{~#if dispatcher.allowAdminAccessFrom}}
-      Require host {{dispatcher.allowAdminAccessFrom}}
+      Require ip {{dispatcher.allowAdminAccessFrom}}
+{{~/if}}
+{{~#if dispatcher.allowAdminAccessFromHost}}
+      Require host {{dispatcher.allowAdminAccessFromHost}}
 {{~/if}}
     </IfVersion>
   </LocationMatch>
@@ -109,11 +127,17 @@
 {{~#if dispatcher.allowFlushFrom}}
       Allow from {{dispatcher.allowFlushFrom}}
 {{~/if}}
+{{~#if dispatcher.allowFlushFromHost}}
+      Allow from {{dispatcher.allowFlushFromHost}}
+{{~/if}}
     </IfVersion>
     <IfVersion >= 2.4>
       Require all denied
 {{~#if dispatcher.allowFlushFrom}}
-      Require host {{dispatcher.allowFlushFrom}}
+      Require ip {{dispatcher.allowFlushFrom}}
+{{~/if}}
+{{~#if dispatcher.allowFlushFrom}}
+      Require host {{dispatcher.allowFlushFromHost}}
 {{~/if}}
     </IfVersion>
 
