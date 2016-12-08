@@ -63,7 +63,7 @@ config:
   dispatcher:
     moduleFile: /usr/lib/apache2/modules/mod_dispatcher.so
     allowFlushFrom: 127.0.0.1
-    allowFlushFromHost localhost
+    allowFlushFromHost: localhost
     sslCertificateFile: /etc/ssl/certs/sample.crt
     sslCertificateKeyFile: /etc/ssl/private/sample.key
     sslCACertificatePath: /etc/ssl/certs
