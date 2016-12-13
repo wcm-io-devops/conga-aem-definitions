@@ -33,6 +33,21 @@
       <action type="update" dev="twolfart">
         VHost templates: Remove document root, not required because dispatcher handles all requests.
       </action>
+      <action type="add" dev="trichter">
+        Apache 2.4 compatibility: Add conditional statements for access control to enable Apache 2.4 compatibility without access_compat module.
+      </action>
+      <action type="add" dev="trichter">
+        Apache 2.4 compatibility: Add dispatcher.allowAdminAccessFromHost option for host based access control
+      </action>
+      <action type="add" dev="trichter">
+        Apache 2.4 compatibility: Add dispatcher.allowFlushFromHost option for host based access control
+      </action>
+      <action type="update" dev="trichter">
+        Apache 2.4 compatibility: Change dispatcher.allowFlushFrom and dispatcher.allowAdminAccessFrom based rules to handle ip addresses only
+      </action>
+      <action type="update" dev="trichter">
+        Apache 2.4 compatibility: Updated roles and examples to reflect new options dispatcher.allowFlushFromHost and dispatcher.allowAdminAccessFromHost
+      </action>
     </release>
 
     <release version="0.7.0" date="2016-09-21">

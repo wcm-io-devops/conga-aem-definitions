@@ -36,6 +36,7 @@ nodes:
           host: localhost
           port: 4502
         allowAdminAccessFrom: 10.0.0.0/255.0.0.0
+        allowAdminAccessFromHost: www.example.org
   - role: aem-dispatcher-publish
     variant: no-ssl+ssl
     config:
@@ -46,6 +47,7 @@ nodes:
           host: localhost
           port: 4503
         allowAdminAccessFrom: 10.0.0.0/255.0.0.0
+        allowAdminAccessFromHost: www.example.org
         forwardClientHeaders:
         - referer
         - content-type
@@ -60,7 +62,8 @@ config:
   jvm.path: "/usr/lib/jvm/jdk-8-oracle-x64"
   dispatcher:
     moduleFile: /usr/lib/apache2/modules/mod_dispatcher.so
-    allowFlushFrom: 127.0.0.1 localhost
+    allowFlushFrom: 127.0.0.1
+    allowFlushFromHost: localhost
     sslCertificateFile: /etc/ssl/certs/sample.crt
     sslCertificateKeyFile: /etc/ssl/private/sample.key
     sslCACertificatePath: /etc/ssl/certs
