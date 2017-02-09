@@ -99,6 +99,19 @@ files:
   template: start.hbs
   fileHeader: unixShellScript
 
+# AEM OSGi System Configuration
+- file: aem-cms-system-config.provisioning
+  dir: packages
+  template: aem-cms-system-config.provisioning.hbs
+  postProcessors:
+  - aem-contentpackage-osgiconfig
+  postProcessorOptions:
+    contentPackage:
+      name: aem-cms-config
+      rootPath: /apps/aem-cms-system-config/config
+      filters:
+      - filter: /apps/aem-cms-system-config
+
 
 # Defines configuration parameters and default values
 config:
@@ -125,6 +138,8 @@ config:
     - nosamplecontent
     # Hide configuration wizards after first AEM startup
     hideConfigWizard: true
+    # Enable Apache Sling DavEx Servlet to be able to use CRX DE Lite
+    enableDavEx: false
 
   replication:
     author:

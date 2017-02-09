@@ -48,8 +48,11 @@
       <action type="update" dev="trichter">
         Apache 2.4 compatibility: Updated roles and examples to reflect new options dispatcher.allowFlushFromHost and dispatcher.allowAdminAccessFromHost
       </action>
-      <action type="update" dev="trichter">
+      <action type="add" dev="sseifert">
         Role aem-cms: Add new property quickstart.hideConfigWizard (default: true).
+      </action>
+      <action type="add" dev="sseifert">
+        Role aem-cms: Add new property quickstart.enableDavEx to enable CRX DE Usage (default: false).
       </action>
     </release>
 
