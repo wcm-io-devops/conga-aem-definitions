@@ -45,7 +45,9 @@ config:
     forwardClientHeaders:
     - "*"
     #allowAdminAccessFrom: 10.0.0.0/255.0.0.0
-    #allowFlushFrom: 127.0.0.1 localhost
+    #allowAdminAccessFromHost: www.example.org
+    #allowFlushFrom: 127.0.0.1
+    #allowFlushFromHost: localhost
     cacheDamAssets: false
     sslCertificateFile: /path/to/sslCertificateFile
     sslCertificateKeyFile: /path/to/sslCertificateKeyFile

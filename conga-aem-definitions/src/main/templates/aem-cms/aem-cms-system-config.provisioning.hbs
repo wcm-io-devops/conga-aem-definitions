@@ -1,0 +1,11 @@
+[feature name=aem-cms-system-config]
+
+
+[configurations runModes=author]
+
+{{~#if quickstart.enableDavEx}}
+  # Enable Apache Sling DavEx Servlet to be able to use CRX DE Lite
+  org.apache.sling.jcr.davex
+    alias="/crx/server"
+    dav.create-absolute-uri=B"true"
+{{~/if}}

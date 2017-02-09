@@ -50,7 +50,8 @@ config:
       host: localhost
       port: 4502
     #statFilesLevel: 3
-    #allowFlushFrom: 127.0.0.1 localhost
+    #allowFlushFrom: 127.0.0.1
+    #allowFlushFromHost: localhost
     rootRedirectHttpStatus: 301
     forwardClientHeaders:
     - "*"

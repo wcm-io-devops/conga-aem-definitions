@@ -17,12 +17,13 @@ This repository contains generic role definitions and templates for CONGA-based 
 
 The definitions can be used by [CONGA - CONfiguration GenerAtor][conga] for configuring [Adobe Experience Manager (AEM)][aem] environments.
 
-The [CONGA AEM Plugin][conga-aem] is required.
+The plugins [CONGA Sling Plugin][conga-sling] and [CONGA AEM Plugin][conga-aem] are required.
 
 
 
 [usage]: usage.html
 [changelog]: changes-report.html
 [conga]: http://devops.wcm.io/conga/
+[conga-sling]: http://devops.wcm.io/conga/plugins/sling/
 [conga-aem]: http://devops.wcm.io/conga/plugins/aem/
 [aem]: http://www.adobe.com/solutions/web-experience-management.html
