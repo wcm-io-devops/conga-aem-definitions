@@ -48,6 +48,9 @@
       <action type="update" dev="trichter">
         Apache 2.4 compatibility: Updated roles and examples to reflect new options dispatcher.allowFlushFromHost and dispatcher.allowAdminAccessFromHost
       </action>
+      <action type="update" dev="trichter">
+        Role aem-cms: Add new property quickstart.hideConfigWizard (default: true).
+      </action>
     </release>
 
     <release version="0.7.0" date="2016-09-21">

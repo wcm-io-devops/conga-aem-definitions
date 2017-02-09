@@ -6,11 +6,14 @@ export CQ_PORT="{{quickstart.port}}"
 export CQ_RUNMODE="{{join quickstart.runmodes ','}}"
 export CQ_JVM_OPTS="-server -Xms{{jvm.heapspace.min}} -Xmx{{jvm.heapspace.max}} -XX:MaxPermSize={{jvm.permgenspace.max}}"
 export CQ_JVM_OPTS="$CQ_JVM_OPTS -Djava.awt.headless=true -XX:+UseG1GC -XX:+UseStringDeduplication"
-{{#if jvm.timezone ~}}
+{{~#if jvm.timezone}}
 export CQ_JVM_OPTS="$CQ_JVM_OPTS -Duser.timezone={{jvm.timezone}}"
 {{~/if}}
-{{#if jvm.args ~}}
+{{~#if jvm.args}}
 export CQ_JVM_OPTS="$CQ_JVM_OPTS {{jvm.args}}"
+{{~/if}}
+{{~#if quickstart.hideConfigWizard}}
+export CQ_JVM_OPTS="$CQ_JVM_OPTS -DhideConfigWizard=true"
 {{~/if}}
 ### END customized AEM quickstart settings
 

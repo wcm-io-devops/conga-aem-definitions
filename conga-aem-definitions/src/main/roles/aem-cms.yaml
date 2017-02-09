@@ -117,10 +117,14 @@ config:
     #args: additional custom JVM args
 
   quickstart:
+    # Port for AEM instance
     port: 4502
+    # Default runmodes
     runmodes:
     - author
     - nosamplecontent
+    # Hide configuration wizards after first AEM startup
+    hideConfigWizard: true
 
   replication:
     author:
