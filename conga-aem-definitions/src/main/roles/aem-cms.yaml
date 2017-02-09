@@ -138,7 +138,7 @@ config:
     - nosamplecontent
     # Hide configuration wizards after first AEM startup
     hideConfigWizard: true
-    # Enable Apache Sling DavEx Servlet to be able to use CRX DE Lite
+    # Enable Apache Sling DavEx Servlet to be able to use CRXDE Lite
     enableDavEx: false
 
   replication:
