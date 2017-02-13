@@ -23,6 +23,12 @@
     xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/plugins/maven-changes-plugin/xsd/changes-1.0.0.xsd">
   <body>
 
+    <release version="0.8.2" date="not released">
+      <action type="add" dev="sseifert">
+        Role aem-cms: Fix PID of Sling DavEx servlet.
+      </action>
+    </release>
+
     <release version="0.8.0" date="2017-02-09">
       <action type="add" dev="sseifert">
         HSTS support in dispatcher: Increase timeout to 31536000 seconds (one year).
