@@ -28,6 +28,9 @@
         Role aem-cms: Fix PID of Sling DavEx servlet.
       </action>
       <action type="update" dev="sseifert">
+        Role aem-cms: Add parameter quickstart.rootPath that defines the AEM home directory.
+      </action>
+      <action type="update" dev="sseifert">
         Role aem-dispatcher-common: Add parameter httpd.modules that lists apache modules.
       </action>
     </release>

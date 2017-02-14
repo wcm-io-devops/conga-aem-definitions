@@ -10,6 +10,7 @@ variants:
       runmodes:
       - publish
       - nosamplecontent
+      rootPath: /opt/adobe/aem-publish
 
 templateDir: aem-cms
 
@@ -140,6 +141,8 @@ config:
     hideConfigWizard: true
     # Enable Apache Sling DavEx Servlet to be able to use CRXDE Lite
     enableDavEx: false
+    # AEM root path where quickstart jar is located
+    rootPath: /opt/adobe/aem-author
 
   replication:
     author:
