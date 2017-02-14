@@ -24,8 +24,11 @@
   <body>
 
     <release version="0.8.2" date="not released">
-      <action type="add" dev="sseifert">
+      <action type="fix" dev="sseifert">
         Role aem-cms: Fix PID of Sling DavEx servlet.
+      </action>
+      <action type="update" dev="sseifert">
+        Role aem-dispatcher-common: Add parameter httpd.modules that lists apache modules.
       </action>
     </release>
 
