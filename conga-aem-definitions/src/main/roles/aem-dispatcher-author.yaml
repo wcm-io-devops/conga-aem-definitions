@@ -6,7 +6,17 @@ templateDir: aem-dispatcher/author
 variants:
 - variant: no-ssl
 - variant: ssl
+  config:
+    httpd:
+      modules:
+      - _merge_
+      - ssl
 - variant: no-ssl+ssl
+  config:
+    httpd:
+      modules:
+      - _merge_
+      - ssl
 
 files:
 
@@ -53,3 +63,9 @@ config:
     sslCertificateKeyFile: /path/to/sslCertificateKeyFile
     #sslCACertificatePath: /path/to/sslCACertificates
     #sslCACertificateFile: /path/to/sslCACertificateFile
+
+  httpd:
+    # Modules to be activated in httpd as they are used in the templates. Use names that can be used with a2enmod.
+    modules:
+    - rewrite
+    - headers

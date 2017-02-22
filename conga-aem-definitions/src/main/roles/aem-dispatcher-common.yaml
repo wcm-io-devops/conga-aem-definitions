@@ -28,7 +28,7 @@ config:
     moduleFile: modules/mod_dispatcher.so
 
   httpd:
-    # Default modules names to be included in Apache httpd. Use names that can be used with a2enmod.
+    # Modules to be activated in httpd as they are used in the templates. Use names that can be used with a2enmod.
     modules:
-    - rewrite
+    - dispatcher
     - headers

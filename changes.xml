@@ -24,6 +24,9 @@
   <body>
 
     <release version="0.8.2" date="not released">
+      <action type="update" dev="mwehner">
+        Role aem-dispatcher-*: Make each role explicitly activate all httpd modules it depends on.
+      </action>
       <action type="fix" dev="sseifert">
         Role aem-cms: Fix PID of Sling DavEx servlet.
       </action>

@@ -6,7 +6,17 @@ templateDir: aem-dispatcher/publish
 variants:
 - variant: no-ssl
 - variant: ssl
+  config:
+    httpd:
+      modules:
+      - _merge_
+      - ssl
 - variant: no-ssl+ssl
+  config:
+    httpd:
+      modules:
+      - _merge_
+      - ssl
 
 files:
 
@@ -70,7 +80,11 @@ config:
       #- www.host1.com
       #- www.host2.com
 
-
+  httpd:
+    # Modules to be activated in httpd as they are used in the templates. Use names that can be used with a2enmod.
+    modules:
+    - rewrite
+    - headers
 
 # Example tenant configuration. Tenant name = primary host name/server name
 #config:
