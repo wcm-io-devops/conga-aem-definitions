@@ -138,7 +138,7 @@ if [ $CQ_USE_JAAS ]; then
     CQ_JVM_OPTS="${CQ_JVM_OPTS} -Djava.security.auth.login.config=${CQ_JAAS_CONFIG}"
 fi
 START_OPTS="${START_OPTS} -Dsling.properties=conf/sling.properties"
-
+START_OPTS="${START_OPTS} -nofork"
 (
   (
     java $CQ_JVM_OPTS -jar $CURR_DIR/$CQ_JARFILE $START_OPTS &

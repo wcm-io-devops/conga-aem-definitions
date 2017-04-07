@@ -24,4 +24,11 @@ files:
 config:
 
   dispatcher:
+    # Module binary for AEM dispatcher
     moduleFile: modules/mod_dispatcher.so
+
+  httpd:
+    # Modules to be activated in httpd as they are used in the templates. Use names that can be used with a2enmod.
+    modules:
+    - dispatcher
+    - headers

@@ -5,7 +5,7 @@
 
 {{~#if quickstart.enableDavEx}}
   # Enable Apache Sling DavEx Servlet to be able to use CRX DE Lite
-  org.apache.sling.jcr.davex
+  org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet
     alias="/crx/server"
     dav.create-absolute-uri=B"true"
 {{~/if}}
