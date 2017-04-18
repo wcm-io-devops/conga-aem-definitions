@@ -103,3 +103,5 @@ config:
 #    sslCertificateKeyFile: /path/to/sslCertificateKeyFile
 #    sslCACertificateFile: /path/to/sslCACertificateFile
 #    sslCACertificatePath: /path/to/sslCACertificates
+#    HSTS:
+#        enabled: true
