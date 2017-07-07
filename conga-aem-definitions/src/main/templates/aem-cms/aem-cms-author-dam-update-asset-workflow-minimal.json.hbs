@@ -6,6 +6,7 @@
   - Dynamic Media On-Premise Process CSS (Dynamic Media)
   - Create PTIFF Rendition (Dynamic Media)
   - EPS thumbnails (powered by ImageMagick)
+  - Create web enabled video formats
   - Media Extraction (Indesign)
   - Create Sub Asset
   - INDD Verify Thumbnail (Indesign)
@@ -59,18 +60,6 @@
           "jcr:primaryType": "nt:unstructured",
           "PROCESS_ARGS": "count:4,index:2,[140:100],[48:48],[319:319]",
           "PROCESS": "com.day.cq.dam.video.FFMpegThumbnailProcess",
-          "PROCESS_AUTO_ADVANCE": "true"
-          }
-        },
-      "process3": {
-        "jcr:primaryType": "nt:unstructured",
-        "jcr:title": "FFmpeg transcoding",
-        "jcr:description": "Create web enabled video formats",
-        "sling:resourceType": "cq/workflow/components/model/process",
-        "metaData": {
-          "jcr:primaryType": "nt:unstructured",
-          "PROCESS_ARGS": "profile:firefoxhq,profile:hq,profile:flv,profile:iehq",
-          "PROCESS": "com.day.cq.dam.video.FFMpegTranscodeProcess",
           "PROCESS_AUTO_ADVANCE": "true"
           }
         },
@@ -154,18 +143,6 @@
           },
         "node4": {
           "jcr:primaryType": "cq:WorkflowNode",
-          "description": "Create web enabled video formats",
-          "type": "PROCESS",
-          "title": "FFmpeg transcoding",
-          "metaData": {
-            "jcr:primaryType": "nt:unstructured",
-            "PROCESS_ARGS": "profile:firefoxhq,profile:hq,profile:flv,profile:iehq",
-            "PROCESS": "com.day.cq.dam.video.FFMpegTranscodeProcess",
-            "PROCESS_AUTO_ADVANCE": "true"
-            }
-          },
-        "node5": {
-          "jcr:primaryType": "cq:WorkflowNode",
           "description": "This process will create one or more thumbnails for the asset, create web enabled rendition and update folder thumbnail.",
           "type": "PROCESS",
           "title": "Process Thumbnails",
@@ -188,7 +165,7 @@
             "HEIGHT": "1280"
             }
           },
-        "node6": {
+        "node5": {
           "jcr:primaryType": "cq:WorkflowNode",
           "type": "END",
           "title": "End",

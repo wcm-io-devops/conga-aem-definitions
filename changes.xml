@@ -25,7 +25,10 @@
 
     <release version="0.9.2" date="not released">
       <action type="update" dev="sseifert">
-        aem-dispatcher: Allow access to clientlibs proxy servlet (/etc.clientlibs).
+        Role aem-dispatcher: Allow access to clientlibs proxy servlet (/etc.clientlibs).
+      </action>
+      <action type="update" dev="sseifert">
+        Role aem-cms: Remove 'Create web enabled video formats' step from minimal DAM Update Asset workflow.
       </action>
     </release>
 
