@@ -124,15 +124,6 @@ Header set Cache-Control "public, must-revalidate"
   </IfVersion>
 </Location>
 
-# Allow access to clientlibs proxy servlet
-<Location "/etc.clientlibs">
-  <IfVersion < 2.4>
-    Allow from all
-  </IfVersion>
-  <IfVersion >= 2.4>
-    Require all granted
-  </IfVersion>
-</Location>
 
 # Allow dispatcher flushing only from defined hosts
 <Location "/dispatcher">
@@ -160,7 +151,7 @@ Header set Cache-Control "public, must-revalidate"
 
 #### Deny access to dangerous selectors ####
 
-#match *.infinity.json
+# match *.infinity.json
 <LocationMatch "^/.*\.infinity\.json.*$">
   <IfVersion < 2.4>
     Deny from all
