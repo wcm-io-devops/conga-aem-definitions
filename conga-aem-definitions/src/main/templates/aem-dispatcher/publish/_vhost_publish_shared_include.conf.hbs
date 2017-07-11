@@ -31,12 +31,12 @@ RewriteEngine On
 #### Cache-control, noindex for some non-html files ####
 
 Header set Cache-Control "public, must-revalidate"
-<FilesMatch ".*\.(css|js)$">
+<LocationMatch ".*\.(css|js)$">
   Header set X-Robots-Tag "noindex"
-</FilesMatch>
-<FilesMatch ".*\.sitemap\.xml$">
+</LocationMatch>
+<LocationMatch ".*\.sitemap\.xml$">
   Header set X-Robots-Tag "noindex"
-</FilesMatch>
+</LocationMatch>
 
 
 #### Deny access to sensitive areas ####
