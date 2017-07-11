@@ -24,6 +24,9 @@
   <body>
 
     <release version="0.10.0" date="not released">
+      <action type="add" dev="sseifert">
+        Role aem-dispatcher: Cache AEM Clientlibs with long cache key for 1 year (CSS/JS files with '.lc-*-lc.min.' in the file name).
+      </action>
       <action type="update" dev="sseifert">
         Role aem-dispatcher: Allow access to clientlibs proxy servlet (/etc.clientlibs).
       </action>
