@@ -7,13 +7,13 @@
 {{#eachIf tenants "config.slingMappingPath"}},
     "{{this.tenant}}": {
       "jcr:primaryType": "sling:Mapping",
-      "sling:internalRedirect": ["{{this.config.slingMappingPath}}","/"],
+      "sling:internalRedirect": ["/","{{this.config.slingMappingPath}}"],
       "sling:match": "^(?!/etc.clientlibs).*$"
     }
   {{~#each this.config.serverAliasNames}},
     "{{this}}": {
       "jcr:primaryType": "sling:Mapping",
-      "sling:internalRedirect": ["{{../this.config.slingMappingPath}}","/"],
+      "sling:internalRedirect": ["/","{{../this.config.slingMappingPath}}"],
       "sling:match": "^(?!/etc.clientlibs).*$"
     }
   {{/each ~}}
@@ -28,20 +28,20 @@
   {{~#if this.config.serverNameSsl}}
     "{{this.config.serverNameSsl}}": {
       "jcr:primaryType": "sling:Mapping",
-      "sling:internalRedirect": ["{{this.config.slingMappingPath}}","/"],
+      "sling:internalRedirect": ["/","{{this.config.slingMappingPath}}"],
       "sling:match": "^(?!/etc.clientlibs).*$"
     }
   {{~ else ~}}
     "{{this.tenant}}": {
       "jcr:primaryType": "sling:Mapping",
-      "sling:internalRedirect": ["{{this.config.slingMappingPath}}","/"],
+      "sling:internalRedirect": ["/","{{this.config.slingMappingPath}}"],
       "sling:match": "^(?!/etc.clientlibs).*$"
     }
   {{/if ~}}
   {{~#each this.config.serverAliasNames}},
     "{{this}}": {
       "jcr:primaryType": "sling:Mapping",
-      "sling:internalRedirect": ["{{../this.config.slingMappingPath}}","/"],
+      "sling:internalRedirect": ["/","{{../this.config.slingMappingPath}}"],
       "sling:match": "^(?!/etc.clientlibs).*$"
     }
   {{/each ~}}
