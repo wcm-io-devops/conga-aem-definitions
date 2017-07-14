@@ -36,6 +36,9 @@
       <action type="update" dev="sseifert">
         Role aem-cms: Remove 'Create web enabled video formats' step from minimal DAM Update Asset workflow.
       </action>
+      <action type="add" dev="twolfart">
+        Sling Mapping: ease handling for resolution of non-matching requests
+      </action>
     </release>
 
     <release version="0.9.0" date="2017-04-07">
