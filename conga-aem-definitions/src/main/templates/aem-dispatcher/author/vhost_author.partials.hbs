@@ -17,6 +17,8 @@
 {{~#block "rewriteEnforcePrimaryHostname"}}
   # Make sure primary hostname is always used
   RewriteEngine On
+  # Don't rewrite the dispatcher invalidation URL
+  RewriteCond %{REQUEST_URI} !^/dispatcher/invalidate.cache
   RewriteCond %{HTTP_HOST} !^{{regexQuote cmsAuthorHostname}}$ [NC]
   RewriteRule ^(.*)$ http://{{cmsAuthorHostname}}$1 [R=301,L]
 {{/block}}
