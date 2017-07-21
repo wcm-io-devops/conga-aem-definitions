@@ -9,6 +9,8 @@
 {{/partial ~}}
 
 {{#partial "rewriteEnforcePrimaryHostname"}}
+  # Don't rewrite the dispatcher invalidation URL
+  RewriteCond %{REQUEST_URI} !^/dispatcher/invalidate.cache
   # Make sure primary hostname is always used
   RewriteCond %{HTTP_HOST} !^{{#if serverNameSsl}}{{regexQuote serverNameSsl}}{{else}}{{regexQuote tenant}}{{/if}}$ [NC] 
   RewriteRule ^(.*)$ https://{{#if serverNameSsl}}{{serverNameSsl}}{{else}}{{tenant}}{{/if}}$1 [R=301,L]
@@ -20,9 +22,7 @@
 
 {{~#if dispatcher.enforceSsl}}
   # Enable HSTS if SSL is enforced
-  <IfModule mod_headers.c>
-    Header always set Strict-Transport-Security "max-age=31536000"
-  </IfModule>
+  Header always set Strict-Transport-Security "max-age=31536000"
 {{/if}}
 
   # SSL configuration

@@ -23,6 +23,21 @@
     xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/plugins/maven-changes-plugin/xsd/changes-1.0.0.xsd">
   <body>
 
+    <release version="0.9.2" date="2017-07-21">
+      <action type="update" dev="sseifert">
+        Role aem-dispatcher: Cache AEM Clientlibs with long cache key for 1 year (CSS/JS files with '.lc-*-lc.min.' in the file name).
+      </action>
+      <action type="fix" dev="sseifert">
+        Role aem-dispatcher: Always use LocationMatch instead of FilesMatch to better play together with dispatcher.
+      </action>
+      <action type="update" dev="sseifert">
+        Role aem-cms: Remove 'Create web enabled video formats' step from minimal DAM Update Asset workflow.
+      </action>
+      <action type="fix" dev="mwehner">
+        Role aem-dispatcher: Exclude the dispatcher invalidation URL from rewriting.
+      </action>
+    </release>
+
     <release version="0.9.0" date="2017-04-07">
       <action type="update" dev="mwehner">
         Role aem-cms: Start AEM with -nofork option.

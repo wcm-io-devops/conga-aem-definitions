@@ -30,6 +30,8 @@
 
 
 {{~#block "rewriteEnforcePrimaryHostname"}}
+  # Don't rewrite the dispatcher invalidation URL
+  RewriteCond %{REQUEST_URI} !^/dispatcher/invalidate.cache
   # Make sure primary hostname is always used
   RewriteCond %{HTTP_HOST} !^{{regexQuote tenant}}$ [NC] 
   RewriteRule ^(.*)$ http://{{tenant}}$1 [R=301,L]
@@ -69,6 +71,8 @@
 
 {{~#block "rewriteSlingShortUrlMapping"}}
 {{~#if slingMappingPath}}
+  # Don't rewrite the dispatcher invalidation URL
+  RewriteCond %{REQUEST_URI} !^/dispatcher/invalidate.cache
   # Short URL configuration according to http://www.cognifide.com/blogs/cq/multidomain-cq-mappings-and-apache-configuration/
   RewriteCond %{REQUEST_URI} !^/apps
   RewriteCond %{REQUEST_URI} !^/bin
