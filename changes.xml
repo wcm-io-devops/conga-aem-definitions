@@ -27,6 +27,12 @@
       <action type="fix" dev="sseifert">
         Role aem-cms: Apply quickstart.enableDavEx parameter also on publish.
       </action>
+      <action type="fix" dev="sseifert">
+        Role aem-dispatcher: Add /system and /services (required for AEM Communities) to exclude list for short url mapping.
+      </action>
+      <action type="fix" dev="sseifert">
+        Role aem-dispatcher: Allow access to /etc/designs by default.
+      </action>
     </release>
 
     <release version="0.9.2" date="2017-07-21">
