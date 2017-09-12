@@ -80,6 +80,8 @@
   RewriteCond %{REQUEST_URI} !^/etc
   RewriteCond %{REQUEST_URI} !^/home
   RewriteCond %{REQUEST_URI} !^/libs
+  RewriteCond %{REQUEST_URI} !^/services
+  RewriteCond %{REQUEST_URI} !^/system
   RewriteCond %{REQUEST_URI} !^/tmp
   RewriteCond %{REQUEST_URI} !^/var
   RewriteRule ^/(.+)$ {{slingMappingPath}}/$1 [PT,L]  

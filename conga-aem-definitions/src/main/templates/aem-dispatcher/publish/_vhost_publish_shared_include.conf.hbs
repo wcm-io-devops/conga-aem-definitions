@@ -121,8 +121,16 @@ Header set Cache-Control "public, must-revalidate"
   </IfVersion>
 </Location>
 
-# Allow access to clientlibs
+# Allow access to clientlibs and designs
 <Location "/etc/clientlibs">
+  <IfVersion < 2.4>
+    Allow from all
+  </IfVersion>
+  <IfVersion >= 2.4>
+    Require all granted
+  </IfVersion>
+</Location>
+<Location "/etc/designs">
   <IfVersion < 2.4>
     Allow from all
   </IfVersion>

@@ -108,7 +108,7 @@ files:
   - aem-contentpackage-osgiconfig
   postProcessorOptions:
     contentPackage:
-      name: aem-cms-config
+      name: aem-cms-system-config
       rootPath: /apps/aem-cms-system-config/config
       filters:
       - filter: /apps/aem-cms-system-config
