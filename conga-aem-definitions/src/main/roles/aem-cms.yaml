@@ -162,6 +162,7 @@ config:
 
   workflow:
     useMinimalDamUpdateAssetWorkflow: true
+    minimalDamUpdateAssetWorkflowTransient: true
 
 
 # Example tenant configuration. Tenant name = primary host name/server name
