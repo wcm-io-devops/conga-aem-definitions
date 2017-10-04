@@ -161,7 +161,9 @@ config:
         #url: http://localhost:8000
 
   workflow:
+    # Replace the default 'DAM Update Asset' workflow with a minimal one containing only the steps that are always required
     useMinimalDamUpdateAssetWorkflow: true
+    # Configure minimal 'DAM Update Asset' workflow as transient (which is default since AEM 6.3 and recommended for earlier versions)
     minimalDamUpdateAssetWorkflowTransient: true
 
 
