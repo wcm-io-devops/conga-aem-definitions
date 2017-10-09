@@ -1,0 +1,175 @@
+# Webserverver with Dispatcher module for AEM author and/or publish instance
+# Generates general dispatcher configuration
+
+variants:
+# Dispatcher in front of Authoring instance
+- variant: aem-author
+# Disaptcher for publish instances - configure a tenant for each vhost
+- variant: aem-publish
+  config:
+    dispatcher:
+      renderInstance:
+        port: 4503
+# Mixin variant to support HTTP access
+- variant: no-ssl
+# Mixin variant to support HTTPS access
+- variant: ssl
+  config:
+    httpd:
+      modules:
+      - _merge_
+      - ssl
+
+templateDir: aem-dispatcher
+
+files:
+
+# --- common ---
+
+# global httpd dispatcher config
+- file: "dispatcher.conf"
+  dir: conf.d
+  template: common/dispatcher.conf.hbs
+
+# global dispatcher config
+- file: "dispatcher.any"
+  dir: conf.d
+  template: common/dispatcher.any.hbs
+
+# load snippte for dispatcher module
+- file: "dispatcher.load"
+  dir: mods-available
+  template: common/dispatcher.load.hbs
+
+# --- author ---
+
+# Dispatcher configuration
+- file: "dispatcher_author.any"
+  dir: conf.d
+  variants:
+  - aem-author
+  template: author/dispatcher_author.any.hbs
+
+# httpd vhost (HTTP)
+- file: "vhost_author.conf"
+  dir: sites-available
+  variants:
+  - aem-author
+  - no-ssl
+  template: author/vhost_author.conf.hbs
+
+# httpd vhost (HTTPS)
+- file: "vhost_author.ssl.conf"
+  dir: sites-available
+  variants:
+  - aem-author
+  - ssl
+  template: author/vhost_author.ssl.conf.hbs
+
+# --- publish ---
+
+# Dispatcher configuration
+- file: "dispatcher_publish.any"
+  dir: conf.d
+  variants:
+  - aem-publish
+  template: publish/dispatcher_publish.any.hbs
+
+# httpd vhost per tenant (HTTP)
+- file: "vhost_publish_${tenant}.conf"
+  dir: sites-available
+  variants:
+  - aem-publish
+  - no-ssl
+  template: publish/vhost_publish_tenant.conf.hbs
+  # Mulitply file for each tenant that has the given roles
+  multiply: tenant
+
+# httpd vhost per tenant (HTTPS)
+- file: "vhost_publish_${tenant}.ssl.conf"
+  dir: sites-available
+  variants:
+  - aem-publish
+  - ssl
+  condition: "${dispatcher.sslCertificateFile}"
+  template: publish/vhost_publish_tenant.ssl.conf.hbs
+  # Mulitply file for each tenant that has the given roles
+  multiply: tenant
+
+# httpd config that is shared by all vhosts per tenant
+- file: "_vhost_publish_shared_include.conf"
+  dir: sites-available-shared
+  variants:
+  - aem-publish
+  template: publish/_vhost_publish_shared_include.conf.hbs
+
+
+config:
+
+  httpd:
+    # Modules to be activated in httpd as they are used in the templates. Use names that can be used with a2enmod.
+    modules:
+    - dispatcher
+    - rewrite
+    - headers
+
+  cmsAuthorHostname: author-host
+  cmsAuthorHostnameSsl: "${cmsAuthorHostname}"
+  
+  dispatcher:
+    # Module binary for AEM dispatcher
+    moduleFile: modules/mod_dispatcher.so
+    cacheRootPath: /path/to/dispatcher/cache
+    renderInstance:
+      host: localhost
+      port: 4502
+    forwardClientHeaders:
+    - "*"
+    #allowAdminAccessFrom: 10.0.0.0/255.0.0.0
+    #allowAdminAccessFromHost: www.example.org
+    #allowFlushFrom: 127.0.0.1
+    #allowFlushFromHost: localhost
+    #statFilesLevel: 3
+    rootRedirectHttpStatus: 301
+    cacheDamAssets: false
+    sslCertificateFile: /path/to/sslCertificateFile
+    sslCertificateKeyFile: /path/to/sslCertificateKeyFile
+    #sslCACertificatePath: /path/to/sslCACertificates
+    #sslCACertificateFile: /path/to/sslCACertificateFile
+
+    # If set to true all requests are redirectd to HTTPS and HSTS is enabled
+    enforceSsl: false
+
+    # Configure CORS header to be sent to the client
+    corsHeader:
+      enabled: true
+      # Generate them by default only for font-related files
+      locationMatch: "\\.(svg|eot|ttf|woff)"
+      # If set to true always "*" is sent as 'Access-Control-Allow-Origin' header
+      # If set to false only the requesting host is all if it is in the hostWhiteList (or this list is empty), and not in the hostBlackList
+      allowAllHosts: true
+      #hostWhiteList:
+      #- www.host1.com
+      #- www.host2.com
+
+
+# Example tenant configuration. Tenant name = primary host name/server name
+#config:
+#  serverNameSsl:
+#  serverAliasNames:
+#  - alias1
+#  - alias2
+#  slingMappingPath: /content/path
+#  # By default, only access to paths shortened via Sling Mapping are allowed. Set this to true to also allow unshortened paths.
+#  slingMappingAllowUnshortenedPath: false
+#  dispatcher:
+#    rootRedirectUrl: /en.html
+#    rootRedirectHttpStatus: 301
+#    tenantSpecificVHostConfig: |
+#      Custom Config Line 1
+#      Custom Config Line 2
+#    sslCertificateFile: /path/to/sslCertificateFile
+#    sslCertificateKeyFile: /path/to/sslCertificateKeyFile
+#    sslCACertificateFile: /path/to/sslCACertificateFile
+#    sslCACertificatePath: /path/to/sslCACertificates
+
