@@ -1,4 +1,7 @@
 {{#if dispatcher.sslCertificateFile}}
+{{ensureProperties
+    "dispatcher.sslCertificateKeyFile"
+~}}
 
 # Virtual host for publish site of tenant {{tenant}} (HTTPS)
 <VirtualHost *:443>

@@ -119,7 +119,7 @@ config:
     moduleFile: modules/mod_dispatcher.so
     
     # Dispatcher cache root path
-    cacheRootPath: /path/to/dispatcher/cache
+    #cacheRootPath: /path/to/dispatcher/cache
     
     # Hostname and port of AEM instance
     renderInstance:
@@ -145,8 +145,8 @@ config:
     rootRedirectHttpStatus: 301
 
     # May be set globally or for each tenant (on publish dispatcher)
-    sslCertificateFile: /path/to/sslCertificateFile
-    sslCertificateKeyFile: /path/to/sslCertificateKeyFile
+    #sslCertificateFile: /path/to/sslCertificateFile
+    #sslCertificateKeyFile: /path/to/sslCertificateKeyFile
     #sslCACertificatePath: /path/to/sslCACertificates
     #sslCACertificateFile: /path/to/sslCACertificateFile
 
