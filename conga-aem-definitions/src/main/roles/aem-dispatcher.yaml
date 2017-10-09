@@ -10,8 +10,6 @@ variants:
     dispatcher:
       renderInstance:
         port: 4503
-# Mixin variant to support HTTP access
-- variant: no-ssl
 # Mixin variant to support HTTPS access
 - variant: ssl
   config:
@@ -55,7 +53,6 @@ files:
   dir: sites-available
   variants:
   - aem-author
-  - no-ssl
   template: author/vhost_author.conf.hbs
 
 # httpd vhost (HTTPS)
@@ -80,7 +77,6 @@ files:
   dir: sites-available
   variants:
   - aem-publish
-  - no-ssl
   template: publish/vhost_publish_tenant.conf.hbs
   # Mulitply file for each tenant that has the given roles
   multiply: tenant
@@ -113,34 +109,51 @@ config:
     - rewrite
     - headers
 
+  # Server name for Dispatcher for Authoring instance
   cmsAuthorHostname: author-host
   cmsAuthorHostnameSsl: "${cmsAuthorHostname}"
-  
+
   dispatcher:
+    
     # Module binary for AEM dispatcher
     moduleFile: modules/mod_dispatcher.so
+    
+    # Dispatcher cache root path
     cacheRootPath: /path/to/dispatcher/cache
+    
+    # Hostname and port of AEM instance
     renderInstance:
       host: localhost
       port: 4502
+    
+    # Forward client headers from dispatcher to AEM instance
     forwardClientHeaders:
+    
     - "*"
+    # Allow access to administrative URLs like /crx, /system/console etc. ony from these sources
     #allowAdminAccessFrom: 10.0.0.0/255.0.0.0
     #allowAdminAccessFromHost: www.example.org
+    
+    # Allow dispatcher flush only from these sources
     #allowFlushFrom: 127.0.0.1
     #allowFlushFromHost: localhost
+    
+    # Stars file level for dispatcher
     #statFilesLevel: 3
+    
+    # HTTP Status for redirecting from "/" (only publish dispatcher)
     rootRedirectHttpStatus: 301
-    cacheDamAssets: false
+
+    # May be set globally or for each tenant (on publish dispatcher)
     sslCertificateFile: /path/to/sslCertificateFile
     sslCertificateKeyFile: /path/to/sslCertificateKeyFile
     #sslCACertificatePath: /path/to/sslCACertificates
     #sslCACertificateFile: /path/to/sslCACertificateFile
 
-    # If set to true all requests are redirectd to HTTPS and HSTS is enabled
+    # If set to true all requests are redirectd to HTTPS and HSTS is enabled (only on publish dispatcher)
     enforceSsl: false
 
-    # Configure CORS header to be sent to the client
+    # Configure CORS header to be sent to the client (only on publish dispatcher)
     corsHeader:
       enabled: true
       # Generate them by default only for font-related files
@@ -151,6 +164,10 @@ config:
       #hostWhiteList:
       #- www.host1.com
       #- www.host2.com
+
+    # Only for authoring dispatcher: whether assets should be cached
+    cacheDamAssets: false
+    
 
 
 # Example tenant configuration. Tenant name = primary host name/server name
@@ -172,4 +189,3 @@ config:
 #    sslCertificateKeyFile: /path/to/sslCertificateKeyFile
 #    sslCACertificateFile: /path/to/sslCACertificateFile
 #    sslCACertificatePath: /path/to/sslCACertificates
-

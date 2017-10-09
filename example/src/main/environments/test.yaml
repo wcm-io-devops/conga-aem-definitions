@@ -25,9 +25,10 @@ nodes:
 
 - node: webserver
   roles:
-  - role: aem-dispatcher-common
-  - role: aem-dispatcher-author
-    variant: ssl
+  - role: aem-dispatcher
+    variants:
+    - aem-author
+    - ssl
     config:
       cmsAuthorHostname: author.sample.com
       dispatcher:
@@ -37,8 +38,10 @@ nodes:
           port: 4502
         allowAdminAccessFrom: 10.0.0.0/255.0.0.0
         allowAdminAccessFromHost: www.example.org
-  - role: aem-dispatcher-publish
-    variant: no-ssl+ssl
+  - role: aem-dispatcher
+    variants:
+    - aem-publish
+    - ssl
     config:
       dispatcher:
         cacheRootPath: /var/cache/publish1
