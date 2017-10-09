@@ -93,6 +93,8 @@ config:
 #  - alias1
 #  - alias2
 #  slingMappingPath: /content/path
+#  # By default, only access to paths shortened via Sling Mapping are allowed. Set this to true to also allow unshortened paths.
+#  slingMappingAllowUnshortenedPath: false
 #  dispatcher:
 #    rootRedirectUrl: /en.html
 #    rootRedirectHttpStatus: 301

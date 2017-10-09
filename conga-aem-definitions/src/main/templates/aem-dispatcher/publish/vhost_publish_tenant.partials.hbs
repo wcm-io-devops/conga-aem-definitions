@@ -73,7 +73,8 @@
 {{~#if slingMappingPath}}
   # Don't rewrite the dispatcher invalidation URL
   RewriteCond %{REQUEST_URI} !^/dispatcher/invalidate.cache
-  # Short URL configuration according to http://www.cognifide.com/blogs/cq/multidomain-cq-mappings-and-apache-configuration/
+
+  # Rewrite all paths to short url mapping except special system paths
   RewriteCond %{REQUEST_URI} !^/apps
   RewriteCond %{REQUEST_URI} !^/bin
   RewriteCond %{REQUEST_URI} !^/content
@@ -86,10 +87,13 @@
   RewriteCond %{REQUEST_URI} !^/var
   RewriteRule ^/(.+)$ {{slingMappingPath}}/$1 [PT,L]  
 
-  # Cross-domain injection threat
-  RewriteCond %{REQUEST_URI} ^/content
+
+  # Do not allow access to any /content without url shortening path (except to assets)
   RewriteCond %{REQUEST_URI} !^/content/dam
-  RewriteRule !^{{slingMappingPath}} - [R=404,L,NC]
+{{#if slingMappingAllowUnshortenedPath ~}}
+  RewriteCond %{REQUEST_URI} !^{{slingMappingPath}}
+{{/if ~}}
+  RewriteRule ^/content/.* - [R=404,L,NC]
 {{/if ~}}
 {{/block}}
 
