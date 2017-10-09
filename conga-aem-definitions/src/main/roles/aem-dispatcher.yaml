@@ -127,9 +127,9 @@ config:
       port: 4502
     
     # Forward client headers from dispatcher to AEM instance
-    forwardClientHeaders:
-    
+    forwardClientHeaders:    
     - "*"
+
     # Allow access to administrative URLs like /crx, /system/console etc. ony from these sources
     #allowAdminAccessFrom: 10.0.0.0/255.0.0.0
     #allowAdminAccessFromHost: www.example.org
@@ -138,7 +138,7 @@ config:
     #allowFlushFrom: 127.0.0.1
     #allowFlushFromHost: localhost
     
-    # Stars file level for dispatcher
+    # Stars file level for dispatcher (only on publish dispatcher)
     #statFilesLevel: 3
     
     # HTTP Status for redirecting from "/" (only publish dispatcher)

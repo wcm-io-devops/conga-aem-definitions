@@ -59,11 +59,64 @@ Header set Cache-Control "public, must-revalidate"
 <Location "/admin">
   <IfVersion < 2.4>
     Deny from all
+{{~#if dispatcher.allowAdminAccessFrom}}
+      Allow from {{dispatcher.allowAdminAccessFrom}}
+{{~/if}}
+{{~#if dispatcher.allowAdminAccessFromHost}}
+      Allow from {{dispatcher.allowAdminAccessFromHost}}
+{{~/if}}
   </IfVersion>
   <IfVersion >= 2.4>
     Require all denied
+  {{~#if dispatcher.allowAdminAccessFrom}}
+      Require ip {{dispatcher.allowAdminAccessFrom}}
+{{~/if}}
+{{~#if dispatcher.allowAdminAccessFromHost}}
+      Require host {{dispatcher.allowAdminAccessFromHost}}
+{{~/if}}
+</IfVersion>
+</Location>
+<Location "/crx">
+  <IfVersion < 2.4>
+    Deny from all
+{{~#if dispatcher.allowAdminAccessFrom}}
+      Allow from {{dispatcher.allowAdminAccessFrom}}
+{{~/if}}
+{{~#if dispatcher.allowAdminAccessFromHost}}
+      Allow from {{dispatcher.allowAdminAccessFromHost}}
+{{~/if}}
+  </IfVersion>
+  <IfVersion >= 2.4>
+    Require all denied
+{{~#if dispatcher.allowAdminAccessFrom}}
+      Require ip {{dispatcher.allowAdminAccessFrom}}
+{{~/if}}
+{{~#if dispatcher.allowAdminAccessFromHost}}
+      Require host {{dispatcher.allowAdminAccessFromHost}}
+{{~/if}}
   </IfVersion>
 </Location>
+<Location "/system/console">
+  <IfVersion < 2.4>
+    Deny from all
+{{~#if dispatcher.allowAdminAccessFrom}}
+      Allow from {{dispatcher.allowAdminAccessFrom}}
+{{~/if}}
+{{~#if dispatcher.allowAdminAccessFromHost}}
+      Allow from {{dispatcher.allowAdminAccessFromHost}}
+{{~/if}}
+  </IfVersion>
+  <IfVersion >= 2.4>
+    Require all denied
+  {{~#if dispatcher.allowAdminAccessFrom}}
+      Require ip {{dispatcher.allowAdminAccessFrom}}
+{{~/if}}
+{{~#if dispatcher.allowAdminAccessFromHost}}
+      Require host {{dispatcher.allowAdminAccessFromHost}}
+{{~/if}}
+</IfVersion>
+</Location>
+
 <Location "/apps">
   <IfVersion < 2.4>
     Deny from all
@@ -73,14 +126,6 @@ Header set Cache-Control "public, must-revalidate"
   </IfVersion>
 </Location>
 <Location "/bin">
-  <IfVersion < 2.4>
-    Deny from all
-  </IfVersion>
-  <IfVersion >= 2.4>
-    Require all denied
-  </IfVersion>
-</Location>
-<Location "/crx">
   <IfVersion < 2.4>
     Deny from all
   </IfVersion>
@@ -105,14 +150,6 @@ Header set Cache-Control "public, must-revalidate"
   </IfVersion>
 </Location>
 <Location "/libs">
-  <IfVersion < 2.4>
-    Deny from all
-  </IfVersion>
-  <IfVersion >= 2.4>
-    Require all denied
-  </IfVersion>
-</Location>
-<Location "/system/console">
   <IfVersion < 2.4>
     Deny from all
   </IfVersion>
