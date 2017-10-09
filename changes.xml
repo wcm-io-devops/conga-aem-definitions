@@ -25,7 +25,10 @@
 
     <release version="0.9.6" date="not released">
       <action type="update" dev="amuthmann">
-        Role aem-cms: Add option to make the minimal DAM Update Asset transient (default: true)
+        Role aem-cms: Add option to make the minimal DAM Update Asset transient (default: true).
+      </action>
+      <action type="update" dev="twolfart">
+        Sling Mapping: ease handling for resolution of non-matching requests.
       </action>
     </release>
 
@@ -50,9 +53,6 @@
       </action>
       <action type="update" dev="sseifert">
         Role aem-cms: Remove 'Create web enabled video formats' step from minimal DAM Update Asset workflow.
-      </action>
-      <action type="add" dev="twolfart">
-        Sling Mapping: ease handling for resolution of non-matching requests
       </action>
       <action type="fix" dev="mwehner">
         Role aem-dispatcher: Exclude the dispatcher invalidation URL from rewriting.
