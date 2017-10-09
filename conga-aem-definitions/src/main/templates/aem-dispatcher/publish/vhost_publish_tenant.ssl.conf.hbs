@@ -1,4 +1,4 @@
-{{#if dispatcher.sslCertificateFile}}
+{{#if dispatcher.sslCertificateFile ~}}
 {{ensureProperties
     "dispatcher.sslCertificateKeyFile"
 ~}}
@@ -43,4 +43,4 @@
 
 </VirtualHost>
 
-{{/if}}
+{{~/if}}

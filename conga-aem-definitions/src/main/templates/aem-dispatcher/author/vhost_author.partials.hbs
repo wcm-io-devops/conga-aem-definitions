@@ -44,7 +44,7 @@
 {{/block}}
 
 
-{{~#block "accessRestrictions"}}
+{{~#block "accessRestrictionsAdmin"}}
   # Deny external access to system console, but allow access to logout
   <Location "/admin">
     <IfVersion < 2.4>
@@ -109,7 +109,10 @@
 {{~/if}}
     </IfVersion>
   </LocationMatch>
+{{/block}}
 
+
+{{~#block "accessRestrictionsDispatcherFlush"}}
   # Allow dispatcher flushing only from defined hosts
   <Location "/dispatcher">
     <IfVersion < 2.4>
