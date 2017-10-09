@@ -32,6 +32,14 @@ RewriteEngine On
 
 Header set Cache-Control "public, must-revalidate"
 
+# Cache AEM Clientlibs with long cache key for 1 year
+<LocationMatch "\.lc-.*-lc\.min\.(css|js)$">
+  Header set Cache-Control "max-age=31536000, public"
+</LocationMatch>
+
+
+#### Control indexing by search engine robots ####
+
 # noindex for some non-html files
 <LocationMatch ".*\.(css|js)$">
   Header set X-Robots-Tag "noindex"
@@ -40,10 +48,10 @@ Header set Cache-Control "public, must-revalidate"
   Header set X-Robots-Tag "noindex"
 </LocationMatch>
 
-# Cache AEM Clientlibs with long cache key for 1 year
-<LocationMatch "\.lc-.*-lc\.min\.(css|js)$">
-  Header set Cache-Control "max-age=31536000, public"
-</LocationMatch>
+# Exclude requests with debugClientLibs=true parameter from indexing
+<If "%{QUERY_STRING} =~ /debugClientLibs=true/">
+  Header set X-Robots-Tag "noindex, nofollow"
+</If>
 
 
 #### Deny access to sensitive areas ####

@@ -28,7 +28,10 @@
         Role aem-cms: Add option to make the minimal DAM Update Asset transient (default: true).
       </action>
       <action type="update" dev="twolfart">
-        Sling Mapping: ease handling for resolution of non-matching requests.
+        Role aem-cms: Sling Mapping - ease handling for resolution of non-matching requests.
+      </action>
+      <action type="update" dev="twolfart">
+        Role aem-dispatcher: Set "noindex, nofollow" header for all requests with ?frontend-debug
       </action>
     </release>
 
