@@ -108,7 +108,7 @@ files:
   - aem-contentpackage-osgiconfig
   postProcessorOptions:
     contentPackage:
-      name: aem-cms-config
+      name: aem-cms-system-config
       rootPath: /apps/aem-cms-system-config/config
       filters:
       - filter: /apps/aem-cms-system-config
@@ -161,7 +161,10 @@ config:
         #url: http://localhost:8000
 
   workflow:
+    # Replace the default 'DAM Update Asset' workflow with a minimal one containing only the steps that are always required
     useMinimalDamUpdateAssetWorkflow: true
+    # Configure minimal 'DAM Update Asset' workflow as transient (which is default since AEM 6.3 and recommended for earlier versions)
+    minimalDamUpdateAssetWorkflowTransient: true
 
 
 # Example tenant configuration. Tenant name = primary host name/server name
