@@ -47,15 +47,12 @@
     }
     
   # The filter section defines the requests that should be handled by the dispatcher.
-  # The globs will be compared against the request line, e.g. "GET /index.html HTTP/1.1".
   /filter
-    {
-    # Filtering is done in the httpd configuration
-    /0000
-      {
-      /url "*"
-      /type "allow"
-      }
+    {    
+{{~#each dispatcher.filter}}
+      /{{@index}}
+        {{{aemDispatcherFilter this}}}
+{{~/each}}
     }
 
   # The cache section regulates what responses will be cached and where.

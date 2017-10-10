@@ -51,31 +51,12 @@
     }
     
   # The filter section defines the requests that should be handled by the dispatcher.
-  #
-  # Entries can be either specified using globs, or elements of the request line:
-  #
-  # (1) globs will be compared against the entire request line, e.g.:
-  #
-  #     /0001 { /type "deny" /glob "* /index.html *" }
-  #
-  #   matches request "GET /index.html HTTP/1.1" but not "GET /index.html?a=b HTTP/1.1".
-  #
-  # (2) method/url/query/protocol will be compared againts the respective elements of
-  #   the request line, e.g.:
-  #
-  #     /0001 { /type "deny" /method "GET" /url "/index.html" }
-  #
-  #   matches both "GET /index.html" and "GET /index.html?a=b HTTP/1.1".
-  #
-  # Note: specifying elements of the request line is the preferred method.
   /filter
     {
-    # Filtering is done in the httpd configuration
-    /0000
-      {
-      /url "*"
-      /type "allow"
-      }
+{{~#each dispatcher.filter}}
+      /{{@index}}
+        {{{aemDispatcherFilter this}}}
+{{~/each}}
     }
 
   # The cache section regulates what responses will be cached and where.

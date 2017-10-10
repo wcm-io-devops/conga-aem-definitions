@@ -44,71 +44,11 @@
 {{/block}}
 
 
-{{~#block "accessRestrictionsAdmin"}}
-  # Deny external access to system console, but allow access to logout
-  <Location "/admin">
-    <IfVersion < 2.4>
-      Order deny,allow
-      Deny from all
-{{~#if dispatcher.allowAdminAccessFrom}}
-      Allow from {{dispatcher.allowAdminAccessFrom}}
-{{~/if}}
-{{~#if dispatcher.allowAdminAccessFromHost}}
-      Allow from {{dispatcher.allowAdminAccessFromHost}}
-{{~/if}}
-    </IfVersion>
-    <IfVersion >= 2.4>
-      Require all denied
-{{~#if dispatcher.allowAdminAccessFrom}}
-      Require ip {{dispatcher.allowAdminAccessFrom}}
-{{~/if}}
-{{~#if dispatcher.allowAdminAccessFromHost}}
-      Require host {{dispatcher.allowAdminAccessFromHost}}
-{{~/if}}
-    </IfVersion>
-  </Location>
-  <Location "/crx">
-    <IfVersion < 2.4>
-      Order deny,allow
-      Deny from all
-{{~#if dispatcher.allowAdminAccessFrom}}
-      Allow from {{dispatcher.allowAdminAccessFrom}}
-{{~/if}}
-{{~#if dispatcher.allowAdminAccessFromHost}}
-      Allow from {{dispatcher.allowAdminAccessFromHost}}
-{{~/if}}
-    </IfVersion>
-    <IfVersion >= 2.4>
-      Require all denied
-{{~#if dispatcher.allowAdminAccessFrom}}
-      Require ip {{dispatcher.allowAdminAccessFrom}}
-{{~/if}}
-{{~#if dispatcher.allowAdminAccessFromHost}}
-      Require host {{dispatcher.allowAdminAccessFromHost}}
-{{~/if}}
-    </IfVersion>
-  </Location>
-  <Location "/system/console">
-    <IfVersion < 2.4>
-      Order deny,allow
-      Deny from all
-{{~#if dispatcher.allowAdminAccessFrom}}
-      Allow from {{dispatcher.allowAdminAccessFrom}}
-{{~/if}}
-{{~#if dispatcher.allowAdminAccessFromHost}}
-      Allow from {{dispatcher.allowAdminAccessFromHost}}
-{{~/if}}
-    </IfVersion>
-    <IfVersion >= 2.4>
-      Require all denied
-{{~#if dispatcher.allowAdminAccessFrom}}
-      Require ip {{dispatcher.allowAdminAccessFrom}}
-{{~/if}}
-{{~#if dispatcher.allowAdminAccessFromHost}}
-      Require host {{dispatcher.allowAdminAccessFromHost}}
-{{~/if}}
-    </IfVersion>
-  </Location>
+{{~#block "accessRestrictionsLocationFilter"}}
+# Location filter
+{{#each httpd.locationFilter~}}
+{{aemHttpdFilter this allowFromKey="dispatcher.allowAdminAccessFrom" allowFromHostKey="dispatcher.allowAdminAccessFromHost"}}
+{{/each~}}
 {{/block}}
 
 
@@ -137,51 +77,3 @@
 
   </Location>
 {{/block}}
-
-
-
-
-########## TEST ACCESS RESTRICTONS ###############
-
-{{#each dispatcher.accessRestrictionLocation}}
-  <Location "{{this.location}}">
-{{~#ifEquals this.type "allow"}}
-    <IfVersion < 2.4>
-      Allow from all
-    </IfVersion>
-    <IfVersion >= 2.4>
-      Require all granted
-    </IfVersion>
-{{~else}}
-    <IfVersion < 2.4>
-      Order Deny,Allow
-      Deny from all
-    </IfVersion>
-    <IfVersion >= 2.4>
-      Require all denied
-    </IfVersion>
-{{~/ifEquals}}
-  </Location>
-{{/each}}
-
-{{#each dispatcher.accessRestrictionSelector}}
-  <LocationMatch ".*{{regexQuote this.selector}}.*">
-{{~#ifEquals this.type "allow"}}
-    <IfVersion < 2.4>
-      Allow from all
-    </IfVersion>
-    <IfVersion >= 2.4>
-      Require all granted
-    </IfVersion>
-{{~else}}
-    <IfVersion < 2.4>
-      Order Deny,Allow
-      Deny from all
-    </IfVersion>
-    <IfVersion >= 2.4>
-      Require all denied
-    </IfVersion>
-{{~/ifEquals}}
-  </LocationMatch>
-{{/each}}
-

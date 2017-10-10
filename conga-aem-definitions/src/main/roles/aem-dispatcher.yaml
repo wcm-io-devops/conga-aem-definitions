@@ -2,67 +2,45 @@
 # Generates general dispatcher configuration
 
 variants:
+
 # Dispatcher in front of Authoring instance
 - variant: aem-author
-  config:
-    dispatcher:
-      renderInstance:
-        port: 4502
-      accessRestrictionLocation:
-      - location: /admin
-        type: deny-allow-admin
-      - location: /crx
-        type: deny-allow-admin
-      - location: /system/console
-        type: deny-allow-admin
+
 # Disaptcher for publish instances - configure a tenant for each vhost
 - variant: aem-publish
   config:
     dispatcher:
       renderInstance:
         port: 4503
-      accessRestrictionLocation:
-      - location: /admin
-        type: deny-allow-admin
-      - location: /crx
-        type: deny-allow-admin
-      - location: /system/console
-        type: deny-allow-admin
-      - location: /apps
+      
+      # dispatcher.any filter rules
+      filter:
+      - url: /.*
         type: deny
-      - location: /bin
-        type: deny
-      - location: /etc
-        type: deny
-      - location: /etc/clientlibs
+      # open consoles (access is controlled in httpd config)
+      - url: /(admin|crx|system)(/.*)?
         type: allow
-      - location: /etc/designs
+      # Allow non-public content directories
+      - url: /content(/.*)?
         type: allow
-      - location: /home
+      # Enable extensions in non-public content directories
+      - extension: (css|gif|ico|js|png|swf|jpe?g)
+        type: allow
+      # Enable features 
+      - url: /libs/cq/personalization(/.*)?
+        type: allow
+      - url: /etc/(clientlibs|designs)(/.*)?
+        type: allow
+      # Deny content grabbing, on all accessible pages
+      - selectors: ((sys|doc)view|query|[0-9-]+)
+        extension: (json|xml)
         type: deny
-      - location: /libs
+      # Deny content grabbing for /content
+      - path: /content(/.*)?
+        selectors: (feed|rss|pages|languages|blueprint|infinity|tidy|form)
+        extension: (json|xml|html)
         type: deny
-      - location: /var
-        type: deny
-      accessRestrictionSelector:
-      - selector: .infinity.json
-        type: deny
-      - selector: .query.json
-        type: deny
-      - selector: .query.json
-        type: deny
-      - selector: .sysview.xml
-        type: deny
-      - selector: .docview.xml
-        type: deny
-      - selector: .docview.json
-        type: deny
-      - selector: .feed.
-        type: deny
-      - selector: .feedentry.
-        type: deny
-      - selector: .form.
-        type: deny
+
 # Mixin variant to support HTTPS access
 - variant: ssl
   config:
@@ -100,6 +78,9 @@ files:
   variants:
   - aem-author*
   template: author/dispatcher_author.any.hbs
+  # TOOD: remove this once ANY validator supports regex values enclosed in '
+  validators:
+  - none
 
 # httpd vhost (HTTP)
 - file: vhost_author.conf
@@ -124,6 +105,9 @@ files:
   variants:
   - aem-publish*
   template: publish/dispatcher_publish.any.hbs
+  # TOOD: remove this once ANY validator supports regex values enclosed in '
+  validators:
+  - none
 
 # httpd vhost per tenant (HTTP)
 - file: vhost_publish_${tenant}.conf
@@ -149,11 +133,23 @@ files:
 config:
 
   httpd:
+
     # Modules to be activated in httpd as they are used in the templates. Use names that can be used with a2enmod.
     modules:
     - dispatcher
     - rewrite
     - headers
+
+    # Allow access to adminstrative areas only to certain sources (same on author and publish)
+    locationFilter:
+    - location: /admin
+      type: deny_allow_admin
+    - location: /crx
+      type: deny_allow_admin
+    - location: /system
+      type: deny_allow_admin
+    - locationMatch: /system/sling/logout.*
+      type: allow
 
   # Server name for Dispatcher for Authoring instance
   cmsAuthorHostname: author-host
@@ -175,6 +171,11 @@ config:
     # Forward client headers from dispatcher to AEM instance
     forwardClientHeaders:    
     - "*"
+
+    # dispatcher.any filter rules
+    filter:
+    - url: /.*
+      type: allow
 
     # Allow access to administrative URLs like /crx, /system/console etc. ony from these sources
     #allowAdminAccessFrom: 10.0.0.0/255.0.0.0
