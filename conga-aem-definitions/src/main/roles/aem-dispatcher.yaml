@@ -4,12 +4,65 @@
 variants:
 # Dispatcher in front of Authoring instance
 - variant: aem-author
+  config:
+    dispatcher:
+      renderInstance:
+        port: 4502
+      accessRestrictionLocation:
+      - location: /admin
+        type: deny-allow-admin
+      - location: /crx
+        type: deny-allow-admin
+      - location: /system/console
+        type: deny-allow-admin
 # Disaptcher for publish instances - configure a tenant for each vhost
 - variant: aem-publish
   config:
     dispatcher:
       renderInstance:
         port: 4503
+      accessRestrictionLocation:
+      - location: /admin
+        type: deny-allow-admin
+      - location: /crx
+        type: deny-allow-admin
+      - location: /system/console
+        type: deny-allow-admin
+      - location: /apps
+        type: deny
+      - location: /bin
+        type: deny
+      - location: /etc
+        type: deny
+      - location: /etc/clientlibs
+        type: allow
+      - location: /etc/designs
+        type: allow
+      - location: /home
+        type: deny
+      - location: /libs
+        type: deny
+      - location: /var
+        type: deny
+      accessRestrictionSelector:
+      - selector: .infinity.json
+        type: deny
+      - selector: .query.json
+        type: deny
+      - selector: .query.json
+        type: deny
+      - selector: .sysview.xml
+        type: deny
+      - selector: .docview.xml
+        type: deny
+      - selector: .docview.json
+        type: deny
+      - selector: .feed.
+        type: deny
+      - selector: .feedentry.
+        type: deny
+      - selector: .form.
+        type: deny
 # Mixin variant to support HTTPS access
 - variant: ssl
   config:
@@ -160,7 +213,6 @@ config:
 
     # Only for authoring dispatcher: whether assets should be cached
     cacheDamAssets: false
-    
 
 
 # Example tenant configuration. Tenant name = primary host name/server name

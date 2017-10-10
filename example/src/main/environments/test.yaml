@@ -38,6 +38,14 @@ nodes:
           port: 4502
         allowAdminAccessFrom: 10.0.0.0/255.0.0.0
         allowAdminAccessFromHost: www.example.org
+        accessRestrictionLocation:
+        - _merge_
+        - location: /location1Allow
+          type: allow
+        - location: /location2Deny
+          type: deny
+        - location: /admin
+          type: allow
   - role: aem-dispatcher
     variants:
     - aem-publish
@@ -60,6 +68,14 @@ nodes:
         - accept-language
         - accept
         - host
+        accessRestrictionLocation:
+        - location: /location3Allow
+          type: allow
+        - location: /location4Deny
+          type: deny
+        - location: /admin
+          type: allow
+        - _merge_
 
 config:
   jvm.path: "/usr/lib/jvm/jdk-8-oracle-x64"
