@@ -90,9 +90,9 @@
 
   # Do not allow access to any /content without url shortening path (except to assets)
   RewriteCond %{REQUEST_URI} !^/content/dam
-{{#if slingMappingAllowUnshortenedPath ~}}
+{{~#if slingMappingAllowUnshortenedPath}}
   RewriteCond %{REQUEST_URI} !^{{slingMappingPath}}
-{{/if ~}}
+{{~/if}}
   RewriteRule ^/content/.* - [R=404,L,NC]
 {{/if ~}}
 {{/block}}
