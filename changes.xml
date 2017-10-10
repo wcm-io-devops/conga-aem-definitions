@@ -37,6 +37,9 @@
         Role aem-cms: Sling Mapping - ease handling for resolution of non-matching requests.
       </action>
       <action type="update" dev="sseifert">
+        Role aem-cms: Add jvm.argsList parameter to define a list of custom JVM arguments for AEM start script.
+      </action>
+      <action type="update" dev="sseifert">
         Role aem-dispatcher: Set "noindex, nofollow" header for all requests with ?frontend-debug
       </action>
       <action type="update" dev="sseifert">
