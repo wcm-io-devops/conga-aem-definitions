@@ -128,7 +128,12 @@ config:
     permgenspace:
       max: 256m
     #timezone: Europe/Berlin
-    #args: additional custom JVM args
+    # Additional JVM argument
+    #args: arg1
+    # List of additional JVM arguments
+    #argsList:
+    #- arg1
+    #- arg2
 
   quickstart:
     # Port for AEM instance
