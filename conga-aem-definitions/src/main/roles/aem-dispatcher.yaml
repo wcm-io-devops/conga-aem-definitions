@@ -18,7 +18,7 @@ variants:
       renderInstance:
         port: 4503
       
-      # Dispatcher filter rules
+      # Dispatcher filter rules (use only regex, no glob expressions)
       filter:
       - url: /.*
         type: deny
@@ -248,7 +248,7 @@ config:
     forwardClientHeaders:    
     - "*"
 
-    # Dispatcher filter rules
+    # Dispatcher filter rules (use only regex, no glob expressions)
     filter:
     - url: /.*
       type: allow
