@@ -57,8 +57,8 @@
 
 {{~#block "accessRestrictionsLocationFilter"}}
 # Location filter
-{{#each httpd.locationFilter~}}
-{{aemHttpdFilter this allowFromKey="dispatcher.allowAdminAccessFrom" allowFromHostKey="dispatcher.allowAdminAccessFromHost"}}
+{{#each httpd.accessRestriction.locationFilter~}}
+{{aemHttpdFilter this allowFromKey="httpd.accessRestriction.adminAccessFromIp" allowFromHostKey="httpd.accessRestriction.adminAccessFromHost"}}
 {{/each~}}
 {{/block}}
 
@@ -69,20 +69,20 @@
     <IfVersion < 2.4>
       Order Deny,Allow
       Deny from all
-{{~#if dispatcher.allowFlushFrom}}
-      Allow from {{dispatcher.allowFlushFrom}}
+{{~#if httpd.accessRestriction.dispatcherFlushFromIp}}
+      Allow from {{httpd.accessRestriction.dispatcherFlushFromIp}}
 {{~/if}}
-{{~#if dispatcher.allowFlushFromHost}}
-      Allow from {{dispatcher.allowFlushFromHost}}
+{{~#if httpd.accessRestriction.dispatcherFlushFromHost}}
+      Allow from {{httpd.accessRestriction.dispatcherFlushFromHost}}
 {{~/if}}
     </IfVersion>
     <IfVersion >= 2.4>
       Require all denied
-{{~#if dispatcher.allowFlushFrom}}
-      Require ip {{dispatcher.allowFlushFrom}}
+{{~#if httpd.accessRestriction.dispatcherFlushFromIp}}
+      Require ip {{httpd.accessRestriction.dispatcherFlushFromIp}}
 {{~/if}}
-{{~#if dispatcher.allowFlushFrom}}
-      Require host {{dispatcher.allowFlushFromHost}}
+{{~#if httpd.accessRestriction.dispatcherFlushFromIp}}
+      Require host {{httpd.accessRestriction.dispatcherFlushFromHost}}
 {{~/if}}
     </IfVersion>
 

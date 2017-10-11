@@ -146,16 +146,27 @@ config:
     serverAliasNames:
     serverAliasNamesSsl: ${httpd.serverAliasNames}
 
-    # Allow access to adminstrative areas only to certain sources (same on author and publish)
-    locationFilter:
-    - location: /admin
-      type: deny_allow_admin
-    - location: /crx
-      type: deny_allow_admin
-    - location: /system
-      type: deny_allow_admin
-    - locationMatch: /system/sling/logout.*
-      type: allow
+    # Access restrictions
+    accessRestriction:
+
+      # Allow access to adminstrative areas only to certain sources (same on author and publish)
+      locationFilter:
+      - location: /admin
+        type: deny_allow_admin
+      - location: /crx
+        type: deny_allow_admin
+      - location: /system
+        type: deny_allow_admin
+      - locationMatch: /system/sling/logout.*
+        type: allow
+
+      # Allow access to administrative URLs like /crx, /system/console etc. only from these sources
+      #adminAccessFromIp: 10.0.0.0/255.0.0.0
+      #adminAccessFromHost: www.example.org
+
+      # Allow dispatcher flush only from these sources
+      #dispatcherFlushFromIp: 127.0.0.1
+      #dispatcherFlushFromHost: localhost
 
   dispatcher:
     
@@ -179,14 +190,6 @@ config:
     - url: /.*
       type: allow
 
-    # Allow access to administrative URLs like /crx, /system/console etc. ony from these sources
-    #allowAdminAccessFrom: 10.0.0.0/255.0.0.0
-    #allowAdminAccessFromHost: www.example.org
-    
-    # Allow dispatcher flush only from these sources
-    #allowFlushFrom: 127.0.0.1
-    #allowFlushFromHost: localhost
-    
     # Stars file level for dispatcher (only on publish dispatcher)
     #statFilesLevel: 3
     
@@ -220,10 +223,12 @@ config:
 
 # Example tenant configuration. Tenant name = primary host name/server name
 #config:
-#  serverNameSsl:
-#  serverAliasNames:
-#  - alias1
-#  - alias2
+#  httpd:
+#    serverName: ${tenant}
+#    serverNameSsl:
+#    serverAliasNames:
+#    - alias1
+#    - alias2
 #  slingMappingPath: /content/path
 #  # By default, only access to paths shortened via Sling Mapping are allowed. Set this to true to also allow unshortened paths.
 #  slingMappingAllowUnshortenedPath: false
