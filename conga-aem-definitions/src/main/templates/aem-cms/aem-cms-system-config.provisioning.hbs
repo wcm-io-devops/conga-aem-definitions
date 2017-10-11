@@ -9,3 +9,17 @@
     alias="/crx/server"
     dav.create-absolute-uri=B"true"
 {{~/if}}
+
+{{#if sling.caconfig.overrides}}
+  # Sling Context-Aware Configuration Overrides
+  org.apache.sling.caconfig.impl.override.OsgiConfigurationOverrideProvider-conga-aem-cms-system-config
+    enabled=B"true"
+    description="CONGA aem-cms-system-config"
+    overrides=[
+      {{~#each sling.caconfig.overrides ~}}
+        {{~#each this ~}}
+          "[{{../@key}}]{{this}}",
+        {{~/each ~}}
+      {{~/each ~}}
+    ]
+{{/if}}

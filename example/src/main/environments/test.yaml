@@ -94,6 +94,9 @@ nodes:
 config:
   jvm.path: "/usr/lib/jvm/jdk-8-oracle-x64"
 
+  quickstart:
+    enableDavEx: true
+
   httpd:
     accessRestriction:
       adminAccessFromIp: 10.0.0.0/255.0.0.0
@@ -108,6 +111,13 @@ config:
 
   dispatcher:
     moduleFile: /usr/lib/apache2/modules/mod_dispatcher.so
+
+  sling:
+    caconfig:
+      overrides:
+        "/content":
+        - io.wcm.handler.url.SiteConfig/siteUrl="http://site1"
+        - io.wcm.handler.url.SiteConfig/siteUrlAuthor="https://author.site1"
 
   workflow:
     useMinimalDamUpdateAssetWorkflow: true
