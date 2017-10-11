@@ -78,9 +78,6 @@ files:
   variants:
   - aem-author*
   template: author/dispatcher_author.any.hbs
-  # TOOD: remove this once ANY validator supports regex values enclosed in '
-  validators:
-  - none
 
 # httpd vhost (HTTP)
 - file: vhost_author.conf
@@ -105,9 +102,6 @@ files:
   variants:
   - aem-publish*
   template: publish/dispatcher_publish.any.hbs
-  # TOOD: remove this once ANY validator supports regex values enclosed in '
-  validators:
-  - none
 
 # httpd vhost per tenant (HTTP)
 - file: vhost_publish_${tenant}.conf
