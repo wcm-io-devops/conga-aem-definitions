@@ -1,7 +1,7 @@
 {{ensureProperties
     "dispatcher.renderInstance.host"
     "dispatcher.renderInstance.port"
-    "dispatcher.cacheRootPath"
+    "dispatcher.cache.rootPath"
 ~}}
 
 /publish
@@ -44,7 +44,11 @@
       # Port of the render
       /port "{{dispatcher.renderInstance.port}}"
       # Connect timeout in milliseconds, 0 to wait indefinitely
+{{~#if dispatcher.renderInstance.timeoutMs}}
+      /timeout "{{dispatcher.renderInstance.timeoutMs}}"
+{{~ else}}
       # /timeout "0"
+{{~/if}}
       }
     }
     
@@ -64,25 +68,33 @@
     # dispatcher will store files relative to this directory and subsequent
     # requests may be "declined" by the dispatcher, allowing the webserver
     # to deliver them just like static files.
-    /docroot "{{dispatcher.cacheRootPath}}"
+    /docroot "{{dispatcher.cache.rootPath}}"
 
     # Sets the level upto which files named ".stat" will be created in the 
     # document root of the webserver. When an activation request for some 
     # page is received, only files within the same subtree are affected 
     # by the invalidation.
-{{~#if dispatcher.statFilesLevel}}
-    /statfileslevel "{{dispatcher.statFilesLevel}}"
+{{~#if dispatcher.cache.statFilesLevel}}
+    /statfileslevel "{{dispatcher.cache.statFilesLevel}}"
 {{~ else}}
-    #/statfileslevel "1"
+    #/statfileslevel "0"
 {{~/if}}
     
     # Flag indicating whether to cache responses to requests that contain
     # authorization information.
+{{~#if dispatcher.cache.allowAuthorized}}
+    /allowAuthorized "1"
+{{~ else}}
     #/allowAuthorized "0"
+{{~/if}}
     
     # Flag indicating whether the dispatcher should serve stale content if
     # no remote server is available.
+{{~#if dispatcher.cache.serveStaleOnError}}
+    /serveStaleOnError "1"
+{{~ else}}
     #/serveStaleOnError "0"
+{{~/if}}
     
     # The rules section defines what responses should be cached based on
     # the requested URL. Please note that only the following requests can
@@ -94,22 +106,10 @@
     # - Request has no "Authorization" header (unless allowAuthorized is 1)
     /rules
       {
-      /0000
-        {
-        # the globbing pattern to be compared against the url
-        # example: *             -> everything
-        #        : /foo/bar.*    -> only the /foo/bar documents
-        #        : /foo/bar/*    -> all pages below /foo/bar
-        #        : /foo/bar[./]* -> all pages below and /foo/bar itself
-        #        : *.html        -> all .html files
-        /glob "*"
-        /type "allow"
-        }
-      /0001
-        {
-        /glob "*.htx"
-        /type "deny"
-        }
+{{~#each dispatcher.cache.rules}}
+      /{{@index}}
+        { /type "{{this.type}}" /glob "{{this.glob}}" }
+{{~/each}}
       }
       
     # The invalidate section defines the pages that are "invalidated" after
@@ -119,33 +119,10 @@
     # cache.
     /invalidate
       {
-      /0000
-        {
-        /glob "*"
-        /type "deny"
-        }
-      /0001
-        {
-        # Consider all HTML files stale after an activation.
-        /glob "*.html"
-        /type "allow"
-        }
-      /0002
-        {
-        # Consider all JSON files stale after an activation.
-        /glob "*.json"
-        /type "allow"
-        }
-      /0003
-        {
-        /glob "/etc/segmentation.segment.js"
-        /type "allow"
-        }
-      /0004
-        {
-        /glob "*/analytics.sitecatalyst.js"
-        /type "allow"
-        }
+{{~#each dispatcher.cache.invalidate}}
+      /{{@index}}
+        { /type "{{this.type}}" /glob "{{this.glob}}" }
+{{~/each}}
       }
 
     # The allowedClients section restricts the client IP addresses that are
@@ -186,15 +163,18 @@
     #
     # Note, that file globbing characters are not allowed here.
     #
+{{~#if dispatcher.cache.headers}}
+    /headers
+      {
+{{~#each dispatcher.cache.headers}}
+      "{{this}}"
+{{~/each}}
+      }
+{{~ else}}
     #/headers
     #  {
-    #  "Cache-Control"
-    #  "Content-Disposition"
-    #  "Content-Type"
-    #  "Expires"
-    #  "Last-Modified"
-    #  "X-Content-Type-Options"
     #  }
+{{~/if}}
 
     # A grace period defines the number of seconds a stale, auto-invalidated
     # resource may still be served from the cache after the last activation
@@ -203,7 +183,11 @@
     # can be used in a setup, where a batch of activations would otherwise
     # repeatedly invalidate the entire cache.
     #
+{{~#if dispatcher.cache.serveStaleGracePeriodSec}}
+    /gracePeriod "{{dispatcher.cache.serveStaleGracePeriodSec}}"
+{{~ else}}
     #/gracePeriod "2"
+{{~/if}}
 
     # Enable TTL evaluates the response headers from the backend, and if they
     # contain a Cache-Control max-age or Expires date, an auxiliary, empty file
@@ -211,7 +195,11 @@
     # expiry date. When the cache file is requested past the modification time
     # it is automatically re-requested from the backend.
     #
+{{~#if dispatcher.cache.enableTTL}}
+    /enableTTL "1"
+{{~ else}}
     # /enableTTL "1"
+{{~/if}}
 
     }
     

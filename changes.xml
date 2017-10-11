@@ -51,6 +51,9 @@
       <action type="update" dev="sseifert">
         Role aem-dispatcher: Introduce httpd.customVHostConfig.*, remove "dispatcher.tenantSpecificVHostConfig" property.
       </action>
+      <action type="update" dev="sseifert">
+        Role aem-dispatcher: Introduce httpd.cache.*, remove "dispatcher.cacheRootPath" and "dispatcher.statFilesLevel" properties.
+      </action>
     </release>
 
     <release version="0.9.6" date="not released">

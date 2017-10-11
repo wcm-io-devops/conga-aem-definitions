@@ -18,7 +18,7 @@ variants:
       renderInstance:
         port: 4503
       
-      # dispatcher.any filter rules
+      # Dispatcher filter rules
       filter:
       - url: /.*
         type: deny
@@ -45,6 +45,32 @@ variants:
         selectors: (feed|rss|pages|languages|blueprint|infinity|tidy|form)
         extension: (json|xml|html)
         type: deny
+
+      # Configure dispatcher cache
+      cache:
+
+        # Defines what responses should be cached based on the requested URL
+        rules:
+        # Cache everything by default
+        - glob: "*"
+          type: allow
+        # Exclude .htx extension from caching
+        - glob: "*.htx"
+          type: deny
+
+        # Defines the pages that are "invalidated" after any activation
+        invalidate:
+        - glob: "*"
+          type: deny
+        # Consider all HTML and JSON files stale after an activation.
+        - glob: "*.html"
+          type: allow
+        - glob: "*.json"
+          type: allow
+        - glob: "/etc/segmentation.segment.js"
+          type: allow
+        - glob: "*/analytics.sitecatalyst.js"
+          type: allow
 
 # Mixin variant to support HTTPS access
 - variant: ssl
@@ -211,28 +237,85 @@ config:
     # Module binary for AEM dispatcher
     moduleFile: modules/mod_dispatcher.so
     
-    # Dispatcher cache root path
-    #cacheRootPath: /path/to/dispatcher/cache
-    
     # Hostname and port of AEM instance
     renderInstance:
       host: localhost
       port: 4502
+      # Connect timeout in milliseconds, 0 to wait indefinitely
+      #timeoutMs: 0
     
     # Forward client headers from dispatcher to AEM instance
     forwardClientHeaders:    
     - "*"
 
-    # dispatcher.any filter rules
+    # Dispatcher filter rules
     filter:
     - url: /.*
       type: allow
 
-    # Stars file level for dispatcher (only on publish dispatcher)
-    #statFilesLevel: 3
+    # Configure dispatcher cache
+    cache:
+
+      # Dispatcher cache root path
+      rootPath:
+
+      # Defines what responses should be cached based on the requested URL
+      rules:
+      # Disallow any caching by default and subsequently allow caching
+      # for content that may be cached although requested with authorization
+      # information present in the request
+      - glob: "*"
+        type: deny
+      # Allow caching of requests to /libs
+      - glob: "/libs/*"
+        type: allow
+      # This contains user information
+      - glob: "/libs/cq/security/userinfo.*"
+        type: deny
+      # This page contains a "Welcome, User XXX" message
+      - glob: "/libs/cq/core/content/welcome.*"
+        type: deny
+      # Thumbnails exist in various resolutions: thumbnail.png, thumbnail.png.thumb.48.48.png
+      - glob: "/apps/*/templates/*/thumbnail.pn*"
+        type: allow
+      # Static ressources in /apps
+      - glob: "/apps/*/docroot/*"
+        type: allow
+      # Client Libraries
+      - glob: "/etc/clientlibs/*"
+        type: allow
+      - glob: "/etc/designs/*/clientlibs/*"
+        type: allow
+
+      # Defines the pages that are "invalidated" after any activation
+      invalidate:
+      - glob: "*"
+        type: deny
+      
+      # Sets the level upto which files named ".stat" will be created in the document root of the webserver (only on publish dispatcher)
+      #statFilesLevel: 1
+      
+      # Whether to cache responses to requests that contain authorization information (only on publish dispatcher)
+      #allowAuthorized: false
+
+      # Whether the dispatcher should serve stale content if no remote server is available (only on publish dispatcher)
+      #serveStaleOnError: false
+
+      # Ggrace period defines the number of seconds a stale, auto-invalidated resource may still be served from the cache after the last activation occurring. 
+      #serveStaleGracePeriodSec: 0
+
+      # Cache headers in dispatcher (only on publish dispatcher)
+      #headers:
+      #- Cache-Control
+      #- Content-Disposition
+      #- Content-Type
+      #- Expires
+      #- Last-Modified
+      #- X-Content-Type-Options
+
+      # Enable TTL evaluates the response headers from the backend
+      #enableTTL: false
     
-    # Only for authoring dispatcher: whether assets should be cached
-    cacheDamAssets: false
 
   sling:
 

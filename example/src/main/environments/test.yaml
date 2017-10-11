@@ -42,7 +42,8 @@ nodes:
           - location: /admin
             type: allow
       dispatcher:
-        cacheRootPath: /var/cache/author1
+        cache:
+          rootPath: /var/cache/author1
         renderInstance:
           host: localhost
           port: 4502
@@ -62,11 +63,24 @@ nodes:
             type: allow
           - _merge_
       dispatcher:
-        cacheRootPath: /var/cache/publish1
-        statFilesLevel: 3
+        cache:
+          rootPath: /var/cache/publish1
+          statFilesLevel: 3
+          allowAuthorized: true
+          serveStaleOnError: true
+          serveStaleGracePeriodSec: 5
+          headers:
+          - Cache-Control
+          - Content-Disposition
+          - Content-Type
+          - Expires
+          - Last-Modified
+          - X-Content-Type-Options
+          enableTTL: true
         renderInstance:
           host: localhost
           port: 4503
+          timeoutMs: 10000
         forwardClientHeaders:
         - referer
         - content-type
