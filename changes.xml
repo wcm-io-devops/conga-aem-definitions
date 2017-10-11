@@ -34,6 +34,9 @@
         Role aem-cms, aem-dispatcher: Introduce httpd.serverName|serverNameSsl|serverAliasNames|serverAliasNamesSsl, remove "server*" properties.
       </action>
       <action type="update" dev="sseifert">
+        Role aem-cms, aem-dispatcher: Introduce sling.mapping.*, remove "slingMapping*" properties.
+      </action>
+      <action type="update" dev="sseifert">
         Role aem-dispatcher: Introduce httpd.accessRestriction.adminAccessFromIp|adminAccessFromHost|dispatcherFlushFromIp|dispatcherFlushFromHost, remove "dispatcher.allow*" properties.
       </action>
       <action type="update" dev="sseifert">

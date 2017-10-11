@@ -158,7 +158,7 @@
 
 
 {{~#block "rewriteSlingShortUrlMapping"}}
-{{~#if slingMappingPath}}
+{{~#if sling.mapping.rootPath}}
   # Don't rewrite the dispatcher invalidation URL
   RewriteCond %{REQUEST_URI} !^/dispatcher/invalidate.cache
 
@@ -173,13 +173,13 @@
   RewriteCond %{REQUEST_URI} !^/system
   RewriteCond %{REQUEST_URI} !^/tmp
   RewriteCond %{REQUEST_URI} !^/var
-  RewriteRule ^/(.+)$ {{slingMappingPath}}/$1 [PT,L]  
+  RewriteRule ^/(.+)$ {{sling.mapping.rootPath}}/$1 [PT,L]  
 
 
   # Do not allow access to any /content without url shortening path (except to assets)
   RewriteCond %{REQUEST_URI} !^/content/dam
-{{~#if slingMappingAllowUnshortenedPath}}
-  RewriteCond %{REQUEST_URI} !^{{slingMappingPath}}
+{{~#if sling.mapping.allowUnshortenedPath}}
+  RewriteCond %{REQUEST_URI} !^{{sling.mapping.rootPath}}
 {{~/if}}
   RewriteRule ^/content/.* - [R=404,L,NC]
 {{/if ~}}

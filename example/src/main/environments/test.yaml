@@ -108,7 +108,7 @@ tenants:
       - www.sample1.com
       rootRedirect.url: /en.html
       ssl.enforce: true      
-    slingMappingPath: /content/sample1
+    sling.mapping.rootPath: /content/sample1
 
 - tenant: sample2.com
   config:
@@ -119,4 +119,4 @@ tenants:
       serverAliasNamesSsl:
       - www.ssl-sample2.com
       rootRedirect.url: /de.html
-    slingMappingPath: /content/sample2
+    sling.mapping.rootPath: /content/sample2

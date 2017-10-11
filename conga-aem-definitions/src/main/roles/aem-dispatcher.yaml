@@ -224,6 +224,15 @@ config:
     # Only for authoring dispatcher: whether assets should be cached
     cacheDamAssets: false
 
+  sling:
+
+    # Configure Sling Mapping for URL shortening of content paths
+    mapping:
+      # Content root path which is stripped off
+      #rootPath: /content/path
+      # By default, only access to paths shortened via Sling Mapping are allowed. Set this to true to also allow unshortened paths.
+      #allowUnshortenedPath: false
+
 
 
 # Example tenant configuration. Tenant name = primary host name/server name
@@ -240,10 +249,8 @@ config:
 #      certificateKeyFile: /path/to/sslCertificateKeyFile
 #      caCertificateFile: /path/to/sslCACertificateFile
 #      caCertificatePath: /path/to/sslCACertificates
-#  slingMappingPath: /content/path
-#  # By default, only access to paths shortened via Sling Mapping are allowed. Set this to true to also allow unshortened paths.
-#  slingMappingAllowUnshortenedPath: false
 #  dispatcher:
 #    tenantSpecificVHostConfig: |
 #      Custom Config Line 1
 #      Custom Config Line 2
+#  sling.mapping.rootPath: /content/path

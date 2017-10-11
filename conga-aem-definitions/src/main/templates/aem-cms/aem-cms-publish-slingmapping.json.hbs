@@ -4,15 +4,15 @@
   "http": {
     "jcr:primaryType": "sling:Folder"
 
-{{~#eachIf tenants "config.slingMappingPath"}},
+{{~#eachIf tenants "config.sling.mapping.rootPath"}},
     "{{#if this.config.httpd.serverName}}{{this.config.httpd.serverName}}{{else}}{{this.tenant}}{{/if}}": {
       "jcr:primaryType": "sling:Mapping",
-      "sling:internalRedirect": ["/","{{this.config.slingMappingPath}}"]
+      "sling:internalRedirect": ["/","{{this.config.sling.mapping.rootPath}}"]
     }
   {{~#each this.config.httpd.serverAliasNames}},
     "{{this}}": {
       "jcr:primaryType": "sling:Mapping",
-      "sling:internalRedirect": ["/","{{../this.config.slingMappingPath}}"]
+      "sling:internalRedirect": ["/","{{../this.config.sling.mapping.rootPath}}"]
     }
   {{/each ~}}
 {{/eachIf~}}
@@ -22,15 +22,15 @@
   "https": {
     "jcr:primaryType": "sling:Folder"
 
-{{~#eachIf tenants "config.slingMappingPath"}},
+{{~#eachIf tenants "config.sling.mapping.rootPath"}},
     "{{#if this.config.httpd.serverNameSsl}}{{this.config.httpd.serverNameSsl}}{{else}}{{#if this.config.httpd.serverName}}{{this.config.httpd.serverName}}{{else}}{{this.tenant}}{{/if}}{{/if}}": {
       "jcr:primaryType": "sling:Mapping",
-      "sling:internalRedirect": ["/","{{this.config.slingMappingPath}}"]
+      "sling:internalRedirect": ["/","{{this.config.sling.mapping.rootPath}}"]
     }
 {{~#each this.config.httpd.serverAliasNamesSsl}},
     "{{this}}": {
       "jcr:primaryType": "sling:Mapping",
-      "sling:internalRedirect": ["/","{{../this.config.slingMappingPath}}"]
+      "sling:internalRedirect": ["/","{{../this.config.sling.mapping.rootPath}}"]
     }
   {{/each ~}}
 {{/eachIf~}}
