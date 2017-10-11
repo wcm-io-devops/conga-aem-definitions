@@ -4,43 +4,36 @@
   "http": {
     "jcr:primaryType": "sling:Folder"
 
-{{#eachIf tenants "config.slingMappingPath"}},
-    "{{this.tenant}}": {
+{{~#eachIf tenants "config.sling.mapping.rootPath"}},
+    "{{#if this.config.httpd.serverName}}{{this.config.httpd.serverName}}{{else}}{{this.tenant}}{{/if}}": {
       "jcr:primaryType": "sling:Mapping",
-      "sling:internalRedirect": ["/","{{this.config.slingMappingPath}}"]
+      "sling:internalRedirect": ["/","{{this.config.sling.mapping.rootPath}}"]
     }
-  {{~#each this.config.serverAliasNames}},
+  {{~#each this.config.httpd.serverAliasNames}},
     "{{this}}": {
       "jcr:primaryType": "sling:Mapping",
-      "sling:internalRedirect": ["/","{{../this.config.slingMappingPath}}"]
+      "sling:internalRedirect": ["/","{{../this.config.sling.mapping.rootPath}}"]
     }
   {{/each ~}}
-{{/eachIf}}
+{{/eachIf~}}
 
   },
 
   "https": {
     "jcr:primaryType": "sling:Folder"
 
-{{#eachIf tenants "config.slingMappingPath"}},
-  {{~#if this.config.serverNameSsl}}
-    "{{this.config.serverNameSsl}}": {
+{{~#eachIf tenants "config.sling.mapping.rootPath"}},
+    "{{#if this.config.httpd.serverNameSsl}}{{this.config.httpd.serverNameSsl}}{{else}}{{#if this.config.httpd.serverName}}{{this.config.httpd.serverName}}{{else}}{{this.tenant}}{{/if}}{{/if}}": {
       "jcr:primaryType": "sling:Mapping",
-      "sling:internalRedirect": ["/","{{this.config.slingMappingPath}}"]
+      "sling:internalRedirect": ["/","{{this.config.sling.mapping.rootPath}}"]
     }
-  {{~ else ~}}
-    "{{this.tenant}}": {
-      "jcr:primaryType": "sling:Mapping",
-      "sling:internalRedirect": ["/","{{this.config.slingMappingPath}}"]
-    }
-  {{/if ~}}
-  {{~#each this.config.serverAliasNames}},
+{{~#each this.config.httpd.serverAliasNamesSsl}},
     "{{this}}": {
       "jcr:primaryType": "sling:Mapping",
-      "sling:internalRedirect": ["/","{{../this.config.slingMappingPath}}"]
+      "sling:internalRedirect": ["/","{{../this.config.sling.mapping.rootPath}}"]
     }
   {{/each ~}}
-{{/eachIf}}
+{{/eachIf~}}
 
   }
 

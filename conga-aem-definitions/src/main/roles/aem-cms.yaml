@@ -170,12 +170,3 @@ config:
     useMinimalDamUpdateAssetWorkflow: true
     # Configure minimal 'DAM Update Asset' workflow as transient (which is default since AEM 6.3 and recommended for earlier versions)
     minimalDamUpdateAssetWorkflowTransient: true
-
-
-# Example tenant configuration. Tenant name = primary host name/server name
-#config:
-#  serverNameSsl:
-#  aliasNames:
-#  - alias1
-#  - alias2
-#  slingMappingPath: /content/path

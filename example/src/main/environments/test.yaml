@@ -30,27 +30,57 @@ nodes:
     - aem-author
     - ssl
     config:
-      cmsAuthorHostname: author.sample.com
+      httpd:
+        serverName: author.sample.com
+        accessRestriction:
+          locationFilter:
+          - _merge_
+          - location: /location1Allow
+            type: allow
+          - location: /location2Deny
+            type: deny
+          - location: /admin
+            type: allow
       dispatcher:
-        cacheRootPath: /var/cache/author1
+        cache:
+          rootPath: /var/cache/author1
         renderInstance:
           host: localhost
           port: 4502
-        allowAdminAccessFrom: 10.0.0.0/255.0.0.0
-        allowAdminAccessFromHost: www.example.org
   - role: aem-dispatcher
     variants:
     - aem-publish
     - ssl
     config:
+      httpd:
+        accessRestriction:
+          locationFilter:
+          - location: /location3Allow
+            type: allow
+          - location: /location4Deny
+            type: deny
+          - location: /admin
+            type: allow
+          - _merge_
       dispatcher:
-        cacheRootPath: /var/cache/publish1
-        statFilesLevel: 3
+        cache:
+          rootPath: /var/cache/publish1
+          statFilesLevel: 3
+          allowAuthorized: true
+          serveStaleOnError: true
+          serveStaleGracePeriodSec: 5
+          headers:
+          - Cache-Control
+          - Content-Disposition
+          - Content-Type
+          - Expires
+          - Last-Modified
+          - X-Content-Type-Options
+          enableTTL: true
         renderInstance:
           host: localhost
           port: 4503
-        allowAdminAccessFrom: 10.0.0.0/255.0.0.0
-        allowAdminAccessFromHost: www.example.org
+          timeoutMs: 10000
         forwardClientHeaders:
         - referer
         - content-type
@@ -63,14 +93,22 @@ nodes:
 
 config:
   jvm.path: "/usr/lib/jvm/jdk-8-oracle-x64"
+
+  httpd:
+    accessRestriction:
+      adminAccessFromIp: 10.0.0.0/255.0.0.0
+      adminAccessFromHost: www.example.org
+      dispatcherFlushFromIp: 127.0.0.1
+      dispatcherFlushFromHost: localhost
+    ssl:
+      certificateFile: /etc/ssl/certs/sample.crt
+      certificateKeyFile: /etc/ssl/private/sample.key
+      cACertificatePath: /etc/ssl/certs
+      cACertificateFile: /etc/ssl/certs/sample.pem
+
   dispatcher:
     moduleFile: /usr/lib/apache2/modules/mod_dispatcher.so
-    allowFlushFrom: 127.0.0.1
-    allowFlushFromHost: localhost
-    sslCertificateFile: /etc/ssl/certs/sample.crt
-    sslCertificateKeyFile: /etc/ssl/private/sample.key
-    sslCACertificatePath: /etc/ssl/certs
-    sslCACertificateFile: /etc/ssl/certs/sample.pem
+
   workflow:
     useMinimalDamUpdateAssetWorkflow: true
 
@@ -79,17 +117,30 @@ tenants:
 
 - tenant: sample1.com
   config:
-    serverAliasNames:
-    - www.sample1.com
-    slingMappingPath: /content/sample1
-    dispatcher:
-      rootRedirectUrl: /en.html
-      enforceSsl: true
+    httpd:
+      serverAliasNames:
+      - www.sample1.com
+      rootRedirect.url: /en.html
+      ssl.enforce: true      
+      customVHostConfig:
+        before: |
+          # This is custom configuration example
+          # at the top of the file
+        beforeRewrite: |
+          # This is custom configuration example
+          # before the rewrite rules
+        after: |
+          # This is custom configuration example
+          # at the bottom of the file
+    sling.mapping.rootPath: /content/sample1
 
 - tenant: sample2.com
   config:
-    serverAliasNames:
-    - www.sample2.com
-    slingMappingPath: /content/sample2
-    dispatcher:
-      rootRedirectUrl: /de.html
+    httpd:
+      serverNameSsl: ssl-sample2.com
+      serverAliasNames:
+      - www.sample2.com
+      serverAliasNamesSsl:
+      - www.ssl-sample2.com
+      rootRedirect.url: /de.html
+    sling.mapping.rootPath: /content/sample2

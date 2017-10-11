@@ -27,6 +27,33 @@
       <action type="update" dev="sseifert" issue="WDCONGA-14">
         Role aem-dispatcher: Combine aem-dispatcher-* roles into a single role with multiple variants (that can be combined).
       </action>
+      <action type="update" dev="sseifert" issue="WDCONGA-12">
+        Role aem-dispatcher: Add httpd.accessRestriction.locationFilter and dispatcher.filter properties to allow to customize filtering rules.
+      </action>
+      <action type="update" dev="sseifert">
+        Role aem-cms, aem-dispatcher: Introduce sling.mapping.*, remove "slingMapping*" properties.
+      </action>
+      <action type="update" dev="sseifert">
+        Role aem-cms, aem-dispatcher: Introduce httpd.serverName|serverNameSsl|serverAliasNames|serverAliasNamesSsl, remove "server*" properties.
+      </action>
+      <action type="update" dev="sseifert">
+        Role aem-dispatcher: Introduce httpd.accessRestriction.adminAccessFromIp|adminAccessFromHost|dispatcherFlushFromIp|dispatcherFlushFromHost, remove "dispatcher.allow*" properties.
+      </action>
+      <action type="update" dev="sseifert">
+        Role aem-dispatcher: Introduce httpd.redirectRoot.url|httpStatus, remove "dispatcher.rootRedirect*" properties.
+      </action>
+      <action type="update" dev="sseifert">
+        Role aem-dispatcher: Introduce httpd.corsHeader.*, remove "dispatcher.corsHeader.*" properties.
+      </action>
+      <action type="update" dev="sseifert">
+        Role aem-dispatcher: Introduce httpd.ssl.*, remove "dispatcher.ssl*" and "dispatcher.enforceSsl" properties.
+      </action>
+      <action type="update" dev="sseifert">
+        Role aem-dispatcher: Introduce httpd.customVHostConfig.*, remove "dispatcher.tenantSpecificVHostConfig" property.
+      </action>
+      <action type="update" dev="sseifert">
+        Role aem-dispatcher: Introduce httpd.cache.*, remove "dispatcher.cacheRootPath" and "dispatcher.statFilesLevel" properties.
+      </action>
     </release>
 
     <release version="0.9.6" date="not released">

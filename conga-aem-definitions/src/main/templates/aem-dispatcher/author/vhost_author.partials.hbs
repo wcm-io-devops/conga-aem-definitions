@@ -1,139 +1,93 @@
 {{!-- Contains configuration snippets that can be used when building the vhost author template --}}
 
-
 {{~#block "serverName"}}
-  ServerName {{cmsAuthorHostname}}
+# Primary hostname 
+ServerName {{httpd.serverName}}
+{{/block}}
+
+
+{{~#block "serverAliasNames"}}
+{{~#if httpd.serverAliasNames}}
+# Alternative hostnames
+{{~#each httpd.serverAliasNames}}
+ServerAlias {{this}}
+{{~/each}}
+{{~/if}}
 {{/block}}
 
 
 {{~#block "logSettings"}}
-  # Possible values include: debug, info, notice, warn, error, crit, alert, emerg.
-  LogLevel warn
-  ErrorLog ${APACHE_LOG_DIR}/vhost_author_error.log
-  CustomLog ${APACHE_LOG_DIR}/vhost_author_access.log combined
+# Possible values include: debug, info, notice, warn, error, crit, alert, emerg.
+LogLevel warn
+ErrorLog ${APACHE_LOG_DIR}/vhost_author_error.log
+CustomLog ${APACHE_LOG_DIR}/vhost_author_access.log combined
+{{/block}}
+
+
+{{~#block "generalSettings"}}
+# Enable rewrite engine
+RewriteEngine On
 {{/block}}
 
 
 {{~#block "rewriteEnforcePrimaryHostname"}}
-  # Make sure primary hostname is always used
-  RewriteEngine On
-  # Don't rewrite the dispatcher invalidation URL
-  RewriteCond %{REQUEST_URI} !^/dispatcher/invalidate.cache
-  RewriteCond %{HTTP_HOST} !^{{regexQuote cmsAuthorHostname}}$ [NC]
-  RewriteRule ^(.*)$ http://{{cmsAuthorHostname}}$1 [R=301,L]
+# Make sure primary hostname is always used - but don't rewrite the dispatcher invalidation URL
+RewriteCond %{REQUEST_URI} !^/dispatcher/invalidate.cache
+RewriteCond %{HTTP_HOST} !^{{regexQuote httpd.serverName}}$ [NC]
+RewriteRule ^(.*)$ http://{{httpd.serverName}}$1 [R=301,L]
 {{/block}}
 
 
 {{~#block "enableDispatcher"}}
-  # Enable AEM Dispatcher
-  <Location />
-    <IfModule disp_apache2.c>
-      ModMimeUsePathInfo On
-      # enable dispatcher for ALL requests.
-      SetHandler dispatcher-handler
-    </IfModule>
-  </Location>
+# Enable AEM Dispatcher
+<Location />
+  <IfModule disp_apache2.c>
+    ModMimeUsePathInfo On
+    # enable dispatcher for ALL requests.
+    SetHandler dispatcher-handler
+  </IfModule>
+</Location>
 {{/block}}
 
 
 {{~#block "damContentDispositionHeader"}}
-  # Set content disposition header for downloads
-  <LocationMatch "^.*/dam/.*\.download_attachment\..*$">
-    Header set Content-Disposition: attachment
-  </LocationMatch>
+# Set content disposition header for downloads
+<LocationMatch "^.*/dam/.*\.download_attachment\..*$">
+  Header set Content-Disposition: attachment
+</LocationMatch>
 {{/block}}
 
 
-{{~#block "accessRestrictionsAdmin"}}
-  # Deny external access to system console, but allow access to logout
-  <Location "/admin">
-    <IfVersion < 2.4>
-      Order deny,allow
-      Deny from all
-{{~#if dispatcher.allowAdminAccessFrom}}
-      Allow from {{dispatcher.allowAdminAccessFrom}}
-{{~/if}}
-{{~#if dispatcher.allowAdminAccessFromHost}}
-      Allow from {{dispatcher.allowAdminAccessFromHost}}
-{{~/if}}
-    </IfVersion>
-    <IfVersion >= 2.4>
-      Require all denied
-{{~#if dispatcher.allowAdminAccessFrom}}
-      Require ip {{dispatcher.allowAdminAccessFrom}}
-{{~/if}}
-{{~#if dispatcher.allowAdminAccessFromHost}}
-      Require host {{dispatcher.allowAdminAccessFromHost}}
-{{~/if}}
-    </IfVersion>
-  </Location>
-  <Location "/crx">
-    <IfVersion < 2.4>
-      Order deny,allow
-      Deny from all
-{{~#if dispatcher.allowAdminAccessFrom}}
-      Allow from {{dispatcher.allowAdminAccessFrom}}
-{{~/if}}
-{{~#if dispatcher.allowAdminAccessFromHost}}
-      Allow from {{dispatcher.allowAdminAccessFromHost}}
-{{~/if}}
-    </IfVersion>
-    <IfVersion >= 2.4>
-      Require all denied
-{{~#if dispatcher.allowAdminAccessFrom}}
-      Require ip {{dispatcher.allowAdminAccessFrom}}
-{{~/if}}
-{{~#if dispatcher.allowAdminAccessFromHost}}
-      Require host {{dispatcher.allowAdminAccessFromHost}}
-{{~/if}}
-    </IfVersion>
-  </Location>
-  <Location "/system/console">
-    <IfVersion < 2.4>
-      Order deny,allow
-      Deny from all
-{{~#if dispatcher.allowAdminAccessFrom}}
-      Allow from {{dispatcher.allowAdminAccessFrom}}
-{{~/if}}
-{{~#if dispatcher.allowAdminAccessFromHost}}
-      Allow from {{dispatcher.allowAdminAccessFromHost}}
-{{~/if}}
-    </IfVersion>
-    <IfVersion >= 2.4>
-      Require all denied
-{{~#if dispatcher.allowAdminAccessFrom}}
-      Require ip {{dispatcher.allowAdminAccessFrom}}
-{{~/if}}
-{{~#if dispatcher.allowAdminAccessFromHost}}
-      Require host {{dispatcher.allowAdminAccessFromHost}}
-{{~/if}}
-    </IfVersion>
-  </Location>
+{{~#block "accessRestrictionsLocationFilter"}}
+# Location filter
+{{#each httpd.accessRestriction.locationFilter~}}
+{{aemHttpdFilter this allowFromKey="httpd.accessRestriction.adminAccessFromIp" allowFromHostKey="httpd.accessRestriction.adminAccessFromHost"}}
+{{/each~}}
 {{/block}}
 
 
 {{~#block "accessRestrictionsDispatcherFlush"}}
-  # Allow dispatcher flushing only from defined hosts
-  <Location "/dispatcher">
-    <IfVersion < 2.4>
-      Order Deny,Allow
-      Deny from all
-{{~#if dispatcher.allowFlushFrom}}
-      Allow from {{dispatcher.allowFlushFrom}}
+# Allow dispatcher flushing only from defined hosts
+<Location "/dispatcher">
+  <IfVersion < 2.4>
+    Order Deny,Allow
+    Deny from all
+{{~#if httpd.accessRestriction.dispatcherFlushFromIp}}
+    Allow from {{httpd.accessRestriction.dispatcherFlushFromIp}}
 {{~/if}}
-{{~#if dispatcher.allowFlushFromHost}}
-      Allow from {{dispatcher.allowFlushFromHost}}
+{{~#if httpd.accessRestriction.dispatcherFlushFromHost}}
+    Allow from {{httpd.accessRestriction.dispatcherFlushFromHost}}
 {{~/if}}
-    </IfVersion>
-    <IfVersion >= 2.4>
-      Require all denied
-{{~#if dispatcher.allowFlushFrom}}
-      Require ip {{dispatcher.allowFlushFrom}}
+  </IfVersion>
+  <IfVersion >= 2.4>
+    Require all denied
+{{~#if httpd.accessRestriction.dispatcherFlushFromIp}}
+    Require ip {{httpd.accessRestriction.dispatcherFlushFromIp}}
 {{~/if}}
-{{~#if dispatcher.allowFlushFrom}}
-      Require host {{dispatcher.allowFlushFromHost}}
+{{~#if httpd.accessRestriction.dispatcherFlushFromIp}}
+    Require host {{httpd.accessRestriction.dispatcherFlushFromHost}}
 {{~/if}}
-    </IfVersion>
+  </IfVersion>
 
-  </Location>
+</Location>
 {{/block}}
