@@ -1,5 +1,5 @@
 {{ensureProperties
-    "cmsAuthorHostname"
+    "httpd.serverName"
     "dispatcher.renderInstance.host"
     "dispatcher.renderInstance.port"
     "dispatcher.cacheRootPath"
@@ -29,7 +29,8 @@
     #   www.company.com
     #   intranet.*
     #   myhost:8888/mysite
-    "{{cmsAuthorHostname}}"
+    "{{httpd.serverName}}"
+    "{{httpd.serverNameSsl}}"
     }
     
   # The load will be balanced among these render instances

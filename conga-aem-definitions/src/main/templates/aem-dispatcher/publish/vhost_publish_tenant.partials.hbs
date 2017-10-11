@@ -2,25 +2,28 @@
 
 
 {{~#block "serverName"}}
-  # Primary hostname
-  ServerName {{tenant}}
+  # Primary hostname 
+  ServerName {{httpd.serverName}}
 {{/block}}
 
 
 {{~#block "serverAliasNames"}}
+{{~#if httpd.serverAliasNames}}
   # Alternative hostnames
-{{~#each serverAliasNames}}
+{{~#each httpd.serverAliasNames}}
   ServerAlias {{this}}
 {{~/each}}
+{{~/if}}
 {{/block}}
 
 
 {{~#block "logSettings"}}
   # Possible values include: debug, info, notice, warn, error, crit, alert, emerg.
   LogLevel warn
-  ErrorLog ${APACHE_LOG_DIR}/vhost_publish_{{tenant}}_error.log
-  CustomLog ${APACHE_LOG_DIR}/vhost_publish_{{tenant}}_access.log combined
+  ErrorLog ${APACHE_LOG_DIR}/vhost_publish_{{httpd.serverName}}_error.log
+  CustomLog ${APACHE_LOG_DIR}/vhost_publish_{{httpd.serverName}}_access.log combined
 {{/block}}
+
 
 {{~#block "generalSettings"}}
   # Do not allow RFC 2616 trace requests
@@ -29,6 +32,7 @@
   # Enable rewrite engine
   RewriteEngine On
 {{/block}}
+
 
 {{~#block "dispatcherModule"}}
   # Enable AEM dispatcher module
@@ -117,8 +121,8 @@
   # Don't rewrite the dispatcher invalidation URL
   RewriteCond %{REQUEST_URI} !^/dispatcher/invalidate.cache
   # Make sure primary hostname is always used
-  RewriteCond %{HTTP_HOST} !^{{regexQuote tenant}}$ [NC] 
-  RewriteRule ^(.*)$ http://{{tenant}}$1 [R=301,L]
+  RewriteCond %{HTTP_HOST} !^{{regexQuote httpd.serverName}}$ [NC] 
+  RewriteRule ^(.*)$ http://{{httpd.serverName}}$1 [R=301,L]
 {{/block}}
 
 

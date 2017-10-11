@@ -1,4 +1,5 @@
 {{ensureProperties
+    "httpd.serverNameSsl"
     "dispatcher.sslCertificateFile"
     "dispatcher.sslCertificateKeyFile"
 ~}}
@@ -6,10 +7,19 @@
 # Virtual host for author (HTTPS)
 <VirtualHost *:443>
 
-{{#partial "serverName"}}
-  # Primary hostname
-  ServerName {{cmsAuthorHostnameSsl}}
-{{/partial ~}}
+{{~#partial "serverName"}}
+  # Primary hostname 
+  ServerName {{httpd.serverNameSsl}}
+{{/partial}}
+
+{{~#partial "serverAliasNames"}}
+{{~#if httpd.serverAliasNamesSsl}}
+  # Alternative hostnames
+{{~#each httpd.serverAliasNamesSsl}}
+  ServerAlias {{this}}
+{{~/each}}
+{{~/if}}
+{{/partial}}
 
 {{~#partial "rewriteEnforcePrimaryHostname"}}
   # Make sure primary hostname is always used

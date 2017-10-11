@@ -2,7 +2,18 @@
 
 
 {{~#block "serverName"}}
-  ServerName {{cmsAuthorHostname}}
+  # Primary hostname 
+  ServerName {{httpd.serverName}}
+{{/block}}
+
+
+{{~#block "serverAliasNames"}}
+{{~#if httpd.serverAliasNames}}
+  # Alternative hostnames
+{{~#each httpd.serverAliasNames}}
+  ServerAlias {{this}}
+{{~/each}}
+{{~/if}}
 {{/block}}
 
 
@@ -19,8 +30,8 @@
   RewriteEngine On
   # Don't rewrite the dispatcher invalidation URL
   RewriteCond %{REQUEST_URI} !^/dispatcher/invalidate.cache
-  RewriteCond %{HTTP_HOST} !^{{regexQuote cmsAuthorHostname}}$ [NC]
-  RewriteRule ^(.*)$ http://{{cmsAuthorHostname}}$1 [R=301,L]
+  RewriteCond %{HTTP_HOST} !^{{regexQuote httpd.serverName}}$ [NC]
+  RewriteRule ^(.*)$ http://{{httpd.serverName}}$1 [R=301,L]
 {{/block}}
 
 

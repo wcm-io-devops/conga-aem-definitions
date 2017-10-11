@@ -9,6 +9,11 @@ variants:
 # Disaptcher for publish instances - configure a tenant for each vhost
 - variant: aem-publish
   config:
+    
+    httpd:
+      # Default server name to tenant name on publish
+      serverName: ${tenant}
+
     dispatcher:
       renderInstance:
         port: 4503
@@ -134,6 +139,13 @@ config:
     - rewrite
     - headers
 
+    # Server and alias names and - optionally - an alternative server names for SSL.
+    # On publish instances the server name defaults to the tenant name.
+    serverName:
+    serverNameSsl: ${httpd.serverName}
+    serverAliasNames:
+    serverAliasNamesSsl: ${httpd.serverAliasNames}
+
     # Allow access to adminstrative areas only to certain sources (same on author and publish)
     locationFilter:
     - location: /admin
@@ -144,10 +156,6 @@ config:
       type: deny_allow_admin
     - locationMatch: /system/sling/logout.*
       type: allow
-
-  # Server name for Dispatcher for Authoring instance
-  cmsAuthorHostname: author-host
-  cmsAuthorHostnameSsl: ${cmsAuthorHostname}
 
   dispatcher:
     
@@ -185,7 +193,7 @@ config:
     # HTTP Status for redirecting from "/" (only publish dispatcher)
     rootRedirectHttpStatus: 301
 
-    # May be set globally or for each tenant (on publish dispatcher)
+    # May be set globally or for each tenant
     #sslCertificateFile: /path/to/sslCertificateFile
     #sslCertificateKeyFile: /path/to/sslCertificateKeyFile
     #sslCACertificatePath: /path/to/sslCACertificates

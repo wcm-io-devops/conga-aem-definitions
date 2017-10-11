@@ -30,7 +30,8 @@ nodes:
     - aem-author
     - ssl
     config:
-      cmsAuthorHostname: author.sample.com
+      httpd:
+        serverName: author.sample.com
       dispatcher:
         cacheRootPath: /var/cache/author1
         renderInstance:
@@ -95,8 +96,9 @@ tenants:
 
 - tenant: sample1.com
   config:
-    serverAliasNames:
-    - www.sample1.com
+    httpd:
+      serverAliasNames:
+      - www.sample1.com
     slingMappingPath: /content/sample1
     dispatcher:
       rootRedirectUrl: /en.html
@@ -104,8 +106,12 @@ tenants:
 
 - tenant: sample2.com
   config:
-    serverAliasNames:
-    - www.sample2.com
+    httpd:
+      serverNameSsl: ssl-sample2.com
+      serverAliasNames:
+      - www.sample2.com
+      serverAliasNamesSsl:
+      - www.ssl-sample2.com
     slingMappingPath: /content/sample2
     dispatcher:
       rootRedirectUrl: /de.html

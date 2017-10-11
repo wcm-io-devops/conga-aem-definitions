@@ -1,22 +1,32 @@
 {{#if dispatcher.sslCertificateFile ~}}
 {{ensureProperties
+    "httpd.serverNameSsl"
     "dispatcher.sslCertificateKeyFile"
 ~}}
 
 # Virtual host for publish site of tenant {{tenant}} (HTTPS)
 <VirtualHost *:443>
 
-{{#partial "serverName"}}
-  # Primary hostname
-  ServerName {{#if serverNameSsl}}{{serverNameSsl}}{{else}}{{tenant}}{{/if}}
-{{/partial ~}}
+{{~#partial "serverName"}}
+  # Primary hostname 
+  ServerName {{httpd.serverNameSsl}}
+{{/partial}}
+
+{{~#partial "serverAliasNames"}}
+{{~#if httpd.serverAliasNamesSsl}}
+  # Alternative hostnames
+{{~#each httpd.serverAliasNamesSsl}}
+  ServerAlias {{this}}
+{{~/each}}
+{{~/if}}
+{{/partial}}
 
 {{#partial "rewriteEnforcePrimaryHostname"}}
   # Don't rewrite the dispatcher invalidation URL
   RewriteCond %{REQUEST_URI} !^/dispatcher/invalidate.cache
   # Make sure primary hostname is always used
-  RewriteCond %{HTTP_HOST} !^{{#if serverNameSsl}}{{regexQuote serverNameSsl}}{{else}}{{regexQuote tenant}}{{/if}}$ [NC] 
-  RewriteRule ^(.*)$ https://{{#if serverNameSsl}}{{serverNameSsl}}{{else}}{{tenant}}{{/if}}$1 [R=301,L]
+  RewriteCond %{HTTP_HOST} !^{{regexQuote httpd.serverNameSsl}}$ [NC] 
+  RewriteRule ^(.*)$ https://{{httpd.serverNameSsl}}$1 [R=301,L]
 {{/partial ~}}
 
 

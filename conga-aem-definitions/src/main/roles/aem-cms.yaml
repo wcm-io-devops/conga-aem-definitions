@@ -174,8 +174,7 @@ config:
 
 # Example tenant configuration. Tenant name = primary host name/server name
 #config:
-#  serverNameSsl:
-#  aliasNames:
-#  - alias1
-#  - alias2
+#  httpd:
+#    serverName: ${tenant}
+#    serverNameSsl:
 #  slingMappingPath: /content/path

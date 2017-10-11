@@ -29,10 +29,8 @@
     #   intranet.*
     #   myhost:8888/mysite
 {{~#each tenants}}
-    "{{this.tenant}}"
-{{~#if this.config.serverNameSsl}}
-    "{{this.config.serverNameSsl}}"
-{{~/if}}
+    "{{#if this.config.httpd.serverName}}{{this.config.httpd.serverName}}{{else}}{{this.tenant}}{{/if}}"
+    "{{#if this.config.httpd.serverNameSsl}}{{this.config.httpd.serverNameSsl}}{{else}}{{#if this.config.httpd.serverName}}{{this.config.httpd.serverName}}{{else}}{{this.tenant}}{{/if}}{{/if}}"
 {{~/each}}
     }
     
