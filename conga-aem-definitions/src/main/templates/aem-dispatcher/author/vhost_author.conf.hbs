@@ -6,8 +6,8 @@
 <VirtualHost *:80>
 
 {{#if httpd.ssl.enforce}}
-  # Redirect all requests to SSL
-  Redirect permanent / https://{{httpd.serverNameSsl}}/
+# Redirect all requests to SSL
+Redirect permanent / https://{{httpd.serverNameSsl}}/
 {{/if~}}
 
 {{> aem-dispatcher/author/vhost_author.partials.hbs}}

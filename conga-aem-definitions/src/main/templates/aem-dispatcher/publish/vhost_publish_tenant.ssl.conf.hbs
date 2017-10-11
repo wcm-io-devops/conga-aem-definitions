@@ -8,25 +8,25 @@
 <VirtualHost *:443>
 
 {{~#partial "serverName"}}
-  # Primary hostname 
-  ServerName {{httpd.serverNameSsl}}
+# Primary hostname
+ServerName {{httpd.serverNameSsl}}
 {{/partial}}
 
 {{~#partial "serverAliasNames"}}
 {{~#if httpd.serverAliasNamesSsl}}
-  # Alternative hostnames
+# Alternative hostnames
 {{~#each httpd.serverAliasNamesSsl}}
-  ServerAlias {{this}}
+ServerAlias {{this}}
 {{~/each}}
 {{~/if}}
 {{/partial}}
 
 {{#partial "rewriteEnforcePrimaryHostname"}}
-  # Don't rewrite the dispatcher invalidation URL
-  RewriteCond %{REQUEST_URI} !^/dispatcher/invalidate.cache
-  # Make sure primary hostname is always used
-  RewriteCond %{HTTP_HOST} !^{{regexQuote httpd.serverNameSsl}}$ [NC] 
-  RewriteRule ^(.*)$ https://{{httpd.serverNameSsl}}$1 [R=301,L]
+# Don't rewrite the dispatcher invalidation URL
+RewriteCond %{REQUEST_URI} !^/dispatcher/invalidate.cache
+# Make sure primary hostname is always used
+RewriteCond %{HTTP_HOST} !^{{regexQuote httpd.serverNameSsl}}$ [NC] 
+RewriteRule ^(.*)$ https://{{httpd.serverNameSsl}}$1 [R=301,L]
 {{/partial ~}}
 
 
@@ -34,22 +34,22 @@
 
 
 {{~#if httpd.ssl.enforce}}
-  # Enable HSTS if SSL is enforced
-  Header always set Strict-Transport-Security "max-age=31536000"
+# Enable HSTS if SSL is enforced
+Header always set Strict-Transport-Security "max-age=31536000"
 {{/if}}
 
-  # SSL configuration
-  SSLEngine on
-  SSLCertificateFile      {{httpd.ssl.certificateFile}}
-  SSLCertificateKeyFile   {{httpd.ssl.certificateKeyFile}}
+# SSL configuration
+SSLEngine on
+SSLCertificateFile      {{httpd.ssl.certificateFile}}
+SSLCertificateKeyFile   {{httpd.ssl.certificateKeyFile}}
 {{#if httpd.ssl.caCertificatePath}}
-  SSLCACertificatePath    {{httpd.ssl.caCertificatePath}}
+SSLCACertificatePath    {{httpd.ssl.caCertificatePath}}
 {{/if}}
 {{#if httpd.ssl.caCertificateFile}}
-  SSLCACertificateFile    {{httpd.ssl.caCertificateFile}}
+SSLCACertificateFile    {{httpd.ssl.caCertificateFile}}
 {{/if}}
-  SSLProtocol             all -SSLv2 -SSLv3
-  SSLCipherSuite          ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-DSS-AES128-GCM-SHA256:kEDH+AESGCM:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-DSS-AES128-SHA256:DHE-RSA-AES256-SHA256:DHE-DSS-AES256-SHA:DHE-RSA-AES256-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:AES:CAMELLIA:DES-CBC3-SHA:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK:!aECDH:!EDH-DSS-DES-CBC3-SHA:!EDH-RSA-DES-CBC3-SHA:!KRB5-DES-CBC3-SHA
+SSLProtocol             all -SSLv2 -SSLv3
+SSLCipherSuite          ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-DSS-AES128-GCM-SHA256:kEDH+AESGCM:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-DSS-AES128-SHA256:DHE-RSA-AES256-SHA256:DHE-DSS-AES256-SHA:DHE-RSA-AES256-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:AES:CAMELLIA:DES-CBC3-SHA:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK:!aECDH:!EDH-DSS-DES-CBC3-SHA:!EDH-RSA-DES-CBC3-SHA:!KRB5-DES-CBC3-SHA
 
 </VirtualHost>
 
