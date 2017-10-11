@@ -168,6 +168,17 @@ config:
       #dispatcherFlushFromIp: 127.0.0.1
       #dispatcherFlushFromHost: localhost
 
+    # SSL configuration
+    ssl:
+      # SSL Certificate files
+      #certificateFile: /path/to/sslCertificateFile
+      #certificateKeyFile: /path/to/sslCertificateKeyFile
+      #caCertificatePath: /path/to/sslCACertificates
+      #caCertificateFile: /path/to/sslCACertificateFile
+
+      # If set to true all requests are redirectd to HTTPS and HSTS is enabled
+      enforce: false
+
     # Redirecting from "/" (only publish dispatcher)
     rootRedirect:
       #url: /en.html
@@ -185,16 +196,15 @@ config:
       #- www.host1.com
       #- www.host2.com
 
-    # SSL configuration
-    ssl:
-      # SSL Certificate files
-      #certificateFile: /path/to/sslCertificateFile
-      #certificateKeyFile: /path/to/sslCertificateKeyFile
-      #caCertificatePath: /path/to/sslCACertificates
-      #caCertificateFile: /path/to/sslCACertificateFile
+    # Custom configuration snippets for vhost files (only on publish dispatcher - useful for tenant-specific configurations)
+    customVHostConfig:
+      # Placed at the top of the vhost config file
+      before:
+      # Placed before the rewrite rules in the host config file
+      beforeRewrite:
+      # Placed at the bottom of the vhost confign file
+      after:
 
-      # If set to true all requests are redirectd to HTTPS and HSTS is enabled
-      enforce: false
 
   dispatcher:
     
@@ -249,8 +259,7 @@ config:
 #      certificateKeyFile: /path/to/sslCertificateKeyFile
 #      caCertificateFile: /path/to/sslCACertificateFile
 #      caCertificatePath: /path/to/sslCACertificates
-#  dispatcher:
-#    tenantSpecificVHostConfig: |
+#    customVHostConfig.after: |
 #      Custom Config Line 1
 #      Custom Config Line 2
 #  sling.mapping.rootPath: /content/path

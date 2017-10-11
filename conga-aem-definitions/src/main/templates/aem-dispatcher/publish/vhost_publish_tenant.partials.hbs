@@ -1,6 +1,15 @@
 {{!-- Contains configuration snippets that can be used when building the vhost publish tenant template --}}
 
 
+{{~#block "customVHostConfigBefore"}}
+{{#if httpd.customVHostConfig.before ~}}
+#### Custom configuration (before) ####
+
+{{httpd.customVHostConfig.before}}
+{{~/if}}
+{{/block}}
+
+
 {{~#block "serverName"}}
 # Primary hostname 
 ServerName {{httpd.serverName}}
@@ -147,11 +156,11 @@ RewriteRule ^(.*)$ http://{{httpd.serverName}}$1 [R=301,L]
 {{/block}}
 
 
-{{~#block "tenantSpecificVHostConfig"}}
-{{#if dispatcher.tenantSpecificVHostConfig ~}}
-#### Configuration specific for this tenant ####
+{{~#block "customVHostConfigBeforeRewrite"}}
+{{#if httpd.customVHostConfig.beforeRewrite ~}}
+#### Custom configuration (beforeRewrite) ####
 
-{{dispatcher.tenantSpecificVHostConfig}}
+{{httpd.customVHostConfig.beforeRewrite}}
 {{~/if}}
 {{/block}}
 
@@ -190,4 +199,13 @@ RewriteRule ^/content/.* - [R=404,L,NC]
 # Root redirect to homepage
 RewriteRule ^/$ {{httpd.rootRedirect.url}} [R={{httpd.rootRedirect.httpStatus}},L]
 {{/if ~}}
+{{/block}}
+
+
+{{~#block "customVHostConfigAfter"}}
+{{#if httpd.customVHostConfig.after ~}}
+#### Custom configuration (after) ####
+
+{{httpd.customVHostConfig.after}}
+{{~/if}}
 {{/block}}

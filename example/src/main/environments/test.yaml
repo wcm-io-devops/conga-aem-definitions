@@ -108,6 +108,16 @@ tenants:
       - www.sample1.com
       rootRedirect.url: /en.html
       ssl.enforce: true      
+      customVHostConfig:
+        before: |
+          # This is custom configuration example
+          # at the top of the file
+        beforeRewrite: |
+          # This is custom configuration example
+          # before the rewrite rules
+        after: |
+          # This is custom configuration example
+          # at the bottom of the file
     sling.mapping.rootPath: /content/sample1
 
 - tenant: sample2.com
