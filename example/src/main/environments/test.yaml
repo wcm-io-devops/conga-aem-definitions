@@ -105,9 +105,9 @@ tenants:
     httpd:
       serverAliasNames:
       - www.sample1.com
+      rootRedirect.url: /en.html
     slingMappingPath: /content/sample1
     dispatcher:
-      rootRedirectUrl: /en.html
       enforceSsl: true
 
 - tenant: sample2.com
@@ -118,6 +118,5 @@ tenants:
       - www.sample2.com
       serverAliasNamesSsl:
       - www.ssl-sample2.com
+      rootRedirect.url: /de.html
     slingMappingPath: /content/sample2
-    dispatcher:
-      rootRedirectUrl: /de.html

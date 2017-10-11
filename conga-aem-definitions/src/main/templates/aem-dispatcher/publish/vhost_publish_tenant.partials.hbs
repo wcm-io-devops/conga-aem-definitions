@@ -127,15 +127,15 @@
 
 
 {{~#block "corsHeader"}}
-{{~#if dispatcher.corsHeader.enabled}}
+{{~#if httpd.corsHeader.enabled}}
   # Send CORS header to client for certain requests
-  <Location ~ "{{dispatcher.corsHeader.locationMatch}}">
-    {{~#if dispatcher.corsHeader.allowAllHosts}}
+  <Location ~ "{{httpd.corsHeader.locationMatch}}">
+    {{~#if httpd.corsHeader.allowAllHosts}}
     Header add Access-Control-Allow-Origin "*"
     {{~else}}
     SetEnvIf Origin "^(
-      {{~#if dispatcher.corsHeader.hostWhiteList ~}}
-        {{~#each dispatcher.corsHeader.hostWhiteList}}{{regexQuote this}}{{#unless @last}}|{{/unless}}{{/each ~}}
+      {{~#if httpd.corsHeader.hostWhiteList ~}}
+        {{~#each httpd.corsHeader.hostWhiteList}}{{regexQuote this}}{{#unless @last}}|{{/unless}}{{/each ~}}
       {{~else ~}}
         .*
       {{~/if ~}}
@@ -187,8 +187,8 @@
 
 
 {{~#block "rewriteHomepageRedirect"}}
-{{~#if dispatcher.rootRedirectUrl}}
+{{~#if httpd.rootRedirect.url}}
   # Root redirect to homepage
-  RewriteRule ^/$ {{dispatcher.rootRedirectUrl}} [R={{dispatcher.rootRedirectHttpStatus}},L]
+  RewriteRule ^/$ {{httpd.rootRedirect.url}} [R={{httpd.rootRedirect.httpStatus}},L]
 {{/if ~}}
 {{/block}}

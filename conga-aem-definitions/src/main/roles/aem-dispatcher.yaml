@@ -168,6 +168,23 @@ config:
       #dispatcherFlushFromIp: 127.0.0.1
       #dispatcherFlushFromHost: localhost
 
+    # Redirecting from "/" (only publish dispatcher)
+    rootRedirect:
+      #url: /en.html
+      httpStatus: 301
+
+    # Configure CORS header to be sent to the client (only on publish dispatcher)
+    corsHeader:
+      enabled: true
+      # Generate them by default only for font-related files
+      locationMatch: "\\.(svg|eot|ttf|woff)"
+      # If set to true always "*" is sent as 'Access-Control-Allow-Origin' header
+      # If set to false only the requesting host is all if it is in the hostWhiteList (or this list is empty), and not in the hostBlackList
+      allowAllHosts: true
+      #hostWhiteList:
+      #- www.host1.com
+      #- www.host2.com
+
   dispatcher:
     
     # Module binary for AEM dispatcher
@@ -193,8 +210,8 @@ config:
     # Stars file level for dispatcher (only on publish dispatcher)
     #statFilesLevel: 3
     
-    # HTTP Status for redirecting from "/" (only publish dispatcher)
-    rootRedirectHttpStatus: 301
+    # Only for authoring dispatcher: whether assets should be cached
+    cacheDamAssets: false
 
     # May be set globally or for each tenant
     #sslCertificateFile: /path/to/sslCertificateFile
@@ -205,20 +222,6 @@ config:
     # If set to true all requests are redirectd to HTTPS and HSTS is enabled (only on publish dispatcher)
     enforceSsl: false
 
-    # Configure CORS header to be sent to the client (only on publish dispatcher)
-    corsHeader:
-      enabled: true
-      # Generate them by default only for font-related files
-      locationMatch: "\\.(svg|eot|ttf|woff)"
-      # If set to true always "*" is sent as 'Access-Control-Allow-Origin' header
-      # If set to false only the requesting host is all if it is in the hostWhiteList (or this list is empty), and not in the hostBlackList
-      allowAllHosts: true
-      #hostWhiteList:
-      #- www.host1.com
-      #- www.host2.com
-
-    # Only for authoring dispatcher: whether assets should be cached
-    cacheDamAssets: false
 
 
 # Example tenant configuration. Tenant name = primary host name/server name
@@ -229,12 +232,11 @@ config:
 #    serverAliasNames:
 #    - alias1
 #    - alias2
+#    rootRedirect.url: /en.html
 #  slingMappingPath: /content/path
 #  # By default, only access to paths shortened via Sling Mapping are allowed. Set this to true to also allow unshortened paths.
 #  slingMappingAllowUnshortenedPath: false
 #  dispatcher:
-#    rootRedirectUrl: /en.html
-#    rootRedirectHttpStatus: 301
 #    tenantSpecificVHostConfig: |
 #      Custom Config Line 1
 #      Custom Config Line 2
