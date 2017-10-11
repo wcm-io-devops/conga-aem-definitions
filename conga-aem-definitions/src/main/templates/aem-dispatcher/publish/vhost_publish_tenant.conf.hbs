@@ -5,7 +5,7 @@
 # Virtual host for publish site of tenant {{tenant}} (HTTP)
 <VirtualHost *:80>
   
-{{#if dispatcher.enforceSsl}}
+{{#if httpd.ssl.enforce}}
   # Redirect all requests to SSL
   Redirect permanent / https://{{httpd.serverNameSsl}}/
 {{/if~}}

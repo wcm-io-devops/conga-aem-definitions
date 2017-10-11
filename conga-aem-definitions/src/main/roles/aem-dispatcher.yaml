@@ -123,7 +123,7 @@ files:
   variants:
   - aem-publish*
   - ssl*
-  condition: ${dispatcher.sslCertificateFile}
+  condition: ${httpd.ssl.certificateFile}
   template: publish/vhost_publish_tenant.ssl.conf.hbs
   # Mulitply file for each tenant that has the given roles
   multiply: tenant
@@ -185,6 +185,17 @@ config:
       #- www.host1.com
       #- www.host2.com
 
+    # SSL configuration
+    ssl:
+      # SSL Certificate files
+      #certificateFile: /path/to/sslCertificateFile
+      #certificateKeyFile: /path/to/sslCertificateKeyFile
+      #caCertificatePath: /path/to/sslCACertificates
+      #caCertificateFile: /path/to/sslCACertificateFile
+
+      # If set to true all requests are redirectd to HTTPS and HSTS is enabled
+      enforce: false
+
   dispatcher:
     
     # Module binary for AEM dispatcher
@@ -213,15 +224,6 @@ config:
     # Only for authoring dispatcher: whether assets should be cached
     cacheDamAssets: false
 
-    # May be set globally or for each tenant
-    #sslCertificateFile: /path/to/sslCertificateFile
-    #sslCertificateKeyFile: /path/to/sslCertificateKeyFile
-    #sslCACertificatePath: /path/to/sslCACertificates
-    #sslCACertificateFile: /path/to/sslCACertificateFile
-
-    # If set to true all requests are redirectd to HTTPS and HSTS is enabled (only on publish dispatcher)
-    enforceSsl: false
-
 
 
 # Example tenant configuration. Tenant name = primary host name/server name
@@ -233,6 +235,11 @@ config:
 #    - alias1
 #    - alias2
 #    rootRedirect.url: /en.html
+#    ssl:
+#      certificateFile: /path/to/sslCertificateFile
+#      certificateKeyFile: /path/to/sslCertificateKeyFile
+#      caCertificateFile: /path/to/sslCACertificateFile
+#      caCertificatePath: /path/to/sslCACertificates
 #  slingMappingPath: /content/path
 #  # By default, only access to paths shortened via Sling Mapping are allowed. Set this to true to also allow unshortened paths.
 #  slingMappingAllowUnshortenedPath: false
@@ -240,7 +247,3 @@ config:
 #    tenantSpecificVHostConfig: |
 #      Custom Config Line 1
 #      Custom Config Line 2
-#    sslCertificateFile: /path/to/sslCertificateFile
-#    sslCertificateKeyFile: /path/to/sslCertificateKeyFile
-#    sslCACertificateFile: /path/to/sslCACertificateFile
-#    sslCACertificatePath: /path/to/sslCACertificates

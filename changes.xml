@@ -42,6 +42,9 @@
       <action type="update" dev="sseifert">
         Role aem-dispatcher: Introduce httpd.corsHeader.*, remove "dispatcher.corsHeader.*" properties.
       </action>
+      <action type="update" dev="sseifert">
+        Role aem-dispatcher: Introduce httpd.ssl.*, remove "dispatcher.ssl*" and "dispatcher.enforceSsl" properties.
+      </action>
     </release>
 
     <release version="0.9.6" date="not released">

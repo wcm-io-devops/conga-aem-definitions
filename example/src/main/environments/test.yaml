@@ -86,13 +86,14 @@ config:
       adminAccessFromHost: www.example.org
       dispatcherFlushFromIp: 127.0.0.1
       dispatcherFlushFromHost: localhost
+    ssl:
+      certificateFile: /etc/ssl/certs/sample.crt
+      certificateKeyFile: /etc/ssl/private/sample.key
+      cACertificatePath: /etc/ssl/certs
+      cACertificateFile: /etc/ssl/certs/sample.pem
 
   dispatcher:
     moduleFile: /usr/lib/apache2/modules/mod_dispatcher.so
-    sslCertificateFile: /etc/ssl/certs/sample.crt
-    sslCertificateKeyFile: /etc/ssl/private/sample.key
-    sslCACertificatePath: /etc/ssl/certs
-    sslCACertificateFile: /etc/ssl/certs/sample.pem
 
   workflow:
     useMinimalDamUpdateAssetWorkflow: true
@@ -106,9 +107,8 @@ tenants:
       serverAliasNames:
       - www.sample1.com
       rootRedirect.url: /en.html
+      ssl.enforce: true      
     slingMappingPath: /content/sample1
-    dispatcher:
-      enforceSsl: true
 
 - tenant: sample2.com
   config:
