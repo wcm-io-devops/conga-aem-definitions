@@ -57,6 +57,9 @@
       <action type="update" dev="sseifert">
         Role aem-dispatcher: Remove "dispatcher.moduleFile" and the generated dispatcher.load file.
       </action>
+      <action type="update" dev="sseifert" issue="WDCONGA-18">
+        Role aem-dispatcher: Use distro-agnostic file for generated httpd and dispatcher config files.
+      </action>
       <action type="update" dev="sseifert">
         Role aem-cms: Introduce sling.caconfig.override to generate overrides for Sling Context-Aware Configuration.
       </action>
