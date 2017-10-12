@@ -96,11 +96,6 @@ files:
   dir: dispatcher.d
   template: common/dispatcher.any.hbs
 
-# load snippte for dispatcher module
-- file: dispatcher.load
-  dir: mods-available
-  template: common/dispatcher.load.hbs
-
 # --- author ---
 
 # Dispatcher configuration
@@ -233,9 +228,6 @@ config:
 
 
   dispatcher:
-    
-    # Module binary for AEM dispatcher
-    moduleFile: modules/mod_dispatcher.so
     
     # Hostname and port of AEM instance
     renderInstance:

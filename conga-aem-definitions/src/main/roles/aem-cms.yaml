@@ -149,6 +149,21 @@ config:
     # AEM root path where quickstart jar is located
     rootPath: /opt/adobe/aem-author
 
+  sling:
+
+    # Configure Sling Mapping for URL shortening of content paths
+    mapping:
+      # Content root path which is stripped off
+      #rootPath: /content/path
+
+    caconfig:
+      # Example for config override configuration - key is context path, list values contain the override strings
+      # see also http://sling.apache.org/documentation/bundles/context-aware-configuration/context-aware-configuration-override.html
+      overrides:
+      #  "/content":
+      #  - io.wcm.handler.url.SiteConfig/siteUrl="http://site1"
+      #  - io.wcm.handler.url.SiteConfig/siteUrlAuthor="https://author.site1"
+
   replication:
     author:
       publishTargets:
