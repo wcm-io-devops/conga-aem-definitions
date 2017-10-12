@@ -109,9 +109,6 @@ config:
       cACertificatePath: /etc/ssl/certs
       cACertificateFile: /etc/ssl/certs/sample.pem
 
-  dispatcher:
-    moduleFile: /usr/lib/apache2/modules/mod_dispatcher.so
-
   sling:
     caconfig:
       overrides:

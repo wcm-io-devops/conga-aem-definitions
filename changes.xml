@@ -55,6 +55,9 @@
         Role aem-dispatcher: Introduce httpd.cache.*, remove "dispatcher.cacheRootPath" and "dispatcher.statFilesLevel" properties.
       </action>
       <action type="update" dev="sseifert">
+        Role aem-dispatcher: Remove "dispatcher.moduleFile" and the generated dispatcher.load file.
+      </action>
+      <action type="update" dev="sseifert">
         Role aem-cms: Introduce sling.caconfig.override to generate overrides for Sling Context-Aware Configuration.
       </action>
     </release>
