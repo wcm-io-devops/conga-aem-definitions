@@ -29,7 +29,7 @@
 
   <groupId>io.wcm.devops.conga.definitions</groupId>
   <artifactId>io.wcm.devops.conga.definitions.aem.root</artifactId>
-  <version>0.9.6</version>
+  <version>0.9.7-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>CONGA AEM Definitions</name>
@@ -65,9 +65,4 @@
       <url>${site.deploy.url}${site.url.module.prefix}</url>
     </site>
   </distributionManagement>
-
-
-  <scm>
-    <tag>io.wcm.devops.conga.definitions.aem.root-0.9.6</tag>
-  </scm>
 </project>
