@@ -7,5 +7,8 @@ https://github.com/wcm-io-devops/conga-aem-definitions
 
 In a subdirectory `example`.
 
+For more in-depth information and exercises see [CONGA Training][conga-training].
+
 
 [conga-usage]: http://devops.wcm.io/conga/usage.html
+[conga-training]: http://training.wcm.io/conga/

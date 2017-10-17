@@ -1,0 +1,340 @@
+# Webserverver with Dispatcher module for AEM author and/or publish instance
+# Generates general dispatcher configuration
+
+variants:
+
+# Dispatcher in front of Authoring instance
+- variant: aem-author
+
+# Disaptcher for publish instances - configure a tenant for each vhost
+- variant: aem-publish
+  config:
+    
+    httpd:
+      # Default server name to tenant name on publish
+      serverName: ${tenant}
+
+    dispatcher:
+      renderInstance:
+        port: 4503
+      
+      # Dispatcher filter rules (use only regex, no glob expressions)
+      filter:
+      - url: /.*
+        type: deny
+      # open consoles (access is controlled in httpd config)
+      - url: /(admin|crx|system)(/.*)?
+        type: allow
+      # Allow non-public content directories
+      - url: /content(/.*)?
+        type: allow
+      # Enable extensions in non-public content directories
+      - extension: (css|gif|ico|js|png|swf|jpe?g)
+        type: allow
+      # Enable features 
+      - url: /libs/cq/personalization(/.*)?
+        type: allow
+      - url: /etc/(clientlibs|designs)(/.*)?
+        type: allow
+      # Deny content grabbing, on all accessible pages
+      - selectors: ((sys|doc)view|query|[0-9-]+)
+        extension: (json|xml)
+        type: deny
+      # Deny content grabbing for /content
+      - path: /content(/.*)?
+        selectors: (feed|rss|pages|languages|blueprint|infinity|tidy|form)
+        extension: (json|xml|html)
+        type: deny
+
+      # Configure dispatcher cache
+      cache:
+
+        # Defines what responses should be cached based on the requested URL
+        rules:
+        # Cache everything by default
+        - glob: "*"
+          type: allow
+        # Exclude .htx extension from caching
+        - glob: "*.htx"
+          type: deny
+
+        # Defines the pages that are "invalidated" after any activation
+        invalidate:
+        - glob: "*"
+          type: deny
+        # Consider all HTML and JSON files stale after an activation.
+        - glob: "*.html"
+          type: allow
+        - glob: "*.json"
+          type: allow
+        - glob: "/etc/segmentation.segment.js"
+          type: allow
+        - glob: "*/analytics.sitecatalyst.js"
+          type: allow
+
+# Mixin variant to support HTTPS access
+- variant: ssl
+  config:
+    httpd:
+      modules:
+      - _merge_
+      - ssl
+
+templateDir: aem-dispatcher
+
+files:
+
+# --- common ---
+
+# global httpd dispatcher config
+- file: dispatcher.conf
+  dir: conf.d
+  template: common/dispatcher.conf.hbs
+
+# global dispatcher config
+- file: dispatcher.any
+  dir: dispatcher.d
+  template: common/dispatcher.any.hbs
+
+# --- author ---
+
+# Dispatcher configuration
+- file: dispatcher_author.any
+  dir: dispatcher.d
+  variants:
+  - aem-author*
+  template: author/dispatcher_author.any.hbs
+
+# httpd vhost (HTTP)
+- file: vhost_author.conf
+  dir: vhosts.d
+  variants:
+  - aem-author*
+  template: author/vhost_author.conf.hbs
+
+# httpd vhost (HTTPS)
+- file: vhost_author.ssl.conf
+  dir: vhosts.d
+  variants:
+  - aem-author*
+  - ssl*
+  template: author/vhost_author.ssl.conf.hbs
+
+# --- publish ---
+
+# Dispatcher configuration
+- file: dispatcher_publish.any
+  dir: dispatcher.d
+  variants:
+  - aem-publish*
+  template: publish/dispatcher_publish.any.hbs
+
+# httpd vhost per tenant (HTTP)
+- file: vhost_publish_${tenant}.conf
+  dir: vhosts.d
+  variants:
+  - aem-publish*
+  template: publish/vhost_publish_tenant.conf.hbs
+  # Mulitply file for each tenant that has the given roles
+  multiply: tenant
+
+# httpd vhost per tenant (HTTPS)
+- file: vhost_publish_${tenant}.ssl.conf
+  dir: vhosts.d
+  variants:
+  - aem-publish*
+  - ssl*
+  condition: ${httpd.ssl.certificateFile}
+  template: publish/vhost_publish_tenant.ssl.conf.hbs
+  # Mulitply file for each tenant that has the given roles
+  multiply: tenant
+
+
+config:
+
+  httpd:
+
+    # Modules to be activated in httpd as they are used in the templates. Use names that can be used with a2enmod.
+    modules:
+    - dispatcher
+    - rewrite
+    - headers
+
+    # Server and alias names and - optionally - an alternative server names for SSL.
+    # On publish instances the server name defaults to the tenant name.
+    serverName:
+    serverNameSsl: ${httpd.serverName}
+    serverAliasNames:
+    serverAliasNamesSsl: ${httpd.serverAliasNames}
+
+    # Access restrictions
+    accessRestriction:
+
+      # Allow access to adminstrative areas only to certain sources (same on author and publish)
+      locationFilter:
+      - location: /admin
+        type: deny_allow_admin
+      - location: /crx
+        type: deny_allow_admin
+      - location: /system
+        type: deny_allow_admin
+      - locationMatch: /system/sling/logout.*
+        type: allow
+
+      # Allow access to administrative URLs like /crx, /system/console etc. only from these sources
+      #adminAccessFromIp: 10.0.0.0/255.0.0.0
+      #adminAccessFromHost: www.example.org
+
+      # Allow dispatcher flush only from these sources
+      #dispatcherFlushFromIp: 127.0.0.1
+      #dispatcherFlushFromHost: localhost
+
+    # SSL configuration
+    ssl:
+      # SSL Certificate files
+      #certificateFile: /path/to/sslCertificateFile
+      #certificateKeyFile: /path/to/sslCertificateKeyFile
+      #caCertificatePath: /path/to/sslCACertificates
+      #caCertificateFile: /path/to/sslCACertificateFile
+
+      # If set to true all requests are redirectd to HTTPS and HSTS is enabled
+      enforce: false
+
+    # Redirecting from "/" (only publish dispatcher)
+    rootRedirect:
+      #url: /en.html
+      httpStatus: 301
+
+    # Configure CORS header to be sent to the client (only on publish dispatcher)
+    corsHeader:
+      enabled: true
+      # Generate them by default only for font-related files
+      locationMatch: "\\.(svg|eot|ttf|woff)"
+      # If set to true always "*" is sent as 'Access-Control-Allow-Origin' header
+      # If set to false only the requesting host is all if it is in the hostWhiteList (or this list is empty), and not in the hostBlackList
+      allowAllHosts: true
+      #hostWhiteList:
+      #- www.host1.com
+      #- www.host2.com
+
+    # Custom configuration snippets for vhost files (only on publish dispatcher - useful for tenant-specific configurations)
+    customVHostConfig:
+      # Placed at the top of the vhost config file
+      before:
+      # Placed before the rewrite rules in the host config file
+      beforeRewrite:
+      # Placed at the bottom of the vhost confign file
+      after:
+
+
+  dispatcher:
+    
+    # Hostname and port of AEM instance
+    renderInstance:
+      host: localhost
+      port: 4502
+      # Connect timeout in milliseconds, 0 to wait indefinitely
+      #timeoutMs: 0
+    
+    # Forward client headers from dispatcher to AEM instance
+    forwardClientHeaders:    
+    - "*"
+
+    # Dispatcher filter rules (use only regex, no glob expressions)
+    filter:
+    - url: /.*
+      type: allow
+
+    # Configure dispatcher cache
+    cache:
+
+      # Dispatcher cache root path
+      rootPath:
+
+      # Defines what responses should be cached based on the requested URL
+      rules:
+      # Disallow any caching by default and subsequently allow caching
+      # for content that may be cached although requested with authorization
+      # information present in the request
+      - glob: "*"
+        type: deny
+      # Allow caching of requests to /libs
+      - glob: "/libs/*"
+        type: allow
+      # This contains user information
+      - glob: "/libs/cq/security/userinfo.*"
+        type: deny
+      # This page contains a "Welcome, User XXX" message
+      - glob: "/libs/cq/core/content/welcome.*"
+        type: deny
+      # Thumbnails exist in various resolutions: thumbnail.png, thumbnail.png.thumb.48.48.png
+      - glob: "/apps/*/templates/*/thumbnail.pn*"
+        type: allow
+      # Static ressources in /apps
+      - glob: "/apps/*/docroot/*"
+        type: allow
+      # Client Libraries
+      - glob: "/etc/clientlibs/*"
+        type: allow
+      - glob: "/etc/designs/*/clientlibs/*"
+        type: allow
+
+      # Defines the pages that are "invalidated" after any activation
+      invalidate:
+      - glob: "*"
+        type: deny
+      
+      # Sets the level upto which files named ".stat" will be created in the document root of the webserver (only on publish dispatcher)
+      #statFilesLevel: 1
+      
+      # Whether to cache responses to requests that contain authorization information (only on publish dispatcher)
+      #allowAuthorized: false
+
+      # Whether the dispatcher should serve stale content if no remote server is available (only on publish dispatcher)
+      #serveStaleOnError: false
+
+      # Ggrace period defines the number of seconds a stale, auto-invalidated resource may still be served from the cache after the last activation occurring. 
+      #serveStaleGracePeriodSec: 0
+
+      # Cache headers in dispatcher (only on publish dispatcher)
+      #headers:
+      #- Cache-Control
+      #- Content-Disposition
+      #- Content-Type
+      #- Expires
+      #- Last-Modified
+      #- X-Content-Type-Options
+
+      # Enable TTL evaluates the response headers from the backend
+      #enableTTL: false
+    
+
+  sling:
+
+    # Configure Sling Mapping for URL shortening of content paths
+    mapping:
+      # Content root path which is stripped off
+      #rootPath: /content/path
+      # By default, only access to paths shortened via Sling Mapping are allowed. Set this to true to also allow unshortened paths.
+      #allowUnshortenedPath: false
+
+
+
+# Example tenant configuration. Tenant name = primary host name/server name
+#config:
+#  httpd:
+#    serverName: ${tenant}
+#    serverNameSsl:
+#    serverAliasNames:
+#    - alias1
+#    - alias2
+#    rootRedirect.url: /en.html
+#    ssl:
+#      certificateFile: /path/to/sslCertificateFile
+#      certificateKeyFile: /path/to/sslCertificateKeyFile
+#      caCertificateFile: /path/to/sslCACertificateFile
+#      caCertificatePath: /path/to/sslCACertificates
+#    customVHostConfig.after: |
+#      Custom Config Line 1
+#      Custom Config Line 2
+#  sling.mapping.rootPath: /content/path

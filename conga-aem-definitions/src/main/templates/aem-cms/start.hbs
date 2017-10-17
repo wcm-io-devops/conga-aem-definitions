@@ -12,6 +12,9 @@ export CQ_JVM_OPTS="$CQ_JVM_OPTS -Duser.timezone={{jvm.timezone}}"
 {{~#if jvm.args}}
 export CQ_JVM_OPTS="$CQ_JVM_OPTS {{jvm.args}}"
 {{~/if}}
+{{~#each jvm.argsList}}
+export CQ_JVM_OPTS="$CQ_JVM_OPTS {{this}}"
+{{~/each}}
 {{~#if quickstart.hideConfigWizard}}
 export CQ_JVM_OPTS="$CQ_JVM_OPTS -DhideConfigWizard=true"
 {{~/if}}

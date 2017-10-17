@@ -23,6 +23,66 @@
     xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/plugins/maven-changes-plugin/xsd/changes-1.0.0.xsd">
   <body>
 
+    <release version="1.0.0" date="2017-10-17">
+      <action type="update" dev="sseifert" issue="WDCONGA-14">
+        Role aem-dispatcher: Combine aem-dispatcher-* roles into a single role with multiple variants (that can be combined).
+      </action>
+      <action type="update" dev="sseifert" issue="WDCONGA-12">
+        Role aem-dispatcher: Add httpd.accessRestriction.locationFilter and dispatcher.filter properties to allow to customize filtering rules.
+      </action>
+      <action type="update" dev="sseifert">
+        Role aem-cms, aem-dispatcher: Introduce sling.mapping.*, remove "slingMapping*" properties.
+      </action>
+      <action type="update" dev="sseifert">
+        Role aem-cms, aem-dispatcher: Introduce httpd.serverName|serverNameSsl|serverAliasNames|serverAliasNamesSsl, remove "server*" properties.
+      </action>
+      <action type="update" dev="sseifert">
+        Role aem-dispatcher: Introduce httpd.accessRestriction.adminAccessFromIp|adminAccessFromHost|dispatcherFlushFromIp|dispatcherFlushFromHost, remove "dispatcher.allow*" properties.
+      </action>
+      <action type="update" dev="sseifert">
+        Role aem-dispatcher: Introduce httpd.redirectRoot.url|httpStatus, remove "dispatcher.rootRedirect*" properties.
+      </action>
+      <action type="update" dev="sseifert">
+        Role aem-dispatcher: Introduce httpd.corsHeader.*, remove "dispatcher.corsHeader.*" properties.
+      </action>
+      <action type="update" dev="sseifert">
+        Role aem-dispatcher: Introduce httpd.ssl.*, remove "dispatcher.ssl*" and "dispatcher.enforceSsl" properties.
+      </action>
+      <action type="update" dev="sseifert">
+        Role aem-dispatcher: Introduce httpd.customVHostConfig.*, remove "dispatcher.tenantSpecificVHostConfig" property.
+      </action>
+      <action type="update" dev="sseifert">
+        Role aem-dispatcher: Introduce httpd.cache.*, remove "dispatcher.cacheRootPath" and "dispatcher.statFilesLevel" properties.
+      </action>
+      <action type="update" dev="sseifert">
+        Role aem-dispatcher: Remove "dispatcher.moduleFile" and the generated dispatcher.load file.
+      </action>
+      <action type="update" dev="sseifert" issue="WDCONGA-18">
+        Role aem-dispatcher: Use distro-agnostic file for generated httpd and dispatcher config files.
+      </action>
+      <action type="update" dev="sseifert">
+        Role aem-cms: Introduce sling.caconfig.override to generate overrides for Sling Context-Aware Configuration.
+      </action>
+    </release>
+
+    <release version="0.9.6" date="2017-10-17">
+      <action type="update" dev="amuthmann">
+        Role aem-cms: Add option to make the minimal DAM Update Asset transient (default: true).
+      </action>
+      <action type="update" dev="twolfart">
+        Role aem-cms: Sling Mapping - ease handling for resolution of non-matching requests.
+      </action>
+      <action type="update" dev="sseifert">
+        Role aem-cms: Add jvm.argsList parameter to define a list of custom JVM arguments for AEM start script.
+      </action>
+      <action type="update" dev="sseifert">
+        Role aem-dispatcher: Set "noindex, nofollow" header for all requests with ?frontend-debug
+      </action>
+      <action type="update" dev="sseifert">
+        Role aem-dispatcher: Do not allow access to un-shortened paths when sling mapping is active, unless explicitely configured.
+      </action>
+    </release>
+
     <release version="0.9.4" date="2017-09-12">
       <action type="fix" dev="sseifert">
         Role aem-cms: Apply quickstart.enableDavEx parameter also on publish.

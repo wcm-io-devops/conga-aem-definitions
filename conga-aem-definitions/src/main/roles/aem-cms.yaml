@@ -128,7 +128,12 @@ config:
     permgenspace:
       max: 256m
     #timezone: Europe/Berlin
-    #args: additional custom JVM args
+    # Additional JVM argument
+    #args: arg1
+    # List of additional JVM arguments
+    #argsList:
+    #- arg1
+    #- arg2
 
   quickstart:
     # Port for AEM instance
@@ -143,6 +148,21 @@ config:
     enableDavEx: false
     # AEM root path where quickstart jar is located
     rootPath: /opt/adobe/aem-author
+
+  sling:
+
+    # Configure Sling Mapping for URL shortening of content paths
+    mapping:
+      # Content root path which is stripped off
+      #rootPath: /content/path
+
+    caconfig:
+      # Example for config override configuration - key is context path, list values contain the override strings
+      # see also http://sling.apache.org/documentation/bundles/context-aware-configuration/context-aware-configuration-override.html
+      overrides:
+      #  "/content":
+      #  - io.wcm.handler.url.SiteConfig/siteUrl="http://site1"
+      #  - io.wcm.handler.url.SiteConfig/siteUrlAuthor="https://author.site1"
 
   replication:
     author:
@@ -161,13 +181,7 @@ config:
         #url: http://localhost:8000
 
   workflow:
+    # Replace the default 'DAM Update Asset' workflow with a minimal one containing only the steps that are always required
     useMinimalDamUpdateAssetWorkflow: true
-
-
-# Example tenant configuration. Tenant name = primary host name/server name
-#config:
-#  serverNameSsl:
-#  aliasNames:
-#  - alias1
-#  - alias2
-#  slingMappingPath: /content/path
+    # Configure minimal 'DAM Update Asset' workflow as transient (which is default since AEM 6.3 and recommended for earlier versions)
+    minimalDamUpdateAssetWorkflowTransient: true
