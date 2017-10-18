@@ -24,8 +24,8 @@ ServerAlias {{this}}
 {{~#partial "rewriteEnforcePrimaryHostname"}}
 # Make sure primary hostname is always used  - but don't rewrite the dispatcher invalidation URL
 RewriteCond %{REQUEST_URI} !^/dispatcher/invalidate.cache
-RewriteCond %{HTTP_HOST} !^{{regexQuote cmsAuthorHostnameSsl}}$ [NC] 
-RewriteRule ^(.*)$ https://{{cmsAuthorHostnameSsl}}$1 [R=301,L]
+RewriteCond %{HTTP_HOST} !^{{regexQuote httpd.serverNameSsl}}$ [NC] 
+RewriteRule ^(.*)$ https://{{httpd.serverNameSsl}}$1 [R=301,L]
 {{/partial}}
 
 
