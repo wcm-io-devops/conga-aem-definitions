@@ -167,13 +167,11 @@ RewriteRule ^(.*)$ http://{{httpd.serverName}}$1 [R=301,L]
 
 {{~#block "rewriteSlingShortUrlMapping"}}
 {{~#if sling.mapping.rootPath}}
-# Don't rewrite the dispatcher invalidation URL
-RewriteCond %{REQUEST_URI} !^/dispatcher/invalidate.cache
-
 # Rewrite all paths to short url mapping except special system paths
 RewriteCond %{REQUEST_URI} !^/apps
 RewriteCond %{REQUEST_URI} !^/bin
 RewriteCond %{REQUEST_URI} !^/content
+RewriteCond %{REQUEST_URI} !^/dispatcher/invalidate.cache
 RewriteCond %{REQUEST_URI} !^/etc
 RewriteCond %{REQUEST_URI} !^/home
 RewriteCond %{REQUEST_URI} !^/libs
