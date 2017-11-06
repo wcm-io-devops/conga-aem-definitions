@@ -4,10 +4,13 @@
 
 # Virtual host for publish site of tenant {{tenant}} (HTTP)
 <VirtualHost *:80>
-  
+
 {{#if httpd.ssl.enforce}}
-# Redirect all requests to SSL
-Redirect permanent / https://{{httpd.serverNameSsl}}/
+{{#partial "rewriteEnforcePrimaryHostname"}}
+# Make sure primary hostname and ssl is always used - but don't rewrite the dispatcher invalidation URL
+RewriteCond %{REQUEST_URI} !^/dispatcher/invalidate.cache
+RewriteRule ^(.*)$ https://{{httpd.serverNameSsl}}$1 [R=301,L]
+{{/partial}}
 {{/if~}}
 
 {{> aem-dispatcher/publish/vhost_publish_tenant.partials.hbs}}
