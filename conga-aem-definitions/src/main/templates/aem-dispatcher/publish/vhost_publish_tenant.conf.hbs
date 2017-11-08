@@ -6,8 +6,9 @@
 <VirtualHost *:80>
 
 {{#if httpd.ssl.enforce}}
+{{ensureProperties "httpd.serverNameSsl" ~}}
 {{#partial "rewriteEnforcePrimaryHostname"}}
-# Make sure primary hostname and ssl is always used - but don't rewrite the dispatcher invalidation URL
+# Enforce SSL: Redirect all requests to HTTPS primary hostname (except for dispatcher invalidation)
 RewriteCond %{REQUEST_URI} !^/dispatcher/invalidate.cache
 RewriteRule ^(.*)$ https://{{httpd.serverNameSsl}}$1 [R=301,L]
 {{/partial}}

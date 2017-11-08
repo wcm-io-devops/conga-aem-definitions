@@ -23,7 +23,7 @@
     xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/plugins/maven-changes-plugin/xsd/changes-1.0.0.xsd">
   <body>
 
-    <release version="1.0.3" date="not released yet">
+    <release version="1.0.4" date="not released yet">
       <action type="fix" dev="trichter">
         Role aem-dispatcher: Fix httpd.ssl.enforce to use mod-rewrite in rewriteEnforcePrimaryHostname, because redirect permanent had no effect.
       </action>
