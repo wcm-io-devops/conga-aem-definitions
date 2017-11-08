@@ -6,8 +6,12 @@
 <VirtualHost *:80>
 
 {{#if httpd.ssl.enforce}}
-# Redirect all requests to SSL
-Redirect permanent / https://{{httpd.serverNameSsl}}/
+{{ensureProperties "httpd.serverNameSsl" ~}}
+{{#partial "rewriteEnforcePrimaryHostname"}}
+# Enforce SSL: Redirect all requests to HTTPS primary hostname (except for dispatcher invalidation)
+RewriteCond %{REQUEST_URI} !^/dispatcher/invalidate.cache
+RewriteRule ^(.*)$ https://{{httpd.serverNameSsl}}$1 [R=301,L]
+{{/partial}}
 {{/if~}}
 
 {{> aem-dispatcher/author/vhost_author.partials.hbs}}
