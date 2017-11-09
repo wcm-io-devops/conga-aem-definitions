@@ -27,6 +27,9 @@
       <action type="fix" dev="trichter">
         Role aem-dispatcher: Fix httpd.ssl.enforce to use mod-rewrite in rewriteEnforcePrimaryHostname, because redirect permanent had no effect.
       </action>
+      <action type="add" dev="trichter">
+        Role aem-dispatcher: Introduce httpd.logging.level and httpd.logging.accessLogFormat to allow configuration of LogLevel and access log format.
+      </action>
     </release>
 
     <release version="1.0.2" date="2017-10-19">

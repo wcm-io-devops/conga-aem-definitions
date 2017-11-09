@@ -226,6 +226,10 @@ config:
       # Placed at the bottom of the vhost confign file
       after:
 
+    # logging configuration
+    logging:
+      level: warn
+      accessLogFormat: combined
 
   dispatcher:
     

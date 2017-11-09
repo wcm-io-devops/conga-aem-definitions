@@ -109,6 +109,10 @@ config:
       cACertificatePath: /etc/ssl/certs
       cACertificateFile: /etc/ssl/certs/sample.pem
 
+    logging:
+      level: error
+      accessLogFormat: '"%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-agent}i\""'
+
   sling:
     caconfig:
       overrides:
