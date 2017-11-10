@@ -18,9 +18,9 @@ ServerAlias {{this}}
 
 {{~#block "logSettings"}}
 # Possible values include: debug, info, notice, warn, error, crit, alert, emerg.
-LogLevel warn
+LogLevel {{httpd.logging.level}}
 ErrorLog ${APACHE_LOG_DIR}/vhost_author_error.log
-CustomLog ${APACHE_LOG_DIR}/vhost_author_access.log combined
+CustomLog ${APACHE_LOG_DIR}/vhost_author_access.log {{httpd.logging.accessLogFormat}}
 {{/block}}
 
 

@@ -167,6 +167,11 @@ config:
     serverAliasNames:
     serverAliasNamesSsl: ${httpd.serverAliasNames}
 
+    # Logging configuration
+    logging:
+      level: warn
+      accessLogFormat: combined
+
     # Access restrictions
     accessRestriction:
 
@@ -225,7 +230,6 @@ config:
       beforeRewrite:
       # Placed at the bottom of the vhost confign file
       after:
-
 
   dispatcher:
     
