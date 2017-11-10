@@ -98,6 +98,9 @@ config:
     enableDavEx: true
 
   httpd:
+    logging:
+      level: error
+      accessLogFormat: '"%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-agent}i\""'
     accessRestriction:
       adminAccessFromIp: 10.0.0.0/255.0.0.0
       adminAccessFromHost: www.example.org
@@ -108,10 +111,6 @@ config:
       certificateKeyFile: /etc/ssl/private/sample.key
       cACertificatePath: /etc/ssl/certs
       cACertificateFile: /etc/ssl/certs/sample.pem
-
-    logging:
-      level: error
-      accessLogFormat: '"%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-agent}i\""'
 
   sling:
     caconfig:

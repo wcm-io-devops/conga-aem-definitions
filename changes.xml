@@ -23,12 +23,12 @@
     xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/plugins/maven-changes-plugin/xsd/changes-1.0.0.xsd">
   <body>
 
-    <release version="1.0.4" date="not released yet">
+    <release version="1.1.0" date="not released">
+      <action type="add" dev="trichter">
+        Role aem-dispatcher: Introduce httpd.logging.errorLogLevel and httpd.logging.accessLogFormat to allow configuration of LogLevel and access log format.
+      </action>
       <action type="fix" dev="trichter">
         Role aem-dispatcher: Fix httpd.ssl.enforce to use mod-rewrite in rewriteEnforcePrimaryHostname, because redirect permanent had no effect.
-      </action>
-      <action type="add" dev="trichter">
-        Role aem-dispatcher: Introduce httpd.logging.level and httpd.logging.accessLogFormat to allow configuration of LogLevel and access log format.
       </action>
     </release>
 
