@@ -170,7 +170,7 @@ config:
     # Logging configuration
     logging:
       level: warn
-      accessLogFormat: combined
+      accessLogFormat: '"- %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-agent}i\""'
 
     # Access restrictions
     accessRestriction:

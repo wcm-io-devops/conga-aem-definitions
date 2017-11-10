@@ -24,6 +24,9 @@
   <body>
 
     <release version="1.1.0" date="not released">
+      <action type="update" dev="trichter">
+        Role aem-dispatcher: No client ip logging by default.
+      </action>
       <action type="add" dev="trichter">
         Role aem-dispatcher: Introduce httpd.logging.errorLogLevel and httpd.logging.accessLogFormat to allow configuration of LogLevel and access log format.
       </action>
