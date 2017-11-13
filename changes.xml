@@ -27,6 +27,9 @@
       <action type="add" dev="trichter">
         Role aem-dispatcher: Introduce httpd.logging.errorLogLevel and httpd.logging.accessLogFormat to allow configuration of LogLevel and access log format.
       </action>
+      <action type="update" dev="trichter">
+        Role aem-dispatcher: No client ip logging by default (privacy protection).
+      </action>
       <action type="fix" dev="trichter">
         Role aem-dispatcher: Fix httpd.ssl.enforce to use mod-rewrite in rewriteEnforcePrimaryHostname, because redirect permanent had no effect.
       </action>

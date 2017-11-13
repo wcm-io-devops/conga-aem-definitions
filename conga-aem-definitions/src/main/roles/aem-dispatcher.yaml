@@ -170,7 +170,8 @@ config:
     # Logging configuration
     logging:
       level: warn
-      accessLogFormat: combined
+      # Access logging similar to "Combined", but without IP address (privacy protection)
+      accessLogFormat: '"- %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-agent}i\""'
 
     # Access restrictions
     accessRestriction:
