@@ -35,6 +35,13 @@
   <name>CONGA AEM Definitions</name>
   <description>Root POM for wcm.io CONGA Roles and Templates for AEM.</description>
 
+  <scm>
+    <connection>scm:git:https://github.com/wcm-io-devops/conga-aem-definitions.git</connection>
+    <developerConnection>scm:git:https://github.com/wcm-io-devops/conga-aem-definitions.git</developerConnection>
+    <url>https://github.com/wcm-io-devops/conga-aem-definitions</url>
+    <tag>HEAD</tag>
+  </scm>
+
   <properties>
     <site.url.module.prefix>conga/definitions/aem</site.url.module.prefix>
   </properties>
