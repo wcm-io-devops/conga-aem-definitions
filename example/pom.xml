@@ -55,7 +55,7 @@
       <plugin>
         <groupId>io.wcm.devops.conga</groupId>
         <artifactId>conga-maven-plugin</artifactId>
-        <version>1.4.2</version>
+        <version>1.4.5-SNAPSHOT</version>
         <extensions>true</extensions>
         <dependencies>
 
@@ -63,15 +63,23 @@
           <dependency>
             <groupId>io.wcm.devops.conga.plugins</groupId>
             <artifactId>io.wcm.devops.conga.plugins.aem</artifactId>            
-            <version>1.5.0</version>
+            <version>1.5.3-SNAPSHOT</version>
           </dependency>
           <dependency>
             <groupId>io.wcm.devops.conga.plugins</groupId>
             <artifactId>io.wcm.devops.conga.plugins.sling</artifactId>            
-            <version>1.2.2</version>
+            <version>1.2.3-SNAPSHOT</version>
           </dependency>
 
         </dependencies>
+        <configuration>
+
+          <!-- Path to AEM crytpo key (recommendation: encrypt it with Ansible Vault) -->
+          <pluginConfig>
+            aem-plugin;cryptoAesKeyUrl=classpath:/crypto/master
+          </pluginConfig>
+
+        </configuration>
       </plugin>
 
       <!-- do not deploy this example into maven repository -->

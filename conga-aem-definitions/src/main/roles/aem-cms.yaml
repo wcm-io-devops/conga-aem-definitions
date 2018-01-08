@@ -86,7 +86,7 @@ files:
   template: aem-cms-author-dam-update-asset-workflow-minimal.json.hbs
   variants:
   - aem-author
-  condition: "${workflow.useMinimalDamUpdateAssetWorkflow}"
+  condition: ${workflow.useMinimalDamUpdateAssetWorkflow}
   postProcessors:
   - aem-contentpackage
   postProcessorOptions:
@@ -118,7 +118,7 @@ files:
 config:
   contentPackage:
     group: conga-aem-cms
-    version: "${version}"
+    version: ${version}
 
   jvm:
     path: /path/to/java
@@ -170,8 +170,7 @@ config:
       #- name: publish1
       #  url: http://localhost:4503
       #  transportUser: admin
-      #  # Has to be encrypted with the correct key, see http://www.wemblog.com/2012/03/how-to-use-crypto-support-in-cq55.html
-      #  transportPassword: "{bb696f1ac8643072c0bcf45dbc66d782e37a5ed8bc3f55fc51c012fc469bf6cc}"
+      #  transportPassword: admin
       flushTarget:
         #name: dispatcherAuthor1
         #url: http://localhost:8000
