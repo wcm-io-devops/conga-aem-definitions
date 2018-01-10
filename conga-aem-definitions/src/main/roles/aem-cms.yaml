@@ -201,6 +201,6 @@ config:
     minimalDamUpdateAssetWorkflowTransient: true
 
   crypto:
-    # URLs to crypto keys to be deployed to AEM (as bundle files, supported for AEM 6.3 and up)
+    # URLs of crypto keys to be deployed to AEM (as bundle files, supported for AEM 6.3 and up)
     #aesCryptoKeyUrl: ansible-vault:classpath:/crypto/master
     #hmacCryptoKeyUrl: ansible-vault:classpath:/crypto/hmac
