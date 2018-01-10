@@ -27,6 +27,9 @@
       <action type="update" dev="sseifert">
         Role aem-cms: Use aemCryptoEncrypt to encrypt transport user password for replication agents.
       </action>
+      <action type="add" dev="sseifert">
+        Role aem-cms: Add (optional) support for deploying AEM crypto keys.
+      </action>
     </release>
 
     <release version="1.1.0" date="2017-11-22">

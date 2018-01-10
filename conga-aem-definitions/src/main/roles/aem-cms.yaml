@@ -113,6 +113,21 @@ files:
       filters:
       - filter: /apps/aem-cms-system-config
 
+# Crypto keys
+- file: master
+  dir: bundle-files/com.adobe.granite.crypto.file
+  url: ${crypto.aesCryptoKeyUrl}
+  condition: ${crypto.aesCryptoKeyUrl:}
+  modelOptions:
+    bundleFileProperties:
+      bundle: com.adobe.granite.crypto.file
+- file: hmac
+  dir: bundle-files/com.adobe.granite.crypto.file
+  url: ${crypto.hmacCryptoKeyUrl}
+  condition: ${crypto.hmacCryptoKeyUrl:}
+  modelOptions:
+    bundleFileProperties:
+      bundle: com.adobe.granite.crypto.file
 
 # Defines configuration parameters and default values
 config:
@@ -184,3 +199,8 @@ config:
     useMinimalDamUpdateAssetWorkflow: true
     # Configure minimal 'DAM Update Asset' workflow as transient (which is default since AEM 6.3 and recommended for earlier versions)
     minimalDamUpdateAssetWorkflowTransient: true
+
+  crypto:
+    # URLs of crypto keys to be deployed to AEM (as bundle files, supported for AEM 6.3 and up)
+    #aesCryptoKeyUrl: ansible-vault:classpath:/crypto/master
+    #hmacCryptoKeyUrl: ansible-vault:classpath:/crypto/hmac
