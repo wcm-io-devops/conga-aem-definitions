@@ -119,13 +119,15 @@ files:
   url: ${crypto.aesCryptoKeyUrl}
   condition: ${crypto.aesCryptoKeyUrl:}
   modelOptions:
-    bundle: com.adobe.granite.crypto.file
+    bundleFileProperties:
+      bundle: com.adobe.granite.crypto.file
 - file: hmac
   dir: bundle-files/com.adobe.granite.crypto.file
   url: ${crypto.hmacCryptoKeyUrl}
   condition: ${crypto.hmacCryptoKeyUrl:}
   modelOptions:
-    bundle: com.adobe.granite.crypto.file
+    bundleFileProperties:
+      bundle: com.adobe.granite.crypto.file
 
 # Defines configuration parameters and default values
 config:
