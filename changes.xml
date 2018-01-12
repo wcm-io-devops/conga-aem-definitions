@@ -30,6 +30,9 @@
       <action type="add" dev="sseifert">
         Role aem-cms: Add (optional) support for deploying AEM crypto keys.
       </action>
+      <action type="update" dev="sseifert">
+        Role aem-dispatcher: Remove 'DispatcherNoServerHeader' from dispatcher.conf - it's deprecated and has no longer any effect.
+      </action>
     </release>
 
     <release version="1.1.0" date="2017-11-22">

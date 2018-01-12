@@ -16,9 +16,6 @@
   # debug(3): Debug
   DispatcherLogLevel warn
 
-  # if turned on, the dispatcher looks like a normal module
-  DispatcherNoServerHeader Off
-
   # if turned on, request to / are not handled by the dispatcher
   # use the mod_alias then for the correct mapping
   DispatcherDeclineRoot On
@@ -39,6 +36,12 @@
   #
   # DispatcherPassError 400-404,501
   DispatcherPassError 0
+
+  # DispatcherKeepAliveTimeout specifies the number of seconds a
+  # connection to a backend should be kept alive. If not set or
+  # set to zero, connections are not kept alive.
+  #
+  #DispatcherKeepAliveTimeout 60
 
 </IfModule>
 
