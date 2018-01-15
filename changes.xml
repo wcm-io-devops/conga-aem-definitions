@@ -33,6 +33,9 @@
       <action type="update" dev="sseifert">
         Role aem-dispatcher: Remove 'DispatcherNoServerHeader' from dispatcher.conf - it's deprecated and has no longer any effect.
       </action>
+      <action type="update" dev="sseifert">
+        Role aem-dispatcher: Add additional selectors to block pointing to AEM-builtin servlets which should normally not accessible on publish instances.
+      </action>
     </release>
 
     <release version="1.1.0" date="2017-11-22">
