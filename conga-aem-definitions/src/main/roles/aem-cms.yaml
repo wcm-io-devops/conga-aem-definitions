@@ -48,6 +48,7 @@ files:
   template: aem-cms-author-replicationagents.json.hbs
   variants:
   - aem-author
+  condition: ${replication.author.generatePackage}
   postProcessors:
   - aem-contentpackage
   postProcessorOptions:
@@ -67,6 +68,7 @@ files:
   template: aem-cms-publish-replicationagents.json.hbs
   variants:
   - aem-publish
+  condition: ${replication.publish.generatePackage}
   postProcessors:
   - aem-contentpackage
   postProcessorOptions:
@@ -189,10 +191,14 @@ config:
       flushTarget:
         #name: dispatcherAuthor1
         #url: http://localhost:8000
+      # generate replicationagents package by default
+      generatePackage: true
     publish:
       flushTarget:
         #name: dispatcherPublish1
         #url: http://localhost:8000
+      # generate replicationagents package by default
+      generatePackage: true
 
   workflow:
     # Replace the default 'DAM Update Asset' workflow with a minimal one containing only the steps that are always required
