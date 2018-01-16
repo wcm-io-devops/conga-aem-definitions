@@ -36,6 +36,9 @@
       <action type="update" dev="sseifert">
         Role aem-dispatcher: Add additional selectors to block pointing to AEM-builtin servlets which should normally not accessible on publish instances.
       </action>
+      <action type="add" dev="trichter">
+        Role aem-cms: Introduce replication.author.generatePackage and replication.publish.generatePackage to allow disabling of the replicationagent packages.
+      </action>
     </release>
 
     <release version="1.1.0" date="2017-11-22">
