@@ -183,8 +183,6 @@ config:
 
   replication:
     author:
-      # generate replicationagents package by default
-      generatePackage: true
       publishTargets:
       #- name: publish1
       #  url: http://localhost:4503
@@ -193,12 +191,14 @@ config:
       flushTarget:
         #name: dispatcherAuthor1
         #url: http://localhost:8000
-    publish:
       # generate replicationagents package by default
       generatePackage: true
+    publish:
       flushTarget:
         #name: dispatcherPublish1
         #url: http://localhost:8000
+      # generate replicationagents package by default
+      generatePackage: true
 
   workflow:
     # Replace the default 'DAM Update Asset' workflow with a minimal one containing only the steps that are always required
