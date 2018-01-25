@@ -100,7 +100,7 @@ files:
 - file: start
   dir: bin
   template: start.hbs
-  fileHeader: unixShellScript
+  fileHeader: none
 
 # AEM OSGi System Configuration
 - file: aem-cms-system-config.provisioning
