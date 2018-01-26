@@ -34,7 +34,7 @@
         Role aem-cms: Introduce replication.author.generatePackage and replication.publish.generatePackage to allow disabling of the replicationagent packages.
       </action>
       <action type="update" dev="sseifert">
-        Role aem-cms: Remove CONGA file header from start script to avoid unnecessary restarts when dependencies are updated.
+        Role aem-cms: Generate static CONGA file header for start script to avoid unnecessary restarts when dependencies are updated.
       </action>
       <action type="update" dev="sseifert">
         Role aem-dispatcher: Remove 'DispatcherNoServerHeader' from dispatcher.conf - it's deprecated and has no longer any effect.
