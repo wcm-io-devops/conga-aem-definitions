@@ -25,14 +25,14 @@
   <parent>
     <groupId>io.wcm.maven</groupId>
     <artifactId>io.wcm.maven.global-parent</artifactId>
-    <version>17</version>
+    <version>19</version>
     <relativePath />
   </parent>
 
   <groupId>io.wcm.devops.conga.definitions</groupId>
   <artifactId>io.wcm.devops.conga.definitions.aem.example</artifactId>
   <packaging>config</packaging>
-  <version>1.1.0</version>
+  <version>1.2.0</version>
 
   <name>CONGA AEM Definitions Example</name>
   <description>Example environment definition.</description>
@@ -43,7 +43,7 @@
     <dependency>
       <groupId>io.wcm.devops.conga.definitions</groupId>
       <artifactId>io.wcm.devops.conga.definitions.aem</artifactId>
-      <version>1.1.0</version>
+      <version>1.2.0</version>
     </dependency>
 
   </dependencies>
@@ -55,7 +55,7 @@
       <plugin>
         <groupId>io.wcm.devops.conga</groupId>
         <artifactId>conga-maven-plugin</artifactId>
-        <version>1.4.2</version>
+        <version>1.5.0</version>
         <extensions>true</extensions>
         <dependencies>
 
@@ -63,15 +63,23 @@
           <dependency>
             <groupId>io.wcm.devops.conga.plugins</groupId>
             <artifactId>io.wcm.devops.conga.plugins.aem</artifactId>            
-            <version>1.5.0</version>
+            <version>1.6.0</version>
           </dependency>
           <dependency>
             <groupId>io.wcm.devops.conga.plugins</groupId>
             <artifactId>io.wcm.devops.conga.plugins.sling</artifactId>            
-            <version>1.2.2</version>
+            <version>1.2.4</version>
           </dependency>
 
         </dependencies>
+        <configuration>
+
+          <!-- Path to AEM crytpo key (recommendation: encrypt it with Ansible Vault) -->
+          <pluginConfig>
+            aem-plugin;cryptoAesKeyUrl=classpath:/crypto/master
+          </pluginConfig>
+
+        </configuration>
       </plugin>
 
       <!-- do not deploy this example into maven repository -->

@@ -24,7 +24,7 @@
         "enabled": "true",
         "transportUri": "{{this.url}}/bin/receive?sling:authRequestLogin=1",
         "transportUser": "{{this.transportUser}}",
-        "transportPassword": "{{this.transportPassword}}",
+        "transportPassword": "{{aemCryptoEncrypt this.transportPassword ignoreMissingKey=true}}",
         "serializationType": "durbo",
         "retryDelay": "60000",
         "logLevel": "error"

@@ -20,31 +20,49 @@ variants:
       
       # Dispatcher filter rules (use only regex, no glob expressions)
       filter:
+      # deny everything first and then allow specific entries [from default dispatcher.any]
       - url: /.*
         type: deny
-      # open consoles (access is controlled in httpd config)
-      - url: /(admin|crx|system)(/.*)?
-        type: allow
-      # Allow non-public content directories
+      # Allow non-public content directories [from default dispatcher.any]
       - url: /content(/.*)?
         type: allow
-      # Enable extensions in non-public content directories
+      # Enable extensions in non-public content directories [from default dispatcher.any]
       - extension: (css|gif|ico|js|png|swf|jpe?g)
         type: allow
-      # Enable features 
+      # Enable features [from default dispatcher.any]
       - url: /libs/cq/personalization(/.*)?
         type: allow
-      - url: /etc/(clientlibs|designs)(/.*)?
-        type: allow
-      # Deny content grabbing, on all accessible pages
+      # Deny content grabbing, on all accessible pages [from default dispatcher.any]
       - selectors: ((sys|doc)view|query|[0-9-]+)
         extension: (json|xml)
         type: deny
-      # Deny content grabbing for /content
+      # Deny content grabbing for /content [from default dispatcher.any]
       - path: /content(/.*)?
-        selectors: (feed|rss|pages|languages|blueprint|infinity|tidy|form)
+        selectors: (feed|rss|pages|languages|blueprint|infinity|tidy)
         extension: (json|xml|html)
         type: deny
+      # Deny content grabbing for /content - additional selectors not included in default dispatcher.any
+      - path: /content(/.*)?
+        selectors: (ambits|assignments|childrenlist|cloudservices|contentfinder|context|emailservice|exacttarget|ext|form|media|missingpages|mobileapps|pages|paragraphs|payloadsummary|permissions|publications|referencelist|savedsearch|skippedpages|search|social|style|tags|tagtree|timezones)
+        extension: (json)
+        type: deny
+      - path: /content(/.*)?
+        selectors: (translate|translationRulesEditor)
+        extension: (html)
+        type: deny
+      - path: /content(/.*)?
+        selectors: (emulatorstrip|projectcard|thumb)
+        extension: (gif|jpeg|png)
+        type: deny
+      - path: /content(/.*)?
+        selectors: (overlay)
+        type: deny
+      # Allow access to client libraries and designs at /etc
+      - url: /etc/(clientlibs|designs)(/.*)?
+        type: allow
+      # open consoles (access is controlled in httpd config)
+      - url: /(admin|crx|system)(/.*)?
+        type: allow
 
       # Configure dispatcher cache
       cache:

@@ -23,6 +23,27 @@
     xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/plugins/maven-changes-plugin/xsd/changes-1.0.0.xsd">
   <body>
 
+    <release version="1.2.0" date="2018-02-05">
+      <action type="add" dev="sseifert">
+        Role aem-cms: Add (optional) support for deploying AEM crypto keys.
+      </action>
+      <action type="update" dev="sseifert">
+        Role aem-cms: Use aemCryptoEncrypt to encrypt transport user password for replication agents.
+      </action>
+      <action type="add" dev="trichter">
+        Role aem-cms: Introduce replication.author.generatePackage and replication.publish.generatePackage to allow disabling of the replicationagent packages.
+      </action>
+      <action type="update" dev="sseifert">
+        Role aem-cms: Generate static CONGA file header for start script to avoid unnecessary restarts when dependencies are updated.
+      </action>
+      <action type="update" dev="sseifert">
+        Role aem-dispatcher: Remove 'DispatcherNoServerHeader' from dispatcher.conf - it's deprecated and has no longer any effect.
+      </action>
+      <action type="update" dev="sseifert">
+        Role aem-dispatcher: Add additional selectors to block pointing to AEM-builtin servlets which should normally not accessible on publish instances.
+      </action>
+    </release>
+
     <release version="1.1.0" date="2017-11-22">
       <action type="add" dev="trichter">
         Role aem-dispatcher: Introduce httpd.logging.errorLogLevel and httpd.logging.accessLogFormat to allow configuration of LogLevel and access log format.

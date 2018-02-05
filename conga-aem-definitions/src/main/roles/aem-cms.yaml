@@ -48,6 +48,7 @@ files:
   template: aem-cms-author-replicationagents.json.hbs
   variants:
   - aem-author
+  condition: ${replication.author.generatePackage}
   postProcessors:
   - aem-contentpackage
   postProcessorOptions:
@@ -67,6 +68,7 @@ files:
   template: aem-cms-publish-replicationagents.json.hbs
   variants:
   - aem-publish
+  condition: ${replication.publish.generatePackage}
   postProcessors:
   - aem-contentpackage
   postProcessorOptions:
@@ -86,7 +88,7 @@ files:
   template: aem-cms-author-dam-update-asset-workflow-minimal.json.hbs
   variants:
   - aem-author
-  condition: "${workflow.useMinimalDamUpdateAssetWorkflow}"
+  condition: ${workflow.useMinimalDamUpdateAssetWorkflow}
   postProcessors:
   - aem-contentpackage
   postProcessorOptions:
@@ -98,7 +100,7 @@ files:
 - file: start
   dir: bin
   template: start.hbs
-  fileHeader: unixShellScript
+  fileHeader: none
 
 # AEM OSGi System Configuration
 - file: aem-cms-system-config.provisioning
@@ -113,12 +115,27 @@ files:
       filters:
       - filter: /apps/aem-cms-system-config
 
+# Crypto keys
+- file: master
+  dir: bundle-files/com.adobe.granite.crypto.file
+  url: ${crypto.aesCryptoKeyUrl}
+  condition: ${crypto.aesCryptoKeyUrl:}
+  modelOptions:
+    bundleFileProperties:
+      bundle: com.adobe.granite.crypto.file
+- file: hmac
+  dir: bundle-files/com.adobe.granite.crypto.file
+  url: ${crypto.hmacCryptoKeyUrl}
+  condition: ${crypto.hmacCryptoKeyUrl:}
+  modelOptions:
+    bundleFileProperties:
+      bundle: com.adobe.granite.crypto.file
 
 # Defines configuration parameters and default values
 config:
   contentPackage:
     group: conga-aem-cms
-    version: "${version}"
+    version: ${version}
 
   jvm:
     path: /path/to/java
@@ -170,18 +187,26 @@ config:
       #- name: publish1
       #  url: http://localhost:4503
       #  transportUser: admin
-      #  # Has to be encrypted with the correct key, see http://www.wemblog.com/2012/03/how-to-use-crypto-support-in-cq55.html
-      #  transportPassword: "{bb696f1ac8643072c0bcf45dbc66d782e37a5ed8bc3f55fc51c012fc469bf6cc}"
+      #  transportPassword: admin
       flushTarget:
         #name: dispatcherAuthor1
         #url: http://localhost:8000
+      # generate replicationagents package by default
+      generatePackage: true
     publish:
       flushTarget:
         #name: dispatcherPublish1
         #url: http://localhost:8000
+      # generate replicationagents package by default
+      generatePackage: true
 
   workflow:
     # Replace the default 'DAM Update Asset' workflow with a minimal one containing only the steps that are always required
     useMinimalDamUpdateAssetWorkflow: true
     # Configure minimal 'DAM Update Asset' workflow as transient (which is default since AEM 6.3 and recommended for earlier versions)
     minimalDamUpdateAssetWorkflowTransient: true
+
+  crypto:
+    # URLs of crypto keys to be deployed to AEM (as bundle files, supported for AEM 6.3 and up)
+    #aesCryptoKeyUrl: ansible-vault:classpath:/crypto/master
+    #hmacCryptoKeyUrl: ansible-vault:classpath:/crypto/hmac

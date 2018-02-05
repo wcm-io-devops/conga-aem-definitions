@@ -11,8 +11,7 @@ nodes:
     - name: publish1
       url: http://localhost:4503
       transportUser: admin
-      # Has to be encrypted with the correct key, see http://www.wemblog.com/2012/03/how-to-use-crypto-support-in-cq55.html
-      transportPassword: "{443a90a7ed2bf085c7a4a5947013b32bf617b87025bbca44786ac2b926a59f6c}"
+      transportPassword: admin
 
 - node: aem-publish
   roles:
@@ -92,7 +91,7 @@ nodes:
         - host
 
 config:
-  jvm.path: "/usr/lib/jvm/jdk-8-oracle-x64"
+  jvm.path: /usr/lib/jvm/jdk-8-oracle-x64
 
   quickstart:
     enableDavEx: true
@@ -121,6 +120,11 @@ config:
 
   workflow:
     useMinimalDamUpdateAssetWorkflow: true
+
+  crypto:
+    # URLs of crypto keys to be deployed to AEM (as bundle files, supported for AEM 6.3 and up)
+    aesCryptoKeyUrl: classpath:/crypto/master
+    hmacCryptoKeyUrl: classpath:/crypto/hmac
 
 
 tenants:
