@@ -83,3 +83,11 @@ Header set X-UA-Compatible "IE=Edge,chrome=1"
 <LocationMatch "\.(js|css|gif|png|jpe?g|pdf|xml|oga|ogg|m4a|ogv|mp4|m4v|webm|svg|svgz|eot|ttf|otf|woff|ico|webp|appcache|manifest|htc|crx|oex|xpi|safariextz|vcf)$" >
   Header unset X-UA-Compatible
 </LocationMatch>
+
+{{~#block "customDispatcherConfigAfter"}}
+  {{#if dispatcher.customConfig.after ~}}
+    #### Custom configuration (after) ####
+
+    {{dispatcher.customConfig.after}}
+  {{~/if}}
+{{/block}}
