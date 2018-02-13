@@ -330,7 +330,11 @@ config:
 
       # Enable TTL evaluates the response headers from the backend
       #enableTTL: false
-    
+
+    # Custom configuration snippets for dispatcher config file (useful to apply configurations for all vhosts)
+    customConfig:
+      # Placed at the bottom of the dispatcher config file
+      after:
 
   sling:
 

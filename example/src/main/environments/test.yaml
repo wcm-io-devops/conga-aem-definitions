@@ -90,6 +90,11 @@ nodes:
         - accept
         - host
 
+        customConfig:
+          after: |
+            # This is custom configuration example
+            # at the bottom of the file
+
 config:
   jvm.path: /usr/lib/jvm/jdk-8-oracle-x64
 
