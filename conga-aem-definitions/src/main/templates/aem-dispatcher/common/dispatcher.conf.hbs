@@ -85,9 +85,9 @@ Header set X-UA-Compatible "IE=Edge,chrome=1"
 </LocationMatch>
 
 {{~#block "customDispatcherConfigAfter"}}
-  {{#if dispatcher.customConfig.after ~}}
-    #### Custom configuration (after) ####
+{{#if dispatcher.customConfig.after ~}}
+#### Custom configuration (after) ####
 
-    {{dispatcher.customConfig.after}}
-  {{~/if}}
+{{dispatcher.customConfig.after}}
+{{~/if}}
 {{/block}}
