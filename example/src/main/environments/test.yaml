@@ -118,6 +118,10 @@ config:
         - io.wcm.handler.url.SiteConfig/siteUrl="http://site1"
         - io.wcm.handler.url.SiteConfig/siteUrlAuthor="https://author.site1"
 
+  security:
+    # generates the aem-security-config package with default configuration for the Felix Webconsole
+    generatePackage: true
+
   workflow:
     useMinimalDamUpdateAssetWorkflow: true
 
