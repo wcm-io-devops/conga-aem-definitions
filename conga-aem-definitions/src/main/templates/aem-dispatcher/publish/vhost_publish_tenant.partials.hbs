@@ -73,7 +73,13 @@ Header set Cache-Control "public, must-revalidate"
 </LocationMatch>
 {{/block}}
 
-
+{{~#block "sslEnforce"}}
+{{~#if httpd.ssl.enforce}}
+# SSL enforcing
+# Enable HSTS if SSL is enforced, even on http (e.g. when running behind a ssl offloader)
+Header always set Strict-Transport-Security "max-age=31536000"
+{{/if}}
+{{/block}}
 
 {{~#block "searchRobotHeader"}}
 # Control indexing by search engine robots
@@ -195,7 +201,12 @@ RewriteRule ^/content/.* - [R=404,L,NC]
 {{~#block "rewriteHomepageRedirect"}}
 {{~#if httpd.rootRedirect.url}}
 # Root redirect to homepage
+{{#if httpd.ssl.enforce}}
+  {{ensureProperties "httpd.serverNameSsl" ~}}
+RewriteRule ^/$ https://{{httpd.serverNameSsl}}{{httpd.rootRedirect.url}} [R={{httpd.rootRedirect.httpStatus}},L]
+{{~ else}}
 RewriteRule ^/$ {{httpd.rootRedirect.url}} [R={{httpd.rootRedirect.httpStatus}},L]
+{{/if ~}}
 {{/if ~}}
 {{/block}}
 
