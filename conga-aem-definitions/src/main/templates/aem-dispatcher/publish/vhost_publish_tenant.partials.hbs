@@ -42,6 +42,14 @@ TraceEnable Off
 RewriteEngine On
 {{/block}}
 
+{{~#block "remoteIPForwarding"}}
+{{~#if httpd.remoteIPInternalProxies}}
+# Trusted remote ip proxies
+{{~#each httpd.remoteIPInternalProxies}}
+RemoteIPInternalProxy {{this}}
+{{~/each}}
+{{~/if}}
+{{/block}}
 
 {{~#block "dispatcherModule"}}
 # Enable AEM dispatcher module
