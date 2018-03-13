@@ -23,6 +23,18 @@
     xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/plugins/maven-changes-plugin/xsd/changes-1.0.0.xsd">
   <body>
 
+    <release version="1.3.0" date="not-released">
+      <action type="add" dev="trichter">
+        Role aem-dispatcher: Introduce (optional) headers.contentSecurityPolicy to allow configuration of the Content-Security-Policy header.
+      </action>
+      <action type="add" dev="trichter">
+        Role aem-dispatcher: Introduce headers.referrerPolicy to allow configuration of the Referrer-Policy header.
+      </action>
+      <action type="add" dev="trichter">
+        Role aem-dispatcher: Introduce (optional) headers.xssProtection to allow configuration of the X-XSS-Protection.
+      </action>
+    </release>
+
     <release version="1.2.0" date="2018-02-05">
       <action type="add" dev="sseifert">
         Role aem-cms: Add (optional) support for deploying AEM crypto keys.
