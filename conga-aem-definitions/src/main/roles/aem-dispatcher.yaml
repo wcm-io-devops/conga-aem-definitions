@@ -228,7 +228,7 @@ config:
       offloading:
         # if set to true a additional rewriteCondition will be added to the rewriteEnforcePrimaryHostname block to ensure
         # requests forwarded for https are not rewritten to https
-        active: false
+        enabled: false
         rewriteCondition: "%{HTTP:X-Forwarded-Proto} !https"
 
     # Redirecting from "/" (only publish dispatcher)

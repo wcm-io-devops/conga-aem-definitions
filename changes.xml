@@ -23,15 +23,15 @@
     xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/plugins/maven-changes-plugin/xsd/changes-1.0.0.xsd">
   <body>
 
-    <release version="1.3.0" date="not-released">
+    <release version="1.3.0" date="not released">
       <action type="add" dev="trichter">
-        Role aem-dispatcher: Introduce httpd.ssl.offloading.active and httpd.ssl.offloading.rewriteCondition in order to support SSL offloading.
+        Role aem-dispatcher: Introduce httpd.ssl.offloading.enabled and httpd.ssl.offloading.rewriteCondition in order to support SSL offloading.
       </action>
       <action type="update" dev="trichter">
-        Role aem-dispatcher: Update rewriteHomepageRedirect to use https and httpd.serverNameSsl when SSL is enforced (used in SSL offloading setup)
+        Role aem-dispatcher: Update rewriteHomepageRedirect to use https and httpd.serverNameSsl when SSL is enforced (used in SSL offloading setup).
       </action>
       <action type="update" dev="trichter">
-        Role aem-dispatcher: Always set Strict-Transport-Security header when SSL is enforced (used in SSL offloading setup)
+        Role aem-dispatcher: Always set Strict-Transport-Security header when SSL is enforced (used in SSL offloading setup).
       </action>
     </release>
 
