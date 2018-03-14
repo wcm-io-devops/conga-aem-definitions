@@ -83,3 +83,7 @@ Header set X-UA-Compatible "IE=Edge,chrome=1"
 <LocationMatch "\.(js|css|gif|png|jpe?g|pdf|xml|oga|ogg|m4a|ogv|mp4|m4v|webm|svg|svgz|eot|ttf|otf|woff|ico|webp|appcache|manifest|htc|crx|oex|xpi|safariextz|vcf)$" >
   Header unset X-UA-Compatible
 </LocationMatch>
+
+# Fix NOT MODIFIED for deflated resources, see https://bz.apache.org/bugzilla/show_bug.cgi?id=45023#c22 (thanks to Joost Dekeijzer)
+# Manipulate request header to request with ($1) and without gzip ($2) ending.
+RequestHeader edit "If-None-Match" '^"((.*)-gzip)"$' '"$1", "$2"'
