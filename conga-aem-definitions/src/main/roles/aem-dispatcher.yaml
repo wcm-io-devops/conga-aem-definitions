@@ -248,6 +248,14 @@ config:
       #- www.host1.com
       #- www.host2.com
 
+    headers:
+      # Enables/Configures the Content-Security-Policy header on publish dispatcher (see https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)
+      contentSecurityPolicy:
+      # Enables/Configures the Referrer-Policy header on publish dispatcher (see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy)
+      referrerPolicy: "origin-when-cross-origin"
+      # Enables/Configures the X-XSS-Protection header on publish dispatcher (see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection)
+      xssProtection:
+
     # Custom configuration snippets for vhost files (only on publish dispatcher - useful for tenant-specific configurations)
     customVHostConfig:
       # Placed at the top of the vhost config file

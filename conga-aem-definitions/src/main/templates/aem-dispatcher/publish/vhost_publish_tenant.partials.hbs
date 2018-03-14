@@ -169,6 +169,20 @@ RewriteRule ^(.*)$ http://{{httpd.serverName}}$1 [R=301,L]
 {{~/if}}
 {{/block}}
 
+{{~#block "headers"}}
+{{~#if httpd.headers.contentSecurityPolicy}}
+# Send CSP header to client
+Header set Content-Security-Policy "{{httpd.headers.contentSecurityPolicy}}"
+{{~/if}}
+{{~#if httpd.headers.referrerPolicy}}
+# Send Referrer-Policy header to client
+Header set Referrer-Policy "{{httpd.headers.referrerPolicy}}"
+{{~/if}}
+{{~#if httpd.headers.xssProtection}}
+# Send XSS protection header to client
+Header set X-XSS-Protection "{{httpd.headers.xssProtection}}"
+{{~/if}}
+{{/block}}
 
 {{~#block "customVHostConfigBeforeRewrite"}}
 {{#if httpd.customVHostConfig.beforeRewrite ~}}

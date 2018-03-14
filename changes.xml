@@ -36,6 +36,15 @@
       <action type="add" dev="trichter">
         Role aem-dispatcher: Introduce httpd.remoteIPInternalProxies to allow configuration of addresses (or address blocks) to trust as presenting a valid RemoteIPHeader value of the useragent IP.
       </action>
+      <action type="add" dev="trichter">
+        Role aem-dispatcher: Introduce (optional) headers.contentSecurityPolicy to allow configuration of the Content-Security-Policy header.
+      </action>
+      <action type="add" dev="trichter">
+        Role aem-dispatcher: Introduce headers.referrerPolicy to allow configuration of the Referrer-Policy header.
+      </action>
+      <action type="add" dev="trichter">
+        Role aem-dispatcher: Introduce (optional) headers.xssProtection to allow configuration of the X-XSS-Protection.
+      </action>
     </release>
 
     <release version="1.2.0" date="2018-02-05">
