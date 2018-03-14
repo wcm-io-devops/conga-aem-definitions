@@ -224,6 +224,13 @@ config:
       # If set to true all requests are redirectd to HTTPS and HSTS is enabled
       enforce: false
 
+      # SSL offloading configuration
+      offloading:
+        # if set to true a additional rewriteCondition will be added to the rewriteEnforcePrimaryHostname block to ensure
+        # requests forwarded for https are not rewritten to https
+        enabled: false
+        rewriteCondition: "%{HTTP:X-Forwarded-Proto} !https"
+
     # Redirecting from "/" (only publish dispatcher)
     rootRedirect:
       #url: /en.html
