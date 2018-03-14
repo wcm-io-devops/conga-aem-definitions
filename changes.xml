@@ -33,6 +33,9 @@
       <action type="update" dev="trichter">
         Role aem-dispatcher: Always set Strict-Transport-Security header when SSL is enforced (used in SSL offloading setup).
       </action>
+      <action type="add" dev="trichter">
+        Role aem-dispatcher: Introduce httpd.remoteIPInternalProxies to allow configuration of addresses (or address blocks) to trust as presenting a valid RemoteIPHeader value of the useragent IP.
+      </action>
     </release>
 
     <release version="1.2.0" date="2018-02-05">

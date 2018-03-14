@@ -257,6 +257,11 @@ config:
       # Placed at the bottom of the vhost confign file
       after:
 
+    # Configures adresses (or address blocks) to trust as presenting a valid RemoteIPHeader (use in loadbalancer setup where client ip forwarding is needed)
+    remoteIPInternalProxies:
+    # - 10.0.2.0/24
+    # - gateway.localdomain
+
   dispatcher:
     
     # Hostname and port of AEM instance
