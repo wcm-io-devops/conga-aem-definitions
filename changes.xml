@@ -45,6 +45,9 @@
       <action type="add" dev="trichter">
         Role aem-dispatcher: Introduce (optional) headers.xssProtection to allow configuration of the X-XSS-Protection.
       </action>
+      <action type="fix" dev="trichter">
+        Role aem-dispatcher: Fixed 304 NOT MODIFIED responses for gzipped resources when working with entity tags, see https://bz.apache.org/bugzilla/show_bug.cgi?id=45023#c22.
+      </action>
     </release>
 
     <release version="1.2.0" date="2018-02-05">
