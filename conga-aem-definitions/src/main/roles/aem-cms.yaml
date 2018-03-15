@@ -115,20 +115,6 @@ files:
       filters:
       - filter: /apps/aem-cms-system-config
 
-# AEM OSGi System Security Configuration
-- file: aem-cms-security-config.provisioning
-  dir: packages
-  template: aem-cms-security-config.provisioning.hbs
-  postProcessors:
-  - aem-contentpackage-osgiconfig
-  postProcessorOptions:
-    contentPackage:
-      name: aem-cms-security-config
-      rootPath: /apps/aem-cms-security-config/config
-      filters:
-      - filter: /apps/aem-cms-security-config
-  condition: ${security.generatePackage}
-
 # Crypto keys
 - file: master
   dir: bundle-files/com.adobe.granite.crypto.file
@@ -195,47 +181,14 @@ config:
       #  - io.wcm.handler.url.SiteConfig/siteUrl="http://site1"
       #  - io.wcm.handler.url.SiteConfig/siteUrlAuthor="https://author.site1"
 
-  security:
-    # controls the generation of the security package
-    generatePackage: false
-
-    webconsole:
-      osgiManager:
-        # The root path to the OSGi Management Console.
-        managerRoot: /system/console
-
-        # OSGi filter used to select the Http Service towhich the Web Console binds
-        httpServiceFilter:
-
-        # The name of the default configuration page when invoking the OSGi Management console.
-        defaultRender: bundles
-
-        # The name of the HTTP Authentication Realm.
-        realm: OSGi Management Console
-
-        # The name of the user allowed to access the OSGi Management Console.
-        username: admin
-
-        # The password for the user allowed to access the OSGi Management Console.
-        password: admin
-
-        # The default category (menu label) to be used for plugins not registered with a felix.webconsole.category service property.
-        category: Main
-
-        # If set, this locale forces the localization to use this locale instead of the one requested by the web browser
-        locale:
-
-        # Logging Level (WARN)
-        loglevel: 2
-
-        # Plugin configuration
-        plugins:
-        - org.apache.felix.webconsole.internal.compendium.LogServlet
-        - org.apache.felix.webconsole.internal.configuration.ConfigManager
-        - org.apache.felix.webconsole.internal.core.BundlesServlet
-        - org.apache.felix.webconsole.internal.core.ServicesServlet
-        - org.apache.felix.webconsole.internal.misc.LicenseServlet
-        - org.apache.felix.webconsole.internal.system.VMStatPlugin
+  aem:
+    admin:
+      # The admin username
+      username: admin
+      # The admin password to set for OAK and Apache Felix Webconsole (used together with passwordOld to change the password in conga-ansible automation)
+      password:
+      # The old (initial) admin password for OAK and Apache Felix Webconsole
+      passwordOld: admin
 
   replication:
     author:

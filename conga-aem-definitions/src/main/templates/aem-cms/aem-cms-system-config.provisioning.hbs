@@ -23,3 +23,10 @@
       {{~/each ~}}
     ]
 {{/if}}
+
+{{#if aem.admin.password}}
+  # Apache Felix OSGi Management Console configuration
+  org.apache.felix.webconsole.internal.servlet.OsgiManager
+    username="{{aem.admin.username}}"
+    password="{{webconsolePasswordHash aem.admin.password}}"
+{{/if}}

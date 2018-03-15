@@ -55,9 +55,10 @@
         Role aem-dispatcher: Introduce dispatcher.logging.level to allow configuration of DispatcherLogLevel.
       </action>
       <action type="add" dev="trichter">
-        Role aem-cms: Add (optional) support for deploying security OSGi configurations in order to allow securing the Felix Webconsole.
+        Role aem-cms: Introduce aem.admin.username|password|passwordOld to provide a central configuration place, change the Apache Felix Webconsole password and the AEM admin password during conga-ansible automation.
       </action>
     </release>
+
     <release version="1.2.0" date="2018-02-05">
       <action type="add" dev="sseifert">
         Role aem-cms: Add (optional) support for deploying AEM crypto keys.
