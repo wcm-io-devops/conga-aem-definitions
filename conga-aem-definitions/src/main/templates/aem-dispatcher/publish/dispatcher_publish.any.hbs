@@ -148,12 +148,13 @@
     # should be ignored when determining whether some request's output can be
     # cached or delivered from cache.
     #
-    # In this example configuration, the "q" parameter will be ignored. 
-    #/ignoreUrlParams
-    #  {
-    #  /0001 { /glob "*" /type "deny" }
-    #  /0002 { /glob "q" /type "allow" }
-    #  }
+    /ignoreUrlParams
+      {
+{{~#each dispatcher.cache.ignoreUrlParams}}
+      /{{@index}}
+        { /type "{{this.type}}" /glob "{{this.glob}}" }
+{{~/each}}
+      }
 
     # Cache response headers next to a cached file. On the first request to
     # an uncached resource, all headers matching one of the values found here
