@@ -289,7 +289,8 @@ config:
       type: allow
 
     # Defines the DispatcherLogLevel (error,warn,info,debug)
-    logLevel: warn
+    logging:
+      level: warn
 
     # Configure dispatcher cache
     cache:

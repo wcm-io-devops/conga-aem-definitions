@@ -52,9 +52,10 @@
         Role aem-dispatcher: Introduce dispatcher.cache.ignoreUrlParams to allow configuration of query params that are ignored during evaluation of a request is cached/served from cache.
       </action>
       <action type="add" dev="trichter">
-        Role aem-dispatcher: Introduce dispatcher.logLevel to allow configuration of DispatcherLogLevel.
+        Role aem-dispatcher: Introduce dispatcher.logging.level to allow configuration of DispatcherLogLevel.
       </action>
     </release>
+
     <release version="1.2.0" date="2018-02-05">
       <action type="add" dev="sseifert">
         Role aem-cms: Add (optional) support for deploying AEM crypto keys.
