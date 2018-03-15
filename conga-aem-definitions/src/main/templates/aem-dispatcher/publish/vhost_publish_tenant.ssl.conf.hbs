@@ -31,12 +31,6 @@ RewriteRule ^(.*)$ https://{{httpd.serverNameSsl}}$1 [R=301,L]
 
 {{> aem-dispatcher/publish/vhost_publish_tenant.partials.hbs}}
 
-
-{{~#if httpd.ssl.enforce}}
-# Enable HSTS if SSL is enforced
-Header always set Strict-Transport-Security "max-age=31536000"
-{{/if}}
-
 # SSL configuration
 SSLEngine on
 SSLCertificateFile      {{httpd.ssl.certificateFile}}

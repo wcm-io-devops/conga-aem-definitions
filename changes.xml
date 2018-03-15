@@ -23,7 +23,31 @@
     xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/plugins/maven-changes-plugin/xsd/changes-1.0.0.xsd">
   <body>
 
-    <release version="1.3.0" date="not-released">
+    <release version="1.3.0" date="not released">
+      <action type="add" dev="trichter">
+        Role aem-dispatcher: Introduce httpd.ssl.offloading.enabled and httpd.ssl.offloading.rewriteCondition in order to support SSL offloading.
+      </action>
+      <action type="update" dev="trichter">
+        Role aem-dispatcher: Update rewriteHomepageRedirect to use https and httpd.serverNameSsl when SSL is enforced (used in SSL offloading setup).
+      </action>
+      <action type="update" dev="trichter">
+        Role aem-dispatcher: Always set Strict-Transport-Security header when SSL is enforced (used in SSL offloading setup).
+      </action>
+      <action type="add" dev="trichter">
+        Role aem-dispatcher: Introduce httpd.remoteIPInternalProxies to allow configuration of addresses (or address blocks) to trust as presenting a valid RemoteIPHeader value of the useragent IP.
+      </action>
+      <action type="add" dev="trichter">
+        Role aem-dispatcher: Introduce (optional) headers.contentSecurityPolicy to allow configuration of the Content-Security-Policy header.
+      </action>
+      <action type="add" dev="trichter">
+        Role aem-dispatcher: Introduce headers.referrerPolicy to allow configuration of the Referrer-Policy header.
+      </action>
+      <action type="add" dev="trichter">
+        Role aem-dispatcher: Introduce (optional) headers.xssProtection to allow configuration of the X-XSS-Protection.
+      </action>
+      <action type="fix" dev="trichter">
+        Role aem-dispatcher: Fixed 304 NOT MODIFIED responses for gzipped resources when working with entity tags, see https://bz.apache.org/bugzilla/show_bug.cgi?id=45023#c22.
+      </action>
       <action type="add" dev="trichter">
         Role aem-dispatcher: Introduce dispatcher.cache.ignoreUrlParams to allow configuration of query params that are ignored during evaluation of a request is cached/served from cache.
       </action>
@@ -31,7 +55,6 @@
         Role aem-dispatcher: Introduce dispatcher.logLevel to allow configuration of DispatcherLogLevel.
       </action>
     </release>
-
     <release version="1.2.0" date="2018-02-05">
       <action type="add" dev="sseifert">
         Role aem-cms: Add (optional) support for deploying AEM crypto keys.

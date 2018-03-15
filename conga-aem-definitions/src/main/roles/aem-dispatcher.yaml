@@ -224,6 +224,13 @@ config:
       # If set to true all requests are redirectd to HTTPS and HSTS is enabled
       enforce: false
 
+      # SSL offloading configuration
+      offloading:
+        # if set to true a additional rewriteCondition will be added to the rewriteEnforcePrimaryHostname block to ensure
+        # requests forwarded for https are not rewritten to https
+        enabled: false
+        rewriteCondition: "%{HTTP:X-Forwarded-Proto} !https"
+
     # Redirecting from "/" (only publish dispatcher)
     rootRedirect:
       #url: /en.html
@@ -241,6 +248,14 @@ config:
       #- www.host1.com
       #- www.host2.com
 
+    headers:
+      # Enables/Configures the Content-Security-Policy header on publish dispatcher (see https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)
+      contentSecurityPolicy:
+      # Enables/Configures the Referrer-Policy header on publish dispatcher (see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy)
+      referrerPolicy: "origin-when-cross-origin"
+      # Enables/Configures the X-XSS-Protection header on publish dispatcher (see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection)
+      xssProtection:
+
     # Custom configuration snippets for vhost files (only on publish dispatcher - useful for tenant-specific configurations)
     customVHostConfig:
       # Placed at the top of the vhost config file
@@ -249,6 +264,11 @@ config:
       beforeRewrite:
       # Placed at the bottom of the vhost confign file
       after:
+
+    # Configures adresses (or address blocks) to trust as presenting a valid RemoteIPHeader (use in loadbalancer setup where client ip forwarding is needed)
+    remoteIPInternalProxies:
+    # - 10.0.2.0/24
+    # - gateway.localdomain
 
   dispatcher:
     
