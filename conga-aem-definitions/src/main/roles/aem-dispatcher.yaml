@@ -288,6 +288,10 @@ config:
     - url: /.*
       type: allow
 
+    # Defines the DispatcherLogLevel (error,warn,info,debug)
+    logging:
+      level: warn
+
     # Configure dispatcher cache
     cache:
 
@@ -324,6 +328,11 @@ config:
 
       # Defines the pages that are "invalidated" after any activation
       invalidate:
+      - glob: "*"
+        type: deny
+
+      # Defines query string parameters that should be ignored when determining if some request's output can be cached or delivered from cache
+      ignoreUrlParams:
       - glob: "*"
         type: deny
       
