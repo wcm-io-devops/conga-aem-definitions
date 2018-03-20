@@ -54,6 +54,9 @@
       <action type="add" dev="trichter">
         Role aem-dispatcher: Introduce dispatcher.logging.level to allow configuration of DispatcherLogLevel.
       </action>
+      <action type="add" dev="trichter">
+        Role aem-cms: Introduce stop script with optional synchronous stop behavior, to ensure AEM is either stopped within timeout (quickstart.stopTimeout) or killed when not.
+      </action>
     </release>
 
     <release version="1.2.0" date="2018-02-05">
