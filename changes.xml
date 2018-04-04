@@ -58,7 +58,7 @@
         Role aem-cms: Introduce stop script with optional synchronous stop behavior, to ensure AEM is either stopped within timeout (quickstart.stopTimeout) or killed when not.
       </action>
       <action type="add" dev="trichter">
-        Role aem-cms: Introduce aem.admin.username|password|passwordOld to provide a central configuration place, change the Apache Felix Webconsole password and the AEM admin password during conga-ansible automation.
+        Role aem-cms: Introduce quickstart.adminUser.username|password|passwordOld to provide a central configuration place, change the Apache Felix Webconsole password and the AEM admin password during conga-ansible automation.
       </action>
     </release>
 

@@ -24,9 +24,9 @@
     ]
 {{/if}}
 
-{{#if aem.admin.password}}
+{{#if quickstart.adminUser.password}}
   # Apache Felix OSGi Management Console configuration
   org.apache.felix.webconsole.internal.servlet.OsgiManager
-    username="{{aem.admin.username}}"
-    password="{{webconsolePasswordHash aem.admin.password}}"
+    username="{{quickstart.adminUser.username}}"
+    password="{{webconsolePasswordHash quickstart.adminUser.password}}"
 {{/if}}
