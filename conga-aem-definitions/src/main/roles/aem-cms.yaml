@@ -102,6 +102,12 @@ files:
   template: start.hbs
   fileHeader: none
 
+# AEM Quickstart stop script
+- file: stop
+  dir: bin
+  template: stop.hbs
+  fileHeader: none
+
 # AEM OSGi System Configuration
 - file: aem-cms-system-config.provisioning
   dir: packages
@@ -165,6 +171,8 @@ config:
     enableDavEx: false
     # AEM root path where quickstart jar is located
     rootPath: /opt/adobe/aem-author
+    # Seconds to wait for instance to be stopped until process is killed
+    stopTimeout: 180
 
   sling:
 
