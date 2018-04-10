@@ -46,7 +46,7 @@
   <properties>
     <site.url.module.prefix>conga/definitions/aem</site.url.module.prefix>
   </properties>
-  
+
   <modules>
     <module>conga-aem-definitions</module>
     <module>example</module>

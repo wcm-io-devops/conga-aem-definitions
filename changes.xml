@@ -97,7 +97,7 @@
         Role aem-dispatcher: Fix primary hostname redirect for Author SSL vhost.
       </action>
     </release>
-    
+
     <release version="1.0.0" date="2017-10-17">
       <action type="update" dev="sseifert" issue="WDCONGA-14">
         Role aem-dispatcher: Combine aem-dispatcher-* roles into a single role with multiple variants (that can be combined).

@@ -58,12 +58,12 @@
           <!-- Activate further CONGA plugins for special file types -->
           <dependency>
             <groupId>io.wcm.devops.conga.plugins</groupId>
-            <artifactId>io.wcm.devops.conga.plugins.aem</artifactId>            
+            <artifactId>io.wcm.devops.conga.plugins.aem</artifactId>
             <version>1.7.0</version>
           </dependency>
           <dependency>
             <groupId>io.wcm.devops.conga.plugins</groupId>
-            <artifactId>io.wcm.devops.conga.plugins.sling</artifactId>            
+            <artifactId>io.wcm.devops.conga.plugins.sling</artifactId>
             <version>1.2.4</version>
           </dependency>
 
