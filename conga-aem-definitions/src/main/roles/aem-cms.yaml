@@ -174,6 +174,15 @@ config:
     # Seconds to wait for instance to be stopped until process is killed
     stopTimeout: 180
 
+    # AEM/Sling admin user
+    adminUser:
+      # The admin username
+      username: admin
+      # The admin password to set for OAK and Apache Felix Webconsole (used together with passwordOld to change the password in conga-ansible automation)
+      password:
+      # The old (initial) admin password for OAK and Apache Felix Webconsole
+      passwordOld: admin
+  
   sling:
 
     # Configure Sling Mapping for URL shortening of content paths
