@@ -84,7 +84,7 @@ RewriteRule ^(.*)$ http://{{httpd.serverName}}$1 [R=301,L]
 {{~#if httpd.accessRestriction.dispatcherFlushFromIp}}
     Require ip {{httpd.accessRestriction.dispatcherFlushFromIp}}
 {{~/if}}
-{{~#if httpd.accessRestriction.dispatcherFlushFromIp}}
+{{~#if httpd.accessRestriction.dispatcherFlushFromHost}}
     Require host {{httpd.accessRestriction.dispatcherFlushFromHost}}
 {{~/if}}
   </IfVersion>

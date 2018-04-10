@@ -60,6 +60,9 @@
       <action type="add" dev="trichter">
         Role aem-cms: Introduce quickstart.adminUser.username|password|passwordOld to provide a central configuration place, change the Apache Felix Webconsole password and the AEM admin password during conga-ansible automation.
       </action>
+      <action type="fix" dev="trichter">
+        Role aem-dispatcher: Fixed conditional statement for httpd.accessRestriction.dispatcherFlushFromHost in accessRestrictionsDispatcherFlush block.
+      </action>
     </release>
 
     <release version="1.2.0" date="2018-02-05">
