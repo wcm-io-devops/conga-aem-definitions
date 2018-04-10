@@ -182,6 +182,7 @@ config:
       password:
       # The old (initial) admin password for OAK and Apache Felix Webconsole
       passwordOld: admin
+  
   sling:
 
     # Configure Sling Mapping for URL shortening of content paths
@@ -196,7 +197,6 @@ config:
       #  "/content":
       #  - io.wcm.handler.url.SiteConfig/siteUrl="http://site1"
       #  - io.wcm.handler.url.SiteConfig/siteUrlAuthor="https://author.site1"
-
 
   replication:
     author:
