@@ -63,6 +63,9 @@
       <action type="fix" dev="trichter">
         Role aem-dispatcher: Fixed conditional statement for httpd.accessRestriction.dispatcherFlushFromHost in accessRestrictionsDispatcherFlush block.
       </action>
+      <action type="update" dev="sseifert">
+        Role aem-dispatcher: Prefix publish vhost files with index numbers to enforce same order as tenants in environments.
+      </action>
     </release>
 
     <release version="1.2.0" date="2018-02-05">

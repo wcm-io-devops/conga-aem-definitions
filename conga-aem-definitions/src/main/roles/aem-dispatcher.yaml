@@ -148,7 +148,7 @@ files:
   template: publish/dispatcher_publish.any.hbs
 
 # httpd vhost per tenant (HTTP)
-- file: vhost_publish_${tenant}.conf
+- file: ${new('java.text.DecimalFormat','0000').format(multiplyIndex)}_vhost_publish_${tenant}.conf
   dir: vhosts.d
   variants:
   - aem-publish*
@@ -157,7 +157,7 @@ files:
   multiply: tenant
 
 # httpd vhost per tenant (HTTPS)
-- file: vhost_publish_${tenant}.ssl.conf
+- file: ${new('java.text.DecimalFormat','0000').format(multiplyIndex)}_vhost_publish_${tenant}.ssl.conf
   dir: vhosts.d
   variants:
   - aem-publish*
