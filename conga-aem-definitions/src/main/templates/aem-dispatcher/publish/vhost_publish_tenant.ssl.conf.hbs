@@ -24,7 +24,7 @@ ServerAlias {{this}}
 {{#partial "rewriteEnforcePrimaryHostname"}}
 # Make sure primary hostname is always used - but don't rewrite the dispatcher invalidation URL
 RewriteCond %{REQUEST_URI} !^/dispatcher/invalidate.cache
-RewriteCond %{HTTP_HOST} !^{{chain httpd.serverNameSsl helpers="httpHostSsl,regexQuote" port=httpd.serverPortSsl}}$ [NC]
+RewriteCond %{HTTP_HOST} !^{{regexQuote (httpHostSsl httpd.serverNameSsl port=httpd.serverPortSsl)}}$ [NC]
 RewriteRule ^(.*)$ https://{{httpHostSsl httpd.serverNameSsl port=httpd.serverPortSsl}}$1 [R=301,L]
 {{/partial ~}}
 
