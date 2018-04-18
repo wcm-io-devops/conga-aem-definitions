@@ -66,6 +66,11 @@
       <action type="update" dev="sseifert">
         Role aem-dispatcher: Prefix publish vhost files with index numbers to enforce same order as tenants in environments.
       </action>
+      <action type="add" dev="trichter">
+        Role aem-cms, aem-dispatcher: Introduce httpd.serverPort|serverPortSsl.
+      </action>
+
+
     </release>
 
     <release version="1.2.0" date="2018-02-05">
