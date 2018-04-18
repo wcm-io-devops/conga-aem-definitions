@@ -145,8 +145,8 @@ Header always set Strict-Transport-Security "max-age=31536000"
 {{~#block "rewriteEnforcePrimaryHostname"}}
 # Make sure primary hostname is always used - but don't rewrite the dispatcher invalidation URL
 RewriteCond %{REQUEST_URI} !^/dispatcher/invalidate.cache
-RewriteCond %{HTTP_HOST} !^{{regexQuote httpd.serverName}}$ [NC] 
-RewriteRule ^(.*)$ http://{{httpd.serverName}}$1 [R=301,L]
+RewriteCond %{HTTP_HOST} !^{{chain httpd.serverName helpers="httpHost,regexQuote" port=httpd.serverPort}}$ [NC]
+RewriteRule ^(.*)$ http://{{httpHost httpd.serverName port=httpd.serverPort}}$1 [R=301,L]
 {{/block}}
 
 
@@ -226,8 +226,8 @@ RewriteRule ^/content/.* - [R=404,L,NC]
 {{~#if httpd.rootRedirect.url}}
 # Root redirect to homepage
 {{#if httpd.ssl.enforce}}
-  {{ensureProperties "httpd.serverNameSsl" ~}}
-RewriteRule ^/$ https://{{httpd.serverNameSsl}}{{httpd.rootRedirect.url}} [R={{httpd.rootRedirect.httpStatus}},L]
+{{ensureProperties "httpd.serverNameSsl" ~}}
+RewriteRule ^/$ https://{{httpHostSsl httpd.serverName port=httpd.serverPortSsl}}{{httpd.rootRedirect.url}} [R={{httpd.rootRedirect.httpStatus}},L]
 {{~ else}}
 RewriteRule ^/$ {{httpd.rootRedirect.url}} [R={{httpd.rootRedirect.httpStatus}},L]
 {{/if ~}}

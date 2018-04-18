@@ -185,6 +185,14 @@ config:
     serverAliasNames:
     serverAliasNamesSsl: ${httpd.serverAliasNames}
 
+    # Server ports
+    serverPort: 80
+    serverPortSsl: 443
+
+    # Server listen address
+    serverListenAddress: "*"
+    serverListenAddressSsl: ${httpd.serverListenAddress}
+
     # Logging configuration
     logging:
       level: warn
