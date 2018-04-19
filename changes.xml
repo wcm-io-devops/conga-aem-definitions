@@ -67,10 +67,8 @@
         Role aem-dispatcher: Prefix publish vhost files with index numbers to enforce same order as tenants in environments.
       </action>
       <action type="add" dev="trichter">
-        Role aem-cms, aem-dispatcher: Introduce httpd.serverPort|serverPortSsl.
+        Role aem-cms, aem-dispatcher: Allow to configure custom ports for HTTPd by introducing httpd.serverPort|serverPortSsl.
       </action>
-
-
     </release>
 
     <release version="1.2.0" date="2018-02-05">
