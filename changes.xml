@@ -69,6 +69,9 @@
       <action type="add" dev="trichter">
         Role aem-cms, aem-dispatcher: Allow to configure custom ports for HTTPd by introducing httpd.serverPort|serverPortSsl.
       </action>
+      <action type="update" dev="sseifert">
+        Role aem-cms: Mark configuration parameters that contain sensitive data so they get encrypted in model export YAML files.
+      </action>
     </release>
 
     <release version="1.2.0" date="2018-02-05">

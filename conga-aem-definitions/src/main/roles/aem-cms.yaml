@@ -232,3 +232,10 @@ config:
     # Server ports - needs to be defined here to be available for dispatcher flush targets
     serverPort: 80
     serverPortSsl: 443
+
+
+# Configuration parameter that should be encrypted in model export YAML file
+sensitiveConfigParameters:
+- quickstart.adminUser.password
+- quickstart.adminUser.passwordOld
+- replication.author.publishTargets.transportPassword

@@ -95,6 +95,10 @@ config:
 
   quickstart:
     enableDavEx: true
+    adminUser:
+      username: admin
+      password: mynewpwd
+      passwordOld: admin
 
   httpd:
     logging:
