@@ -398,3 +398,9 @@ config:
 #      Custom Config Line 1
 #      Custom Config Line 2
 #  sling.mapping.rootPath: /content/path
+
+# Configuration parameter that should be encrypted in model export YAML file
+sensitiveConfigParameters:
+- quickstart.adminUser.password
+- quickstart.adminUser.passwordOld
+- replication.author.publishTargets.transportPassword
