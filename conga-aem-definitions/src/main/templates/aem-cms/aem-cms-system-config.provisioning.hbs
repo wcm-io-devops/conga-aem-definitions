@@ -23,3 +23,10 @@
       {{~/each ~}}
     ]
 {{/if}}
+
+{{#if quickstart.adminUser.password}}
+  # Apache Felix OSGi Management Console configuration
+  org.apache.felix.webconsole.internal.servlet.OsgiManager
+    username="{{quickstart.adminUser.username}}"
+    password="{{webconsolePasswordHash quickstart.adminUser.password}}"
+{{/if}}

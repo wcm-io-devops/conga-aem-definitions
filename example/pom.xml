@@ -21,7 +21,7 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  
+
   <parent>
     <groupId>io.wcm.maven</groupId>
     <artifactId>io.wcm.maven.global-parent</artifactId>
@@ -32,18 +32,18 @@
   <groupId>io.wcm.devops.conga.definitions</groupId>
   <artifactId>io.wcm.devops.conga.definitions.aem.example</artifactId>
   <packaging>config</packaging>
-  <version>1.2.0</version>
+  <version>1.3.0</version>
 
   <name>CONGA AEM Definitions Example</name>
   <description>Example environment definition.</description>
-  
+
   <dependencies>
 
     <!-- Use generic AEM CMS and Dispatcher roles -->
     <dependency>
       <groupId>io.wcm.devops.conga.definitions</groupId>
       <artifactId>io.wcm.devops.conga.definitions.aem</artifactId>
-      <version>1.2.0</version>
+      <version>1.3.0</version>
     </dependency>
 
   </dependencies>
@@ -55,20 +55,27 @@
       <plugin>
         <groupId>io.wcm.devops.conga</groupId>
         <artifactId>conga-maven-plugin</artifactId>
-        <version>1.5.0</version>
+        <version>1.9.0</version>
         <extensions>true</extensions>
         <dependencies>
 
           <!-- Activate further CONGA plugins for special file types -->
           <dependency>
             <groupId>io.wcm.devops.conga.plugins</groupId>
-            <artifactId>io.wcm.devops.conga.plugins.aem</artifactId>            
-            <version>1.6.0</version>
+            <artifactId>io.wcm.devops.conga.plugins.aem</artifactId>
+            <version>1.8.0</version>
           </dependency>
           <dependency>
             <groupId>io.wcm.devops.conga.plugins</groupId>
-            <artifactId>io.wcm.devops.conga.plugins.sling</artifactId>            
+            <artifactId>io.wcm.devops.conga.plugins.sling</artifactId>
             <version>1.2.4</version>
+          </dependency>
+
+          <!-- Test with ansible encryption -->
+          <dependency>
+            <groupId>io.wcm.devops.conga.plugins</groupId>
+            <artifactId>io.wcm.devops.conga.plugins.ansible</artifactId>
+            <version>1.1.0</version>
           </dependency>
 
         </dependencies>
@@ -80,6 +87,26 @@
           </pluginConfig>
 
         </configuration>
+      </plugin>
+
+      <!-- only for this example: set Ansible vault password as system property via maven plugin -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>properties-maven-plugin</artifactId>
+        <version>1.0.0</version>
+        <executions>
+          <execution>
+            <id>set-properties</id>
+            <goals>
+              <goal>set-system-properties</goal>
+            </goals>
+            <configuration>
+              <properties>
+                <ansible.vault.password>test123</ansible.vault.password>
+              </properties>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
 
       <!-- do not deploy this example into maven repository -->

@@ -33,8 +33,8 @@ RewriteEngine On
 {{~#block "rewriteEnforcePrimaryHostname"}}
 # Make sure primary hostname is always used - but don't rewrite the dispatcher invalidation URL
 RewriteCond %{REQUEST_URI} !^/dispatcher/invalidate.cache
-RewriteCond %{HTTP_HOST} !^{{regexQuote httpd.serverName}}$ [NC]
-RewriteRule ^(.*)$ http://{{httpd.serverName}}$1 [R=301,L]
+RewriteCond %{HTTP_HOST} !^{{regexQuote (httpHost httpd.serverName port=httpd.serverPort)}}$ [NC]
+RewriteRule ^(.*)$ http://{{httpHost httpd.serverName port=httpd.serverPort}}$1 [R=301,L]
 {{/block}}
 
 
@@ -84,7 +84,7 @@ RewriteRule ^(.*)$ http://{{httpd.serverName}}$1 [R=301,L]
 {{~#if httpd.accessRestriction.dispatcherFlushFromIp}}
     Require ip {{httpd.accessRestriction.dispatcherFlushFromIp}}
 {{~/if}}
-{{~#if httpd.accessRestriction.dispatcherFlushFromIp}}
+{{~#if httpd.accessRestriction.dispatcherFlushFromHost}}
     Require host {{httpd.accessRestriction.dispatcherFlushFromHost}}
 {{~/if}}
   </IfVersion>

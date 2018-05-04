@@ -15,7 +15,7 @@ The current version of AEM Definitions is 1.x. Guideline for migration from AEM 
 
 ### Overview
 
-This repository contains generic role definitions and templates for CONGA-based AEM configurations. 
+This repository contains generic role definitions and templates for CONGA-based AEM configurations.
 
 The definitions can be used by [CONGA - CONfiguration GenerAtor][conga] for configuring [Adobe Experience Manager (AEM)][aem] environments.
 

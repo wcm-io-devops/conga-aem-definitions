@@ -29,8 +29,8 @@
     #   intranet.*
     #   myhost:8888/mysite
 {{~#each tenants}}
-    "{{#if this.config.httpd.serverName}}{{this.config.httpd.serverName}}{{else}}{{this.tenant}}{{/if}}"
-    "{{#if this.config.httpd.serverNameSsl}}{{this.config.httpd.serverNameSsl}}{{else}}{{#if this.config.httpd.serverName}}{{this.config.httpd.serverName}}{{else}}{{this.tenant}}{{/if}}{{/if}}"
+    "{{#if this.config.httpd.serverName}}{{httpHost this.config.httpd.serverName port=httpd.serverPort}}{{else}}{{httpHost this.tenant port=httpd.serverPort}}{{/if}}"
+    "{{#if this.config.httpd.serverNameSsl}}{{httpHostSsl this.config.httpd.serverNameSsl port=httpd.serverPortSsl}}{{else}}{{#if this.config.httpd.serverName}}{{httpHostSsl this.config.httpd.serverName port=httpd.serverPortSsl}}{{else}}{{httpHostSsl this.tenant port=httpd.serverPortSsl}}{{/if}}{{/if}}"
 {{~/each}}
     }
     
@@ -148,12 +148,13 @@
     # should be ignored when determining whether some request's output can be
     # cached or delivered from cache.
     #
-    # In this example configuration, the "q" parameter will be ignored. 
-    #/ignoreUrlParams
-    #  {
-    #  /0001 { /glob "*" /type "deny" }
-    #  /0002 { /glob "q" /type "allow" }
-    #  }
+    /ignoreUrlParams
+      {
+{{~#each dispatcher.cache.ignoreUrlParams}}
+      /{{@index}}
+        { /type "{{this.type}}" /glob "{{this.glob}}" }
+{{~/each}}
+      }
 
     # Cache response headers next to a cached file. On the first request to
     # an uncached resource, all headers matching one of the values found here

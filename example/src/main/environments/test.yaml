@@ -95,6 +95,10 @@ config:
 
   quickstart:
     enableDavEx: true
+    adminUser:
+      username: admin
+      password: mynewpwd
+      passwordOld: admin
 
   httpd:
     logging:
@@ -157,4 +161,8 @@ tenants:
       serverAliasNamesSsl:
       - www.ssl-sample2.com
       rootRedirect.url: /de.html
+      headers:
+        contentSecurityPolicy: "script-src 'self' 'unsafe-inline' 'unsafe-eval' *.sample1.com;"
+        xssProtection: "1; mode=block"
+        referrerPolicy: "strict-origin-when-cross-origin"
     sling.mapping.rootPath: /content/sample2

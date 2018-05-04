@@ -102,6 +102,12 @@ files:
   template: start.hbs
   fileHeader: none
 
+# AEM Quickstart stop script
+- file: stop
+  dir: bin
+  template: stop.hbs
+  fileHeader: none
+
 # AEM OSGi System Configuration
 - file: aem-cms-system-config.provisioning
   dir: packages
@@ -165,7 +171,18 @@ config:
     enableDavEx: false
     # AEM root path where quickstart jar is located
     rootPath: /opt/adobe/aem-author
+    # Seconds to wait for instance to be stopped until process is killed
+    stopTimeout: 180
 
+    # AEM/Sling admin user
+    adminUser:
+      # The admin username
+      username: admin
+      # The admin password to set for OAK and Apache Felix Webconsole (used together with passwordOld to change the password in conga-ansible automation)
+      password:
+      # The old (initial) admin password for OAK and Apache Felix Webconsole
+      passwordOld: admin
+  
   sling:
 
     # Configure Sling Mapping for URL shortening of content paths
@@ -210,3 +227,15 @@ config:
     # URLs of crypto keys to be deployed to AEM (as bundle files, supported for AEM 6.3 and up)
     #aesCryptoKeyUrl: ansible-vault:classpath:/crypto/master
     #hmacCryptoKeyUrl: ansible-vault:classpath:/crypto/hmac
+
+  httpd:
+    # Server ports - needs to be defined here to be available for dispatcher flush targets
+    serverPort: 80
+    serverPortSsl: 443
+
+
+# Configuration parameter that should be encrypted in model export YAML file
+sensitiveConfigParameters:
+- quickstart.adminUser.password
+- quickstart.adminUser.passwordOld
+- replication.author.publishTargets.transportPassword
