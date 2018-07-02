@@ -42,8 +42,8 @@
           "PROCESS_ARGS": "",
           "PROCESS": "com.day.cq.dam.core.process.GateKeeperProcess",
           "PROCESS_AUTO_ADVANCE": "true"
-          }
-        },
+        }
+      },
       "metadataprocessorpro": {
         "jcr:primaryType": "nt:unstructured",
         "jcr:title": "Metadata Processor",
@@ -53,8 +53,8 @@
           "jcr:primaryType": "nt:unstructured",
           "PROCESS": "com.day.cq.dam.core.process.MetadataProcessorProcess",
           "PROCESS_AUTO_ADVANCE": "true"
-          }
-        },
+        }
+      },
       "process2": {
         "jcr:primaryType": "nt:unstructured",
         "jcr:title": "FFmpeg thumbnails",
@@ -65,8 +65,8 @@
           "PROCESS_ARGS": "count:4,index:2,[140:100],[48:48],[319:319]",
           "PROCESS": "com.day.cq.dam.video.FFMpegThumbnailProcess",
           "PROCESS_AUTO_ADVANCE": "true"
-          }
-        },
+        }
+      },
       "thumbnailprocess": {
         "jcr:primaryType": "nt:unstructured",
         "jcr:title": "Process Thumbnails",
@@ -91,9 +91,31 @@
           ],
           "PROCESS_AUTO_ADVANCE": "true",
           "HEIGHT": "1280"
-          }
+        }
+      }{{#if workflow.minimalDamUpdateAssetWorkflowAEM63}},
+      "deleteimagepreviewpr": {
+        "jcr:primaryType": "nt:unstructured",
+        "jcr:title": "Delete Image Preview Rendition",
+        "jcr:description": "Process to delete the image preview rendition",
+        "sling:resourceType": "dam/components/workflow/deleteimagepreviewprocess",
+        "metaData": {
+          "jcr:primaryType": "nt:unstructured",
+          "PROCESS": "com.day.cq.dam.core.process.DeleteImagePreviewProcess",
+          "PROCESS_AUTO_ADVANCE": "true"
         }
       },
+      "damupdateassetworkfl": {
+        "jcr:primaryType": "nt:unstructured",
+        "jcr:title": "DAM Update Asset Workflow Completed",
+        "jcr:description": "This process will send DamEvent.Type.DAM_UPDATE_ASSET_WORKFLOW_COMPLETED event when DAM update asset workflow is completed",
+        "sling:resourceType": "dam/components/workflow/damupdateassetworkflowcompletedprocess",
+        "metaData": {
+          "jcr:primaryType": "nt:unstructured",
+          "PROCESS": "com.day.cq.dam.core.impl.process.DamUpdateAssetWorkflowCompletedProcess",
+          "PROCESS_AUTO_ADVANCE": "true"
+        }
+      }{{/if}}
+    },
     "model": {
       "jcr:primaryType": "cq:WorkflowModel",
       "description": "This is a minimal \"DAM Update Asset\"-Workflow with only the core AEM DAM features.",
@@ -104,7 +126,7 @@
         "transient": "true",
         {{~/if}}
         "jcr:primaryType": "nt:unstructured"
-        },
+      },
       "nodes": {
         "jcr:primaryType": "nt:unstructured",
         "node0": {
@@ -112,7 +134,7 @@
           "type": "START",
           "title": "Start",
           "metaData": {"jcr:primaryType": "nt:unstructured"}
-          },
+        },
         "node1": {
           "jcr:primaryType": "cq:WorkflowNode",
           "description": "This process checks if the complete update process has to be executed. The workflow should terminate  eg. the asset got restored right before to make sure that trhe restored content is preserved.",
@@ -123,8 +145,8 @@
             "PROCESS_ARGS": "",
             "PROCESS": "com.day.cq.dam.core.process.GateKeeperProcess",
             "PROCESS_AUTO_ADVANCE": "true"
-            }
-          },
+          }
+        },
         "node2": {
           "jcr:primaryType": "cq:WorkflowNode",
           "description": "A process to extract and import metadata, create references and apply processing profile, if the payload of the step is an asset or part of an asset.",
@@ -134,8 +156,8 @@
             "jcr:primaryType": "nt:unstructured",
             "PROCESS": "com.day.cq.dam.core.process.MetadataProcessorProcess",
             "PROCESS_AUTO_ADVANCE": "true"
-            }
-          },
+          }
+        },
         "node3": {
           "jcr:primaryType": "cq:WorkflowNode",
           "description": "Extracts video poster frame",
@@ -146,8 +168,8 @@
             "PROCESS_ARGS": "count:4,index:2,[140:100],[48:48],[319:319]",
             "PROCESS": "com.day.cq.dam.video.FFMpegThumbnailProcess",
             "PROCESS_AUTO_ADVANCE": "true"
-            }
-          },
+          }
+        },
         "node4": {
           "jcr:primaryType": "cq:WorkflowNode",
           "description": "This process will create one or more thumbnails for the asset, create web enabled rendition and update folder thumbnail.",
@@ -170,15 +192,37 @@
             ],
             "PROCESS_AUTO_ADVANCE": "true",
             "HEIGHT": "1280"
-            }
-          },
+          }
+        }{{#if workflow.minimalDamUpdateAssetWorkflowAEM63}},
         "node5": {
+          "jcr:primaryType": "cq:WorkflowNode",
+          "description": "Process to delete the image preview rendition",
+          "type": "PROCESS",
+          "title": "Delete Image Preview Rendition",
+          "metaData": {
+            "jcr:primaryType": "nt:unstructured",
+            "PROCESS": "com.day.cq.dam.core.process.DeleteImagePreviewProcess",
+            "PROCESS_AUTO_ADVANCE": "true"
+          }
+        },
+        "node6": {
+          "jcr:primaryType": "cq:WorkflowNode",
+          "description": "This process will send DamEvent.Type.DAM_UPDATE_ASSET_WORKFLOW_COMPLETED event when DAM update asset workflow is completed",
+          "type": "PROCESS",
+          "title": "DAM Update Asset Workflow Completed",
+          "metaData": {
+            "jcr:primaryType": "nt:unstructured",
+            "PROCESS": "com.day.cq.dam.core.impl.process.DamUpdateAssetWorkflowCompletedProcess",
+            "PROCESS_AUTO_ADVANCE": "true"
+          }
+        }{{/if}},
+        "node7": {
           "jcr:primaryType": "cq:WorkflowNode",
           "type": "END",
           "title": "End",
           "metaData": {"jcr:primaryType": "nt:unstructured"}
-          }
-        },
+        }
+      },
       "transitions": {
         "jcr:primaryType": "nt:unstructured",
         "node0#node1": {
@@ -187,36 +231,56 @@
           "from": "node0",
           "rule": "",
           "metaData": {"jcr:primaryType": "nt:unstructured"}
-          },
+        },
         "node1#node2": {
           "jcr:primaryType": "cq:WorkflowTransition",
           "to": "node2",
           "from": "node1",
           "rule": "",
           "metaData": {"jcr:primaryType": "nt:unstructured"}
-          },
+        },
         "node2#node3": {
           "jcr:primaryType": "cq:WorkflowTransition",
           "to": "node3",
           "from": "node2",
           "rule": "",
           "metaData": {"jcr:primaryType": "nt:unstructured"}
-          },
+        },
         "node3#node4": {
           "jcr:primaryType": "cq:WorkflowTransition",
           "to": "node4",
           "from": "node3",
           "rule": "",
           "metaData": {"jcr:primaryType": "nt:unstructured"}
-          },
+        }{{#if workflow.minimalDamUpdateAssetWorkflowAEM63}},
         "node4#node5": {
           "jcr:primaryType": "cq:WorkflowTransition",
           "to": "node5",
           "from": "node4",
           "rule": "",
           "metaData": {"jcr:primaryType": "nt:unstructured"}
-          }
-        }
+        },
+        "node5#node6": {
+          "jcr:primaryType": "cq:WorkflowTransition",
+          "to": "node6",
+          "from": "node5",
+          "rule": "",
+          "metaData": {"jcr:primaryType": "nt:unstructured"}
+        },
+        "node6#node7": {
+          "jcr:primaryType": "cq:WorkflowTransition",
+          "to": "node7",
+          "from": "node6",
+          "metaData": {"jcr:primaryType": "nt:unstructured"}
+        }{{else}},
+        "node4#node7": {
+          "jcr:primaryType": "cq:WorkflowTransition",
+          "to": "node7",
+          "from": "node4",
+          "rule": "",
+          "metaData": {"jcr:primaryType": "nt:unstructured"}
+        }{{/if}}
       }
     }
   }
+}

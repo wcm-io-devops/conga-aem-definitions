@@ -124,6 +124,12 @@ config:
 
   workflow:
     useMinimalDamUpdateAssetWorkflow: true
+    minimalDamUpdateAssetWorkflowAEM63: true
+
+  crypto:
+    # URLs of crypto keys to be deployed to AEM (as bundle files, supported for AEM 6.3 and up)
+    aesCryptoKeyUrl: classpath:/crypto/master
+    hmacCryptoKeyUrl: classpath:/crypto/hmac
 
 
 tenants:
