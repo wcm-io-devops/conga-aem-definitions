@@ -219,6 +219,7 @@ config:
 
   workflow:
     # Replace the default 'DAM Update Asset' workflow with a minimal one containing only the steps that are always required
+    # Since AEM 6.3 it is recommended to use the default DAM Update Asset workflow as as starting point
     useMinimalDamUpdateAssetWorkflow: false
     # Configure minimal 'DAM Update Asset' workflow as transient (which is default since AEM 6.3 and recommended for earlier versions)
     minimalDamUpdateAssetWorkflowTransient: true
