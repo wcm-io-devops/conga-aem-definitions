@@ -27,6 +27,12 @@
       <action type="update" dev="trichter">
         Role aem-dispatcher: Adjusted logging.accessLogFormat to log with a dummy ip address in order to make access logs better parsable by standard tools.
       </action>
+      <action type="update" dev="sseifert">
+        Role aem-cms: Set workflow.useMinimalDamUpdateAssetWorkflow to false by default because DAM update asset workflow definitions differ between AEM versions.
+      </action>
+      <action type="update" dev="sseifert">
+        Role aem-cms: Add workflow.minimalDamUpdateAssetWorkflowAEM63 to support additional required DAM update asset workflow steps for AEM 6.3.
+      </action>
     </release>
 
     <release version="1.3.0" date="2018-05-04">
