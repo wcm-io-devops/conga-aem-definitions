@@ -55,7 +55,7 @@
       <plugin>
         <groupId>io.wcm.devops.conga</groupId>
         <artifactId>conga-maven-plugin</artifactId>
-        <version>1.9.0</version>
+        <version>1.9.2</version>
         <extensions>true</extensions>
         <dependencies>
 
@@ -63,7 +63,7 @@
           <dependency>
             <groupId>io.wcm.devops.conga.plugins</groupId>
             <artifactId>io.wcm.devops.conga.plugins.aem</artifactId>
-            <version>1.8.0</version>
+            <version>1.8.8</version>
           </dependency>
           <dependency>
             <groupId>io.wcm.devops.conga.plugins</groupId>
@@ -75,7 +75,7 @@
           <dependency>
             <groupId>io.wcm.devops.conga.plugins</groupId>
             <artifactId>io.wcm.devops.conga.plugins.ansible</artifactId>
-            <version>1.1.0</version>
+            <version>1.2.0</version>
           </dependency>
 
         </dependencies>
