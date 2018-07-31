@@ -13,7 +13,7 @@
     }
 
 {{#with replication.publish.flushTarget}}{{#if this.name}},
-    "flush_{{this.name}}": {
+    "flush_{{replace this.name "." "_"}}": {
       "jcr:primaryType": "cq:Page",
       "jcr:content": {
         "jcr:primaryType": "nt:unstructured",
