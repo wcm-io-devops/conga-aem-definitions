@@ -117,6 +117,8 @@ config:
       certificateKeyFile: /etc/ssl/private/sample.key
       cACertificatePath: /etc/ssl/certs
       cACertificateFile: /etc/ssl/certs/sample.pem
+    serverPort: 8080
+    serverPortSsl: 8443
 
   sling:
     caconfig:
