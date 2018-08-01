@@ -27,6 +27,9 @@
       <action type="update" dev="trichter">
         Role aem-cms: Sanitize replication agent names by replacing dots with underscores.
       </action>
+      <action type="update" dev="trichter">
+        Role aem-cms: Add custom httpd port support for publish sling mapping.
+      </action>
     </release>
 
     <release version="1.4.0" date="2018-07-02">
