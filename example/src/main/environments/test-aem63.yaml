@@ -2,27 +2,30 @@
 
 nodes:
 
-- node: aem-author
+- node: aem-author.dev.net
   roles:
   - role: aem-cms
     variant: aem-author
   config:
     replication.author.publishTargets:
-    - name: publish1
+    - name: aem-publish.dev.net
       url: http://localhost:4503
       transportUser: admin
       transportPassword: admin
+    replication.author.flushTarget:
+      name: webserver.dev.net
+      url: http://author.sample1.com
 
-- node: aem-publish
+- node: aem-publish.dev.net
   roles:
   - role: aem-cms
     variant: aem-publish
   config:
     replication.publish.flushTarget:
-      name: dispatcher1
-      url: http:/www.sample1.com
+      name: webserver.dev.net
+      url: http://www.sample1.com
 
-- node: webserver
+- node: webserver.dev.net
   roles:
   - role: aem-dispatcher
     variants:
@@ -114,6 +117,8 @@ config:
       certificateKeyFile: /etc/ssl/private/sample.key
       cACertificatePath: /etc/ssl/certs
       cACertificateFile: /etc/ssl/certs/sample.pem
+    serverPort: 8080
+    serverPortSsl: 8443
 
   sling:
     caconfig:

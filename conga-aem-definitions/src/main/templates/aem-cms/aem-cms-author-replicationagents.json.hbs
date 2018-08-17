@@ -13,7 +13,7 @@
     }
 
 {{#each replication.author.publishTargets}},
-    "publish_{{this.name}}": {
+    "publish_{{replace this.name "." "_"}}": {
       "jcr:primaryType": "cq:Page",
       "jcr:content": {
         "jcr:primaryType": "nt:unstructured",
@@ -33,7 +33,7 @@
 {{/each}}
 
 {{#with replication.author.flushTarget}}{{#if this.name}},
-    "flush_{{this.name}}": {
+    "flush_{{replace this.name "." "_"}}": {
       "jcr:primaryType": "cq:Page",
       "jcr:content": {
         "jcr:primaryType": "nt:unstructured",
