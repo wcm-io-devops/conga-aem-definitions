@@ -313,21 +313,6 @@ config:
       # information present in the request
       - glob: "*"
         type: deny
-      # Allow caching of clientlibs
-      - glob: "/libs/*/clientlibs/*.js*"
-        type: allow
-      - glob: "/libs/*/clientlibs/*.css*"
-        type: allow
-      - glob: "/etc/*/clientlibs/*.js*"
-        type: allow
-      - glob: "/etc/*/clientlibs/*.css*"
-        type: allow
-      # Thumbnails exist in various resolutions: thumbnail.png, thumbnail.png.thumb.48.48.png
-      - glob: "/content/*/*.thumb.*.png*"
-        type: allow
-      # Static ressources in /apps
-      - glob: "/apps/*/docroot/*"
-        type: allow
 
       # Defines the pages that are "invalidated" after any activation
       invalidate:
