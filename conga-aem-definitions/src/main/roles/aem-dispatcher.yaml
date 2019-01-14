@@ -313,26 +313,6 @@ config:
       # information present in the request
       - glob: "*"
         type: deny
-      # Allow caching of requests to /libs
-      - glob: "/libs/*"
-        type: allow
-      # This contains user information
-      - glob: "/libs/cq/security/userinfo.*"
-        type: deny
-      # This page contains a "Welcome, User XXX" message
-      - glob: "/libs/cq/core/content/welcome.*"
-        type: deny
-      # Thumbnails exist in various resolutions: thumbnail.png, thumbnail.png.thumb.48.48.png
-      - glob: "/apps/*/templates/*/thumbnail.pn*"
-        type: allow
-      # Static ressources in /apps
-      - glob: "/apps/*/docroot/*"
-        type: allow
-      # Client Libraries
-      - glob: "/etc/clientlibs/*"
-        type: allow
-      - glob: "/etc/designs/*/clientlibs/*"
-        type: allow
 
       # Defines the pages that are "invalidated" after any activation
       invalidate:
