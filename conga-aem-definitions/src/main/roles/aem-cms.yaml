@@ -82,7 +82,7 @@ files:
         #- rule: exclude
         #  pattern: /etc/replication/agents\.publish/(outbox|s7delivery)
 
-# Minimal "DAM Update Asset" Workfow (Author)
+# Minimal "DAM Update Asset" Workflow (Author)
 - file: aem-cms-author-dam-update-asset-workflow-minimal.json
   dir: packages
   template: aem-cms-author-dam-update-asset-workflow-minimal.json.hbs
@@ -178,7 +178,7 @@ config:
     adminUser:
       # The admin username
       username: admin
-      # The admin password to set for OAK and Apache Felix Webconsole (used together with passwordOld to change the password in conga-ansible automation)
+      # The admin password to set for OAK and Apache Felix Webconsole (used together with passwordOld to change the password in CONGA-Ansible automation)
       password:
       # The old (initial) admin password for OAK and Apache Felix Webconsole
       passwordOld: admin

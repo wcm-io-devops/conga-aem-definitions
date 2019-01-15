@@ -1,4 +1,4 @@
-# Webserverver with Dispatcher module for AEM author and/or publish instance
+# Web server with Dispatcher module for AEM author and/or publish instance
 # Generates general dispatcher configuration
 
 variants:
@@ -80,7 +80,7 @@ variants:
         invalidate:
         - glob: "*"
           type: deny
-        # Consider all HTML and JSON files stale after an activation.
+        # Consider all HTML and JSON files stale after any activation
         - glob: "*.html"
           type: allow
         - glob: "*.json"
@@ -202,7 +202,7 @@ config:
     # Access restrictions
     accessRestriction:
 
-      # Allow access to adminstrative areas only to certain sources (same on author and publish)
+      # Allow access to administrative areas only to certain sources (same on author and publish)
       locationFilter:
       - location: /admin
         type: deny_allow_admin
@@ -229,7 +229,7 @@ config:
       #caCertificatePath: /path/to/sslCACertificates
       #caCertificateFile: /path/to/sslCACertificateFile
 
-      # If set to true all requests are redirectd to HTTPS and HSTS is enabled
+      # If set to true all requests are redirected to HTTPS and HSTS is enabled
       enforce: false
 
       # SSL offloading configuration
@@ -273,7 +273,7 @@ config:
       # Placed at the bottom of the vhost confign file
       after:
 
-    # Configures adresses (or address blocks) to trust as presenting a valid RemoteIPHeader (use in loadbalancer setup where client ip forwarding is needed)
+    # Configures adresses (or address blocks) to trust as presenting a valid RemoteIPHeader (use in load balancer setup where client IP forwarding is needed)
     remoteIPInternalProxies:
     # - 10.0.2.0/24
     # - gateway.localdomain
@@ -313,26 +313,6 @@ config:
       # information present in the request
       - glob: "*"
         type: deny
-      # Allow caching of requests to /libs
-      - glob: "/libs/*"
-        type: allow
-      # This contains user information
-      - glob: "/libs/cq/security/userinfo.*"
-        type: deny
-      # This page contains a "Welcome, User XXX" message
-      - glob: "/libs/cq/core/content/welcome.*"
-        type: deny
-      # Thumbnails exist in various resolutions: thumbnail.png, thumbnail.png.thumb.48.48.png
-      - glob: "/apps/*/templates/*/thumbnail.pn*"
-        type: allow
-      # Static ressources in /apps
-      - glob: "/apps/*/docroot/*"
-        type: allow
-      # Client Libraries
-      - glob: "/etc/clientlibs/*"
-        type: allow
-      - glob: "/etc/designs/*/clientlibs/*"
-        type: allow
 
       # Defines the pages that are "invalidated" after any activation
       invalidate:
@@ -344,7 +324,7 @@ config:
       - glob: "*"
         type: deny
       
-      # Sets the level upto which files named ".stat" will be created in the document root of the webserver (only on publish dispatcher)
+      # Sets the level up to which files named ".stat" will be created in the document root of the web server (only on publish dispatcher)
       #statFilesLevel: 1
       
       # Whether to cache responses to requests that contain authorization information (only on publish dispatcher)
@@ -353,7 +333,7 @@ config:
       # Whether the dispatcher should serve stale content if no remote server is available (only on publish dispatcher)
       #serveStaleOnError: false
 
-      # Ggrace period defines the number of seconds a stale, auto-invalidated resource may still be served from the cache after the last activation occurring. 
+      # Grace period defines the number of seconds a stale, auto-invalidated resource may still be served from the cache after the last activation occurring. 
       #serveStaleGracePeriodSec: 0
 
       # Cache headers in dispatcher (only on publish dispatcher)
