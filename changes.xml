@@ -23,7 +23,7 @@
     xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/plugins/maven-changes-plugin/xsd/changes-1.0.0.xsd">
   <body>
 
-    <release version="1.4.4" date="not released">
+    <release version="1.4.4" date="2019-01-15">
       <action type="fix" dev="trichter">
         Role aem-dispatcher: Disable dispatcher caching for author instance.
       </action>
