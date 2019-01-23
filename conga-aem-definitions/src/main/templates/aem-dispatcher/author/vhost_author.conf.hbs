@@ -11,8 +11,8 @@
 # Enforce SSL: Redirect all requests to HTTPS primary hostname (except for dispatcher invalidation)
 RewriteCond %{REQUEST_URI} !^/dispatcher/invalidate.cache
 {{~#if httpd.ssl.offloading.enabled}}
-  # SSL Offloading: Disable primary hostname enforcing when forwarded from SSL offloader
-  RewriteCond {{httpd.ssl.offloading.rewriteCondition}}
+# SSL Offloading: Disable primary hostname enforcing when forwarded from SSL offloader
+RewriteCond {{httpd.ssl.offloading.rewriteCondition}}
 {{~/if}}
 RewriteRule ^(.*)$ https://{{httpHostSsl httpd.serverNameSsl port=httpd.serverPortSsl}}$1 [R=301,L]
 {{/partial}}
