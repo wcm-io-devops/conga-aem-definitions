@@ -24,7 +24,7 @@
   <body>
 
     <release version="1.4.6" date="not released">
-      <action type="add" dev="trichter">
+      <action type="update" dev="trichter">
         Role aem-dispatcher: use httpd.ssl.offloading.enabled and httpd.ssl.offloading.rewriteCondition for variant aem-author.
       </action>
       <action type="update" dev="mrozati" issue="WDCONGA-22">
