@@ -27,20 +27,20 @@ files:
   postProcessorOptions:
     contentPackage:
       name: aem-cms-publish-slingmapping
-      rootPath: /etc/map
+      rootPath: /etc/map.publish
       filters:
-      - filter: /etc/map
+      - filter: /etc/map.publish
         rules:
         - rule: exclude
-          pattern: /etc/map
+          pattern: /etc/map.publish
         - rule: include
-          pattern: /etc/map/.*
+          pattern: /etc/map.publish/.*
         - rule: exclude
-          pattern: /etc/map/http
+          pattern: /etc/map.publish/http
         - rule: include
-          pattern: /etc/map/http/.*
+          pattern: /etc/map.publish/http/.*
         - rule: exclude
-          pattern: /etc/map/http/AppMeasurementBridge
+          pattern: /etc/map.publish/http/AppMeasurementBridge
 
 # AEM Replication (Author)
 - file: aem-cms-author-replicationagents.json
