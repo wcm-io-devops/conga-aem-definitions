@@ -172,7 +172,7 @@ config:
     # AEM root path where quickstart jar is located
     rootPath: /opt/adobe/aem-author
     # Seconds to wait for instance to be stopped until process is killed
-    stopTimeout: 180
+    stopTimeout: 1200
 
     # AEM/Sling admin user
     adminUser:

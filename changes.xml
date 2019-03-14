@@ -30,6 +30,9 @@
       <action type="update" dev="mrozati" issue="WDCONGA-22">
         Apply the publish sling mappings only on instances with publish runmode.
       </action>
+      <action type="update" dev="trichter" >
+        Role aem-cms: Increase default quickstart.stopTimeout to 1200 seconds.
+      </action>
     </release>
 
     <release version="1.4.4" date="2019-01-15">
