@@ -7,6 +7,8 @@
 {{~#eachIf tenants "config.sling.mapping.rootPath"}},
     "{{#if this.config.httpd.serverName}}{{this.config.httpd.serverName}}{{else}}{{this.tenant}}{{/if}}{{#ifNotEquals httpd.serverPort 80}}.{{httpd.serverPort}}{{/ifNotEquals}}": {
       "jcr:primaryType": "sling:Mapping",
+      "sling:match": "{{#if this.config.httpd.serverName}}{{this.config.httpd.serverName}}{{else}}{{this.tenant}}{{/if}}{{#ifNotEquals httpd.serverPort 80}}.{{httpd.serverPort}}{{/ifNotEquals}}$",
+      "sling:internalRedirect": ["{{this.config.sling.mapping.rootPath}}"],
       "content-mapping": {
         "jcr:primaryType": "sling:Mapping",
         "sling:match": "(.+)$",
@@ -21,6 +23,8 @@
   {{~#each this.config.httpd.serverAliasNames}},
     "{{this}}{{#ifNotEquals httpd.serverPort 80}}.{{httpd.serverPort}}{{/ifNotEquals}}": {
       "jcr:primaryType": "sling:Mapping",
+      "sling:match": "{{this}}{{#ifNotEquals httpd.serverPort 80}}.{{httpd.serverPort}}{{/ifNotEquals}}$",
+      "sling:internalRedirect": ["{{this.config.sling.mapping.rootPath}}"],
       "content-mapping": {
         "jcr:primaryType": "sling:Mapping",
         "sling:match": "(.+)$",
@@ -43,6 +47,8 @@
 {{~#eachIf tenants "config.sling.mapping.rootPath"}},
     "{{#if this.config.httpd.serverNameSsl}}{{this.config.httpd.serverNameSsl}}{{else}}{{#if this.config.httpd.serverName}}{{this.config.httpd.serverName}}{{else}}{{this.tenant}}{{/if}}{{/if}}{{#ifNotEquals httpd.serverPortSsl 443}}.{{httpd.serverPortSsl}}{{/ifNotEquals}}": {
       "jcr:primaryType": "sling:Mapping",
+      "sling:match": "{{#if this.config.httpd.serverNameSsl}}{{this.config.httpd.serverNameSsl}}{{else}}{{#if this.config.httpd.serverName}}{{this.config.httpd.serverName}}{{else}}{{this.tenant}}{{/if}}{{/if}}{{#ifNotEquals httpd.serverPortSsl 443}}.{{httpd.serverPortSsl}}{{/ifNotEquals}}$",
+      "sling:internalRedirect": ["{{this.config.sling.mapping.rootPath}}"],
       "content-mapping": {
         "jcr:primaryType": "sling:Mapping",
         "sling:match": "(.+)$",
@@ -57,6 +63,8 @@
 {{~#each this.config.httpd.serverAliasNamesSsl}},
     "{{this}}{{#ifNotEquals httpd.serverPortSsl 443}}.{{httpd.serverPortSsl}}{{/ifNotEquals}}": {
       "jcr:primaryType": "sling:Mapping",
+      "sling:match": "{{this}}{{#ifNotEquals httpd.serverPortSsl 443}}.{{httpd.serverPortSsl}}{{/ifNotEquals}}$",
+      "sling:internalRedirect": ["{{this.config.sling.mapping.rootPath}}"],
       "content-mapping": {
         "jcr:primaryType": "sling:Mapping",
         "sling:match": "(.+)$",
