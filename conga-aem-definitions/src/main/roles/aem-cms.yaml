@@ -22,6 +22,7 @@ files:
   template: aem-cms-publish-slingmapping.json.hbs
   variants:
   - aem-publish
+  condition: ${sling.mapping.generatePackage}
   postProcessors:
   - aem-contentpackage
   postProcessorOptions:
@@ -172,7 +173,7 @@ config:
     # AEM root path where quickstart jar is located
     rootPath: /opt/adobe/aem-author
     # Seconds to wait for instance to be stopped until process is killed
-    stopTimeout: 180
+    stopTimeout: 1200
 
     # AEM/Sling admin user
     adminUser:
@@ -187,6 +188,8 @@ config:
 
     # Configure Sling Mapping for URL shortening of content paths
     mapping:
+      # generate aem-cms-publish-slingmapping package by default
+      generatePackage: true
       # Content root path which is stripped off
       #rootPath: /content/path
 
