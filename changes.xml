@@ -24,9 +24,9 @@
   <body>
 
     <release version="1.5.2" date="not released">
-      <action type="remove" dev="trichter">
-        Role aem-cms: Remove stop script. Synchronous stop mode is now implemented in the Ansible role wcm_io_devops.aem_cms (https://github.com/wcm-io-devops/ansible-aem-cms, see 'templates/stop-sync.sh.j2').
-      </action>
+      <action type="remove" dev="trichter"><![CDATA[
+        Role aem-cms: Remove stop script. Synchronous stop mode is now implemented in the Ansible role <a href="https://github.com/wcm-io-devops/ansible-aem-cms">wcm_io_devops.aem_cms</a> (see 'templates/stop-sync.sh.j2').
+      ]]></action>
     </release>
 
     <release version="1.5.0" date="2019-03-19">
