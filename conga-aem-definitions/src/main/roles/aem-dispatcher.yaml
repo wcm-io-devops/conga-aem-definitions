@@ -300,6 +300,9 @@ config:
     logging:
       level: warn
 
+    # Defines the path for the DispatcherConfig
+    configPath: dispatcher.d/dispatcher.any
+
     # Configure dispatcher cache
     cache:
 
