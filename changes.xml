@@ -24,8 +24,8 @@
   <body>
 
 
-    <release version="1.5.2" date="not released">
-      <action type="add" dev="trichter">
+    <release version="1.5.2" date="2019-05-09">
+      <action type="update" dev="trichter">
         Role aem-dispatcher: Introduce dispatcher.configPath to allow customizing of DispatcherConfig location.
       </action>
     </release>
