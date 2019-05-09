@@ -3,7 +3,7 @@
 <IfModule disp_apache2.c>
 
   # location of the configuration file. eg: 'conf/dispatcher.any'
-  DispatcherConfig dispatcher.d/dispatcher.any
+  DispatcherConfig {{dispatcher.configPath}}
 
   # location of the dispatcher log file. eg: 'logs/dispatcher.log'
   DispatcherLog    ${APACHE_LOG_DIR}/dispatcher.log 
