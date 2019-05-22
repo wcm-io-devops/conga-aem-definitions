@@ -23,6 +23,11 @@
     xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/plugins/maven-changes-plugin/xsd/changes-1.0.0.xsd">
   <body>
 
+    <release version="1.5.4" date="not released">
+      <action type="update" dev="sseifert">
+        Role aem-dispatcher: Enable TTL support and caching of cache control headers by default.
+      </action>
+    </release>
 
     <release version="1.5.2" date="2019-05-09">
       <action type="update" dev="trichter">

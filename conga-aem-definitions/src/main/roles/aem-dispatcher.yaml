@@ -340,17 +340,16 @@ config:
       #serveStaleGracePeriodSec: 0
 
       # Cache headers in dispatcher (only on publish dispatcher)
-      #headers:
-      #- Cache-Control
-      #- Content-Disposition
-      #- Content-Type
-      #- Expires
-      #- Last-Modified
-      #- X-Content-Type-Options
+      headers:
+      - Cache-Control
+      - Content-Disposition
+      - Content-Type
+      - Expires
+      - Last-Modified
+      - X-Content-Type-Options
 
       # Enable TTL evaluates the response headers from the backend
-      #enableTTL: false
-    
+      enableTTL: true
 
   sling:
 
