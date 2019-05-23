@@ -26,9 +26,6 @@ variants:
       # Allow non-public content directories [from default dispatcher.any]
       - url: /content(/.*)?
         type: allow
-      # Enable extensions in non-public content directories [from default dispatcher.any]
-      - extension: (css|gif|ico|js|png|swf|jpe?g)
-        type: allow
       # Enable features [from default dispatcher.any]
       - url: /libs/cq/personalization(/.*)?
         type: allow
@@ -58,7 +55,7 @@ variants:
         selectors: (overlay)
         type: deny
       # Allow access to client libraries and designs at /etc
-      - url: /etc/(clientlibs|designs)(/.*)?
+      - url: (/etc/clientlibs|/etc.clientlibs|/etc/designs/.*/clientlibs)(/.*)?
         type: allow
       # open consoles (access is controlled in httpd config)
       - url: /(admin|crx|system)(/.*)?
@@ -340,17 +337,16 @@ config:
       #serveStaleGracePeriodSec: 0
 
       # Cache headers in dispatcher (only on publish dispatcher)
-      #headers:
-      #- Cache-Control
-      #- Content-Disposition
-      #- Content-Type
-      #- Expires
-      #- Last-Modified
-      #- X-Content-Type-Options
+      headers:
+      - Cache-Control
+      - Content-Disposition
+      - Content-Type
+      - Expires
+      - Last-Modified
+      - X-Content-Type-Options
 
       # Enable TTL evaluates the response headers from the backend
-      #enableTTL: false
-    
+      enableTTL: true
 
   sling:
 
