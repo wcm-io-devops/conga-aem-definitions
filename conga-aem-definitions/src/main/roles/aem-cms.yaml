@@ -83,20 +83,6 @@ files:
         #- rule: exclude
         #  pattern: /etc/replication/agents\.publish/(outbox|s7delivery)
 
-# Minimal "DAM Update Asset" Workflow (Author)
-- file: aem-cms-author-dam-update-asset-workflow-minimal.json
-  dir: packages
-  template: aem-cms-author-dam-update-asset-workflow-minimal.json.hbs
-  variants:
-  - aem-author
-  condition: ${workflow.useMinimalDamUpdateAssetWorkflow}
-  postProcessors:
-  - aem-contentpackage
-  postProcessorOptions:
-    contentPackage:
-      name: aem-cms-author-dam-update-asset-workflow-minimal
-      rootPath: /etc/workflow/models/dam/update_asset
-
 # AEM Quickstart start script
 - file: start
   dir: bin
@@ -219,15 +205,6 @@ config:
         #url: http://localhost:8000
       # generate replicationagents package by default
       generatePackage: true
-
-  workflow:
-    # Replace the default 'DAM Update Asset' workflow with a minimal one containing only the steps that are always required
-    # Since AEM 6.3 it is recommended to use the default DAM Update Asset workflow as as starting point
-    useMinimalDamUpdateAssetWorkflow: false
-    # Configure minimal 'DAM Update Asset' workflow as transient (which is default since AEM 6.3 and recommended for earlier versions)
-    minimalDamUpdateAssetWorkflowTransient: true
-    # Add additional workflows steps required since AEM 6.3
-    minimalDamUpdateAssetWorkflowAEM63: false
 
   crypto:
     # URLs of crypto keys to be deployed to AEM (as bundle files, supported for AEM 6.3 and up)

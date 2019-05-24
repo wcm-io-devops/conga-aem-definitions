@@ -124,9 +124,6 @@ config:
         - io.wcm.handler.url.SiteConfig/siteUrl="http://site1"
         - io.wcm.handler.url.SiteConfig/siteUrlAuthor="https://author.site1"
 
-  workflow:
-    useMinimalDamUpdateAssetWorkflow: true
-
 
 tenants:
 
