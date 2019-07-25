@@ -41,6 +41,7 @@ nodes:
           - location: /admin
             type: allow
       dispatcher:
+        configPath: /opt/apache2/dispatcher.d/dispatcher.any
         cache:
           rootPath: /var/cache/author1
         renderInstance:
@@ -62,6 +63,7 @@ nodes:
             type: allow
           - _merge_
       dispatcher:
+        configPath: /opt/apache2/dispatcher.d/dispatcher.any
         cache:
           rootPath: /var/cache/publish1
           statFilesLevel: 3
@@ -121,9 +123,6 @@ config:
         "/content":
         - io.wcm.handler.url.SiteConfig/siteUrl="http://site1"
         - io.wcm.handler.url.SiteConfig/siteUrlAuthor="https://author.site1"
-
-  workflow:
-    useMinimalDamUpdateAssetWorkflow: true
 
 
 tenants:

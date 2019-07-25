@@ -24,7 +24,7 @@ The plugins [CONGA Sling Plugin][conga-sling] and [CONGA AEM Plugin][conga-aem] 
 
 ### Further Resources
 
-* [wcm.io CONGA training material with exercises](http://training.wcm.io/conga/)
+* [wcm.io CONGA training material with exercises](https://training.wcm.io/conga/)
 * [adaptTo() 2015 Talk: CONGA - Configuration generation for Sling and AEM](https://adapt.to/2015/en/schedule/conga---configuration-generation-for-sling-and-aem.html)
 * [adaptTo() 2017 Talk: Automate AEM Deployment with Ansible and wcm.io CONGA](https://adapt.to/2017/en/schedule/automate-aem-deployment-with-ansible-and-wcm-io-conga.html)
 
@@ -32,8 +32,8 @@ The plugins [CONGA Sling Plugin][conga-sling] and [CONGA AEM Plugin][conga-aem] 
 
 [usage]: usage.html
 [changelog]: changes-report.html
-[conga]: http://devops.wcm.io/conga/
-[conga-sling]: http://devops.wcm.io/conga/plugins/sling/
-[conga-aem]: http://devops.wcm.io/conga/plugins/aem/
+[conga]: https://devops.wcm.io/conga/
+[conga-sling]: https://devops.wcm.io/conga/plugins/sling/
+[conga-aem]: https://devops.wcm.io/conga/plugins/aem/
 [aem]: http://www.adobe.com/solutions/web-experience-management.html
 [aem-definitions-migration]: https://wcm-io.atlassian.net/wiki/x/AQDRAw
