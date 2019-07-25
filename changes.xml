@@ -27,6 +27,9 @@
       <action type="remove" dev="sseifert">
         Role aem-cms: Remove Minimal "DAM Update Asset" Workflow - it was aleady discouraged to be used in AEM 6.3, and no longer compatible with AEM 6.4 and up.
       </action>
+      <action type="remove" dev="trichter"><![CDATA[
+        Role aem-cms: Remove stop script. Synchronous stop mode is now implemented in the Ansible role <a href="https://github.com/wcm-io-devops/ansible-aem-cms">wcm_io_devops.aem_cms</a> (see 'templates/stop-sync.sh.j2').
+      ]]></action>
     </release>
 
     <release version="1.5.4" date="2019-05-23">

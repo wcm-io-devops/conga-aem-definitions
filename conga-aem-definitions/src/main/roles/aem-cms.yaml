@@ -89,12 +89,6 @@ files:
   template: start.hbs
   fileHeader: none
 
-# AEM Quickstart stop script
-- file: stop
-  dir: bin
-  template: stop.hbs
-  fileHeader: none
-
 # AEM OSGi System Configuration
 - file: aem-cms-system-config.provisioning
   dir: packages
