@@ -16,6 +16,15 @@ ServerAlias {{this}}
 {{/block}}
 
 
+{{~#block "http2"}}
+{{~#if httpd.http2.enabled}}
+# Enable HTTP/2
+ProtocolsHonorOrder On
+Protocols h2 h2c http/1.1
+{{/if}}
+{{/block}}
+
+
 {{~#block "logSettings"}}
 # Possible values include: debug, info, notice, warn, error, crit, alert, emerg.
 LogLevel {{httpd.logging.level}}
