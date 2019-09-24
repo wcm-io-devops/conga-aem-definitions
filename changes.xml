@@ -38,7 +38,7 @@
       </action>
       <action type="fix" dev="sseifert">
         Role aem-dispatcher: Avoid potential exploit allowing accessing any URLs that ends with css, js and other file extensions.
-        Allow unstricted access only to client libraries at /etc/clientlibs, /etc.clientlibs and /etc/designs/*/clientlibs.
+        Allow unrestricted access only to client libraries at /etc/clientlibs, /etc.clientlibs and /etc/designs/*/clientlibs.
       </action>
     </release>
 
