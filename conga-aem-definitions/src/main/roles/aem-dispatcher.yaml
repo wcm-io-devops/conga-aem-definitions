@@ -176,7 +176,7 @@ config:
     - headers
     - http2
 
-    # Enable or disable HTTP/2
+    # HTTP/2 support
     http2:
       enabled: true
 
