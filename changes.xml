@@ -24,6 +24,9 @@
   <body>
 
     <release version="1.6.0" date="not released">
+      <action type="add" dev="nbellack">
+        Role aem-dispatcher: Add support for HTTP/2 and enable it by default.
+      </action>
       <action type="remove" dev="sseifert">
         Role aem-cms: Remove Minimal "DAM Update Asset" Workflow - it was aleady discouraged to be used in AEM 6.3, and no longer compatible with AEM 6.4 and up.
       </action>
