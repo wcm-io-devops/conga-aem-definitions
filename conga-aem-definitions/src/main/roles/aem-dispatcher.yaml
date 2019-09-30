@@ -186,8 +186,8 @@ config:
     - headers
 
     # HTTP/2 support. Defaults to false; enable it by adding the http2 variant.
-    #http2:
-    #  enabled: false
+    http2:
+      enabled: false
 
     # Server and alias names and - optionally - an alternative server names for SSL.
     # On publish instances the server name defaults to the tenant name.
