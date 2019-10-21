@@ -202,8 +202,8 @@ config:
 
   crypto:
     # URLs of crypto keys to be deployed to AEM (as bundle files, supported for AEM 6.3 and up)
-    #aesCryptoKeyUrl: ansible-vault:classpath:/crypto/master
-    #hmacCryptoKeyUrl: ansible-vault:classpath:/crypto/hmac
+    #aesCryptoKeyUrl: classpath:/crypto/master
+    #hmacCryptoKeyUrl: classpath:/crypto/hmac
 
   httpd:
     # Server ports - needs to be defined here to be available for dispatcher flush targets
