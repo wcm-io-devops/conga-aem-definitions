@@ -10,5 +10,5 @@ In a subdirectory `example`.
 For more in-depth information and exercises see [CONGA Training][conga-training].
 
 
-[conga-usage]: http://devops.wcm.io/conga/usage.html
-[conga-training]: http://training.wcm.io/conga/
+[conga-usage]: https://devops.wcm.io/conga/usage.html
+[conga-training]: https://training.wcm.io/conga/

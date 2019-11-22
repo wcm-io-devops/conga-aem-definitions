@@ -28,6 +28,7 @@ nodes:
     variants:
     - aem-author
     - ssl
+    - http2
     config:
       httpd:
         serverName: author.sample.com
@@ -51,6 +52,7 @@ nodes:
     variants:
     - aem-publish
     - ssl
+    - http2
     config:
       httpd:
         accessRestriction:
@@ -123,9 +125,6 @@ config:
         "/content":
         - io.wcm.handler.url.SiteConfig/siteUrl="http://site1"
         - io.wcm.handler.url.SiteConfig/siteUrlAuthor="https://author.site1"
-
-  workflow:
-    useMinimalDamUpdateAssetWorkflow: true
 
 
 tenants:

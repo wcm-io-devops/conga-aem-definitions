@@ -95,6 +95,16 @@ variants:
       - _merge_
       - ssl
 
+# Mixin variant to support HTTP/2
+- variant: http2
+  config:
+    httpd:
+      modules:
+        - _merge_
+        - http2
+      http2:
+        enabled: true
+
 templateDir: aem-dispatcher
 
 files:
@@ -174,6 +184,10 @@ config:
     - dispatcher
     - rewrite
     - headers
+
+    # HTTP/2 support. Defaults to false; enable it by adding the http2 variant.
+    http2:
+      enabled: false
 
     # Server and alias names and - optionally - an alternative server names for SSL.
     # On publish instances the server name defaults to the tenant name.
