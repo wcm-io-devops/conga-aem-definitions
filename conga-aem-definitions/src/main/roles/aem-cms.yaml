@@ -191,12 +191,14 @@ config:
       flushTarget:
         #name: dispatcherAuthor1
         #url: http://localhost:8000
+        aliasUpdate: false
       # generate replicationagents package by default
       generatePackage: true
     publish:
       flushTarget:
         #name: dispatcherPublish1
         #url: http://localhost:8000
+        aliasUpdate: false
       # generate replicationagents package by default
       generatePackage: true
 
