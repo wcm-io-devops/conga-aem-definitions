@@ -191,6 +191,7 @@ config:
       flushTarget:
         #name: dispatcherAuthor1
         #url: http://localhost:8000
+        # set aliasUpdate to true if you use sling:alias or vanity urls. This will send a flush request with both the original path and the vanity path with aliases
         aliasUpdate: false
       # generate replicationagents package by default
       generatePackage: true
@@ -198,6 +199,7 @@ config:
       flushTarget:
         #name: dispatcherPublish1
         #url: http://localhost:8000
+        # set aliasUpdate to true if you use sling:alias or vanity urls. This will send a flush request with both the original path and the vanity path with aliases
         aliasUpdate: false
       # generate replicationagents package by default
       generatePackage: true
