@@ -162,7 +162,7 @@ RewriteRule ^(.*)$ http://{{httpHost httpd.serverName port=httpd.serverPort}}$1 
 {{~#block "corsHeader"}}
 {{~#if httpd.corsHeader.enabled}}
 # Send CORS header to client for certain requests
-<Location ~ "{{httpd.corsHeader.locationMatch}}">
+<LocationMatch "{{httpd.corsHeader.locationMatch}}">
   {{~#if httpd.corsHeader.allowAllHosts}}
   Header add Access-Control-Allow-Origin "*"
   {{~else}}
@@ -176,7 +176,7 @@ RewriteRule ^(.*)$ http://{{httpHost httpd.serverName port=httpd.serverPort}}$1 
   Header add Access-Control-Allow-Origin "%{AccessControlAllowOrigin}e" env=AccessControlAllowOrigin
   Header merge Vary Origin
   {{~/if}}
-</Location>
+</LocationMatch>
 {{~/if}}
 {{/block}}
 
