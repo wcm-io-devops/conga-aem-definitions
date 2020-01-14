@@ -27,6 +27,9 @@
       <action type="update" dev="mrozati">
         Dispatcher Flush Agent: support "aliasUpdate" flag, which is needed when using sling:alias or vanity URLs
       </action>
+      <action type="update" dev="bsommerfeld">
+        Role aem-dispatcher: Use "LocationMatch" instead of "Location ~" to avoid handlebar whitespace error
+      </action>
     </release>
 
     <release version="1.6.0" date="2019-11-22">
