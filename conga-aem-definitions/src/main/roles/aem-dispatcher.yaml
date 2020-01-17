@@ -5,6 +5,30 @@ variants:
 
 # Dispatcher in front of Authoring instance
 - variant: aem-author
+  config:
+
+    dispatcher:
+
+      # Dispatcher filter rules (use only regex, no glob expressions)
+      filter:
+      - url: /.*
+        type: allow
+
+      cache:
+
+        # Defines what responses should be cached based on the requested URL
+        rules:
+        # Disallow any caching by default and subsequently allow caching
+        # for content that may be cached although requested with authorization
+        # information present in the request
+        - glob: "*"
+          type: deny
+
+        # Defines the pages that are "invalidated" after any activation
+        invalidate:
+        - glob: "*"
+          type: deny
+
 
 # Disaptcher for publish instances - configure a tenant for each vhost
 - variant: aem-publish
@@ -304,8 +328,8 @@ config:
 
     # Dispatcher filter rules (use only regex, no glob expressions)
     filter:
-    - url: /.*
-      type: allow
+    #- url: /.*
+    #  type: allow
 
     # Defines the DispatcherLogLevel (error,warn,info,debug)
     logging:
@@ -325,13 +349,13 @@ config:
       # Disallow any caching by default and subsequently allow caching
       # for content that may be cached although requested with authorization
       # information present in the request
-      - glob: "*"
-        type: deny
+      #- glob: "*"
+      #  type: deny
 
       # Defines the pages that are "invalidated" after any activation
       invalidate:
-      - glob: "*"
-        type: deny
+      #- glob: "*"
+      #  type: deny
 
       # Defines query string parameters that should be ignored when determining if some request's output can be cached or delivered from cache
       ignoreUrlParams:

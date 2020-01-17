@@ -30,6 +30,9 @@
       <action type="fix" dev="bsommerfeld">
         Role aem-dispatcher: Use "LocationMatch" instead of "Location ~" to avoid Handlebars whitespace error.
       </action>
+      <action type="fix" dev="sseifert" issue="WDCONGA-28">
+        Role aem-dispatcher: Fix inheritance of dispatcher configuration lists in combination with custom inherited dispatcher roles.
+      </action>
     </release>
 
     <release version="1.6.0" date="2019-11-22">
