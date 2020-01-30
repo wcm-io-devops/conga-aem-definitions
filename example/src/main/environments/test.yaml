@@ -93,6 +93,11 @@ nodes:
         - accept-language
         - accept
         - host
+        # add a new filter rules
+        filter:
+        - _merge_
+        - url: /path/to/resources/
+          type: allow
 
 config:
   jvm.path: /usr/lib/jvm/jdk-8-oracle-x64
