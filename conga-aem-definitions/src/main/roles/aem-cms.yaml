@@ -23,11 +23,16 @@ files:
   variants:
   - aem-publish
   condition: ${sling.mapping.generatePackage}
+  validatorOptions:
+    contentPackageValidatorsSettings:
+      jackrabbit-filter:
+        isDisabled: true
   postProcessors:
   - aem-contentpackage
   postProcessorOptions:
     contentPackage:
       name: aem-cms-publish-slingmapping
+      packageType: content
       rootPath: /etc/map
       filters:
       - filter: /etc/map
@@ -50,11 +55,17 @@ files:
   variants:
   - aem-author
   condition: ${replication.author.generatePackage}
+  validatorOptions:
+    contentPackageValidatorsSettings:
+      jackrabbit-filter:
+        options:
+          validRoots: /etc/replication
   postProcessors:
   - aem-contentpackage
   postProcessorOptions:
     contentPackage:
       name: aem-cms-author-replicationagents
+      packageType: content
       rootPath: /etc/replication
       filters:
       - filter: /etc/replication/agents.author
@@ -70,11 +81,17 @@ files:
   variants:
   - aem-publish
   condition: ${replication.publish.generatePackage}
+  validatorOptions:
+    contentPackageValidatorsSettings:
+      jackrabbit-filter:
+        options:
+          validRoots: /etc/replication
   postProcessors:
   - aem-contentpackage
   postProcessorOptions:
     contentPackage:
       name: aem-cms-publish-replicationagents
+      packageType: content
       rootPath: /etc/replication
       filters:
       - filter: /etc/replication/agents.publish
@@ -98,6 +115,7 @@ files:
   postProcessorOptions:
     contentPackage:
       name: aem-cms-system-config
+      packageType: container
       rootPath: /apps/aem-cms-system-config/config
       filters:
       - filter: /apps/aem-cms-system-config
