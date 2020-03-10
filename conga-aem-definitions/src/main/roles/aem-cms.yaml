@@ -24,7 +24,7 @@ files:
   - aem-publish
   condition: ${sling.mapping.generatePackage}
   validatorOptions:
-    contentPackageValidatorsSettings:
+    contentPackage.validatorsSettings:
       jackrabbit-filter:
         isDisabled: true
   postProcessors:
@@ -56,7 +56,7 @@ files:
   - aem-author
   condition: ${replication.author.generatePackage}
   validatorOptions:
-    contentPackageValidatorsSettings:
+    contentPackage.validatorsSettings:
       jackrabbit-filter:
         options:
           validRoots: /etc/replication
@@ -82,7 +82,7 @@ files:
   - aem-publish
   condition: ${replication.publish.generatePackage}
   validatorOptions:
-    contentPackageValidatorsSettings:
+    contentPackage.validatorsSettings:
       jackrabbit-filter:
         options:
           validRoots: /etc/replication
