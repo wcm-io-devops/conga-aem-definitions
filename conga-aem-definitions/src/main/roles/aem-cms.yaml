@@ -115,7 +115,6 @@ files:
   postProcessorOptions:
     contentPackage:
       name: aem-cms-system-config
-      packageType: container
       rootPath: /apps/aem-cms-system-config/config
       filters:
       - filter: /apps/aem-cms-system-config
