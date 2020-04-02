@@ -24,6 +24,9 @@
   <body>
 
     <release version="1.6.4" date="not released">
+      <action type="update" dev="mceruti">
+        CORS Header: Add required protocol to the example origins to be whitelisted 
+      </action>
       <action type="update" dev="sseifert">
         Set packageType and enable FileVault validation for all CONGA-generated content packages.
       </action>
