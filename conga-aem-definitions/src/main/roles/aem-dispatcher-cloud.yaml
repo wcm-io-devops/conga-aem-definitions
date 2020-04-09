@@ -1,0 +1,351 @@
+# Adobe Cloud Service web server with dispatcher module
+# Generates general dispatcher configuration following teh Adobe Cloug Manager conventions
+
+variants:
+
+# Disaptcher for publish instances - configure a tenant for each vhost
+- variant: aem-publish
+  config:
+    
+    httpd:
+      # Default server name to tenant name on publish
+      serverName: ${tenant}
+
+    dispatcher:
+
+      # Forward client headers from dispatcher to AEM instance
+      forwardClientHeaders:    
+      - X-Forwarded-Proto
+      - X-Forwarded-SSL-Certificate
+      - X-Forwarded-SSL-Client-Cert
+      - X-Forwarded-SSL
+      - X-Forwarded-Protocol
+      - CSRF-Token
+      - referer
+      - user-agent
+      - from
+      - content-type
+      - content-length
+      - accept-charset
+      - accept-encoding
+      - accept-language
+      - accept
+      - host
+      - if-match
+      - if-none-match
+      - if-range
+      - if-unmodified-since
+      - max-forwards
+      - range
+      - cookie
+      - depth
+      - translate
+      - expires
+      - date
+      - if
+      - lock-token
+      - x-expected-entity-length
+      - destination
+      - Sling-uploadmode
+      - x-requested-with
+
+      # Dispatcher filter rules (use only regex, no glob expressions)
+      filter:
+      # deny everything and allow specific entries [from default_filters.any]
+      - url: /.*
+        type: deny
+      # This rule allows content to be accessed [from default_filters.any]
+      - url: /content(/.*)?
+        extension: (css|eot|gif|ico|jpeg|jpg|js|gif|pdf|png|svg|swf|ttf|woff|woff2|html)
+        type: allow
+      # Enable clientlibs proxy servlet [from default_filters.any]
+      - url: /etc.clientlibs(/.*)?
+        method: "GET"
+        type: allow
+      # Basic features: AEM provides a framework aimed at preventing Cross-Site Request Forgery attacks [from default_filters.any]
+      - url: /libs/granite/csrf/token.json
+        method: "GET"
+        extension: json
+        type: allow
+      # Basic features: allow POSTs to form selectors under content [from default_filters.any]
+      - url: /content/*.form.html
+        method: "POST"
+        type: allow
+      # Basic features: enable personalization [from default_filters.any]
+      - url: /libs/cq/personalization(/.*)?
+        method: "GET"
+        type: allow
+      # Deny content grabbing for greedy queries and prevent un-intended self DOS attacks [from default_filters.any]
+      - selectors: (feed|rss|pages|languages|blueprint|infinity|tidy|sysview|docview|query|[0-9-]+|jcr:content)
+        extension: (json|xml|html|feed)
+        type: deny
+      # Deny authoring query params [from default_filters.any]
+      - query: debug=.*
+        type: deny
+      - query: wcmmode=.*
+        type: deny
+      # Allow current user [from default_filters.any]
+      - url: /libs/granite/security/currentuser.json
+        type: allow
+      # Deny content grabbing for /content - additional selectors not included in default dispatcher.any
+      - path: /content(/.*)?
+        selectors: (ambits|assignments|childrenlist|cloudservices|contentfinder|context|emailservice|exacttarget|ext|form|media|missingpages|mobileapps|pages|paragraphs|payloadsummary|permissions|publications|referencelist|savedsearch|skippedpages|search|social|style|tags|tagtree|timezones)
+        extension: (json)
+        type: deny
+      - path: /content(/.*)?
+        selectors: (translate|translationRulesEditor)
+        extension: (html)
+        type: deny
+      - path: /content(/.*)?
+        selectors: (emulatorstrip|projectcard|thumb)
+        extension: (gif|jpeg|png)
+        type: deny
+      - path: /content(/.*)?
+        selectors: (overlay)
+        type: deny
+
+      # Configure dispatcher cache
+      cache:
+
+        # Defines what responses should be cached based on the requested URL
+        rules:
+        # Cache everything by default
+        - glob: "*"
+          type: allow
+        # Exclude .htx extension from caching
+        - glob: "*.htx"
+          type: deny
+
+        # Defines the pages that are "invalidated" after any activation
+        invalidate:
+        - glob: "*"
+          type: deny
+        # Consider all HTML and JSON files stale after any activation
+        - glob: "*.html"
+          type: allow
+        - glob: "*.json"
+          type: allow
+        - glob: "/etc/segmentation.segment.js"
+          type: allow
+        - glob: "*/analytics.sitecatalyst.js"
+          type: allow
+
+templateDir: aem-dispatcher-cloud
+
+files:
+
+# --- httpd config ---
+
+# available vhosts (per tenant)
+- file: ${new('java.text.DecimalFormat','0000').format(multiplyIndex)}_${tenant}.vhost
+  dir: conf.d/available_vhosts
+  variants:
+  - aem-publish*
+  template: conf.d/available_vhosts/tenant.vhost.hbs
+  # Mulitply file for each tenant that has the given roles
+  multiply: tenant
+  fileHeader: conf
+
+# enabled vhosts
+- file: default.vhost
+  dir: conf.d/enabled_vhosts
+  template: conf.d/enabled_vhosts/default.vhost.hbs
+
+# global rewrite rules
+- file: rewrite.rules
+  dir: conf.d/rewrites
+  template: conf.d/rewrites/rewrite.rules.hbs
+  fileHeader: conf
+
+# custom variables
+- file: custom.vars
+  dir: conf.d/variables
+  template: conf.d/variables/custom.vars.hbs
+  fileHeader: conf
+
+# global variables
+- file: global.vars
+  dir: conf.d/variables
+  template: conf.d/variables/global.vars.hbs
+  fileHeader: conf
+
+# copy additional static files directly from AEM SDK dispatcher sources
+- file: conf.d/dispatcher_vhost.conf
+  url: classpath:/aem-sdk-dispatcher/src/conf.d/dispatcher_vhost.conf
+- file: conf.d/rewrites/default_rewrite.rules
+  url: classpath:/aem-sdk-dispatcher/src/conf.d/rewrites/default_rewrite.rules
+
+
+# --- dispatcher config ---
+
+# available farms
+- file: publish.farm
+  dir: conf.dispatcher.d/available_farms
+  template: conf.dispatcher.d/available_farms/publish.farm.hbs
+  fileHeader: any
+  validators:
+  - any
+
+# enabled farms
+- file: default.farm
+  dir: conf.dispatcher.d/enabled_farms
+  template: conf.dispatcher.d/enabled_farms/default.farm.hbs
+
+# cache rules
+- file: rules.any
+  dir: conf.dispatcher.d/cache
+  template: conf.dispatcher.d/cache/rules.any.hbs
+
+# client headers
+- file: clientheaders.any
+  dir: conf.dispatcher.d/clientheaders
+  template: conf.dispatcher.d/clientheaders/clientheaders.any.hbs
+
+# filters
+- file: filters.any
+  dir: conf.dispatcher.d/filters
+  template: conf.dispatcher.d/filters/filters.any.hbs
+
+# virtualhosts
+- file: virtualhosts.any
+  dir: conf.dispatcher.d/virtualhosts
+  template: conf.dispatcher.d/virtualhosts/virtualhosts.any.hbs
+
+# copy additional static files directly from AEM SDK dispatcher sources
+- file: conf.dispatcher.d/dispatcher.any
+  url: classpath:/aem-sdk-dispatcher/src/conf.dispatcher.d/dispatcher.any
+- file: conf.dispatcher.d/renders/default_renders.any
+  url: classpath:/aem-sdk-dispatcher/src/conf.dispatcher.d/renders/default_renders.any
+- file: conf.dispatcher.d/cache/default_invalidate.any
+  url: classpath:/aem-sdk-dispatcher/src/conf.dispatcher.d/cache/default_invalidate.any
+
+
+config:
+
+  httpd:
+
+    # Server and alias names
+    # On publish instances the server name defaults to the tenant name.
+    serverName:
+    serverAliasNames:
+
+    # Redirecting from "/" (only publish dispatcher)
+    rootRedirect:
+      #url: /en.html
+      httpStatus: 301
+
+    # Configure CORS header to be sent to the client (only on publish dispatcher)
+    corsHeader:
+      enabled: true
+      # Generate them by default only for font-related files
+      locationMatch: "\\.(svg|eot|ttf|woff)"
+      # If set to true always "*" is sent as 'Access-Control-Allow-Origin' header
+      # If set to false only the requesting host is all if it is in the hostWhiteList (or this list is empty), and not in the hostBlackList
+      allowAllHosts: true
+      #hostWhiteList:
+      #- www.host1.com
+      #- www.host2.com
+
+    headers:
+      # Enables/Configures the Content-Security-Policy header on publish dispatcher (see https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)
+      contentSecurityPolicy:
+      # Enables/Configures the Referrer-Policy header on publish dispatcher (see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy)
+      referrerPolicy: "origin-when-cross-origin"
+      # Enables/Configures the X-XSS-Protection header on publish dispatcher (see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection)
+      xssProtection:
+
+    # Custom configuration snippets for vhost files (only on publish dispatcher - useful for tenant-specific configurations)
+    customVHostConfig:
+      # Placed at the top of the vhost config file
+      before:
+      # Placed before the rewrite rules in the host config file
+      beforeRewrite:
+      # Placed at the bottom of the vhost confign file
+      after:
+
+  dispatcher:
+    
+    # Forward client headers from dispatcher to AEM instance
+    forwardClientHeaders:    
+    - "*"
+
+    # Dispatcher filter rules (use only regex, no glob expressions)
+    filter:
+    #- url: /.*
+    #  type: allow
+
+    # Defines the DispatcherLogLevel (Error, Warn, Info, Debug and Trace1)
+    logging:
+      level: Warn
+
+    # Configure dispatcher cache
+    cache:
+
+      # Dispatcher cache root path
+      rootPath:
+
+      # Defines what responses should be cached based on the requested URL
+      rules:
+      # Disallow any caching by default and subsequently allow caching
+      # for content that may be cached although requested with authorization
+      # information present in the request
+      #- glob: "*"
+      #  type: deny
+
+      # Defines the pages that are "invalidated" after any activation
+      invalidate:
+      #- glob: "*"
+      #  type: deny
+
+      # Defines query string parameters that should be ignored when determining if some request's output can be cached or delivered from cache
+      ignoreUrlParams:
+      - glob: "*"
+        type: deny
+      
+      # Sets the level up to which files named ".stat" will be created in the document root of the web server (only on publish dispatcher)
+      #statFilesLevel: 1
+      
+      # Whether to cache responses to requests that contain authorization information (only on publish dispatcher)
+      #allowAuthorized: false
+
+      # Whether the dispatcher should serve stale content if no remote server is available (only on publish dispatcher)
+      #serveStaleOnError: false
+
+      # Grace period defines the number of seconds a stale, auto-invalidated resource may still be served from the cache after the last activation occurring. 
+      #serveStaleGracePeriodSec: 0
+
+      # Cache headers in dispatcher (only on publish dispatcher)
+      headers:
+      - Cache-Control
+      - Content-Disposition
+      - Content-Type
+      - Expires
+      - Last-Modified
+      - X-Content-Type-Options
+
+      # Enable TTL evaluates the response headers from the backend
+      enableTTL: true
+
+  sling:
+
+    # Configure Sling Mapping for URL shortening of content paths
+    mapping:
+      # Content root path which is stripped off
+      #rootPath: /content/path
+      # By default, only access to paths shortened via Sling Mapping are allowed. Set this to true to also allow unshortened paths.
+      #allowUnshortenedPath: false
+
+
+
+# Example tenant configuration. Tenant name = primary host name/server name
+#config:
+#  httpd:
+#    serverName: ${tenant}
+#    serverAliasNames:
+#    - alias1
+#    - alias2
+#    rootRedirect.url: /en.html
+#    customVHostConfig.after: |
+#      Custom Config Line 1
+#      Custom Config Line 2
+#  sling.mapping.rootPath: /content/path
