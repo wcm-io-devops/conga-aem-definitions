@@ -140,40 +140,52 @@ files:
 - file: ${new('java.text.DecimalFormat','0000').format(multiplyIndex)}_${tenant}.vhost
   dir: conf.d/available_vhosts
   variants:
-  - aem-publish*
+  - aem-publish
   template: conf.d/available_vhosts/tenant.vhost.hbs
-  # Mulitply file for each tenant that has the given roles
   multiply: tenant
   fileHeader: conf
 
 # enabled vhosts
-- file: default.vhost
+- file: ${new('java.text.DecimalFormat','0000').format(multiplyIndex)}_${tenant}.vhost
   dir: conf.d/enabled_vhosts
-  template: conf.d/enabled_vhosts/default.vhost.hbs
+  variants:
+  - aem-publish
+  template: conf.d/enabled_vhosts/tenant.vhost.hbs
+  multiply: tenant
 
 # global rewrite rules
 - file: rewrite.rules
   dir: conf.d/rewrites
+  variants:
+  - aem-publish
   template: conf.d/rewrites/rewrite.rules.hbs
   fileHeader: conf
 
 # custom variables
 - file: custom.vars
   dir: conf.d/variables
+  variants:
+  - aem-publish
   template: conf.d/variables/custom.vars.hbs
   fileHeader: conf
 
 # global variables
 - file: global.vars
   dir: conf.d/variables
+  variants:
+  - aem-publish
   template: conf.d/variables/global.vars.hbs
   fileHeader: conf
 
 # copy additional static files directly from AEM SDK dispatcher sources
 - file: conf.d/dispatcher_vhost.conf
   url: classpath:/aem-sdk-dispatcher/src/conf.d/dispatcher_vhost.conf
+  variants:
+  - aem-publish
 - file: conf.d/rewrites/default_rewrite.rules
   url: classpath:/aem-sdk-dispatcher/src/conf.d/rewrites/default_rewrite.rules
+  variants:
+  - aem-publish
 
 
 # --- dispatcher config ---
@@ -181,43 +193,61 @@ files:
 # available farms
 - file: publish.farm
   dir: conf.dispatcher.d/available_farms
+  variants:
+  - aem-publish
   template: conf.dispatcher.d/available_farms/publish.farm.hbs
   fileHeader: any
   validators:
   - any
 
 # enabled farms
-- file: default.farm
+- file: publish.farm
   dir: conf.dispatcher.d/enabled_farms
-  template: conf.dispatcher.d/enabled_farms/default.farm.hbs
+  variants:
+  - aem-publish
+  template: conf.dispatcher.d/enabled_farms/publish.farm.hbs
 
 # cache rules
 - file: rules.any
   dir: conf.dispatcher.d/cache
+  variants:
+  - aem-publish
   template: conf.dispatcher.d/cache/rules.any.hbs
 
 # client headers
 - file: clientheaders.any
   dir: conf.dispatcher.d/clientheaders
+  variants:
+  - aem-publish
   template: conf.dispatcher.d/clientheaders/clientheaders.any.hbs
 
 # filters
 - file: filters.any
   dir: conf.dispatcher.d/filters
+  variants:
+  - aem-publish
   template: conf.dispatcher.d/filters/filters.any.hbs
 
 # virtualhosts
 - file: virtualhosts.any
   dir: conf.dispatcher.d/virtualhosts
+  variants:
+  - aem-publish
   template: conf.dispatcher.d/virtualhosts/virtualhosts.any.hbs
 
 # copy additional static files directly from AEM SDK dispatcher sources
 - file: conf.dispatcher.d/dispatcher.any
   url: classpath:/aem-sdk-dispatcher/src/conf.dispatcher.d/dispatcher.any
+  variants:
+  - aem-publish
 - file: conf.dispatcher.d/renders/default_renders.any
   url: classpath:/aem-sdk-dispatcher/src/conf.dispatcher.d/renders/default_renders.any
+  variants:
+  - aem-publish
 - file: conf.dispatcher.d/cache/default_invalidate.any
   url: classpath:/aem-sdk-dispatcher/src/conf.dispatcher.d/cache/default_invalidate.any
+  variants:
+  - aem-publish
 
 
 config:
