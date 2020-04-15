@@ -148,9 +148,9 @@ files:
 # enabled vhosts
 - file: ${new('java.text.DecimalFormat','0000').format(multiplyIndex)}_${tenant}.vhost
   dir: conf.d/enabled_vhosts
+  symlinkTarget: conf.d/available_vhosts/${new('java.text.DecimalFormat','0000').format(multiplyIndex)}_${tenant}.vhost
   variants:
   - aem-publish
-  template: conf.d/enabled_vhosts/tenant.vhost.hbs
   multiply: tenant
 
 # global rewrite rules
@@ -203,9 +203,9 @@ files:
 # enabled farms
 - file: publish.farm
   dir: conf.dispatcher.d/enabled_farms
+  symlinkTarget: conf.dispatcher.d/available_farms/publish.farm
   variants:
   - aem-publish
-  template: conf.dispatcher.d/enabled_farms/publish.farm.hbs
 
 # cache rules
 - file: rules.any
