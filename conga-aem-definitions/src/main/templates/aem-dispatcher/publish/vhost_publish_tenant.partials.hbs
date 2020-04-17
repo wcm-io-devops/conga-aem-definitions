@@ -75,7 +75,7 @@ RemoteIPInternalProxy {{this}}
 
 
 {{~#block "downloadContentDispositionHeader"}}
-# Content disposition header for downloads
+# Content disposition header for downloads (wcm.io Media Handler)
 <LocationMatch "^.*/dam/.*\.download_attachment\..*$">
   Header set Content-Disposition: attachment
 </LocationMatch>
