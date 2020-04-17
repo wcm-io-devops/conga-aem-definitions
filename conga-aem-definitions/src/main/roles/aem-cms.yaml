@@ -231,6 +231,11 @@ config:
     serverPort: 80
     serverPortSsl: 443
 
+  # If AEM cloud service is used: defines for which cloud manager environments (=run mode) this CONGA environment should apply to
+  # Can be set to a single environment or a list of ennvironments. If set to "none" this configuration is skipped for cloud manager.
+  cloudManager:
+    target:
+
 
 # Configuration parameter that should be encrypted in model export YAML file
 sensitiveConfigParameters:
