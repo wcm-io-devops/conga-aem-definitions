@@ -163,7 +163,6 @@ config:
       certificateKeyFile: /etc/ssl/private/sample.key
       cACertificatePath: /etc/ssl/certs
       cACertificateFile: /etc/ssl/certs/sample.pem
-      skipCopyCertificates: true
 
   sling:
     caconfig:
@@ -181,7 +180,8 @@ tenants:
       serverAliasNames:
       - www.sample1.com
       rootRedirect.url: /en.html
-      ssl.enforce: true      
+      ssl.enforce: true
+      ssl.skipCopyCertificates: true
       customVHostConfig:
         before: |
           # This is custom configuration example
