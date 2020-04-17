@@ -30,6 +30,9 @@
       <action type="update" dev="sseifert">
         Set packageType and enable FileVault validation for all CONGA-generated content packages.
       </action>
+      <action type="add" dev="nbellack">
+        Add skipCopyCertificates option to skip copying SSL certificates from a controlhost to the target machine.
+      </action>
     </release>
 
     <release version="1.6.2" date="2020-01-30">

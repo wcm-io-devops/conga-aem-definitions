@@ -163,6 +163,7 @@ config:
       certificateKeyFile: /etc/ssl/private/sample.key
       cACertificatePath: /etc/ssl/certs
       cACertificateFile: /etc/ssl/certs/sample.pem
+      skipCopyCertificates: true
 
   sling:
     caconfig:

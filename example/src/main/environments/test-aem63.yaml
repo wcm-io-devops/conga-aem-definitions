@@ -119,6 +119,7 @@ config:
       certificateKeyFile: /etc/ssl/private/sample.key
       cACertificatePath: /etc/ssl/certs
       cACertificateFile: /etc/ssl/certs/sample.pem
+      skipCopyCertificates: false
     serverPort: 8080
     serverPortSsl: 8443
 

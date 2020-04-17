@@ -264,6 +264,11 @@ config:
       #caCertificatePath: /path/to/sslCACertificates
       #caCertificateFile: /path/to/sslCACertificateFile
 
+      # If set to true, the certificate files won't be copied from the controlhost. This is useful in scenarios where
+      # the files are already present on the target host and are handled/maintained by another tool.
+      # This setting is only relevant in conjunction with the Ansible role wcm_io_devops.conga_aem_dispatcher.
+      #skipCopyCertificates: false
+
       # If set to true all requests are redirected to HTTPS and HSTS is enabled
       enforce: false
 
