@@ -179,6 +179,7 @@ tenants:
     httpd:
       serverAliasNames:
       - www.sample1.com
+      #- "*"
       rootRedirect.url: /en.html
       ssl.enforce: true
       ssl.skipCopyCertificates: true
@@ -197,11 +198,14 @@ tenants:
 - tenant: sample2.com
   config:
     httpd:
+      serverName: nonssl-sample2.com
       serverNameSsl: ssl-sample2.com
       serverAliasNames:
       - www.sample2.com
       serverAliasNamesSsl:
       - www.ssl-sample2.com
+      serverPort: 8080
+      serverPortSsl: 8443
       rootRedirect.url: /de.html
       headers:
         contentSecurityPolicy: "script-src 'self' 'unsafe-inline' 'unsafe-eval' *.sample1.com;"
