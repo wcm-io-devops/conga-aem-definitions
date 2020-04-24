@@ -179,7 +179,7 @@ tenants:
     httpd:
       serverAliasNames:
       - www.sample1.com
-      #- "*"
+      - "*"
       rootRedirect.url: /en.html
       ssl.enforce: true
       ssl.skipCopyCertificates: true
@@ -203,6 +203,7 @@ tenants:
       serverAliasNames:
       - www.sample2.com
       serverAliasNamesSsl:
+      - "*"
       - www.ssl-sample2.com
       serverPort: 8080
       serverPortSsl: 8443
