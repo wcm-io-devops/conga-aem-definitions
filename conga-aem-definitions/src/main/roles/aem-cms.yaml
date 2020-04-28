@@ -23,11 +23,16 @@ files:
   variants:
   - aem-publish
   condition: ${sling.mapping.generatePackage}
+  validatorOptions:
+    contentPackage.validatorsSettings:
+      jackrabbit-filter:
+        isDisabled: true
   postProcessors:
   - aem-contentpackage
   postProcessorOptions:
     contentPackage:
       name: aem-cms-publish-slingmapping
+      packageType: content
       rootPath: /etc/map
       filters:
       - filter: /etc/map
@@ -50,11 +55,17 @@ files:
   variants:
   - aem-author
   condition: ${replication.author.generatePackage}
+  validatorOptions:
+    contentPackage.validatorsSettings:
+      jackrabbit-filter:
+        options:
+          validRoots: /etc/replication
   postProcessors:
   - aem-contentpackage
   postProcessorOptions:
     contentPackage:
       name: aem-cms-author-replicationagents
+      packageType: content
       rootPath: /etc/replication
       filters:
       - filter: /etc/replication/agents.author
@@ -70,11 +81,17 @@ files:
   variants:
   - aem-publish
   condition: ${replication.publish.generatePackage}
+  validatorOptions:
+    contentPackage.validatorsSettings:
+      jackrabbit-filter:
+        options:
+          validRoots: /etc/replication
   postProcessors:
   - aem-contentpackage
   postProcessorOptions:
     contentPackage:
       name: aem-cms-publish-replicationagents
+      packageType: content
       rootPath: /etc/replication
       filters:
       - filter: /etc/replication/agents.publish
@@ -213,6 +230,11 @@ config:
     # Server ports - needs to be defined here to be available for dispatcher flush targets
     serverPort: 80
     serverPortSsl: 443
+
+  # If AEM cloud service is used: defines for which cloud manager environments (=run mode) this CONGA environment should apply to
+  # Can be set to a single environment or a list of ennvironments. If set to "none" this configuration is skipped for cloud manager.
+  cloudManager:
+    target:
 
 
 # Configuration parameter that should be encrypted in model export YAML file

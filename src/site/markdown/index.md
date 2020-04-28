@@ -15,7 +15,11 @@ The current version of AEM Definitions is 1.x. Guideline for migration from AEM 
 
 ### Overview
 
-This repository contains generic role definitions and templates for CONGA-based AEM configurations.
+This repository contains generic role definitions and templates for CONGA-based AEM configurations:
+
+* [aem-cms][role-aem-cms]: Configures AEM Author and Publish instances
+* [aem-dispatcher][role-aem-dispatcher]: Configures Webserver with Dispatcher module
+* [aem-dispatcher-cloud][role-aem-dispatcher-cloud]: Configures Webserver with Dispatcher module following the Adobe Cloud Manager conventions
 
 The definitions can be used by [CONGA - CONfiguration GenerAtor][conga] for configuring [Adobe Experience Manager (AEM)][aem] environments.
 
@@ -37,3 +41,6 @@ The plugins [CONGA Sling Plugin][conga-sling] and [CONGA AEM Plugin][conga-aem] 
 [conga-aem]: https://devops.wcm.io/conga/plugins/aem/
 [aem]: http://www.adobe.com/solutions/web-experience-management.html
 [aem-definitions-migration]: https://wcm-io.atlassian.net/wiki/x/AQDRAw
+[role-aem-cms]: https://github.com/wcm-io-devops/conga-aem-definitions/blob/develop/conga-aem-definitions/src/main/roles/aem-cms.yaml
+[role-aem-dispatcher]: https://github.com/wcm-io-devops/conga-aem-definitions/blob/develop/conga-aem-definitions/src/main/roles/aem-dispatcher.yaml
+[role-aem-dispatcher-cloud]: https://github.com/wcm-io-devops/conga-aem-definitions/blob/develop/conga-aem-definitions/src/main/roles/aem-dispatcher-cloud.yaml

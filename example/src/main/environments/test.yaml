@@ -84,16 +84,56 @@ nodes:
           host: localhost
           port: 4503
           timeoutMs: 10000
+        # add a new forwarded client header
         forwardClientHeaders:
-        - referer
-        - content-type
-        - content-length
-        - accept-charset
-        - accept-encoding
-        - accept-language
-        - accept
-        - host
-        # add a new filter rules
+        - _merge_
+        - X-My-Custom-Header
+        # add a new filter rule
+        filter:
+        - _merge_
+        - url: /path/to/resources/
+          type: allow
+
+- node: webserver-cloud
+  roles:
+  - role: aem-dispatcher-cloud
+    variants:
+    - aem-publish
+    config:
+      httpd:
+        accessRestriction:
+          locationFilter:
+          - location: /location3Allow
+            type: allow
+          - location: /location4Deny
+            type: deny
+          - location: /admin
+            type: allow
+          - _merge_
+      dispatcher:
+        cache:
+          rootPath: /var/cache/publish1
+          statFilesLevel: 3
+          allowAuthorized: true
+          serveStaleOnError: true
+          serveStaleGracePeriodSec: 5
+          headers:
+          - Cache-Control
+          - Content-Disposition
+          - Content-Type
+          - Expires
+          - Last-Modified
+          - X-Content-Type-Options
+          enableTTL: true
+        renderInstance:
+          host: localhost
+          port: 4503
+          timeoutMs: 10000
+        # add a new forwarded client header
+        forwardClientHeaders:
+        - _merge_
+        - X-My-Custom-Header
+        # add a new filter rule
         filter:
         - _merge_
         - url: /path/to/resources/
@@ -139,8 +179,10 @@ tenants:
     httpd:
       serverAliasNames:
       - www.sample1.com
+      - "*"
       rootRedirect.url: /en.html
-      ssl.enforce: true      
+      ssl.enforce: true
+      ssl.skipCopyCertificates: true
       customVHostConfig:
         before: |
           # This is custom configuration example
@@ -156,11 +198,15 @@ tenants:
 - tenant: sample2.com
   config:
     httpd:
+      serverName: nonssl-sample2.com
       serverNameSsl: ssl-sample2.com
       serverAliasNames:
       - www.sample2.com
       serverAliasNamesSsl:
+      - "*"
       - www.ssl-sample2.com
+      serverPort: 8080
+      serverPortSsl: 8443
       rootRedirect.url: /de.html
       headers:
         contentSecurityPolicy: "script-src 'self' 'unsafe-inline' 'unsafe-eval' *.sample1.com;"

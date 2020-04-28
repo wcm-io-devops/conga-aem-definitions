@@ -143,7 +143,8 @@ tenants:
       serverAliasNames:
       - www.sample1.com
       rootRedirect.url: /en.html
-      ssl.enforce: true      
+      ssl.enforce: true
+      ssl.skipCopyCertificates: false
       customVHostConfig:
         before: |
           # This is custom configuration example

@@ -1,0 +1,3 @@
+{{#each tenants ~}}
+  "{{#if this.config.httpd.serverName}}this.config.httpd.serverName{{else}}{{this.tenant}}{{/if}}"
+{{/each ~}}
