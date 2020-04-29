@@ -25,7 +25,10 @@
 
     <release version="1.7.2" date="not released">
       <action type="update" dev="mceruti">
-        Role aem-dispatcher, aem-dispatcher-cloud: CORS Header - Add required protocol to the example origins to be whitelisted 
+        Role aem-dispatcher, aem-dispatcher-cloud: CORS Header - Add required protocol to the example origins to be whitelisted
+      </action>
+      <action type="update" dev="mrozati">
+        Role aem-dispatcher: Add mimetype application/manifest+json for extension webmanifest
       </action>
     </release>
 
