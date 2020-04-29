@@ -273,8 +273,8 @@ config:
       # If set to false only the requesting host is all if it is in the hostWhiteList (or this list is empty), and not in the hostBlackList
       allowAllHosts: true
       #hostWhiteList:
-      #- www.host1.com
-      #- www.host2.com
+      #- "https://www.host1.com"
+      #- "https://www.host2.com"
 
     headers:
       # Enables/Configures the Content-Security-Policy header on publish dispatcher (see https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)
