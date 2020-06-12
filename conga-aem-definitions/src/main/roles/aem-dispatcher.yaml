@@ -303,6 +303,11 @@ config:
       referrerPolicy: "origin-when-cross-origin"
       # Enables/Configures the X-XSS-Protection header on publish dispatcher (see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection)
       xssProtection:
+      # Enables/Configures the Cache-Control header on publish dispatcher (see https://developer.mozilla.org/en/docs/Web/HTTP/Headers/Cache-Control)
+      cacheControl:
+        # Cache AEM Clientlibs with long cache key for 1 year
+        - locationMatch: "\\.lc-.*-lc\\.min\\.(css|js)$"
+          directives: "max-age=31536000, public"
 
     # Custom configuration snippets for vhost files (only on publish dispatcher - useful for tenant-specific configurations)
     customVHostConfig:

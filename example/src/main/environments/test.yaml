@@ -212,4 +212,8 @@ tenants:
         contentSecurityPolicy: "script-src 'self' 'unsafe-inline' 'unsafe-eval' *.sample1.com;"
         xssProtection: "1; mode=block"
         referrerPolicy: "strict-origin-when-cross-origin"
+        cacheControl:
+          - _merge_
+          - locationMatch: "\\.json.*$"
+            directives: "max-age=10, public"
     sling.mapping.rootPath: /content/sample2

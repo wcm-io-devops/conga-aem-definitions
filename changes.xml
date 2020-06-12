@@ -30,6 +30,9 @@
       <action type="update" dev="mrozati">
         Role aem-dispatcher: Add mimetype application/manifest+json for extension webmanifest
       </action>
+      <action type="add" dev="nbellack">
+        Role aem-dispatcher: Add httpd.headers.cacheControl
+      </action>
     </release>
 
     <release version="1.7.0" date="2020-04-28">

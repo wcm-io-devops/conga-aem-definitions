@@ -86,11 +86,11 @@ TraceEnable Off
 {{~#block "cacheControl"}}
 # Cache-control
 Header set Cache-Control "public, must-revalidate"
-
-# Cache AEM Clientlibs with long cache key for 1 year
-<LocationMatch "\.lc-.*-lc\.min\.(css|js)$">
-  Header set Cache-Control "max-age=31536000, public"
+{{#each httpd.headers.cacheControl}}
+<LocationMatch "{{this.locationMatch}}">
+  Header set Cache-Control "{{this.directives}}"
 </LocationMatch>
+{{~/each}}
 {{/block}}
 
 {{~#block "searchRobotHeader"}}
