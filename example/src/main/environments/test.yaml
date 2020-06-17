@@ -110,6 +110,7 @@ nodes:
           - location: /admin
             type: allow
           - _merge_
+        docroot: "\\${PUBLISH_DOCROOT}"
       dispatcher:
         cache:
           rootPath: /var/cache/publish1

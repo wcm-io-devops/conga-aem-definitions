@@ -24,6 +24,9 @@
   <body>
 
     <release version="1.7.2" date="not released">
+      <action type="add" dev="trichter">
+        Role aem-dispatcher-cloud: Introduce httpd.docroot in order to cover scenarios where variable is named differently.
+      </action>
       <action type="update" dev="mceruti">
         Role aem-dispatcher, aem-dispatcher-cloud: CORS Header - Add required protocol to the example origins to be whitelisted
       </action>

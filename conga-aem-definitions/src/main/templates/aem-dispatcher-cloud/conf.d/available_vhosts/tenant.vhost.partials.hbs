@@ -27,7 +27,7 @@ ServerAlias {{this}}
 
 {{~#block "generalSettings"}}
 ## Use a document root that matches the one in conf.dispatcher.d/default.farm
-DocumentRoot "${DOCROOT}"
+DocumentRoot "{{httpd.docroot}}"
 ## Add header breadcrumbs for help in troubleshooting
 <IfModule mod_headers.c>
 	Header add X-Vhost "publish"
@@ -55,7 +55,7 @@ DocumentRoot "${DOCROOT}"
 	#### Prevent clickjacking
 	Header always append X-Frame-Options SAMEORIGIN
 </Directory>
-<Directory "${DOCROOT}">
+<Directory "{{httpd.docroot}}">
 	AllowOverride None
 	Require all granted
 </Directory>

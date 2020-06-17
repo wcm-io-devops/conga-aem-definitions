@@ -39,7 +39,7 @@
 	/cache {
 
 		## The cacheroot must be equal to the document root of the webserver
-		/docroot "${DOCROOT}"
+		/docroot "{{httpd.docroot}}"
 
 		## sets the level upto which files named ".stat" will be created in the 
 		## document root of the webserver. when an activation request for some 

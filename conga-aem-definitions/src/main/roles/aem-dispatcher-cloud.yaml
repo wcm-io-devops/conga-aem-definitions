@@ -259,6 +259,9 @@ config:
     serverName:
     serverAliasNames:
 
+    # The document root variable used in httpd configuration files
+    docroot: "\\${DOCROOT}"
+
     # Redirecting from "/" (only publish dispatcher)
     rootRedirect:
       #url: /en.html
