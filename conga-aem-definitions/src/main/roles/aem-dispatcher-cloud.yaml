@@ -288,6 +288,8 @@ config:
         # Cache AEM Clientlibs with long cache key for 1 year
         - locationMatch: "\\.lc-.*-lc\\.min\\.(css|js)$"
           directives: "max-age=31536000, public"
+      # Set the default experiation time for text/html responses (enabled by default in AEM Cloud Service webserver)
+      htmlExpirationTimeMin: 5
 
     # Custom configuration snippets for vhost files (only on publish dispatcher - useful for tenant-specific configurations)
     customVHostConfig:

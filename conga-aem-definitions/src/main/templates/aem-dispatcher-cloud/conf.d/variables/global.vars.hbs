@@ -21,3 +21,6 @@ Define DISP_LOG_LEVEL {{dispatcher.logging.level}}
 # https://httpd.apache.org/docs/current/mod/mod_rewrite.html#logging
 #
 # Define REWRITE_LOG_LEVEL Warn
+
+# Set the default experiation time for text/html responses (in minutes)
+Define EXPIRATION_TIME {{httpd.headers.htmlExpirationTimeMin}}
