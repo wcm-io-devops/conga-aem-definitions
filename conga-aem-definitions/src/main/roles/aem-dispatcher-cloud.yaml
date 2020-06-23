@@ -6,7 +6,7 @@ variants:
 # Disaptcher for publish instances - configure a tenant for each vhost
 - variant: aem-publish
   config:
-    
+
     httpd:
       # Default server name to tenant name on publish
       serverName: ${tenant}
@@ -14,7 +14,7 @@ variants:
     dispatcher:
 
       # Forward client headers from dispatcher to AEM instance
-      forwardClientHeaders:    
+      forwardClientHeaders:
       - X-Forwarded-Proto
       - X-Forwarded-SSL-Certificate
       - X-Forwarded-SSL-Client-Cert
@@ -310,9 +310,9 @@ config:
 
 
   dispatcher:
-    
+
     # Forward client headers from dispatcher to AEM instance
-    forwardClientHeaders:    
+    forwardClientHeaders:
     - "*"
 
     # Dispatcher filter rules (use only regex, no glob expressions)
@@ -347,17 +347,17 @@ config:
       ignoreUrlParams:
       - glob: "*"
         type: deny
-      
+
       # Sets the level up to which files named ".stat" will be created in the document root of the web server (only on publish dispatcher)
       #statFilesLevel: 1
-      
+
       # Whether to cache responses to requests that contain authorization information (only on publish dispatcher)
       #allowAuthorized: false
 
       # Whether the dispatcher should serve stale content if no remote server is available (only on publish dispatcher)
       #serveStaleOnError: false
 
-      # Grace period defines the number of seconds a stale, auto-invalidated resource may still be served from the cache after the last activation occurring. 
+      # Grace period defines the number of seconds a stale, auto-invalidated resource may still be served from the cache after the last activation occurring.
       #serveStaleGracePeriodSec: 0
 
       # Cache headers in dispatcher (only on publish dispatcher)

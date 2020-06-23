@@ -11,7 +11,7 @@
 
 
 {{~#block "serverName"}}
-# Primary hostname 
+# Primary hostname
 ServerName {{httpd.serverName}}
 {{/block}}
 
@@ -219,7 +219,7 @@ RewriteCond %{REQUEST_URI} !^/services
 RewriteCond %{REQUEST_URI} !^/system
 RewriteCond %{REQUEST_URI} !^/tmp
 RewriteCond %{REQUEST_URI} !^/var
-RewriteRule ^/(.+)$ {{sling.mapping.rootPath}}/$1 [PT,L]  
+RewriteRule ^/(.+)$ {{sling.mapping.rootPath}}/$1 [PT,L]
 
 
 # Do not allow access to any /content without url shortening path (except to assets)

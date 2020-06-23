@@ -52,45 +52,45 @@ ServerAlias {{this}}
 DocumentRoot "${DOCROOT}"
 ## Add header breadcrumbs for help in troubleshooting
 <IfModule mod_headers.c>
-	Header add X-Vhost "publish"
+  Header add X-Vhost "publish"
   RequestHeader set X-Forwarded-SSL "on"
 </IfModule>
 <Directory />
-	<IfModule disp_apache2.c>
-		## Some items cache with the wrong mime type
-		## Use this option to use the name to auto-detect mime types when cached improperly
-		ModMimeUsePathInfo On
-		## Use this option to avoid cache poisioning
-		## Sling will return /content/image.jpg as well as /content/image.jpg/ but apache can't search /content/image.jpg/ as a file
-		## Apache will treat that like a directory.  This assures the last slash is never stored in cache
-		DirectorySlash Off
-		## Enable the dispatcher file handler for apache to fetch files from AEM
-		SetHandler dispatcher-handler
-	</IfModule>
-	Options FollowSymLinks
-	AllowOverride None
-	#### Insert filter
-	SetOutputFilter DEFLATE
-	#### Don't compress images
-	SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip dont-vary
-	#### Make sure proxies don't deliver the wrong content
-	Header append Vary User-Agent env=!dont-vary
-	#### Prevent clickjacking
-	Header always append X-Frame-Options SAMEORIGIN
+  <IfModule disp_apache2.c>
+    ## Some items cache with the wrong mime type
+    ## Use this option to use the name to auto-detect mime types when cached improperly
+    ModMimeUsePathInfo On
+    ## Use this option to avoid cache poisioning
+    ## Sling will return /content/image.jpg as well as /content/image.jpg/ but apache can't search /content/image.jpg/ as a file
+    ## Apache will treat that like a directory.  This assures the last slash is never stored in cache
+    DirectorySlash Off
+    ## Enable the dispatcher file handler for apache to fetch files from AEM
+    SetHandler dispatcher-handler
+  </IfModule>
+  Options FollowSymLinks
+  AllowOverride None
+  #### Insert filter
+  SetOutputFilter DEFLATE
+  #### Don't compress images
+  SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip dont-vary
+  #### Make sure proxies don't deliver the wrong content
+  Header append Vary User-Agent env=!dont-vary
+  #### Prevent clickjacking
+  Header always append X-Frame-Options SAMEORIGIN
 </Directory>
 <Directory "${DOCROOT}">
-	AllowOverride None
-	Require all granted
+  AllowOverride None
+  Require all granted
 </Directory>
 <IfModule disp_apache2.c>
-	## Enabled to allow rewrites to take affect and not be ignored by the dispatcher module
-	DispatcherUseProcessedURL	On
-	## Default setting to allow all errors to come from the aem instance
-	DispatcherPassError		0
+  ## Enabled to allow rewrites to take affect and not be ignored by the dispatcher module
+  DispatcherUseProcessedURL  On
+  ## Default setting to allow all errors to come from the aem instance
+  DispatcherPassError    0
 </IfModule>
 <IfModule mod_rewrite.c>
-	RewriteEngine	on
-	Include conf.d/rewrites/rewrite.rules
+  RewriteEngine  on
+  Include conf.d/rewrites/rewrite.rules
 </IfModule>
 
 # Do not allow RFC 2616 trace requests
@@ -193,7 +193,7 @@ RewriteCond %{REQUEST_URI} !^/services
 RewriteCond %{REQUEST_URI} !^/system
 RewriteCond %{REQUEST_URI} !^/tmp
 RewriteCond %{REQUEST_URI} !^/var
-RewriteRule ^/(.+)$ {{sling.mapping.rootPath}}/$1 [PT,L]  
+RewriteRule ^/(.+)$ {{sling.mapping.rootPath}}/$1 [PT,L]
 
 
 # Do not allow access to any /content without url shortening path (except to assets)
