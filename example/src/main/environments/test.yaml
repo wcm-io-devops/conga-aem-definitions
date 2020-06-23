@@ -110,6 +110,8 @@ nodes:
           - location: /admin
             type: allow
           - _merge_
+        headers:
+          htmlExpirationTimeMin: 3
       dispatcher:
         cache:
           rootPath: /var/cache/publish1
