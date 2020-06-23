@@ -219,3 +219,22 @@ tenants:
           - locationMatch: "\\.json.*$"
             directives: "max-age=10, public"
     sling.mapping.rootPath: /content/sample2
+
+- tenant: cloud-sample3.com
+  config:
+    httpd:
+      cloudManagerConditional:
+      # Hostnames for dev environment
+      - targetEnvironment: dev
+        serverName: www.dev-sample3.com
+        serverAliasNames:
+        - www.dev-alias3a.com
+        - www.dev-alias3b.com
+      # Hostnames for stage environment
+      - targetEnvironment: stage
+        serverName: www.stage-sample3.com
+      # Hostnames for prod environment
+      - targetEnvironment: prod
+        serverName: www.prod-sample3.com
+      rootRedirect.url: /en.html
+    sling.mapping.rootPath: /content/sample3

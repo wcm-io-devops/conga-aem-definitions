@@ -28,6 +28,9 @@
         Role aem-dispatcher, aem-dispatcher-cloud: Add httpd.headers.cacheControl to allow fine-grained location-based setting of cache control headers.
       </action>
       <action type="add" dev="sseifert">
+        Role aem-cms, aem-dispatcher-cloud: Add httpd.cloudManagerConditional to allow to define server names/alias names depending on environment in a single dispatcher configuration.
+      </action>
+      <action type="add" dev="sseifert">
         Role aem-dispatcher-cloud: Add httpd.headers.htmlExpirationTimeMin parameter to control the default expiration time for text/html responses.
       </action>
       <action type="update" dev="mceruti">

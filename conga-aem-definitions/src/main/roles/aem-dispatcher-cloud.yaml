@@ -300,6 +300,15 @@ config:
       # Placed at the bottom of the vhost confign file
       after:
 
+    # Allows to different define server names/alias names per environment in a single dispatcher configuration
+    #cloudManagerConditional:
+    #  - targetEnvironment: dev
+    #    serverName: www.dev-host3.com
+    #    serverAliasNames:
+    #    - www.dev-alias3a.com
+    #    - www.dev-alias3b.com
+
+
   dispatcher:
     
     # Forward client headers from dispatcher to AEM instance
