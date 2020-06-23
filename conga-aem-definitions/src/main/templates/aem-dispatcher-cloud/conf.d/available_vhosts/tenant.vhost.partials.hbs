@@ -53,6 +53,7 @@ DocumentRoot "${DOCROOT}"
 ## Add header breadcrumbs for help in troubleshooting
 <IfModule mod_headers.c>
 	Header add X-Vhost "publish"
+  RequestHeader set X-Forwarded-SSL "on"
 </IfModule>
 <Directory />
 	<IfModule disp_apache2.c>
