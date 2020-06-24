@@ -53,6 +53,7 @@ DocumentRoot "${DOCROOT}"
 ## Add header breadcrumbs for help in troubleshooting
 <IfModule mod_headers.c>
   Header add X-Vhost "publish"
+  # Webserver in AEM cloud service is always terminated with SSL
   RequestHeader set X-Forwarded-SSL "on"
 </IfModule>
 <Directory />

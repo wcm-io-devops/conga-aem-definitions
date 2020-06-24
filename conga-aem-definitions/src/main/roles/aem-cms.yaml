@@ -33,9 +33,9 @@ files:
     contentPackage:
       name: aem-cms-publish-slingmapping
       packageType: content
-      rootPath: /etc
+      rootPath: /etc/map
       filters:
-      - filter: /etc
+      - filter: /etc/map
         rules:
         - rule: include
           pattern: /etc/map/.*
@@ -45,10 +45,6 @@ files:
           pattern: /etc/map/http/.*
         - rule: exclude
           pattern: /etc/map/http/AppMeasurementBridge
-        - rule: include
-          pattern: /etc/map/https
-        - rule: include
-          pattern: /etc/map\..*
 
 # AEM Replication (Author)
 - file: aem-cms-author-replicationagents.json

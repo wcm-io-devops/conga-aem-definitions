@@ -28,7 +28,7 @@
         Role aem-dispatcher, aem-dispatcher-cloud: Add httpd.headers.cacheControl to allow fine-grained location-based setting of cache control headers.
       </action>
       <action type="add" dev="sseifert">
-        Role aem-cms, aem-dispatcher-cloud: Add httpd.cloudManagerConditional to allow to define server names/alias names depending on environment in a single dispatcher configuration.
+        Role aem-cms, aem-dispatcher-cloud: Add httpd.cloudManagerConditional to allow to define server names/alias names depending on environment in a single dispatcher configuration with support for Sling short url mapping.
       </action>
       <action type="add" dev="sseifert">
         Role aem-dispatcher, aem-dispatcher-cloud: Introduce parameters httpd.mapping.uriExcludeFromMapping and httpd.mapping.uriAllowContentAccess to configure the URI patterns with special treatments for Sling short url mapping.

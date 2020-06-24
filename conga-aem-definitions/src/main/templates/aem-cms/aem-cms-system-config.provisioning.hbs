@@ -30,21 +30,3 @@
     username="{{quickstart.adminUser.username}}"
     password="{{webconsolePasswordHash quickstart.adminUser.password}}"
 {{/if}}
-
-
-{{~#aemTenantsCloudManagerConditional "groupedCloudManagerConditionals"}}{{/aemTenantsCloudManagerConditional}}
-{{~#each groupedCloudManagerConditionals as |cloudManagerConditionals targetEnvironment|}}
-[configurations runModes=publish,{{targetEnvironment}}]
-
-  # Change Sling Mapping root path for {{targetEnvironment}} environment
-  org.apache.sling.jcr.resource.internal.JcrResourceResolverFactoryImpl
-    resource.resolver.map.location="/etc/map.publish.{{targetEnvironment}}"
-    resource.resolver.log.unclosed=B"false"
-    resource.resolver.manglenamespaces=B"true"
-    resource.resolver.map.observation=["/libs","/apps","/content","/etc","/conf"]
-    resource.resolver.mapping=["/:/"]
-    resource.resolver.searchpath=["/apps","/libs"]
-    resource.resolver.vanitypath.blacklist=["/content/usergenerated"]
-    resource.resolver.vanitypath.whitelist=["/apps/","/libs/","/content/"]
-
-{{/each ~}}
