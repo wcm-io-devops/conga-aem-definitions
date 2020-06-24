@@ -57,7 +57,8 @@
 {{~#aemTenantsCloudManagerConditional "groupedCloudManagerConditionals"}}{{/aemTenantsCloudManagerConditional}}
 {{~#each groupedCloudManagerConditionals as |cloudManagerConditionals targetEnvironment|}}
 
-{{~#each cloudManagerConditionals}},
+{{~#each cloudManagerConditionals}}
+{{~#if this.tenant.config.sling.mapping.rootPath}},
 {{~#assign "serverName"}}{{#if this.config.serverName}}{{this.config.serverName}}{{else}}{{this.tenant.tenant}}{{/if}}{{/assign}}
 {{~#assign "portSuffix"}}{{#ifNotEquals this.tenant.config.httpd.serverPort 80}}.{{this.tenant.config.httpd.serverPort}}{{/ifNotEquals}}{{/assign}}
 {{~#neq serverName "*"}}
@@ -75,6 +76,7 @@
     }
 {{/neq ~}}
 {{/each ~}}
+{{/if ~}}
 {{/each ~}}
 
 {{/each ~}}
