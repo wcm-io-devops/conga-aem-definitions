@@ -187,7 +187,6 @@ RewriteCond %{REQUEST_URI} !{{this}}
 {{~/each}}
 RewriteRule ^/(.+)$ {{sling.mapping.rootPath}}/$1 [PT,L]
 
-
 # Do not allow access to any /content without url shortening path (except to assets)
 {{~#each httpd.mapping.uriAllowContentAccess}}
 RewriteCond %{REQUEST_URI} !{{this}}
@@ -196,6 +195,12 @@ RewriteCond %{REQUEST_URI} !{{this}}
 RewriteCond %{REQUEST_URI} !^{{sling.mapping.rootPath}}
 {{~/if}}
 RewriteRule ^/content/.* - [R=404,L,NC]
+{{else ~}}
+# Default mapping /content -> /
+{{~#each httpd.mapping.uriExcludeFromMapping}}
+RewriteCond %{REQUEST_URI} !{{this}}
+{{~/each}}
+RewriteRule ^/(.+)$ /content/$1 [PT,L]
 {{/if ~}}
 {{/block}}
 
