@@ -31,6 +31,9 @@
         Role aem-cms, aem-dispatcher-cloud: Add httpd.cloudManagerConditional to allow to define server names/alias names depending on environment in a single dispatcher configuration.
       </action>
       <action type="add" dev="sseifert">
+        Role aem-dispatcher, aem-dispatcher-cloud: Introduce parameters httpd.mapping.uriExcludeFromMapping and httpd.mapping.uriAllowContentAccess to configure the URI patterns with special treatments for Sling short url mapping.
+      </action>
+      <action type="add" dev="sseifert">
         Role aem-dispatcher-cloud: Add httpd.headers.htmlExpirationTimeMin parameter to control the default expiration time for text/html responses.
       </action>
       <action type="update" dev="mceruti">
@@ -39,8 +42,8 @@
       <action type="update" dev="mrozati">
         Role aem-dispatcher: Add mimetype application/manifest+json for extension webmanifest
       </action>
-      <action type="fix" dev="sseifert">
-        Role aem-dispatcher, aem-dispatcher-cloud: Exclude /crx from short url mapping rewrite rule.
+      <action type="update" dev="sseifert">
+        Role aem-dispatcher-cloud: Apply special treatment for /crx and /saml_login in resource mapping, remove /dispatcher/invalidate.cache from this list, allow access to /content/test-site.
       </action>
     </release>
 

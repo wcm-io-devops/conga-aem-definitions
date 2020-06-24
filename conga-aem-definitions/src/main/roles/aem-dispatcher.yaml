@@ -309,6 +309,23 @@ config:
         - locationMatch: "\\.lc-.*-lc\\.min\\.(css|js)$"
           directives: "max-age=31536000, public"
 
+    # Request URI patterns for Sling maping short URL configuration
+    mapping:
+      uriExcludeFromMapping:
+      - ^/apps
+      - ^/bin
+      - ^/content
+      - ^/dispatcher/invalidate.cache
+      - ^/etc
+      - ^/home
+      - ^/libs
+      - ^/services
+      - ^/system
+      - ^/tmp
+      - ^/var
+      uriAllowContentAccess:
+      - ^/content/dam
+
     # Custom configuration snippets for vhost files (only on publish dispatcher - useful for tenant-specific configurations)
     customVHostConfig:
       # Placed at the top of the vhost config file

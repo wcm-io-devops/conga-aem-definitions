@@ -207,23 +207,16 @@ Header set X-XSS-Protection "{{httpd.headers.xssProtection}}"
 {{~#block "rewriteSlingShortUrlMapping"}}
 {{~#if sling.mapping.rootPath}}
 # Rewrite all paths to short url mapping except special system paths
-RewriteCond %{REQUEST_URI} !^/apps
-RewriteCond %{REQUEST_URI} !^/bin
-RewriteCond %{REQUEST_URI} !^/content
-RewriteCond %{REQUEST_URI} !^/crx
-RewriteCond %{REQUEST_URI} !^/dispatcher/invalidate.cache
-RewriteCond %{REQUEST_URI} !^/etc
-RewriteCond %{REQUEST_URI} !^/home
-RewriteCond %{REQUEST_URI} !^/libs
-RewriteCond %{REQUEST_URI} !^/services
-RewriteCond %{REQUEST_URI} !^/system
-RewriteCond %{REQUEST_URI} !^/tmp
-RewriteCond %{REQUEST_URI} !^/var
+{{~#each httpd.mapping.uriExcludeFromMapping}}
+RewriteCond %{REQUEST_URI} !{{this}}
+{{~/each}}
 RewriteRule ^/(.+)$ {{sling.mapping.rootPath}}/$1 [PT,L]
 
 
 # Do not allow access to any /content without url shortening path (except to assets)
-RewriteCond %{REQUEST_URI} !^/content/dam
+{{~#each httpd.mapping.uriAllowContentAccess}}
+RewriteCond %{REQUEST_URI} !{{this}}
+{{~/each}}
 {{~#if sling.mapping.allowUnshortenedPath}}
 RewriteCond %{REQUEST_URI} !^{{sling.mapping.rootPath}}
 {{~/if}}

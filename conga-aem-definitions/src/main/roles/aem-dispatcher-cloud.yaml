@@ -291,6 +291,24 @@ config:
       # Set the default experiation time for text/html responses (enabled by default in AEM Cloud Service webserver)
       htmlExpirationTimeMin: 5
 
+    # Request URI patterns for Sling maping short URL configuration
+    mapping:
+      uriExcludeFromMapping:
+      - ^/apps
+      - ^/bin
+      - ^/content
+      - ^/crx
+      - ^/etc
+      - ^/home
+      - ^/libs
+      - ^/saml_login
+      - ^/system
+      - ^/tmp
+      - ^/var
+      uriAllowContentAccess:
+      - ^/content/dam
+      - ^/content/test-site
+
     # Custom configuration snippets for vhost files (only on publish dispatcher - useful for tenant-specific configurations)
     customVHostConfig:
       # Placed at the top of the vhost config file
