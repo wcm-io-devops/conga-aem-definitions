@@ -372,7 +372,7 @@ config:
         type: deny
 
       # Sets the level up to which files named ".stat" will be created in the document root of the web server (only on publish dispatcher)
-      #statFilesLevel: 1
+      statFilesLevel: 1
 
       # Whether to cache responses to requests that contain authorization information (only on publish dispatcher)
       allowAuthorized: false
