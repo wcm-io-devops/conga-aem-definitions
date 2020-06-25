@@ -109,9 +109,9 @@ variants:
 
         # Defines what responses should be cached based on the requested URL
         rules:
-        # Cache everything by default
-        - glob: "*"
-          type: allow
+        # Cache everything by default (already included in default rules)
+        #- glob: "*"
+        #  type: allow
         # Exclude .htx extension from caching
         - glob: "*.htx"
           type: deny
@@ -246,6 +246,10 @@ files:
   - aem-publish
 - file: conf.dispatcher.d/cache/default_invalidate.any
   url: classpath:/aem-sdk-dispatcher/src/conf.dispatcher.d/cache/default_invalidate.any
+  variants:
+  - aem-publish
+- file: conf.dispatcher.d/cache/default_rules.any
+  url: classpath:/aem-sdk-dispatcher/src/conf.dispatcher.d/cache/default_rules.any
   variants:
   - aem-publish
 
