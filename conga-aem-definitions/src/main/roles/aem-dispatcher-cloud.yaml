@@ -297,6 +297,7 @@ config:
       - ^/apps
       - ^/bin
       - ^/content
+      - ^/dispatcher/invalidate.cache
       - ^/crx
       - ^/etc
       - ^/home
