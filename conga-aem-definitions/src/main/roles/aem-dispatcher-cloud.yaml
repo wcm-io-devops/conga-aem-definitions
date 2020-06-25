@@ -371,13 +371,13 @@ config:
       #statFilesLevel: 1
 
       # Whether to cache responses to requests that contain authorization information (only on publish dispatcher)
-      #allowAuthorized: false
+      allowAuthorized: false
 
       # Whether the dispatcher should serve stale content if no remote server is available (only on publish dispatcher)
-      #serveStaleOnError: false
+      serveStaleOnError: true
 
       # Grace period defines the number of seconds a stale, auto-invalidated resource may still be served from the cache after the last activation occurring.
-      #serveStaleGracePeriodSec: 0
+      serveStaleGracePeriodSec: 2
 
       # Cache headers in dispatcher (only on publish dispatcher)
       headers:

@@ -55,7 +55,7 @@
 {{~#if dispatcher.cache.allowAuthorized}}
     /allowAuthorized "1"
 {{~ else}}
-    #/allowAuthorized "0"
+    /allowAuthorized "0"
 {{~/if}}
 
     # Flag indicating whether the dispatcher should serve stale content if
@@ -63,7 +63,7 @@
 {{~#if dispatcher.cache.serveStaleOnError}}
     /serveStaleOnError "1"
 {{~ else}}
-    #/serveStaleOnError "0"
+    /serveStaleOnError "0"
 {{~/if}}
 
     # the rules define, which pages should be cached. please note that
@@ -128,11 +128,7 @@
     # when their path matches the /invalidate section above. This setting
     # can be used in a setup, where a batch of activations would otherwise
     # repeatedly invalidate the entire cache.
-{{~#if dispatcher.cache.serveStaleGracePeriodSec}}
     /gracePeriod "{{dispatcher.cache.serveStaleGracePeriodSec}}"
-{{~ else}}
-    #/gracePeriod "2"
-{{~/if}}
 
     # Enable TTL evaluates the response headers from the backend, and if they
     # contain a Cache-Control max-age or Expires date, an auxiliary, empty file
@@ -142,7 +138,7 @@
 {{~#if dispatcher.cache.enableTTL}}
     /enableTTL "1"
 {{~ else}}
-    # /enableTTL "1"
+    /enableTTL "0"
 {{~/if}}
 
   }
