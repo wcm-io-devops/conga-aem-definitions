@@ -1,3 +1,16 @@
+
 {{#each tenants ~}}
-  "{{#if this.config.httpd.serverName}}this.config.httpd.serverName{{else}}{{this.tenant}}{{/if}}"
+{{#not this.config.httpd.cloudManagerConditional ~}}
+"{{#if this.config.httpd.serverName}}{{this.config.httpd.serverName}}{{else}}{{this.tenant}}{{/if}}"
+{{/not ~}}
+{{/each ~}}
+
+{{#aemTenantsCloudManagerConditional "groupedCloudManagerConditionals"}}{{/aemTenantsCloudManagerConditional ~}}
+{{#each groupedCloudManagerConditionals as |cloudManagerConditionals targetEnvironment| ~}}
+{{#each cloudManagerConditionals ~}}
+"{{#if this.config.serverName}}{{this.config.serverName}}{{else}}{{this.tenant.tenant}}{{/if}}"
+{{#each this.config.serverAliasNames as |alias| ~}}
+"{{alias}}"
+{{/each ~}}
+{{/each ~}}
 {{/each ~}}
