@@ -45,6 +45,9 @@
       <action type="update" dev="sseifert">
         Role aem-dispatcher-cloud: Apply special treatment for /crx and /saml_login in resource mapping, allow access to /content/test-site.
       </action>
+      <action type="update" dev="sseifert">
+        Role aem-dispatcher-cloud: Apply default values for allowAuthorized, serveStaleOnError, serveStaleGracePeriodSec.
+      </action>
     </release>
 
     <release version="1.7.0" date="2020-04-28">
