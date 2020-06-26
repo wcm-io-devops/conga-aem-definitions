@@ -41,8 +41,8 @@
 /0018 { /type "deny" /method "GET" /query "debug=*" }
 /0019 { /type "deny" /method "GET" /query "wcmmode=*" }
 
-## Allow current user
+# Allow current user
 /0020 { /type "allow" /url "/libs/granite/security/currentuser.json" }
 
-## Allow index page
+# Allow index page
 /0030 { /type "allow" /url "/index.html" }
