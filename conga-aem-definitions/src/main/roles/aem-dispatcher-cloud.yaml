@@ -236,12 +236,16 @@ files:
   template: conf.dispatcher.d/virtualhosts/virtualhosts.any.hbs
 
 # copy additional static files directly from AEM SDK dispatcher sources
-- file: conf.dispatcher.d/dispatcher.any
-  url: classpath:/aem-sdk-dispatcher/src/conf.dispatcher.d/dispatcher.any
+- file: conf.d/available_vhosts/default.vhost
+  url: classpath:/aem-sdk-dispatcher/src/conf.d/available_vhosts/default.vhost
   variants:
   - aem-publish
-- file: conf.dispatcher.d/renders/default_renders.any
-  url: classpath:/aem-sdk-dispatcher/src/conf.dispatcher.d/renders/default_renders.any
+- file: conf.d/enabled_vhosts/default.vhost
+  symlinkTarget: conf.d/available_vhosts/default.vhost
+  variants:
+  - aem-publish
+- file: conf.dispatcher.d/dispatcher.any
+  url: classpath:/aem-sdk-dispatcher/src/conf.dispatcher.d/dispatcher.any
   variants:
   - aem-publish
 - file: conf.dispatcher.d/cache/default_invalidate.any
@@ -250,6 +254,30 @@ files:
   - aem-publish
 - file: conf.dispatcher.d/cache/default_rules.any
   url: classpath:/aem-sdk-dispatcher/src/conf.dispatcher.d/cache/default_rules.any
+  variants:
+  - aem-publish
+- file: conf.dispatcher.d/available_farms/default.farm
+  url: classpath:/aem-sdk-dispatcher/src/conf.dispatcher.d/available_farms/default.farm
+  variants:
+  - aem-publish
+- file: conf.dispatcher.d/clientheaders/default_clientheaders.any
+  url: classpath:/aem-sdk-dispatcher/src/conf.dispatcher.d/clientheaders/default_clientheaders.any
+  variants:
+  - aem-publish
+- file: conf.dispatcher.d/enabled_farms/default.farm
+  symlinkTarget: conf.dispatcher.d/available_farms/default.farm
+  variants:
+  - aem-publish
+- file: conf.dispatcher.d/filters/default_filters.any
+  url: classpath:/aem-sdk-dispatcher/src/conf.dispatcher.d/filters/default_filters.any
+  variants:
+  - aem-publish
+- file: conf.dispatcher.d/renders/default_renders.any
+  url: classpath:/aem-sdk-dispatcher/src/conf.dispatcher.d/renders/default_renders.any
+  variants:
+  - aem-publish
+- file: conf.dispatcher.d/virtualhosts/default_virtualhosts.any
+  url: classpath:/aem-sdk-dispatcher/src/conf.dispatcher.d/virtualhosts/default_virtualhosts.any
   variants:
   - aem-publish
 
