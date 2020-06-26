@@ -10,40 +10,22 @@
 
 
 {{~#block "serverName"}}
-{{~#if httpd.cloudManagerConditional}}
-{{~#each httpd.cloudManagerConditional}}
-<IfDefine ENVIRONMENT_{{upper this.targetEnvironment}}>
-  # Primary hostname
-  ServerName {{defaultIfEmpty this.serverName httpd.serverName }}
-</IfDefine>
-{{~/each}}
-{{~else}}
+{{#httpdCloudManagerConditional}}
 # Primary hostname
 ServerName {{httpd.serverName}}
-{{~/if}}
+{{/httpdCloudManagerConditional}}
 {{/block}}
 
 
 {{~#block "serverAliasNames"}}
-{{~#if httpd.cloudManagerConditional}}
-{{~#each httpd.cloudManagerConditional}}
-{{~#if this.serverAliasNames}}
-<IfDefine ENVIRONMENT_{{upper this.targetEnvironment}}>
-  # Alternative hostnames
-  {{~#each this.serverAliasNames}}
-  ServerAlias {{this}}
-  {{~/each}}
-</IfDefine>
-{{~/if}}
-{{~/each}}
-{{~else}}
+{{#httpdCloudManagerConditional}}
 {{~#if httpd.serverAliasNames}}
 # Alternative hostnames
 {{~#each httpd.serverAliasNames}}
 ServerAlias {{this}}
 {{~/each}}
 {{~/if}}
-{{~/if}}
+{{/httpdCloudManagerConditional}}
 {{/block}}
 
 
