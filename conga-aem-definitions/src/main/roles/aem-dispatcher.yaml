@@ -33,7 +33,7 @@ variants:
 # Disaptcher for publish instances - configure a tenant for each vhost
 - variant: aem-publish
   config:
-    
+
     httpd:
       # Default server name to tenant name on publish
       serverName: ${tenant}
@@ -41,7 +41,7 @@ variants:
     dispatcher:
       renderInstance:
         port: 4503
-      
+
       # Dispatcher filter rules (use only regex, no glob expressions)
       filter:
       # deny everything first and then allow specific entries [from default dispatcher.any]
@@ -293,8 +293,8 @@ config:
       # If set to false only the requesting host is all if it is in the hostWhiteList (or this list is empty), and not in the hostBlackList
       allowAllHosts: true
       #hostWhiteList:
-      #- www.host1.com
-      #- www.host2.com
+      #- "https://www.host1.com"
+      #- "https://www.host2.com"
 
     headers:
       # Enables/Configures the Content-Security-Policy header on publish dispatcher (see https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)
@@ -303,6 +303,28 @@ config:
       referrerPolicy: "origin-when-cross-origin"
       # Enables/Configures the X-XSS-Protection header on publish dispatcher (see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection)
       xssProtection:
+      # Enables/Configures the Cache-Control header on publish dispatcher (see https://developer.mozilla.org/en/docs/Web/HTTP/Headers/Cache-Control)
+      cacheControl:
+        # Cache AEM Clientlibs with long cache key for 1 year
+        - locationMatch: "\\.lc-.*-lc\\.min\\.(css|js)$"
+          directives: "max-age=31536000, public"
+
+    # Request URI patterns for Sling maping short URL configuration
+    mapping:
+      uriExcludeFromMapping:
+      - ^/apps
+      - ^/bin
+      - ^/content
+      - ^/dispatcher/invalidate.cache
+      - ^/etc
+      - ^/home
+      - ^/libs
+      - ^/services
+      - ^/system
+      - ^/tmp
+      - ^/var
+      uriAllowContentAccess:
+      - ^/content/dam
 
     # Custom configuration snippets for vhost files (only on publish dispatcher - useful for tenant-specific configurations)
     customVHostConfig:
@@ -319,16 +341,16 @@ config:
     # - gateway.localdomain
 
   dispatcher:
-    
+
     # Hostname and port of AEM instance
     renderInstance:
       host: localhost
       port: 4502
       # Connect timeout in milliseconds, 0 to wait indefinitely
       #timeoutMs: 0
-    
+
     # Forward client headers from dispatcher to AEM instance
-    forwardClientHeaders:    
+    forwardClientHeaders:
     - "*"
 
     # Dispatcher filter rules (use only regex, no glob expressions)
@@ -366,17 +388,17 @@ config:
       ignoreUrlParams:
       - glob: "*"
         type: deny
-      
+
       # Sets the level up to which files named ".stat" will be created in the document root of the web server (only on publish dispatcher)
       #statFilesLevel: 1
-      
+
       # Whether to cache responses to requests that contain authorization information (only on publish dispatcher)
       #allowAuthorized: false
 
       # Whether the dispatcher should serve stale content if no remote server is available (only on publish dispatcher)
       #serveStaleOnError: false
 
-      # Grace period defines the number of seconds a stale, auto-invalidated resource may still be served from the cache after the last activation occurring. 
+      # Grace period defines the number of seconds a stale, auto-invalidated resource may still be served from the cache after the last activation occurring.
       #serveStaleGracePeriodSec: 0
 
       # Cache headers in dispatcher (only on publish dispatcher)

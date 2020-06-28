@@ -5,7 +5,8 @@
 Documentation: https://devops.wcm.io/conga/definitions/aem/<br/>
 Issues: https://wcm-io.atlassian.net/projects/WDCONGA<br/>
 Wiki: https://wcm-io.atlassian.net/wiki/<br/>
-Continuous Integration: https://travis-ci.org/wcm-io-devops/conga-aem-definitions
+Continuous Integration: https://travis-ci.org/wcm-io-devops/conga-aem-definitions<br/>
+Commercial support: https://wcm.io/commercial-support.html
 
 
 ## Build from sources

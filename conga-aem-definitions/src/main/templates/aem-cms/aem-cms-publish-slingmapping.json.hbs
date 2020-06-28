@@ -4,50 +4,56 @@
   "http": {
     "jcr:primaryType": "sling:Folder"
 
-{{~#eachIf tenants "config.sling.mapping.rootPath"}},
-{{~#assign "serverName"}}{{#if this.config.httpd.serverName}}{{this.config.httpd.serverName}}{{else}}{{this.tenant}}{{/if}}{{/assign}}
-{{~#assign "portSuffix"}}{{#ifNotEquals this.config.httpd.serverPort 80}}.{{this.config.httpd.serverPort}}{{/ifNotEquals}}{{/assign}}
-{{~#neq serverName "*"}}
+{{~#eachIf tenants "config.sling.mapping.rootPath" as |tenant|}}
+{{~#assign "tenantName"}}{{tenant.tenant}}{{/assign}}
+{{~#withAllCloudManagerConditional tenant.config}}
+{{~#assign "serverName"}}{{#if httpd.serverName}}{{httpd.serverName}}{{else}}{{tenantName}}{{/if}}{{/assign}}
+{{~#assign "portSuffix"}}{{#ifNotEquals httpd.serverPort 80}}.{{httpd.serverPort}}{{/ifNotEquals}}{{/assign}}
+{{~#neq serverName "*"}},
     "{{serverName}}{{portSuffix}}": {
       "jcr:primaryType": "sling:Mapping",
-      "sling:internalRedirect": ["/","{{this.config.sling.mapping.rootPath}}"]
+      "sling:internalRedirect": ["/","{{sling.mapping.rootPath}}"]
     }
 {{/neq ~}}
-  {{~#each this.config.httpd.serverAliasNames}}
-  {{~#assign "serverAlias"}}{{this}}{{/assign}}
-  {{~#neq serverAlias "*"}},
+{{~#each httpd.serverAliasNames as |alias|}}
+{{~#assign "serverAlias"}}{{alias}}{{/assign}}
+{{~#neq serverAlias "*"}},
     "{{serverAlias}}{{portSuffix}}": {
       "jcr:primaryType": "sling:Mapping",
-      "sling:internalRedirect": ["/","{{../this.config.sling.mapping.rootPath}}"]
+      "sling:internalRedirect": ["/","{{../sling.mapping.rootPath}}"]
     }
-  {{/neq ~}}
-  {{/each ~}}
-{{/eachIf~}}
+{{/neq ~}}
+{{/each ~}}
+{{/withAllCloudManagerConditional ~}}
+{{/eachIf ~}}
 
   },
 
   "https": {
     "jcr:primaryType": "sling:Folder"
 
-{{~#eachIf tenants "config.sling.mapping.rootPath"}},
-{{~#assign "serverName"}}{{#if this.config.httpd.serverNameSsl}}{{this.config.httpd.serverNameSsl}}{{else}}{{#if this.config.httpd.serverName}}{{this.config.httpd.serverName}}{{else}}{{this.tenant}}{{/if}}{{/if}}{{/assign}}
-{{~#assign "portSuffix"}}{{#ifNotEquals this.config.httpd.serverPortSsl 443}}.{{this.config.httpd.serverPortSsl}}{{/ifNotEquals}}{{/assign}}
-{{~#neq serverName "*"}}
+{{~#eachIf tenants "config.sling.mapping.rootPath" as |tenant|}}
+{{~#assign "tenantName"}}{{tenant.tenant}}{{/assign}}
+{{~#withAllCloudManagerConditional tenant.config}}
+{{~#assign "serverName"}}{{#if httpd.serverName}}{{httpd.serverName}}{{else}}{{tenantName}}{{/if}}{{/assign}}
+{{~#assign "portSuffix"}}{{#ifNotEquals httpd.serverPort 80}}.{{httpd.serverPort}}{{/ifNotEquals}}{{/assign}}
+{{~#neq serverName "*"}},
     "{{serverName}}{{portSuffix}}": {
       "jcr:primaryType": "sling:Mapping",
-      "sling:internalRedirect": ["/","{{this.config.sling.mapping.rootPath}}"]
+      "sling:internalRedirect": ["/","{{sling.mapping.rootPath}}"]
     }
 {{/neq ~}}
-  {{~#each this.config.httpd.serverAliasNamesSsl}}
-  {{~#assign "serverAlias"}}{{this}}{{/assign}}
-  {{~#neq serverAlias "*"}},
+{{~#each httpd.serverAliasNames as |alias|}}
+{{~#assign "serverAlias"}}{{alias}}{{/assign}}
+{{~#neq serverAlias "*"}},
     "{{serverAlias}}{{portSuffix}}": {
       "jcr:primaryType": "sling:Mapping",
-      "sling:internalRedirect": ["/","{{../this.config.sling.mapping.rootPath}}"]
+      "sling:internalRedirect": ["/","{{../sling.mapping.rootPath}}"]
     }
-  {{/neq ~}}
-  {{/each ~}}
-{{/eachIf~}}
+{{/neq ~}}
+{{/each ~}}
+{{/withAllCloudManagerConditional ~}}
+{{/eachIf ~}}
 
   }
 

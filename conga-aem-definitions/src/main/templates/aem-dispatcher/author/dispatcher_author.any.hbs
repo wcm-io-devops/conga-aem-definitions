@@ -5,8 +5,8 @@
     "dispatcher.cache.rootPath"
 ~}}
 
-/author 
-  {  
+/author
+  {
   # Request headers that should be forwarded to the remote server.
   /clientheaders
     {
@@ -17,7 +17,7 @@
     "{{this}}"
 {{~/each}}
     }
-    
+
   # Hostname globbing for farm selection (virtual domain addressing)
   /virtualhosts
     {
@@ -32,7 +32,7 @@
     "{{httpHost httpd.serverName port=httpd.serverPort}}"
     "{{httpHostSsl httpd.serverNameSsl port=httpd.serverPortSsl}}"
     }
-    
+
   # The load will be balanced among these render instances
   /renders
     {
@@ -50,10 +50,10 @@
 {{~/if}}
       }
     }
-    
+
   # The filter section defines the requests that should be handled by the dispatcher.
   /filter
-    {    
+    {
 {{~#each dispatcher.filter}}
       /{{@index}}
         {{{aemDispatcherFilter this}}}
@@ -69,12 +69,12 @@
     # to deliver them just like static files.
     /docroot "{{dispatcher.cache.rootPath}}"
 
-    # Sets the level upto which files named ".stat" will be created in the 
-    # document root of the webserver. When an activation request for some 
-    # page is received, only files within the same subtree are affected 
+    # Sets the level upto which files named ".stat" will be created in the
+    # document root of the webserver. When an activation request for some
+    # page is received, only files within the same subtree are affected
     # by the invalidation.
     #/statfileslevel "0"
-    
+
     # Flag indicating whether to cache responses to requests that contain
     # authorization information.
     # This needs to be set to "1" for an author instance, as all requests
@@ -82,11 +82,11 @@
     # This means that the cache rules must never allow caching of content
     # that contains user specific information.
     /allowAuthorized "1"
-    
+
     # Flag indicating whether the dispatcher should serve stale content if
     # no remote server is available.
     #/serveStaleOnError "0"
-    
+
     # The rules section defines what responses should be cached based on
     # the requested URL. Please note that only the following requests can
     # lead to cacheable responses:
@@ -103,10 +103,10 @@
 {{~/each}}
       }
 
-      
+
     # The invalidate section defines the pages that are "invalidated" after
-    # any activation. Please note that the activated page itself and all 
-    # related documents are flushed on an modification. For example: if the 
+    # any activation. Please note that the activated page itself and all
+    # related documents are flushed on an modification. For example: if the
     # page /foo/bar is activated, all /foo/bar.* files are removed from the
     # cache.
     /invalidate
@@ -135,7 +135,7 @@
       #  /type "allow"
       #  }
       }
-      
+
     # The ignoreUrlParams section contains query string parameter names that
     # should be ignored when determining whether some request's output can be
     # cached or delivered from cache.
@@ -146,11 +146,11 @@
         { /type "{{this.type}}" /glob "{{this.glob}}" }
 {{~/each}}
       }
-    
+
     }
-    
+
   # The statistics sections dictates how the load should be balanced among the
-  # renders according to the media-type. 
+  # renders according to the media-type.
   /statistics
     {
     /categories

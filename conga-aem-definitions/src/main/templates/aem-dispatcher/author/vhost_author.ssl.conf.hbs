@@ -8,7 +8,7 @@
 <VirtualHost {{httpd.serverListenAddressSsl}}:{{httpd.serverPortSsl}}>
 
 {{~#partial "serverName"}}
-# Primary hostname 
+# Primary hostname
 ServerName {{httpd.serverNameSsl}}
 {{/partial}}
 

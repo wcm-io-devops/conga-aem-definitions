@@ -23,6 +23,33 @@
     xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/plugins/maven-changes-plugin/xsd/changes-1.0.0.xsd">
   <body>
 
+    <release version="1.8.0" date="2020-06-28">
+      <action type="add" dev="nbellack">
+        Role aem-dispatcher, aem-dispatcher-cloud: Add httpd.headers.cacheControl to allow fine-grained location-based setting of cache control headers.
+      </action>
+      <action type="add" dev="sseifert">
+        Role aem-cms, aem-dispatcher-cloud: Add httpd.cloudManagerConditional to allow to define server names/alias names depending on environment in a single dispatcher configuration with support for Sling short url mapping.
+      </action>
+      <action type="add" dev="sseifert">
+        Role aem-dispatcher, aem-dispatcher-cloud: Introduce parameters httpd.mapping.uriExcludeFromMapping and httpd.mapping.uriAllowContentAccess to configure the URI patterns with special treatments for Sling short url mapping.
+      </action>
+      <action type="add" dev="sseifert">
+        Role aem-dispatcher-cloud: Add httpd.headers.htmlExpirationTimeMin parameter to control the default expiration time for text/html responses.
+      </action>
+      <action type="update" dev="mceruti">
+        Role aem-dispatcher, aem-dispatcher-cloud: CORS Header - Add required protocol to the example origins to be whitelisted.
+      </action>
+      <action type="update" dev="mrozati">
+        Role aem-dispatcher: Add mimetype application/manifest+json for extension webmanifest.
+      </action>
+      <action type="update" dev="sseifert">
+        Role aem-dispatcher-cloud: Apply special treatment for /crx and /saml_login in resource mapping, allow access to /content/test-site.
+      </action>
+      <action type="update" dev="sseifert">
+        Role aem-dispatcher-cloud: Apply default values for allowAuthorized, serveStaleOnError, serveStaleGracePeriodSec, statFilesLevel.
+      </action>
+    </release>
+
     <release version="1.7.0" date="2020-04-28">
       <action type="add" dev="sseifert">
         Add new role "aem-dispatcher-cloud" that generates dispatcher configuration that can be deployed via Adobe Cloud Manager.

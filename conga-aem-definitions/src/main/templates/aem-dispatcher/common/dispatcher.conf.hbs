@@ -6,7 +6,7 @@
   DispatcherConfig {{dispatcher.configPath}}
 
   # location of the dispatcher log file. eg: 'logs/dispatcher.log'
-  DispatcherLog    ${APACHE_LOG_DIR}/dispatcher.log 
+  DispatcherLog    ${APACHE_LOG_DIR}/dispatcher.log
 
   # log level for the dispatcher log, can be either specified
   # as a string or an integer (in parentheses)
@@ -20,16 +20,16 @@
   # use the mod_alias then for the correct mapping
   DispatcherDeclineRoot On
 
-  # if turned on, the dispatcher uses the URL already processed 
-  # by handlers preceeding the dispatcher (i.e. mod_rewrite) 
-  # instead of the original one passed to the web server. 
+  # if turned on, the dispatcher uses the URL already processed
+  # by handlers preceeding the dispatcher (i.e. mod_rewrite)
+  # instead of the original one passed to the web server.
   DispatcherUseProcessedURL On
 
   # if turned to 1, the dispatcher does not spool an error
   # response to the client (where the status code is greater
   # or equal than 400), but passes the status code to
   # Apache, which e.g. allows an ErrorDocument directive
-  # to process such a status code. 
+  # to process such a status code.
   #
   # Additionally, one can specify the status code ranges that should
   # be left to web server to handle, e.g.
@@ -51,8 +51,10 @@ AddDefaultCharset UTF-8
 AddCharset UTF-8 .json
 AddCharset UTF-8 .js
 AddCharset UTF-8 .css
+AddCharset UTF-8 .webmanifest
+AddCharset UTF-8 .appcache
 
-# Enable gzip compression for HTML/CSS/JavaScript/XML/JSON/SVG
+# Enable gzip compression for certain mime types
 AddOutputFilterByType DEFLATE text/html
 AddOutputFilterByType DEFLATE text/css
 AddOutputFilterByType DEFLATE text/javascript
@@ -61,9 +63,10 @@ AddOutputFilterByType DEFLATE application/javascript
 AddOutputFilterByType DEFLATE text/xml
 AddOutputFilterByType DEFLATE text/plain
 AddOutputFilterByType DEFLATE application/json
+AddOutputFilterByType DEFLATE application/manifest+json
 AddOutputFilterByType DEFLATE image/svg+xml
 
-# Set proper mime types
+# Set proper mime types for certain file extensions
 AddType application/javascript              js jsonp
 AddType text/cache-manifest                 appcache manifest
 AddType text/x-component                    htc
@@ -72,6 +75,7 @@ AddType application/x-opera-extension       oex
 AddType application/x-xpinstall             xpi
 AddType application/octet-stream            safariextz
 AddType application/x-web-app-manifest+json webapp
+AddType application/manifest+json           webmanifest
 AddType text/vtt                            vtt
 
 # Force the latest IE version, in various cases when it may fall back to IE7 mode

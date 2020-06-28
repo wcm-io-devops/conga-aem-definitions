@@ -121,6 +121,11 @@ config:
       cACertificateFile: /etc/ssl/certs/sample.pem
     serverPort: 8080
     serverPortSsl: 8443
+    headers:
+      cacheControl:
+        - _merge_
+        - locationMatch: "\\.(woff2|woff)$"
+          directives: "max-age=31536000, public"
 
   sling:
     caconfig:

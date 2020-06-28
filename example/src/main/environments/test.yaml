@@ -110,6 +110,8 @@ nodes:
           - location: /admin
             type: allow
           - _merge_
+        headers:
+          htmlExpirationTimeMin: 3
       dispatcher:
         cache:
           rootPath: /var/cache/publish1
@@ -212,4 +214,39 @@ tenants:
         contentSecurityPolicy: "script-src 'self' 'unsafe-inline' 'unsafe-eval' *.sample1.com;"
         xssProtection: "1; mode=block"
         referrerPolicy: "strict-origin-when-cross-origin"
+        cacheControl:
+          - _merge_
+          - locationMatch: "\\.json.*$"
+            directives: "max-age=10, public"
     sling.mapping.rootPath: /content/sample2
+
+- tenant: cloud-sample3.com
+  config:
+    httpd:
+      cloudManagerConditional:
+        dev:
+          serverName: www.dev-sample3.com
+          serverAliasNames:
+          - www.dev-alias3a.com
+          - www.dev-alias3b.com
+        stage:
+          serverName: www.stage-sample3.com
+        prod:
+          serverName: www.prod-sample3.com
+      rootRedirect.url: /en.html
+    sling.mapping.rootPath: /content/sample3
+
+- tenant: cloud-sample4.com
+  config:
+    httpd:
+      cloudManagerConditional:
+        dev:
+          serverName: www.dev-sample4.com
+          serverAliasNames:
+          - www.dev-alias4a.com
+          - www.dev-alias4b.com
+        stage:
+          serverName: www.stage-sample4.com
+        prod:
+          serverName: www.prod-sample4.com
+      rootRedirect.url: /content/sample4/en.html

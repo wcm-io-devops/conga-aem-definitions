@@ -37,8 +37,6 @@ files:
       filters:
       - filter: /etc/map
         rules:
-        - rule: exclude
-          pattern: /etc/map
         - rule: include
           pattern: /etc/map/.*
         - rule: exclude
@@ -180,7 +178,7 @@ config:
       password:
       # The old (initial) admin password for OAK and Apache Felix Webconsole
       passwordOld: admin
-  
+
   sling:
 
     # Configure Sling Mapping for URL shortening of content paths
