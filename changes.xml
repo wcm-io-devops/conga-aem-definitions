@@ -23,7 +23,7 @@
     xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/plugins/maven-changes-plugin/xsd/changes-1.0.0.xsd">
   <body>
 
-    <release version="1.8.0" date="not released">
+    <release version="1.8.0" date="2020-06-28">
       <action type="add" dev="nbellack">
         Role aem-dispatcher, aem-dispatcher-cloud: Add httpd.headers.cacheControl to allow fine-grained location-based setting of cache control headers.
       </action>
@@ -40,7 +40,7 @@
         Role aem-dispatcher, aem-dispatcher-cloud: CORS Header - Add required protocol to the example origins to be whitelisted.
       </action>
       <action type="update" dev="mrozati">
-        Role aem-dispatcher: Add mimetype application/manifest+json for extension webmanifest
+        Role aem-dispatcher: Add mimetype application/manifest+json for extension webmanifest.
       </action>
       <action type="update" dev="sseifert">
         Role aem-dispatcher-cloud: Apply special treatment for /crx and /saml_login in resource mapping, allow access to /content/test-site.
