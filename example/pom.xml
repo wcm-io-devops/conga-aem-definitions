@@ -32,7 +32,7 @@
   <groupId>io.wcm.devops.conga.definitions</groupId>
   <artifactId>io.wcm.devops.conga.definitions.aem.example</artifactId>
   <packaging>config</packaging>
-  <version>1.8.0</version>
+  <version>1.8.1-SNAPSHOT</version>
 
   <name>CONGA AEM Definitions Example</name>
   <description>Example environment definition.</description>
@@ -43,7 +43,7 @@
     <dependency>
       <groupId>io.wcm.devops.conga.definitions</groupId>
       <artifactId>io.wcm.devops.conga.definitions.aem</artifactId>
-      <version>1.8.0</version>
+      <version>1.8.1-SNAPSHOT</version>
     </dependency>
 
   </dependencies>
