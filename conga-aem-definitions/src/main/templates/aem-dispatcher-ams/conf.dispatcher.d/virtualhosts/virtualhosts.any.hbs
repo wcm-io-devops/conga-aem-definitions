@@ -1,0 +1,10 @@
+
+{{#each tenants as |tenant| ~}}
+{{~#assign "tenantName"}}{{tenant.tenant}}{{/assign ~}}
+{{~#withAllCloudManagerConditional tenant.config ~}}
+"{{#if httpd.serverName}}{{httpd.serverName}}{{else}}{{tenantName}}{{/if}}"
+{{#each httpd.serverAliasNames as |alias| ~}}
+"{{alias}}"
+{{/each ~}}
+{{/withAllCloudManagerConditional ~}}
+{{/each ~}}

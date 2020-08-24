@@ -1,0 +1,12 @@
+#
+# This file contains the cache rules, and can be customized.
+#
+# By default, it includes the default rules.
+#
+
+$include "./default_rules.any"
+
+{{#each dispatcher.cache.rules ~}}
+/{{@index}}
+  { /type "{{this.type}}" /glob "{{this.glob}}" }
+{{/each ~}}

@@ -1,0 +1,6 @@
+# Include customer defined variables
+Include conf.d/variables/custom.vars
+
+<VirtualHost *:80>
+{{> aem-dispatcher-cloud/conf.d/available_vhosts/tenant.vhost.partials.hbs}}
+</VirtualHost>
