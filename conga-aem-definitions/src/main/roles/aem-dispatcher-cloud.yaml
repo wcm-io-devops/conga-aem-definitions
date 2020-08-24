@@ -351,7 +351,7 @@ config:
       # Placed at the bottom of the vhost confign file
       after:
 
-    # Allows to different define server names/alias names per environment in a single dispatcher configuration
+    # Allows to define different server names/alias names per environment in a single dispatcher configuration
     #cloudManagerConditional:
     #  - targetEnvironment: dev
     #    serverName: www.dev-host3.com
