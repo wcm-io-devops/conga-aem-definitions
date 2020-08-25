@@ -143,7 +143,7 @@ nodes:
 
 - node: webserver-ams
   roles:
-    - role: aem-dispatcher-cloud
+    - role: aem-dispatcher-ams
       variants:
         - aem-publish
       config:
