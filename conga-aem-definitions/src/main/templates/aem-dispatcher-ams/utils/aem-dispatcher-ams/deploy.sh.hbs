@@ -1,0 +1,31 @@
+#!/bin/bash
+# abort on first error
+set -e
+
+# change into directory of the script
+cd "$(dirname "$0")/../.."
+
+# perform initial configtest to ensure that configuration is correct before deploying new files
+echo "--- perform configtest before deployment ---"
+sudo apachectl configtest
+
+{{#if utils.deploy.dispatcher.backup.enabled ~}}
+echo "--- create backup ---"
+BACKUP_DIR="{{ utils.deploy.dispatcher.backup.path }}"
+mkdir -p $BACKUP_DIR
+/bin/cp -r /etc/httpd/* $BACKUP_DIR/
+{{~/if~}}
+
+echo "--- deploy dispatcher configuration ---"
+{{#each utils.deploy.dispatcher.copyFiles ~}}
+sudo /bin/cp -r '{{this.src}}' '{{this.dest}}'
+{{/each ~}}
+
+echo "--- enable vhosts ---"
+echo "TODO"
+
+echo "--- perform configtest after deployment ---"
+/usr/sbin/apachectl configtest
+
+echo "--- restart httpd ---"
+sudo systemctl restart httpd

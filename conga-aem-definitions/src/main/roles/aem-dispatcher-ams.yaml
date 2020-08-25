@@ -219,6 +219,14 @@ files:
   - aem-publish
   template: conf.dispatcher.d/virtualhosts/virtualhosts.any.hbs
 
+# --- utils ---
+
+- file: deploy.sh
+  dir: utils/aem-dispatcher-ams
+  variants:
+  - aem-publish
+  template: utils/aem-dispatcher-ams/deploy.sh.hbs
+
 config:
 
   httpd:
@@ -385,6 +393,20 @@ config:
       # By default, only access to paths shortened via Sling Mapping are allowed. Set this to true to also allow unshortened paths.
       #allowUnshortenedPath: false
 
+  utils:
+    deploy:
+      dispatcher:
+        backup:
+          # when enabled the current dispatcher configuration is copied to the backup path
+          enabled: true
+          path: "$HOME/backups/dispatcher/$(date +%y-%m-%d)/$(date +%H-%M-%S)"
+        copyFiles:
+        # conf.d files
+        - src: conf.d/*
+          dest: /etc/httpd/conf.d/
+        # dispatcher.conf.d files
+        - src: dispatcher.conf.d/*
+          dest: /etc/httpd/dispatcher.conf.d/
 
 
 # Example tenant configuration. Tenant name = primary host name/server name
