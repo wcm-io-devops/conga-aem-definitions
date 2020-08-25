@@ -297,3 +297,20 @@ tenants:
         prod:
           serverName: www.prod-sample4.com
       rootRedirect.url: /content/sample4/en.html
+
+- tenant: ams-sample5.com
+  config:
+    httpd:
+      ssl:
+        enforce: true
+      cloudManagerConditional:
+        dev:
+          serverName: www.dev-sample5.com
+          serverAliasNames:
+            - www.dev-alias5a.com
+            - www.dev-alias5b.com
+        stage:
+          serverName: www.stage-sample5.com
+        prod:
+          serverName: www.prod-sample5.com
+      rootRedirect.url: /content/sample4/en.html

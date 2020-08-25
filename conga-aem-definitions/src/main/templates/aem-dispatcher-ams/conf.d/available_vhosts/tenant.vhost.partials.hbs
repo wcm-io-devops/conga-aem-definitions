@@ -73,7 +73,7 @@ DocumentRoot "${PUBLISH_DOCROOT}"
 </IfModule>
 <IfModule mod_rewrite.c>
   RewriteEngine  on
-  Include conf.d/rewrites/rewrite.rules
+  Include {{ httpd.rewriteRulesIncludePath }}
 </IfModule>
 
 # Do not allow RFC 2616 trace requests

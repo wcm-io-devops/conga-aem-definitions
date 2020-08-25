@@ -288,6 +288,9 @@ config:
       # Placed at the bottom of the vhost confign file
       after:
 
+    customVarsIncludePath: "conf.d/variables/custom.vars"
+    rewriteRulesIncludePath: "conf.d/rewrites/rewrite.rules"
+
     # Allows to define server names/alias names per environment in a single dispatcher configuration
     #cloudManagerConditional:
     #  - targetEnvironment: dev
@@ -304,14 +307,26 @@ config:
     forwardClientHeaders:
     - "*"
 
+    # Path to the clientheaders.any file in case the file got renamed in a inheriting role
+    forwardClientHeadersIncludePath: "../clientheaders/clientheaders.any"
+
     # Dispatcher filter rules (use only regex, no glob expressions)
     filter:
     #- url: /.*
     #  type: allow
 
+    # Path to the filters.any file in case the file got renamed in a inheriting role
+    filtersIncludePath: "../filters/filters.any"
+
     # Defines the DispatcherLogLevel (Error, Warn, Info, Debug and Trace1)
     logging:
       level: Warn
+
+    # Path to the virtualhosts.any file in case the file got renamed in a inheriting role
+    virtualhostsIncludePath: "../virtualhosts/virtualhosts.any"
+
+    # Path to the filters.any file in case the file got renamed in a inheriting role
+    cacheIncludePath: "../cache/rules.any"
 
     # Configure dispatcher cache
     cache:
