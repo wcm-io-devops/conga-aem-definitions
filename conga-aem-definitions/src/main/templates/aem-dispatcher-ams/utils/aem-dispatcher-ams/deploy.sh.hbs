@@ -14,7 +14,7 @@ echo "--- create backup ---"
 BACKUP_DIR="{{ utils.deploy.dispatcher.backup.path }}"
 mkdir -p $BACKUP_DIR
 /bin/cp -r /etc/httpd/* $BACKUP_DIR/
-{{~/if~}}
+{{~/if}}
 
 echo "--- deploy dispatcher configuration ---"
 {{#each utils.deploy.dispatcher.copyFiles ~}}
