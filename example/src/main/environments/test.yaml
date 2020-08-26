@@ -160,6 +160,7 @@ nodes:
           headers:
             htmlExpirationTimeMin: 6
         dispatcher:
+          farmName: custom_farm_name
           cache:
             rootPath: /var/cache/publish1
             statFilesLevel: 3
@@ -187,6 +188,23 @@ nodes:
             - _merge_
             - url: /path/to/resources/
               type: allow
+        utils:
+          deploy:
+            dispatcher:
+              files:
+                delete:
+                  - path: conf.d/some-user-owned-file-in-deployment-dir
+                    options: -vf
+                  - path: /tmp/some-sudo-restricted-file
+                    sudo: true
+                copy:
+                  - _merge_
+                  - src: some-non-restricted-file
+                    dest: /tmp/some-non-restricted-destination
+                  - src: some-restricted-file
+                    dest: /tmp/some-restricted-destination
+                    sudo: true
+
 
 config:
   jvm.path: /usr/lib/jvm/jdk-8-oracle-x64
