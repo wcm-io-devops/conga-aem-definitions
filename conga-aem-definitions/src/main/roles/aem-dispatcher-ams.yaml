@@ -411,13 +411,29 @@ config:
           # when enabled the current dispatcher configuration is copied to the backup path
           enabled: true
           path: "$HOME/backups/dispatcher/$(date +%y-%m-%d)/$(date +%H-%M-%S)"
-        copyFiles:
-        # conf.d files
-        - src: conf.d/*
-          dest: /etc/httpd/conf.d/
-        # dispatcher.conf.d files
-        - src: dispatcher.conf.d/*
-          dest: /etc/httpd/dispatcher.conf.d/
+
+        files:
+
+          # files to be deleted, either from the deployment directory or on the target system
+          delete:
+          # - path: conf.d/some-user-owned-file-in-deployment-dir
+          # - path: /tmp/some-sudo-restricted-file
+          #   sudo: true
+          #   options: -fv
+
+          # files to be copied from the node directory to destinations
+          copy:
+            # conf.d files
+            - src: conf.d/*
+              dest: /etc/httpd/conf.d/
+              sudo: true
+              options: -rv
+            # dispatcher.conf.d files
+            - src: conf.dispatcher.d/*
+              dest: /etc/httpd/conf.dispatcher.d/
+              sudo: true
+              options: -rv
+
 
 
 # Example tenant configuration. Tenant name = primary host name/server name
