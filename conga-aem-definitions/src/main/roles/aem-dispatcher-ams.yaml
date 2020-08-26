@@ -298,7 +298,10 @@ config:
       # Placed at the bottom of the vhost confign file
       after:
 
+    # Path to the custom.vars file in case the file got renamed in a inheriting role
     customVarsIncludePath: "conf.d/variables/custom.vars"
+
+    # Path to the rewrite.rules file in case the file got renamed in a inheriting role
     rewriteRulesIncludePath: "conf.d/rewrites/rewrite.rules"
 
     # Controls the generation of enabled_vhosts files
@@ -407,6 +410,7 @@ config:
   utils:
     deploy:
       dispatcher:
+
         backup:
           # when enabled the current dispatcher configuration is copied to the backup path
           enabled: true
