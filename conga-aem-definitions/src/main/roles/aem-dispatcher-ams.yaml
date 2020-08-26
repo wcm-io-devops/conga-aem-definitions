@@ -216,10 +216,10 @@ files:
 
 # virtualhosts
 - file: virtualhosts.any
-  dir: conf.dispatcher.d/virtualhosts
+  dir: conf.dispatcher.d/vhosts
   variants:
   - aem-publish
-  template: conf.dispatcher.d/virtualhosts/virtualhosts.any.hbs
+  template: conf.dispatcher.d/vhosts/virtualhosts.any.hbs
 
 # --- utils ---
 
@@ -336,7 +336,7 @@ config:
       level: Warn
 
     # Path to the virtualhosts.any file in case the file got renamed in a inheriting role
-    virtualhostsIncludePath: "../virtualhosts/virtualhosts.any"
+    virtualhostsIncludePath: "../vhosts/virtualhosts.any"
 
     # Path to the filters.any file in case the file got renamed in a inheriting role
     cacheIncludePath: "../cache/rules.any"
