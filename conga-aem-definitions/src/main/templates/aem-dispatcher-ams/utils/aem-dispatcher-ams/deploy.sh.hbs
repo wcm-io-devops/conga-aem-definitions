@@ -6,26 +6,40 @@ set -e
 cd "$(dirname "$0")/../.."
 
 # perform initial configtest to ensure that configuration is correct before deploying new files
-echo "--- perform configtest before deployment ---"
+echo -e "\n--- perform configtest before deployment ---\n"
 sudo apachectl configtest
 
 {{#if utils.deploy.dispatcher.backup.enabled ~}}
-echo "--- create backup ---"
+echo -e "\n--- create backup ---\n"
 BACKUP_DIR="{{ utils.deploy.dispatcher.backup.path }}"
 mkdir -p $BACKUP_DIR
 /bin/cp -r /etc/httpd/* $BACKUP_DIR/
 {{~/if}}
 
-echo "--- deploy dispatcher configuration ---"
-{{#each utils.deploy.dispatcher.copyFiles ~}}
-sudo /bin/cp -r '{{this.src}}' '{{this.dest}}'
+{{#if utils.deploy.dispatcher.files.delete ~}}
+echo -e "\n--- delete files ---\n"
+{{#each utils.deploy.dispatcher.files.delete ~}}
+echo "> delete {{ this.path }}"
+{{#if this.sudo~}}sudo {{/if}}/bin/rm {{#if this.options~}}{{ this.options }}{{/if}} {{ this.path }}
 {{/each ~}}
+{{/if ~}}
 
-echo "--- enable vhosts ---"
-echo "TODO"
+echo -e "\n--- copy files ---\n"
+{{#each utils.deploy.dispatcher.files.copy ~}}
+echo "> copy from {{this.src}} to {{this.dest}}"
+{{#if this.sudo~}}sudo {{/if}}/bin/cp {{#if this.options~}}{{ this.options }}{{/if}} {{this.src}} {{this.dest}}
+{{/each}}
 
-echo "--- perform configtest after deployment ---"
+echo -e "\n--- enable vhosts ---\n"
+find conf.d/available_vhosts -maxdepth 1 -type f -name "*.vhost" -exec bash -c 'sudo ln -sfv /etc/httpd/conf.d/available_vhosts/"$(basename "{}")" /etc/httpd/conf.d/enabled_vhosts/'  \;
+
+echo -e "\n--- enable farms ---\n"
+find conf.dispatcher.d/available_farms -maxdepth 1 -type f -name "*.any" -exec bash -c 'sudo ln -sfv /etc/httpd/conf.dispatcher.d/available_farms/"$(basename "{}")" /etc/httpd/conf.dispatcher.d/enabled_farms/'  \;
+
+echo -e "\n--- perform configtest after deployment ---\n"
 /usr/sbin/apachectl configtest
 
-echo "--- restart httpd ---"
+echo -e "\n--- restart httpd ---\n"
 sudo systemctl restart httpd
+
+echo -e "\n--- deployment complete ---\n"
