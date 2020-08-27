@@ -331,7 +331,6 @@ config:
       - ^/var
       uriAllowContentAccess:
       - ^/content/dam
-      - ^/content/test-site
 
     # Custom configuration snippets for vhost files (only on publish dispatcher - useful for tenant-specific configurations)
     customVHostConfig:
