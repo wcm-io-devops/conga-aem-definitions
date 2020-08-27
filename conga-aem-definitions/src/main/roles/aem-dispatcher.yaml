@@ -309,7 +309,7 @@ config:
         - locationMatch: "\\.lc-.*-lc\\.min\\.(css|js)$"
           directives: "max-age=31536000, public"
 
-    # Request URI patterns for Sling maping short URL configuration
+    # Request URI patterns for Sling mapping short URL configuration
     mapping:
       uriExcludeFromMapping:
       - ^/apps
