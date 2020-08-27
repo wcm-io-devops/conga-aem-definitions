@@ -229,6 +229,12 @@ files:
   - aem-publish
   template: utils/aem-dispatcher-ams/deploy.sh.hbs
 
+- file: flush.sh
+  dir: utils/aem-dispatcher-ams
+  variants:
+    - aem-publish
+  template: utils/aem-dispatcher-ams/flush.sh.hbs
+
 config:
 
   httpd:
@@ -437,6 +443,14 @@ config:
               dest: /etc/httpd/conf.dispatcher.d/
               sudo: true
               options: -rv
+
+        # Configuration for dispatcher flush utility script
+        flush:
+          paths:
+            # The content in these paths (below ${PUBLISH_DOCROOT} will be deleted when executing the flush script
+            - etc
+            - etc.clientlibs
+            - content
 
 
 
