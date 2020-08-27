@@ -170,6 +170,31 @@ Header set X-XSS-Protection "{{httpd.headers.xssProtection}}"
 {{~/if}}
 {{/block}}
 
+{{~#block "rewrites"}}
+# Rewrites (mainly used to block security relevant URLs)
+{{~#each httpd.rewrites}}
+{{~#each this.conditions}}
+RewriteCond {{this}}
+{{~/each}}
+RewriteRule {{this.rule}}
+{{~/each}}
+
+{{/block}}
+
+{{~#block "uriAllowPostReqest"}}
+{{~#if httpd.uriAllowPostReqest }}
+# Security - deny POST requests
+RewriteCond %{uriAllowPostReqest} POST
+{{~#each httpd.uriAllowPostReqest~}}
+{{~#if this.comment}}
+# {{this.comment}}
+{{/if~}}
+RewriteCond {{this.condition}}
+{{/each}}
+RewriteRule ^(.*)$ - [R=405,L]
+
+{{/if}}
+{{/block}}
 
 {{~#block "rewriteSlingShortUrlMapping"}}
 {{~#if sling.mapping.rootPath}}

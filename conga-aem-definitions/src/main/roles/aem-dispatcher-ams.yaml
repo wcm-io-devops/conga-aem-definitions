@@ -282,7 +282,39 @@ config:
       # Set the default experiation time for text/html responses (enabled by default in AEM Cloud Service webserver)
       htmlExpirationTimeMin: 5
 
-    # Request URI patterns for Sling maping short URL configuration
+    # Rewrite rules, mainly used to protect critical urls
+    # These rules are evaluated before the mapping rules
+    rewrites:
+      - comment: Security - deny access to product critical urls
+        rule: ^/admin/(.*)$               - [R=404,L]
+      - rule: ^/crx/(.*)$                 - [R=404,L]
+      - conditions:
+          - '%{REQUEST_URI} !^/system/sling/logout(.*)$'
+        rule: ^/system/(.*)$              - [R=404,L]
+      - rule: ^/api(.*)$                  - [R=404,L]
+      - rule: ^/apps/(.*)$                - [R=404,L]
+      - rule: ^/conf/(.*)$                - [R=404,L]
+      - rule: ^/bin/(.*)$                 - [R=404,L]
+      - rule: ^/services/(.*)$            - [R=404,L]
+      - rule: ^/tmp/(.*)$                 - [R=404,L]
+      - rule: ^/var/(.*)$                 - [R=404,L]
+      - rule: ^/dav/(.*)$                 - [R=404,L]
+      - rule: ^/jcr(.*)$                  - [R=404,L]
+      - rule: ^/_jcr(.*)$                 - [R=404,L]
+      - rule: ^/libs/wcm/(.*)$            - [R=404,L]
+      - rule: ^/libs/cq/(.*)$             - [R=404,L]
+      - rule: ^/var/linkchecker/(.*)$     - [R=404,L]
+      - rule: ^/etc/linkchecker/(.*)$     - [R=404,L]
+      - rule: ^/home/users/a/admin/(.*)$  - [R=404,L]
+      - rule: ^/apps/sling/(.*)$          - [R=404,L]
+      - rule: ^/dispatcher/invalidate(.*) - [R=404,L]
+
+    # POST access is forbidden, except for the followig URLs
+    uriAllowPostReqest:
+      - comment: Allow SAML Login on all hosts per default
+        condition: '%{REQUEST_URI} !^.*/saml_login$'
+
+    # Request URI patterns for Sling mapping short URL configuration
     mapping:
       uriExcludeFromMapping:
       - ^/apps
