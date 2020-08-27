@@ -245,6 +245,11 @@ config:
     serverName:
     serverAliasNames:
 
+
+    ssl:
+      # If set to true all requests are redirected to HTTPS and HSTS is enabled
+      enforce: true
+
     # Redirecting from "/" (only publish dispatcher)
     rootRedirect:
       #url: /en.html

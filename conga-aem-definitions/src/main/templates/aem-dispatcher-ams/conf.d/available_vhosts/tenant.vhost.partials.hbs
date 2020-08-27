@@ -80,6 +80,16 @@ DocumentRoot "${PUBLISH_DOCROOT}"
 TraceEnable Off
 {{/block}}
 
+{{~#block "sslEnforce"}}
+{{~#if httpd.ssl.enforce}}
+# enforce SSL
+Header always set Strict-Transport-Security "max-age=31536000"
+
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteCond %{REQUEST_URI} !^/dispatcher/invalidate.cache
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+{{~/if}}
+{{/block}}
 
 {{~#block "downloadContentDispositionHeader"}}
 # Content disposition header for downloads (wcm.io Media Handler)
