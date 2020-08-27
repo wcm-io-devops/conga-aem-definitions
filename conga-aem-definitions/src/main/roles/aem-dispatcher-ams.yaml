@@ -147,6 +147,7 @@ files:
   template: conf.d/available_vhosts/tenant.vhost.hbs
   multiply: tenant
   fileHeader: conf
+  condition: ${httpd.generateAvailableVhosts}
 
 # enabled vhosts
 - file: ${new('java.text.DecimalFormat','0000').format(multiplyIndex)}_${tenant}.vhost
@@ -309,6 +310,9 @@ config:
 
     # Path to the rewrite.rules file in case the file got renamed in a inheriting role
     rewriteRulesIncludePath: "conf.d/rewrites/rewrite.rules"
+
+    # Controls the generation of available_vhosts files
+    generateAvailableVhosts: true
 
     # Controls the generation of enabled_vhosts files
     generateEnabledVhosts: true
