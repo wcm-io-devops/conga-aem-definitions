@@ -21,10 +21,16 @@ echo -e "\n--- flush dispatcher ---\n"
 
 {{~#each utils.deploy.dispatcher.flush.paths}}
 echo "> flush cached files in '${PUBLISH_DOCROOT}/{{this}}'"
+
 if [[ -d "${PUBLISH_DOCROOT}/{{this}}" ]]; then
-#sudo rm -rfv ${PUBLISH_DOCROOT}/{{this}}/*
-echo "sudo rm -rfv ${PUBLISH_DOCROOT}/{{this}}/*"
+  sudo rm -rf ${PUBLISH_DOCROOT}/{{this}}/*
 fi
 {{~/each}}
+
+echo -e "\n--- perform httpd configtest ---\n"
+sudo apachectl configtest
+
+echo -e "\n--- restart httpd to avoid not created directories ---\n"
+sudo systemctl restart httpd
 
 echo -e "\n--- flush complete ---\n"
