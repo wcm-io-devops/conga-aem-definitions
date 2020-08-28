@@ -6,7 +6,7 @@ set -e
 cd "$(dirname "$0")/../.."
 
 # perform initial configtest to ensure that configuration is correct before deploying new files
-echo -e "\n--- perform configtest before deployment ---\n"
+echo -e "\n--- perform httpd configtest ---\n"
 sudo apachectl configtest
 
 {{#if utils.deploy.dispatcher.backup.enabled ~}}
