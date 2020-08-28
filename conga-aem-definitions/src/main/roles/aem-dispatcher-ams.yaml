@@ -245,6 +245,11 @@ config:
     serverName:
     serverAliasNames:
 
+    # Logging configuration for httpd
+    logging:
+      level: warn
+      # Access logging similar to "Combined", but without IP address (privacy protection)
+      accessLogFormat: '"0.0.0.0 %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-agent}i\""'
 
     ssl:
       # If set to true all requests are redirected to HTTPS and HSTS is enabled
@@ -316,6 +321,7 @@ config:
 
     # Request URI patterns for Sling mapping short URL configuration
     mapping:
+      rootPath: /content
       uriExcludeFromMapping:
       - ^/apps
       - ^/bin

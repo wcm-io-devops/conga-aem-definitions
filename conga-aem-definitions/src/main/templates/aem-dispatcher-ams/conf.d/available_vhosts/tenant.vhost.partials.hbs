@@ -28,6 +28,19 @@ ServerAlias {{this}}
 {{/httpdCloudManagerConditional}}
 {{/block}}
 
+{{~#block "logSettings"}}
+# Possible values include: debug, info, notice, warn, error, crit, alert, emerg.
+LogLevel {{httpd.logging.level}}
+ErrorLog logs/vhost_{{tenant}}_error.log
+CustomLog logs/vhost_{{tenant}}_access.log {{httpd.logging.accessLogFormat}}
+
+# configure separate dispatcher log for the tenant
+<IfModule disp_apache2.c>
+  # location of the dispatcher log file. eg: 'logs/dispatcher.log'
+  DispatcherLog logs/vhost_{{tenant}}_dispatcher.log
+  DispatcherLogLevel {{dispatcher.logging.level}}
+</IfModule>
+{{/block}}
 
 {{~#block "generalSettings"}}
 # Use a document root that matches the one in conf.dispatcher.d/default.farm
