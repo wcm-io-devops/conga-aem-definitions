@@ -287,6 +287,10 @@ config:
       # Set the default experiation time for text/html responses (enabled by default in AEM Cloud Service webserver)
       htmlExpirationTimeMin: 5
 
+    # List of rewrite rules to include in the vhost
+    rewriteIncludes:
+      - conf.d/rewrites/rewrite.rules
+
     # Rewrite rules, mainly used to protect critical urls
     # These rules are evaluated before the mapping rules
     rewrites:
@@ -342,6 +346,9 @@ config:
     customVHostConfig:
       # Placed at the top of the vhost config file
       before:
+
+      # Placed before the ssh enforce rules in the host config file
+      beforeSslEnforce:
       # Placed before the rewrite rules in the host config file
       beforeRewrite:
       # Placed at the bottom of the vhost confign file

@@ -321,6 +321,9 @@ tenants:
     httpd:
       ssl:
         enforce: true
+      rewriteIncludes:
+        - conf.d/rewrites/rewrite.rules
+        - conf.d/rewrites/webserver_ams_rewrite.rules
       cloudManagerConditional:
         dev:
           serverName: www.dev-sample5.com
