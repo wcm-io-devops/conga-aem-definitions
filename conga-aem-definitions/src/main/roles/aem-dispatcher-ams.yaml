@@ -147,7 +147,7 @@ files:
   template: conf.d/available_vhosts/tenant.vhost.hbs
   multiply: tenant
   fileHeader: conf
-  condition: ${httpd.generateAvailableVhosts}
+  condition: ${httpd.generateAvailableVhost}
 
 # enabled vhosts
 - file: ${new('java.text.DecimalFormat','0000').format(multiplyIndex)}_${tenant}.vhost
@@ -156,7 +156,7 @@ files:
   variants:
   - aem-publish
   multiply: tenant
-  condition: ${httpd.generateEnabledVhosts}
+  condition: ${httpd.generateEnabledVhost}
 
 # global rewrite rules
 - file: rewrite.rules
@@ -350,14 +350,11 @@ config:
     # Path to the custom.vars file in case the file got renamed in a inheriting role
     customVarsIncludePath: "conf.d/variables/custom.vars"
 
-    # Path to the rewrite.rules file in case the file got renamed in a inheriting role
-    rewriteRulesIncludePath: "conf.d/rewrites/rewrite.rules"
-
     # Controls the generation of available_vhosts files
-    generateAvailableVhosts: true
+    generateAvailableVhost: true
 
     # Controls the generation of enabled_vhosts files
-    generateEnabledVhosts: true
+    generateEnabledVhost: true
 
     # Allows to define server names/alias names per environment in a single dispatcher configuration
     #cloudManagerConditional:
