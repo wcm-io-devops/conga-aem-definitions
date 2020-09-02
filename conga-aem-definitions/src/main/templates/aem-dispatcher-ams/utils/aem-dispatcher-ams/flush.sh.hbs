@@ -19,9 +19,9 @@ fi
 
 echo -e "\n--- flush dispatcher ---\n"
 
-{{~#each utils.deploy.dispatcher.flush.paths}}
-echo "> flush cached files in '${PUBLISH_DOCROOT}/{{this}}'"
+{{~#each utils.deploy.dispatcher.flush.path}}
 
+echo "> flush cached files in '${PUBLISH_DOCROOT}/{{this}}'"
 if [[ -d "${PUBLISH_DOCROOT}/{{this}}" ]]; then
   sudo rm -rf ${PUBLISH_DOCROOT}/{{this}}/*
 fi

@@ -496,7 +496,7 @@ config:
 
         # Configuration for dispatcher flush utility script
         flush:
-          paths:
+          path:
             # The content in these paths (below ${PUBLISH_DOCROOT} will be deleted when executing the flush script
             - etc
             - etc.clientlibs
