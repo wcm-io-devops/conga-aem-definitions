@@ -320,7 +320,7 @@ config:
     # POST access is forbidden, except for the followig URLs
     uriAllowPostReqest:
         # Allow SAML Login on all hosts per default
-      - condition: '%{REQUEST_URI} !^.*/saml_login$'
+      - ^.*/saml_login$
 
     # Request URI patterns for Sling mapping short URL configuration
     mapping:

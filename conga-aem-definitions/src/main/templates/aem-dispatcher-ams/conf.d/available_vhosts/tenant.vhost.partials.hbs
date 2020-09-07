@@ -207,11 +207,8 @@ RewriteRule {{this.rule}}
 {{~#if httpd.uriAllowPostReqest }}
 # Security - deny POST requests
 RewriteCond %{REQUEST_METHOD} POST
-{{~#each httpd.uriAllowPostReqest~}}
-{{~#if this.comment}}
-# {{this.comment}}
-{{/if~}}
-RewriteCond {{this.condition}}
+{{#each httpd.uriAllowPostReqest~}}
+RewriteCond %{REQUEST_URI} !{{this}}
 {{/each}}
 RewriteRule ^(.*)$ - [R=405,L]
 

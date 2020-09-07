@@ -327,10 +327,6 @@ tenants:
       rewrites:
         - comment: Example for a rule with comment
           rule: ^/restriced_area/(.*)$ - [R=404,L]
-      uriAllowPostReqest:
-        - _merge_
-        - comment: Custom URI where post request ia allowed
-          condition: '%{REQUEST_URI} !^.*/my/login/url$'
 
       cloudManagerConditional:
         dev:
