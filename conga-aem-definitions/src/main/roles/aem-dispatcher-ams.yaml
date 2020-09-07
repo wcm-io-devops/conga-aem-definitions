@@ -1,5 +1,5 @@
-# Adobe Cloud Service web server with dispatcher module
-# Generates general dispatcher configuration following teh Adobe Cloug Manager conventions
+# Adobe Managed Service web server with dispatcher module
+# Generates general dispatcher configuration following the Adobe Cloud Manager conventions
 
 variants:
 
