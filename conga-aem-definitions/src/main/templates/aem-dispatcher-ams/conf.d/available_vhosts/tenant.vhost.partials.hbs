@@ -206,7 +206,7 @@ RewriteRule {{this.rule}}
 {{~#block "uriAllowPostReqest"}}
 {{~#if httpd.uriAllowPostReqest }}
 # Security - deny POST requests
-RewriteCond %{uriAllowPostReqest} POST
+RewriteCond %{REQUEST_METHOD} POST
 {{~#each httpd.uriAllowPostReqest~}}
 {{~#if this.comment}}
 # {{this.comment}}
