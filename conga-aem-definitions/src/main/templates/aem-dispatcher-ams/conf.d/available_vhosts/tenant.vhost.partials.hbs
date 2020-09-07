@@ -203,11 +203,11 @@ RewriteRule {{this.rule}}
 
 {{/block}}
 
-{{~#block "uriAllowPostReqest"}}
-{{~#if httpd.uriAllowPostReqest }}
+{{~#block "uriAllowPostRequest"}}
+{{~#if httpd.uriAllowPostRequest }}
 # Security - deny POST requests
 RewriteCond %{REQUEST_METHOD} POST
-{{#each httpd.uriAllowPostReqest~}}
+{{#each httpd.uriAllowPostRequest~}}
 RewriteCond %{REQUEST_URI} !{{this}}
 {{/each}}
 RewriteRule ^(.*)$ - [R=405,L]

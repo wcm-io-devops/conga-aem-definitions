@@ -318,7 +318,7 @@ config:
       - rule: ^/dispatcher/invalidate(.*) - [R=404,L]
 
     # POST access is forbidden, except for the followig URLs
-    uriAllowPostReqest:
+    uriAllowPostRequest:
         # Allow SAML Login on all hosts per default
       - ^.*/saml_login$
 
