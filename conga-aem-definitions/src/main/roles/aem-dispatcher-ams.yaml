@@ -294,8 +294,7 @@ config:
     # Rewrite rules, mainly used to protect critical urls
     # These rules are evaluated before the mapping rules
     rewrites:
-      - comment: Security - deny access to product critical urls
-        rule: ^/admin/(.*)$               - [R=404,L]
+      - rule: ^/admin/(.*)$               - [R=404,L]
       - rule: ^/crx/(.*)$                 - [R=404,L]
       - conditions:
           - '%{REQUEST_URI} !^/system/sling/logout(.*)$'
@@ -320,8 +319,8 @@ config:
 
     # POST access is forbidden, except for the followig URLs
     uriAllowPostReqest:
-      - comment: Allow SAML Login on all hosts per default
-        condition: '%{REQUEST_URI} !^.*/saml_login$'
+        # Allow SAML Login on all hosts per default
+      - condition: '%{REQUEST_URI} !^.*/saml_login$'
 
     # Request URI patterns for Sling mapping short URL configuration
     mapping:

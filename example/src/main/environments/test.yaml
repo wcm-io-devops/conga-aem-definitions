@@ -324,6 +324,14 @@ tenants:
       rewriteIncludes:
         - conf.d/rewrites/rewrite.rules
         - conf.d/rewrites/webserver_ams_rewrite.rules
+      rewrites:
+        - comment: Example for a rule with comment
+          rule: ^/restriced_area/(.*)$ - [R=404,L]
+      uriAllowPostReqest:
+        - _merge_
+        - comment: Custom URI where post request ia allowed
+          condition: '%{REQUEST_URI} !^.*/my/login/url$'
+
       cloudManagerConditional:
         dev:
           serverName: www.dev-sample5.com
