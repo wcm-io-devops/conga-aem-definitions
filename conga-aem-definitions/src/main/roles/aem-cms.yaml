@@ -40,10 +40,6 @@ files:
         - rule: include
           pattern: /etc/map/.*
         - rule: exclude
-          pattern: /etc/map/http
-        - rule: include
-          pattern: /etc/map/http/.*
-        - rule: exclude
           pattern: /etc/map/http/AppMeasurementBridge
 
 # AEM Replication (Author)
