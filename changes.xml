@@ -23,6 +23,12 @@
     xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/plugins/maven-changes-plugin/xsd/changes-1.0.0.xsd">
   <body>
 
+    <release version="1.9.0" date="2020-10-08">
+      <action type="add" dev="trichter">
+        Role aem-dispatcher: Introduce httpd.ssl.protocol and httpd.ssl.cipherSuite, configure TLS 1.2 and TLS 1.3 with perfect forward secrecy (PFS) ciphers.
+      </action>
+    </release>
+
     <release version="1.8.2" date="2020-09-15">
       <action type="fix" dev="sseifert">
         Role aem-cms: Fix package filter rules for aem-cms-publish-slingmapping to make sure "http" mappings are installed.
