@@ -66,6 +66,13 @@ RewriteRule ^(.*)$ http://{{httpHost httpd.serverName port=httpd.serverPort}}$1 
 </LocationMatch>
 {{/block}}
 
+{{~#block "sslEnforce"}}
+{{~#if httpd.ssl.enforce}}
+# SSL enforcing
+Header always set Strict-Transport-Security "max-age=31536000"
+{{/if}}
+{{/block}}
+
 
 {{~#block "accessRestrictionsLocationFilter"}}
 # Location filter
