@@ -32,6 +32,8 @@ nodes:
     config:
       httpd:
         serverName: author.sample.com
+        ssl:
+          enforce: true
         accessRestriction:
           locationFilter:
           - _merge_
