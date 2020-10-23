@@ -334,7 +334,6 @@ config:
       - ^/etc
       - ^/home
       - ^/libs
-      - ^/saml_login
       - ^/system
       - ^/tmp
       - ^/var
