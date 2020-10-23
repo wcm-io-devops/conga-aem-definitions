@@ -3,7 +3,7 @@
 
 variants:
 
-# Disaptcher for publish instances - configure a tenant for each vhost
+# Dispatcher for publish instances - configure a tenant for each vhost
 - variant: aem-publish
   config:
 
