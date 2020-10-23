@@ -374,8 +374,7 @@ config:
   dispatcher:
 
     # Forward client headers from dispatcher to AEM instance
-    forwardClientHeaders:
-    - "*"
+    forwardClientHeaders: []
 
     # Path to the clientheaders.any file in case the file got renamed in a inheriting role
     forwardClientHeadersIncludePath: "../clientheaders/clientheaders.any"
