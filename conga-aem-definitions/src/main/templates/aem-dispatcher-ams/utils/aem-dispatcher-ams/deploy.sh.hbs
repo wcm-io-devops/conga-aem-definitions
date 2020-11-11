@@ -5,10 +5,6 @@ set -e
 # change into directory of the script
 cd "$(dirname "$0")/../.."
 
-# perform initial configtest to ensure that configuration is correct before deploying new files
-echo -e "\n--- perform httpd configtest ---\n"
-sudo apachectl configtest
-
 {{#if utils.deploy.dispatcher.backup.enabled ~}}
 echo -e "\n--- create backup ---\n"
 BACKUP_DIR="{{ utils.deploy.dispatcher.backup.path }}"
