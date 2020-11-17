@@ -251,7 +251,12 @@ RewriteRule ^/(.+)$ /content/$1 [PT,L]
 {{~#block "rewriteHomepageRedirect"}}
 {{~#if httpd.rootRedirect.url}}
 # Root redirect to homepage
+{{~#if httpd.ssl.enforce}}
+RewriteRule ^/$ https://%{HTTP_HOST}{{httpd.rootRedirect.url}} [R={{httpd.rootRedirect.httpStatus}},L]
+{{else}}
 RewriteRule ^/$ {{httpd.rootRedirect.url}} [R={{httpd.rootRedirect.httpStatus}},L]
+{{/if ~}}
+
 {{/if ~}}
 {{/block}}
 
