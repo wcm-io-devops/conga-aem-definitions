@@ -30,6 +30,9 @@
       <action type="add" dev="trichter">
         Role aem-dispatcher: Add HSTS header in author vhost when SSL is enforced.
       </action>
+      <action type="update" dev="sseifert">
+        Roles aem-dispatcher, aem-dispatcher-ams, aem-dispatcher-cloud: Add "assetsearch" to list of ignored selectors for json extension.
+      </action>
     </release>
 
     <release version="1.9.0" date="2020-10-08">
