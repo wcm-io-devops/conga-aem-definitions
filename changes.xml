@@ -23,7 +23,10 @@
     xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/plugins/maven-changes-plugin/xsd/changes-1.0.0.xsd">
   <body>
 
-    <release version="1.9.2" date="not-released">
+    <release version="1.10.0" date="not released">
+      <action type="add" dev="trichter">
+        Add new role Role aem-dispatcher-ams.
+      </action>
       <action type="add" dev="trichter">
         Role aem-dispatcher: Add HSTS header in author vhost when SSL is enforced.
       </action>

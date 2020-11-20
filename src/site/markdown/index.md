@@ -18,8 +18,9 @@ The current version of AEM Definitions is 1.x. Guideline for migration from AEM 
 This repository contains generic role definitions and templates for CONGA-based AEM configurations:
 
 * [aem-cms][role-aem-cms]: Configures AEM Author and Publish instances
-* [aem-dispatcher][role-aem-dispatcher]: Configures Webserver with Dispatcher module
-* [aem-dispatcher-cloud][role-aem-dispatcher-cloud]: Configures Webserver with Dispatcher module following the Adobe Cloud Manager conventions
+* [aem-dispatcher][role-aem-dispatcher]: Configures Webserver with Dispatcher module for On Premises hosting
+* [aem-dispatcher-ams][role-aem-dispatcher-ams]: Configures Webserver with Dispatcher module following the Adobe Cloud Manager conventions for AMS
+* [aem-dispatcher-cloud][role-aem-dispatcher-cloud]: Configures Webserver with Dispatcher module following the Adobe Cloud Manager conventions for AEM as a Cloud Service
 
 The definitions can be used by [CONGA - CONfiguration GenerAtor][conga] for configuring [Adobe Experience Manager (AEM)][aem] environments.
 
