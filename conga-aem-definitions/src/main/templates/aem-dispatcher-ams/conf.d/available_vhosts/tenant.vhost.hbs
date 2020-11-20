@@ -1,0 +1,6 @@
+# Include customer defined variables
+Include {{ httpd.customVarsIncludePath }}
+
+<VirtualHost *:80>
+{{> aem-dispatcher-ams/conf.d/available_vhosts/tenant.vhost.partials.hbs}}
+</VirtualHost>

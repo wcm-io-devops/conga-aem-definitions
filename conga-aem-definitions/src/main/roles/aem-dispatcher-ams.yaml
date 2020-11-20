@@ -1,9 +1,9 @@
-# Adobe Cloud Service web server with dispatcher module
+# Adobe Managed Service web server with dispatcher module
 # Generates general dispatcher configuration following the Adobe Cloud Manager conventions
 
 variants:
 
-# Disaptcher for publish instances - configure a tenant for each vhost
+# Dispatcher for publish instances - configure a tenant for each vhost
 - variant: aem-publish
   config:
 
@@ -109,11 +109,14 @@ variants:
 
         # Defines what responses should be cached based on the requested URL
         rules:
-        # Cache everything by default (already included in default rules)
-        #- glob: "*"
-        #  type: allow
+        # Cache everything by default
+        - glob: "*"
+          type: allow
         # Exclude .htx extension from caching
         - glob: "*.htx"
+          type: deny
+        # Do not cache csrf.token
+        - glob: "/libs/granite/csrf/token.json"
           type: deny
 
         # Defines the pages that are "invalidated" after any activation
@@ -130,7 +133,7 @@ variants:
         - glob: "*/analytics.sitecatalyst.js"
           type: allow
 
-templateDir: aem-dispatcher-cloud
+templateDir: aem-dispatcher-ams
 
 files:
 
@@ -144,6 +147,7 @@ files:
   template: conf.d/available_vhosts/tenant.vhost.hbs
   multiply: tenant
   fileHeader: conf
+  condition: ${httpd.generateAvailableVhost}
 
 # enabled vhosts
 - file: ${new('java.text.DecimalFormat','0000').format(multiplyIndex)}_${tenant}.vhost
@@ -152,6 +156,7 @@ files:
   variants:
   - aem-publish
   multiply: tenant
+  condition: ${httpd.generateEnabledVhost}
 
 # global rewrite rules
 - file: rewrite.rules
@@ -169,43 +174,25 @@ files:
   template: conf.d/variables/custom.vars.hbs
   fileHeader: conf
 
-# global variables
-- file: global.vars
-  dir: conf.d/variables
-  variants:
-  - aem-publish
-  template: conf.d/variables/global.vars.hbs
-  fileHeader: conf
-
-# copy additional static files directly from AEM SDK dispatcher sources
-- file: conf.d/dispatcher_vhost.conf
-  url: classpath:/aem-sdk-dispatcher/src/conf.d/dispatcher_vhost.conf
-  variants:
-  - aem-publish
-- file: conf.d/rewrites/default_rewrite.rules
-  url: classpath:/aem-sdk-dispatcher/src/conf.d/rewrites/default_rewrite.rules
-  variants:
-  - aem-publish
-
-
 # --- dispatcher config ---
 
 # available farms
-- file: publish.farm
+- file: publish_farm.any
   dir: conf.dispatcher.d/available_farms
   variants:
   - aem-publish
-  template: conf.dispatcher.d/available_farms/publish.farm.hbs
+  template: conf.dispatcher.d/available_farms/publish_farm.any.hbs
   fileHeader: any
   validators:
   - any
 
 # enabled farms
-- file: publish.farm
+- file: publish_farm.any
   dir: conf.dispatcher.d/enabled_farms
-  symlinkTarget: conf.dispatcher.d/available_farms/publish.farm
+  symlinkTarget: conf.dispatcher.d/available_farms/publish_farm.any
   variants:
   - aem-publish
+  condition: ${dispatcher.generateEnabledFarms}
 
 # cache rules
 - file: rules.any
@@ -230,57 +217,24 @@ files:
 
 # virtualhosts
 - file: virtualhosts.any
-  dir: conf.dispatcher.d/virtualhosts
+  dir: conf.dispatcher.d/vhosts
   variants:
   - aem-publish
-  template: conf.dispatcher.d/virtualhosts/virtualhosts.any.hbs
+  template: conf.dispatcher.d/vhosts/virtualhosts.any.hbs
 
-# copy additional static files directly from AEM SDK dispatcher sources
-- file: conf.d/available_vhosts/default.vhost
-  url: classpath:/aem-sdk-dispatcher/src/conf.d/available_vhosts/default.vhost
-  variants:
-  - aem-publish
-- file: conf.d/enabled_vhosts/default.vhost
-  symlinkTarget: conf.d/available_vhosts/default.vhost
-  variants:
-  - aem-publish
-- file: conf.dispatcher.d/dispatcher.any
-  url: classpath:/aem-sdk-dispatcher/src/conf.dispatcher.d/dispatcher.any
-  variants:
-  - aem-publish
-- file: conf.dispatcher.d/cache/default_invalidate.any
-  url: classpath:/aem-sdk-dispatcher/src/conf.dispatcher.d/cache/default_invalidate.any
-  variants:
-  - aem-publish
-- file: conf.dispatcher.d/cache/default_rules.any
-  url: classpath:/aem-sdk-dispatcher/src/conf.dispatcher.d/cache/default_rules.any
-  variants:
-  - aem-publish
-- file: conf.dispatcher.d/available_farms/default.farm
-  url: classpath:/aem-sdk-dispatcher/src/conf.dispatcher.d/available_farms/default.farm
-  variants:
-  - aem-publish
-- file: conf.dispatcher.d/clientheaders/default_clientheaders.any
-  url: classpath:/aem-sdk-dispatcher/src/conf.dispatcher.d/clientheaders/default_clientheaders.any
-  variants:
-  - aem-publish
-- file: conf.dispatcher.d/enabled_farms/default.farm
-  symlinkTarget: conf.dispatcher.d/available_farms/default.farm
-  variants:
-  - aem-publish
-- file: conf.dispatcher.d/filters/default_filters.any
-  url: classpath:/aem-sdk-dispatcher/src/conf.dispatcher.d/filters/default_filters.any
-  variants:
-  - aem-publish
-- file: conf.dispatcher.d/renders/default_renders.any
-  url: classpath:/aem-sdk-dispatcher/src/conf.dispatcher.d/renders/default_renders.any
-  variants:
-  - aem-publish
-- file: conf.dispatcher.d/virtualhosts/default_virtualhosts.any
-  url: classpath:/aem-sdk-dispatcher/src/conf.dispatcher.d/virtualhosts/default_virtualhosts.any
-  variants:
-  - aem-publish
+# --- utils ---
 
+- file: deploy.sh
+  dir: utils/aem-dispatcher-ams
+  variants:
+  - aem-publish
+  template: utils/aem-dispatcher-ams/deploy.sh.hbs
+
+- file: flush.sh
+  dir: utils/aem-dispatcher-ams
+  variants:
+    - aem-publish
+  template: utils/aem-dispatcher-ams/flush.sh.hbs
 
 config:
 
@@ -290,6 +244,16 @@ config:
     # On publish instances the server name defaults to the tenant name.
     serverName:
     serverAliasNames:
+
+    # Logging configuration for httpd
+    logging:
+      level: warn
+      # Access logging similar to "Combined", but without IP address (privacy protection)
+      accessLogFormat: '"0.0.0.0 %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-agent}i\""'
+
+    ssl:
+      # If set to true all requests are redirected to HTTPS and HSTS is enabled
+      enforce: true
 
     # Redirecting from "/" (only publish dispatcher)
     rootRedirect:
@@ -323,8 +287,44 @@ config:
       # Set the default experiation time for text/html responses (enabled by default in AEM Cloud Service webserver)
       htmlExpirationTimeMin: 5
 
-    # Request URI patterns for Sling maping short URL configuration
+    # List of rewrite rules to include in the vhost
+    rewriteIncludes:
+      - conf.d/rewrites/rewrite.rules
+
+    # Rewrite rules, mainly used to protect critical urls
+    # These rules are evaluated before the mapping rules
+    rewrites:
+      - rule: ^/admin/(.*)$               - [R=404,L]
+      - rule: ^/crx/(.*)$                 - [R=404,L]
+      - conditions:
+          - '%{REQUEST_URI} !^/system/sling/logout(.*)$'
+        rule: ^/system/(.*)$              - [R=404,L]
+      - rule: ^/api(.*)$                  - [R=404,L]
+      - rule: ^/apps/(.*)$                - [R=404,L]
+      - rule: ^/conf/(.*)$                - [R=404,L]
+      - rule: ^/bin/(.*)$                 - [R=404,L]
+      - rule: ^/services/(.*)$            - [R=404,L]
+      - rule: ^/tmp/(.*)$                 - [R=404,L]
+      - rule: ^/var/(.*)$                 - [R=404,L]
+      - rule: ^/dav/(.*)$                 - [R=404,L]
+      - rule: ^/jcr(.*)$                  - [R=404,L]
+      - rule: ^/_jcr(.*)$                 - [R=404,L]
+      - rule: ^/libs/wcm/(.*)$            - [R=404,L]
+      - rule: ^/libs/cq/(.*)$             - [R=404,L]
+      - rule: ^/var/linkchecker/(.*)$     - [R=404,L]
+      - rule: ^/etc/linkchecker/(.*)$     - [R=404,L]
+      - rule: ^/home/users/a/admin/(.*)$  - [R=404,L]
+      - rule: ^/apps/sling/(.*)$          - [R=404,L]
+      - rule: ^/dispatcher/invalidate(.*) - [R=404,L]
+
+    # POST access is forbidden, except for the followig URLs
+    uriAllowPostRequest:
+        # Allow SAML Login on all hosts per default
+      - ^.*/saml_login$
+
+    # Request URI patterns for Sling mapping short URL configuration
     mapping:
+      rootPath: /content
       uriExcludeFromMapping:
       - ^/apps
       - ^/bin
@@ -334,24 +334,34 @@ config:
       - ^/etc
       - ^/home
       - ^/libs
-      - ^/saml_login
       - ^/system
       - ^/tmp
       - ^/var
       uriAllowContentAccess:
       - ^/content/dam
-      - ^/content/test-site
 
     # Custom configuration snippets for vhost files (only on publish dispatcher - useful for tenant-specific configurations)
     customVHostConfig:
       # Placed at the top of the vhost config file
       before:
+
+      # Placed before the ssh enforce rules in the host config file
+      beforeSslEnforce:
       # Placed before the rewrite rules in the host config file
       beforeRewrite:
       # Placed at the bottom of the vhost confign file
       after:
 
-    # Allows to define different server names/alias names per environment in a single dispatcher configuration
+    # Path to the custom.vars file in case the file got renamed in a inheriting role
+    customVarsIncludePath: "conf.d/variables/custom.vars"
+
+    # Controls the generation of available_vhosts files
+    generateAvailableVhost: true
+
+    # Controls the generation of enabled_vhosts files
+    generateEnabledVhost: true
+
+    # Allows to define server names/alias names per environment in a single dispatcher configuration
     #cloudManagerConditional:
     #  - targetEnvironment: dev
     #    serverName: www.dev-host3.com
@@ -364,17 +374,34 @@ config:
   dispatcher:
 
     # Forward client headers from dispatcher to AEM instance
-    forwardClientHeaders:
-    - "*"
+    forwardClientHeaders: []
+
+    # Path to the clientheaders.any file in case the file got renamed in a inheriting role
+    forwardClientHeadersIncludePath: "../clientheaders/clientheaders.any"
 
     # Dispatcher filter rules (use only regex, no glob expressions)
     filter:
     #- url: /.*
     #  type: allow
 
+    # Path to the filters.any file in case the file got renamed in a inheriting role
+    filtersIncludePath: "../filters/filters.any"
+
     # Defines the DispatcherLogLevel (Error, Warn, Info, Debug and Trace1)
     logging:
       level: Warn
+
+    # Path to the virtualhosts.any file in case the file got renamed in a inheriting role
+    virtualhostsIncludePath: "../vhosts/virtualhosts.any"
+
+    # Path to the filters.any file in case the file got renamed in a inheriting role
+    cacheIncludePath: "../cache/rules.any"
+
+    # Controls the generation of enabled_farms file
+    generateEnabledFarms: true
+
+    # Name of the farm
+    farmName: publishfarm
 
     # Configure dispatcher cache
     cache:
@@ -432,6 +459,45 @@ config:
       #rootPath: /content/path
       # By default, only access to paths shortened via Sling Mapping are allowed. Set this to true to also allow unshortened paths.
       #allowUnshortenedPath: false
+
+  utils:
+    deploy:
+      dispatcher:
+
+        backup:
+          # when enabled the current dispatcher configuration is copied to the backup path
+          enabled: true
+          path: "$HOME/backups/dispatcher/$(date +%y-%m-%d)/$(date +%H-%M-%S)"
+
+        files:
+
+          # files to be deleted, either from the deployment directory or on the target system
+          delete:
+          # - path: conf.d/some-user-owned-file-in-deployment-dir
+          # - path: /tmp/some-sudo-restricted-file
+          #   sudo: true
+          #   options: -fv
+
+          # files to be copied from the node directory to destinations
+          copy:
+            # conf.d files
+            - src: conf.d/*
+              dest: /etc/httpd/conf.d/
+              sudo: true
+              options: -rv
+            # dispatcher.conf.d files
+            - src: conf.dispatcher.d/*
+              dest: /etc/httpd/conf.dispatcher.d/
+              sudo: true
+              options: -rv
+
+        # Configuration for dispatcher flush utility script
+        flush:
+          path:
+            # The content in these paths (below ${PUBLISH_DOCROOT} will be deleted when executing the flush script
+            - etc
+            - etc.clientlibs
+            - content
 
 
 

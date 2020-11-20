@@ -1,0 +1,36 @@
+#!/bin/bash
+# abort on first error
+set -e
+
+# change into directory of the script
+cd "$(dirname "$0")"
+
+echo -e "\n--- retrieve docroot ---\n"
+
+export $(grep PUBLISH_DOCROOT /etc/sysconfig/httpd | sed "s/['\"]//g")
+
+echo "> PUBLISH_DOCROOT: '${PUBLISH_DOCROOT}'"
+
+if [ -z "${PUBLISH_DOCROOT}" ]
+then
+  echo "Unable to determine value of environment variable 'PUBLISH_DOCROOT'"
+  exit 1
+fi
+
+echo -e "\n--- flush dispatcher ---\n"
+
+{{~#each utils.deploy.dispatcher.flush.path}}
+
+echo "> flush cached files in '${PUBLISH_DOCROOT}/{{this}}'"
+if [[ -d "${PUBLISH_DOCROOT}/{{this}}" ]]; then
+  sudo rm -rf ${PUBLISH_DOCROOT}/{{this}}/*
+fi
+{{~/each}}
+
+echo -e "\n--- perform httpd configtest ---\n"
+sudo apachectl configtest
+
+echo -e "\n--- restart httpd to avoid not created directories ---\n"
+sudo systemctl restart httpd
+
+echo -e "\n--- flush complete ---\n"

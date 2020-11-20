@@ -143,6 +143,71 @@ nodes:
         - url: /path/to/resources/
           type: allow
 
+- node: webserver-ams
+  roles:
+    - role: aem-dispatcher-ams
+      variants:
+        - aem-publish
+      config:
+        httpd:
+          accessRestriction:
+            locationFilter:
+              - location: /location5Allow
+                type: allow
+              - location: /location6Deny
+                type: deny
+              - location: /admin
+                type: allow
+              - _merge_
+          headers:
+            htmlExpirationTimeMin: 6
+        dispatcher:
+          farmName: custom_farm_name
+          cache:
+            rootPath: /var/cache/publish1
+            statFilesLevel: 3
+            allowAuthorized: true
+            serveStaleOnError: true
+            serveStaleGracePeriodSec: 5
+            headers:
+              - Cache-Control
+              - Content-Disposition
+              - Content-Type
+              - Expires
+              - Last-Modified
+              - X-Content-Type-Options
+            enableTTL: true
+          renderInstance:
+            host: localhost
+            port: 4503
+            timeoutMs: 10000
+          # add a new forwarded client header
+          forwardClientHeaders:
+            - _merge_
+            - X-My-Custom-Header
+          # add a new filter rule
+          filter:
+            - _merge_
+            - url: /path/to/resources/
+              type: allow
+        utils:
+          deploy:
+            dispatcher:
+              files:
+                delete:
+                  - path: conf.d/some-user-owned-file-in-deployment-dir
+                    options: -vf
+                  - path: /tmp/some-sudo-restricted-file
+                    sudo: true
+                copy:
+                  - _merge_
+                  - src: some-non-restricted-file
+                    dest: /tmp/some-non-restricted-destination
+                  - src: some-restricted-file
+                    dest: /tmp/some-restricted-destination
+                    sudo: true
+
+
 config:
   jvm.path: /usr/lib/jvm/jdk-8-oracle-x64
 
@@ -251,4 +316,28 @@ tenants:
           serverName: www.stage-sample4.com
         prod:
           serverName: www.prod-sample4.com
+      rootRedirect.url: /content/sample4/en.html
+
+- tenant: ams-sample5.com
+  config:
+    httpd:
+      ssl:
+        enforce: true
+      rewriteIncludes:
+        - conf.d/rewrites/rewrite.rules
+        - conf.d/rewrites/webserver_ams_rewrite.rules
+      rewrites:
+        - comment: Example for a rule with comment
+          rule: ^/restriced_area/(.*)$ - [R=404,L]
+
+      cloudManagerConditional:
+        dev:
+          serverName: www.dev-sample5.com
+          serverAliasNames:
+            - www.dev-alias5a.com
+            - www.dev-alias5b.com
+        stage:
+          serverName: www.stage-sample5.com
+        prod:
+          serverName: www.prod-sample5.com
       rootRedirect.url: /content/sample4/en.html
