@@ -1,4 +1,4 @@
-# Web server with Dispatcher module for AEM author and/or publish instance
+# On Premises Web server with Dispatcher module for AEM author and/or publish instance
 # Generates general dispatcher configuration
 
 variants:
@@ -64,7 +64,7 @@ variants:
         type: deny
       # Deny content grabbing for /content - additional selectors not included in default dispatcher.any
       - path: /content(/.*)?
-        selectors: (ambits|assignments|childrenlist|cloudservices|contentfinder|context|emailservice|exacttarget|ext|form|media|missingpages|mobileapps|pages|paragraphs|payloadsummary|permissions|publications|referencelist|savedsearch|skippedpages|search|social|style|tags|tagtree|timezones)
+        selectors: (ambits|assetsearch|assignments|childrenlist|cloudservices|contentfinder|context|emailservice|exacttarget|ext|form|media|missingpages|mobileapps|pages|paragraphs|payloadsummary|permissions|publications|referencelist|savedsearch|skippedpages|search|social|style|tags|tagtree|timezones)
         extension: (json)
         type: deny
       - path: /content(/.*)?
@@ -313,7 +313,7 @@ config:
         - locationMatch: "\\.lc-.*-lc\\.min\\.(css|js)$"
           directives: "max-age=31536000, public"
 
-    # Request URI patterns for Sling maping short URL configuration
+    # Request URI patterns for Sling mapping short URL configuration
     mapping:
       uriExcludeFromMapping:
       - ^/apps

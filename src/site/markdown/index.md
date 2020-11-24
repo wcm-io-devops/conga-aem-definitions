@@ -18,8 +18,9 @@ The current version of AEM Definitions is 1.x. Guideline for migration from AEM 
 This repository contains generic role definitions and templates for CONGA-based AEM configurations:
 
 * [aem-cms][role-aem-cms]: Configures AEM Author and Publish instances
-* [aem-dispatcher][role-aem-dispatcher]: Configures Webserver with Dispatcher module
-* [aem-dispatcher-cloud][role-aem-dispatcher-cloud]: Configures Webserver with Dispatcher module following the Adobe Cloud Manager conventions
+* [aem-dispatcher][role-aem-dispatcher]: Configures Webserver with Dispatcher module for On Premises hosting
+* [aem-dispatcher-ams][role-aem-dispatcher-ams]: Configures Webserver with Dispatcher module following the Adobe Cloud Manager conventions for AMS
+* [aem-dispatcher-cloud][role-aem-dispatcher-cloud]: Configures Webserver with Dispatcher module following the Adobe Cloud Manager conventions for AEM as a Cloud Service
 
 The definitions can be used by [CONGA - CONfiguration GenerAtor][conga] for configuring [Adobe Experience Manager (AEM)][aem] environments.
 
@@ -31,6 +32,8 @@ The plugins [CONGA Sling Plugin][conga-sling] and [CONGA AEM Plugin][conga-aem] 
 * [wcm.io CONGA training material with exercises](https://training.wcm.io/conga/)
 * [adaptTo() 2015 Talk: CONGA - Configuration generation for Sling and AEM](https://adapt.to/2015/en/schedule/conga---configuration-generation-for-sling-and-aem.html)
 * [adaptTo() 2017 Talk: Automate AEM Deployment with Ansible and wcm.io CONGA](https://adapt.to/2017/en/schedule/automate-aem-deployment-with-ansible-and-wcm-io-conga.html)
+* [adaptTo() 2018 Talk: Maven Archetypes for AEM & Cloud Deployment](https://adapt.to/2018/en/schedule/maven-archetypes-for-aem.html)
+* [adaptTo() 2020 Talk: Use Cloud Manager to deploy CONGA-based AEM Applications](https://adapt.to/2020/en/schedule/use-cloud-manager-to-deploy-conga-based-aem-applications.html)
 
 
 

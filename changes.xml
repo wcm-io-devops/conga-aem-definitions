@@ -23,6 +23,18 @@
     xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/plugins/maven-changes-plugin/xsd/changes-1.0.0.xsd">
   <body>
 
+    <release version="1.10.0" date="2020-11-24">
+      <action type="add" dev="trichter">
+        Add new role Role aem-dispatcher-ams.
+      </action>
+      <action type="add" dev="trichter">
+        Role aem-dispatcher: Add HSTS header in author vhost when SSL is enforced.
+      </action>
+      <action type="update" dev="sseifert">
+        Roles aem-dispatcher, aem-dispatcher-ams, aem-dispatcher-cloud: Add "assetsearch" to list of ignored selectors for json extension.
+      </action>
+    </release>
+
     <release version="1.9.0" date="2020-10-08">
       <action type="add" dev="trichter">
         Role aem-dispatcher: Introduce httpd.ssl.protocol and httpd.ssl.cipherSuite, configure TLS 1.2 and TLS 1.3 with perfect forward secrecy (PFS) ciphers.
