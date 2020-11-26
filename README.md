@@ -1,11 +1,11 @@
 <img src="https://wcm.io/images/favicon-16@2x.png"/> CONGA AEM Definitions
 ======
-[![Build Status](https://travis-ci.org/wcm-io-devops/conga-aem-definitions.png?branch=develop)](https://travis-ci.org/wcm-io-devops/conga-aem-definitions)
+[![Build Status](https://travis-ci.com/wcm-io-devops/conga-aem-definitions.png?branch=develop)](https://travis-ci.com/wcm-io-devops/conga-aem-definitions)
 
 Documentation: https://devops.wcm.io/conga/definitions/aem/<br/>
 Issues: https://wcm-io.atlassian.net/projects/WDCONGA<br/>
 Wiki: https://wcm-io.atlassian.net/wiki/<br/>
-Continuous Integration: https://travis-ci.org/wcm-io-devops/conga-aem-definitions<br/>
+Continuous Integration: https://travis-ci.com/wcm-io-devops/conga-aem-definitions<br/>
 Commercial support: https://wcm.io/commercial-support.html
 
 
