@@ -218,7 +218,8 @@ config:
     serverName:
     serverNameSsl: ${httpd.serverName}
     serverAliasNames:
-    serverAliasNamesSsl: ${httpd.serverAliasNames}
+    serverAliasNamesSsl:
+      - ${httpd.serverAliasNames}
 
     # Server ports
     serverPort: 80
