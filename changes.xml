@@ -22,7 +22,11 @@
 <document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/changes/1.0.0"
     xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/plugins/maven-changes-plugin/xsd/changes-1.0.0.xsd">
   <body>
-
+    <release version="1.12.0" data="unreleased">
+      <action type="add" dev="amuthmann">
+        Prevent gzip for videos (mp4 and webm) to allow streaming.
+      </action>
+    </release>
     <release version="1.10.0" date="2020-11-24">
       <action type="add" dev="trichter">
         Add new role Role aem-dispatcher-ams.
