@@ -26,6 +26,9 @@
       <action type="add" dev="amuthmann">
         Prevent gzip for videos (mp4 and webm) to allow streaming.
       </action>
+      <action type="fix" dev="mrozati" issue="WDCONGA-21">
+        Fix sling mappings to avoid generation of reverse mapping for "/". Because it would otherwise match every path that is not catched by sling mappings, even when they are not under a sling mapping root path.
+      </action>
     </release>
     <release version="1.10.0" date="2020-11-24">
       <action type="add" dev="trichter">
