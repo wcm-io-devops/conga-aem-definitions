@@ -94,8 +94,6 @@ nodes:
         - host
 
 config:
-  jvm.path: /usr/lib/jvm/jdk-8-oracle-x64
-
   quickstart:
     enableDavEx: true
     adminUser:

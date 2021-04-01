@@ -136,7 +136,6 @@ config:
     version: ${version}
 
   jvm:
-    path: /path/to/java
     heapspace:
       min: 2048m
       max: 2048m
