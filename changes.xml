@@ -29,6 +29,9 @@
       <action type="add" dev="trichter">
         Role: aem-cms: Remove "jvm.path" configuration option
       </action>
+      <action type="fix" dev="nbellack">
+        Role aem-dispatcher-cloud, aem-dispatcher-ams: Fix usage example for cloudManagerConditional directive
+      </action>
     </release>
     <release version="1.10.0" date="2020-11-24">
       <action type="add" dev="trichter">
