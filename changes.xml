@@ -22,7 +22,7 @@
 <document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/changes/1.0.0"
     xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/plugins/maven-changes-plugin/xsd/changes-1.0.0.xsd">
   <body>
-    <release version="1.11.0" data="unreleased">
+    <release version="1.11.0" date="unreleased">
       <action type="add" dev="amuthmann">
         Prevent gzip for videos (mp4 and webm) to allow streaming.
       </action>
@@ -31,6 +31,9 @@
       </action>
       <action type="fix" dev="nbellack">
         Role aem-dispatcher-cloud, aem-dispatcher-ams: Fix usage example for cloudManagerConditional directive
+      </action>
+      <action type="add" dev="nbellack">
+        Role aem-dispatcher: Don't show exact Apache/Dispatcher version in Server header
       </action>
     </release>
     <release version="1.10.0" date="2020-11-24">
