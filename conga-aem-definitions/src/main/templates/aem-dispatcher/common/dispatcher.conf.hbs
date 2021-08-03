@@ -91,3 +91,7 @@ Header set X-UA-Compatible "IE=Edge,chrome=1"
 # Fix NOT MODIFIED for deflated resources, see https://bz.apache.org/bugzilla/show_bug.cgi?id=45023#c22 (thanks to Joost Dekeijzer)
 # Manipulate request header to request with ($1) and without gzip ($2) ending.
 RequestHeader edit "If-None-Match" '^"((.*)-gzip)"$' '"$1", "$2"'
+
+# Suppress leaking the exact Apache/Dispatcher version
+ServerSignature Off
+ServerTokens ProductOnly
