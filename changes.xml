@@ -35,6 +35,9 @@
       <action type="add" dev="nbellack">
         Role aem-dispatcher: Don't show exact Apache/Dispatcher version in Server header
       </action>
+      <action type="fix" dev="nbellack">
+        Role aem-dispatcher-cloud: Set httpd.rootRedirect.url to HTTPS version of VHost
+      </action>
     </release>
     <release version="1.10.0" date="2020-11-24">
       <action type="add" dev="trichter">

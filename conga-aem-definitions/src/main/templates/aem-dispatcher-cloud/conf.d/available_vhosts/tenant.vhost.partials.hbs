@@ -190,7 +190,7 @@ RewriteRule ^/(.+)$ /content/$1 [PT,L]
 {{~#block "rewriteHomepageRedirect"}}
 {{~#if httpd.rootRedirect.url}}
 # Root redirect to homepage
-RewriteRule ^/$ {{httpd.rootRedirect.url}} [R={{httpd.rootRedirect.httpStatus}},L]
+RewriteRule ^/$ https://%{HTTP_HOST}{{httpd.rootRedirect.url}} [R={{httpd.rootRedirect.httpStatus}},L]
 {{/if ~}}
 {{/block}}
 
