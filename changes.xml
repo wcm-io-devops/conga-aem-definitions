@@ -23,17 +23,17 @@
     xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/plugins/maven-changes-plugin/xsd/changes-1.0.0.xsd">
   <body>
     <release version="1.11.0" date="unreleased">
-      <action type="add" dev="amuthmann">
-        Prevent gzip for videos (mp4 and webm) to allow streaming.
+      <action type="remove" dev="trichter">
+        Role: aem-cms: Remove "jvm.path" configuration option.
       </action>
-      <action type="add" dev="trichter">
-        Role: aem-cms: Remove "jvm.path" configuration option
+      <action type="update" dev="amuthmann">
+        Role aem-dispatcher, aem-dispatcher-cloud: Prevent gzip for videos (mp4 and webm) to allow streaming.
       </action>
       <action type="fix" dev="nbellack">
-        Role aem-dispatcher-cloud, aem-dispatcher-ams: Fix usage example for cloudManagerConditional directive
+        Role aem-dispatcher-cloud, aem-dispatcher-ams: Fix usage example for cloudManagerConditional directive.
       </action>
-      <action type="add" dev="nbellack">
-        Role aem-dispatcher: Don't show exact Apache/Dispatcher version in Server header
+      <action type="update" dev="nbellack">
+        Role aem-dispatcher: Don't show exact Apache/Dispatcher version in Server header.
       </action>
       <action type="update" dev="sseifert">
         Role aem-cms: Do not prepend replication agent names with "publish_" to have full control over the agent name.
