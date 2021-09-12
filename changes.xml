@@ -35,7 +35,11 @@
       <action type="add" dev="nbellack">
         Role aem-dispatcher: Don't show exact Apache/Dispatcher version in Server header
       </action>
+      <action type="update" dev="sseifert">
+        Role aem-cms: Do not prepend replication agent names with "publish_" to have full control over the agent name.
+      </action>
     </release>
+
     <release version="1.10.0" date="2020-11-24">
       <action type="add" dev="trichter">
         Add new role Role aem-dispatcher-ams.
