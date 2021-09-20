@@ -21,15 +21,15 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>io.wcm.devops</groupId>
-    <artifactId>io.wcm.devops.parent_toplevel</artifactId>
-    <version>1.2.4</version>
-    <relativePath />
+    <groupId>io.wcm.devops.conga.definitions</groupId>
+    <artifactId>io.wcm.devops.conga.definitions.aem.parent</artifactId>
+    <version>1.11.0</version>
+    <relativePath>parent/pom.xml</relativePath>
   </parent>
 
   <groupId>io.wcm.devops.conga.definitions</groupId>
   <artifactId>io.wcm.devops.conga.definitions.aem.root</artifactId>
-  <version>1.10.0</version>
+  <version>1.11.0</version>
   <packaging>pom</packaging>
 
   <name>CONGA AEM Definitions</name>
@@ -48,6 +48,7 @@
   </properties>
 
   <modules>
+    <module>parent</module>
     <module>conga-aem-definitions</module>
     <module>example</module>
   </modules>
@@ -64,13 +65,30 @@
         </configuration>
       </plugin>
 
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <configuration>
+          <topSiteURL>${site.deploy.url}</topSiteURL>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-scm-publish-plugin</artifactId>
+        <configuration>
+          <subDirectory>${site.url.module.prefix}</subDirectory>
+          <skipDeletedFiles>true</skipDeletedFiles>
+        </configuration>
+      </plugin>
+
     </plugins>
   </build>
 
   <distributionManagement>
     <site>
       <id>${site.deploy.id}</id>
-      <url>${site.deploy.url}${site.url.module.prefix}</url>
+      <url>${site.deploy.url}</url>
     </site>
   </distributionManagement>
 

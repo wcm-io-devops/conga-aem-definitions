@@ -353,7 +353,7 @@ config:
 
     # Allows to define different server names/alias names per environment in a single dispatcher configuration
     #cloudManagerConditional:
-    #  - targetEnvironment: dev
+    #  targetEnvironment:  # to be substituted with e.g. "dev"
     #    serverName: www.dev-host3.com
     #    serverAliasNames:
     #    - www.dev-alias3a.com
