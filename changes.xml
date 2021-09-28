@@ -39,6 +39,9 @@
       <action type="update" dev="sseifert">
         Role aem-cms: Do not prepend replication agent names with "publish_" to have full control over the agent name.
       </action>
+      <action type="fix" dev="nbellack">
+        Role aem-dispatcher-cloud: Set httpd.rootRedirect.url to HTTPS version of VHost
+      </action>
     </release>
 
     <release version="1.10.0" date="2020-11-24">
