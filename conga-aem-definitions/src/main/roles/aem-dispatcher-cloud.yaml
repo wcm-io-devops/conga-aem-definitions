@@ -264,10 +264,6 @@ files:
   url: classpath:/aem-sdk-dispatcher/src/conf.dispatcher.d/clientheaders/default_clientheaders.any
   variants:
   - aem-publish
-- file: conf.dispatcher.d/enabled_farms/default.farm
-  symlinkTarget: conf.dispatcher.d/available_farms/default.farm
-  variants:
-  - aem-publish
 - file: conf.dispatcher.d/filters/default_filters.any
   url: classpath:/aem-sdk-dispatcher/src/conf.dispatcher.d/filters/default_filters.any
   variants:
