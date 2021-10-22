@@ -240,10 +240,6 @@ files:
   url: classpath:/aem-sdk-dispatcher/src/conf.d/available_vhosts/default.vhost
   variants:
   - aem-publish
-- file: conf.d/enabled_vhosts/default.vhost
-  symlinkTarget: conf.d/available_vhosts/default.vhost
-  variants:
-  - aem-publish
 - file: conf.dispatcher.d/dispatcher.any
   url: classpath:/aem-sdk-dispatcher/src/conf.dispatcher.d/dispatcher.any
   variants:
