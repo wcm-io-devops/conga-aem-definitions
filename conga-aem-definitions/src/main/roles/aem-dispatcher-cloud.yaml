@@ -240,10 +240,6 @@ files:
   url: classpath:/aem-sdk-dispatcher/src/conf.d/available_vhosts/default.vhost
   variants:
   - aem-publish
-- file: conf.d/enabled_vhosts/default.vhost
-  symlinkTarget: conf.d/available_vhosts/default.vhost
-  variants:
-  - aem-publish
 - file: conf.dispatcher.d/dispatcher.any
   url: classpath:/aem-sdk-dispatcher/src/conf.dispatcher.d/dispatcher.any
   variants:
@@ -262,10 +258,6 @@ files:
   - aem-publish
 - file: conf.dispatcher.d/clientheaders/default_clientheaders.any
   url: classpath:/aem-sdk-dispatcher/src/conf.dispatcher.d/clientheaders/default_clientheaders.any
-  variants:
-  - aem-publish
-- file: conf.dispatcher.d/enabled_farms/default.farm
-  symlinkTarget: conf.dispatcher.d/available_farms/default.farm
   variants:
   - aem-publish
 - file: conf.dispatcher.d/filters/default_filters.any
