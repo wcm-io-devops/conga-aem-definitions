@@ -23,6 +23,12 @@
     xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/plugins/maven-changes-plugin/xsd/changes-1.0.0.xsd">
   <body>
 
+    <release version="1.11.2" date="unreleased">
+      <action type="fix" dev="nbellack">
+        Role aem-dispatcher-cloud: Set httpd.rootRedirect.url to HTTPS version of VHost
+      </action>
+    </release>
+
     <release version="1.11.0" date="2021-09-20">
       <action type="remove" dev="trichter">
         Role: aem-cms: Remove "jvm.path" configuration option.
@@ -38,9 +44,6 @@
       </action>
       <action type="update" dev="sseifert">
         Role aem-cms: Do not prepend replication agent names with "publish_" to have full control over the agent name.
-      </action>
-      <action type="fix" dev="nbellack">
-        Role aem-dispatcher-cloud: Set httpd.rootRedirect.url to HTTPS version of VHost
       </action>
     </release>
 
