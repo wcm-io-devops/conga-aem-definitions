@@ -24,9 +24,6 @@
   <body>
 
     <release version="1.11.2" date="not released">
-      <action type="fix" dev="nbellack">
-        Role aem-dispatcher-cloud: Set httpd.rootRedirect.url to HTTPS version of VHost
-      </action>
       <action type="fix" dev="mrozati" issue="WDCONGA-31">
         Role: aem-dispatcher-cloud: Remove symlinks to "default.farm" and "default.vhost" because we are using custom copies instead.
       </action>
