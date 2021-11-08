@@ -46,4 +46,5 @@ The plugins [CONGA Sling Plugin][conga-sling] and [CONGA AEM Plugin][conga-aem] 
 [aem-definitions-migration]: https://wcm-io.atlassian.net/wiki/x/AQDRAw
 [role-aem-cms]: https://github.com/wcm-io-devops/conga-aem-definitions/blob/develop/conga-aem-definitions/src/main/roles/aem-cms.yaml
 [role-aem-dispatcher]: https://github.com/wcm-io-devops/conga-aem-definitions/blob/develop/conga-aem-definitions/src/main/roles/aem-dispatcher.yaml
+[role-aem-dispatcher-ams]: https://github.com/wcm-io-devops/conga-aem-definitions/blob/develop/conga-aem-definitions/src/main/roles/aem-dispatcher-ams.yaml
 [role-aem-dispatcher-cloud]: https://github.com/wcm-io-devops/conga-aem-definitions/blob/develop/conga-aem-definitions/src/main/roles/aem-dispatcher-cloud.yaml
