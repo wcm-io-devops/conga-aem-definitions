@@ -23,9 +23,15 @@
     xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/plugins/maven-changes-plugin/xsd/changes-1.0.0.xsd">
   <body>
 
+    <release version="1.11.4" date="not released">
+      <action type="update" dev="sseifert">
+        Role aem-cms: Do not show warning for uncovered node /etc/replication.
+      </action>
+    </release>
+
     <release version="1.11.2" date="2021-11-08">
       <action type="fix" dev="mrozati" issue="WDCONGA-31">
-        Role: aem-dispatcher-cloud: Remove symlinks to "default.farm" and "default.vhost" because we are using custom copies instead.
+        Role aem-dispatcher-cloud: Remove symlinks to "default.farm" and "default.vhost" because we are using custom copies instead.
       </action>
     </release>
 
