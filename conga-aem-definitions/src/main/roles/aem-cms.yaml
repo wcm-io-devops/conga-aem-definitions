@@ -54,6 +54,7 @@ files:
       jackrabbit-filter:
         options:
           validRoots: /etc/replication
+          severityForUncoveredAncestorNodes: debug
   postProcessors:
   - aem-contentpackage
   postProcessorOptions:
@@ -80,6 +81,7 @@ files:
       jackrabbit-filter:
         options:
           validRoots: /etc/replication
+          severityForUncoveredAncestorNodes: debug
   postProcessors:
   - aem-contentpackage
   postProcessorOptions:
