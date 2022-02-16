@@ -207,6 +207,19 @@ nodes:
                     dest: /tmp/some-restricted-destination
                     sudo: true
 
+- node: webserver-ams-cloudmanager
+  roles:
+    - role: aem-dispatcher-ams
+      variants:
+        - aem-publish
+      config:
+        utils:
+          deploy:
+            dispatcher:
+              # disable generation of AMS utility scripts because cloudmanager is not using them
+              generateScript: false
+              flush:
+                generateScript: false
 
 config:
   quickstart:

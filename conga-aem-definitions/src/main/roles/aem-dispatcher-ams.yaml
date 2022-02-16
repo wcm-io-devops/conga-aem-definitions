@@ -229,12 +229,14 @@ files:
   variants:
   - aem-publish
   template: utils/aem-dispatcher-ams/deploy.sh.hbs
+  condition: ${utils.deploy.dispatcher.generateScript}
 
 - file: flush.sh
   dir: utils/aem-dispatcher-ams
   variants:
     - aem-publish
   template: utils/aem-dispatcher-ams/flush.sh.hbs
+  condition: ${utils.deploy.dispatcher.flush.generateScript}
 
 config:
 
@@ -464,6 +466,9 @@ config:
     deploy:
       dispatcher:
 
+        # controls wether to render deployment utility script
+        generateScript: true
+
         backup:
           # when enabled the current dispatcher configuration is copied to the backup path
           enabled: true
@@ -492,7 +497,11 @@ config:
               options: -rv
 
         # Configuration for dispatcher flush utility script
+
         flush:
+          # controls generation of the dispatcher flush utility script
+          generateScript: true
+
           path:
             # The content in these paths (below ${PUBLISH_DOCROOT} will be deleted when executing the flush script
             - etc

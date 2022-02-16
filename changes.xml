@@ -23,6 +23,12 @@
     xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/plugins/maven-changes-plugin/xsd/changes-1.0.0.xsd">
   <body>
 
+    <release version="1.12.0" date="not released">
+      <action type="add" dev="trichter">
+        Role aem-dispatcher-ams: Introduce utils.deploy.dispatcher.generateScript and utils.deploy.dispatcher.flush.generateScript to control utility script generation.
+      </action>
+    </release>
+
     <release version="1.11.4" date="2021-12-18">
       <action type="update" dev="sseifert">
         Role aem-cms: Do not show warning for uncovered node /etc/replication.
