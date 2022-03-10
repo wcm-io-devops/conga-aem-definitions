@@ -248,6 +248,8 @@ config:
     # Logging configuration for httpd
     logging:
       level: warn
+      # Log level for mod_rewrite (error, warn, info, debug, trace1-trace8)
+      rewriteLogLevel: warn
       # Access logging similar to "Combined", but without IP address (privacy protection)
       accessLogFormat: '"0.0.0.0 %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-agent}i\""'
 
