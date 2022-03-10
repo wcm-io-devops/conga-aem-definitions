@@ -23,6 +23,6 @@ Define DISP_LOG_LEVEL {{dispatcher.logging.level}}
 Define REWRITE_LOG_LEVEL {{httpd.logging.rewriteLogLevel}}
 
 {{#httpdCloudManagerConditional}}
-# Set the default experiation time for text/html responses (in minutes)
+# Set the default expiration time for text/html responses (in minutes)
 Define EXPIRATION_TIME {{httpd.headers.htmlExpirationTimeMin}}
 {{/httpdCloudManagerConditional}}
