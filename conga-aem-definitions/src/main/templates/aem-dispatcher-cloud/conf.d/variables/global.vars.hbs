@@ -20,7 +20,7 @@ Define DISP_LOG_LEVEL {{dispatcher.logging.level}}
 # More information can be found at:
 # https://httpd.apache.org/docs/current/mod/mod_rewrite.html#logging
 #
-# Define REWRITE_LOG_LEVEL Warn
+Define REWRITE_LOG_LEVEL {{httpd.logging.rewriteLogLevel}}
 
 {{#httpdCloudManagerConditional}}
 # Set the default experiation time for text/html responses (in minutes)
