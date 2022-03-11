@@ -12,7 +12,22 @@
 {{~#neq serverName "*"}},
     "{{serverName}}{{portSuffix}}": {
       "jcr:primaryType": "sling:Mapping",
-      "sling:internalRedirect": ["/","{{sling.mapping.rootPath}}"]
+      "sling:internalRedirect": ["{{sling.mapping.rootPath}}"],
+      "resolver-mapping": {
+        "jcr:primaryType": "sling:Mapping",
+        "sling:match": "(.+)$",
+        "sling:internalRedirect": ["/$1","{{sling.mapping.rootPath}}/$1"]
+      },
+      "reverse-mapping-root-with-selector": {
+        "jcr:primaryType": "sling:Mapping",
+        "sling:match": "$1",
+        "sling:internalRedirect": ["{{sling.mapping.rootPath}}(\\..+)"]
+      },
+      "reverse-mapping-root": {
+        "jcr:primaryType": "sling:Mapping",
+        "sling:match": "$",
+        "sling:internalRedirect": ["{{sling.mapping.rootPath}}"]
+      }
     }
 {{/neq ~}}
 {{~#each httpd.serverAliasNames as |alias|}}
@@ -20,7 +35,22 @@
 {{~#neq serverAlias "*"}},
     "{{serverAlias}}{{portSuffix}}": {
       "jcr:primaryType": "sling:Mapping",
-      "sling:internalRedirect": ["/","{{../sling.mapping.rootPath}}"]
+      "sling:internalRedirect": ["{{../sling.mapping.rootPath}}"],
+      "resolver-mapping": {
+        "jcr:primaryType": "sling:Mapping",
+        "sling:match": "(.+)$",
+        "sling:internalRedirect": ["/$1","{{sling.mapping.rootPath}}/$1"]
+      },
+      "reverse-mapping-root-with-selector": {
+        "jcr:primaryType": "sling:Mapping",
+        "sling:match": "$1",
+        "sling:internalRedirect": ["{{sling.mapping.rootPath}}(\\..+)"]
+      },
+      "reverse-mapping-root": {
+        "jcr:primaryType": "sling:Mapping",
+        "sling:match": "$",
+        "sling:internalRedirect": ["{{sling.mapping.rootPath}}"]
+      }
     }
 {{/neq ~}}
 {{/each ~}}
@@ -40,7 +70,22 @@
 {{~#neq serverName "*"}},
     "{{serverName}}{{portSuffix}}": {
       "jcr:primaryType": "sling:Mapping",
-      "sling:internalRedirect": ["/","{{sling.mapping.rootPath}}"]
+      "sling:internalRedirect": ["{{sling.mapping.rootPath}}"],
+      "resolver-mapping": {
+        "jcr:primaryType": "sling:Mapping",
+        "sling:match": "(.+)$",
+        "sling:internalRedirect": ["/$1","{{sling.mapping.rootPath}}/$1"]
+      },
+      "reverse-mapping-root-with-selector": {
+        "jcr:primaryType": "sling:Mapping",
+        "sling:match": "$1",
+        "sling:internalRedirect": ["{{sling.mapping.rootPath}}(\\..+)"]
+      },
+      "reverse-mapping-root": {
+        "jcr:primaryType": "sling:Mapping",
+        "sling:match": "$",
+        "sling:internalRedirect": ["{{sling.mapping.rootPath}}"]
+      }
     }
 {{/neq ~}}
 {{~#each httpd.serverAliasNames as |alias|}}
@@ -48,7 +93,22 @@
 {{~#neq serverAlias "*"}},
     "{{serverAlias}}{{portSuffix}}": {
       "jcr:primaryType": "sling:Mapping",
-      "sling:internalRedirect": ["/","{{../sling.mapping.rootPath}}"]
+      "sling:internalRedirect": ["{{../sling.mapping.rootPath}}"],
+      "resolver-mapping": {
+        "jcr:primaryType": "sling:Mapping",
+        "sling:match": "(.+)$",
+        "sling:internalRedirect": ["/$1","{{sling.mapping.rootPath}}/$1"]
+      },
+      "reverse-mapping-root-with-selector": {
+        "jcr:primaryType": "sling:Mapping",
+        "sling:match": "$1",
+        "sling:internalRedirect": ["{{sling.mapping.rootPath}}(\\..+)"]
+      },
+      "reverse-mapping-root": {
+        "jcr:primaryType": "sling:Mapping",
+        "sling:match": "$",
+        "sling:internalRedirect": ["{{sling.mapping.rootPath}}"]
+      }
     }
 {{/neq ~}}
 {{/each ~}}

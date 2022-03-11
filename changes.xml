@@ -30,6 +30,9 @@
       <action type="update" dev="sseifert">
         Role aem-dispatcher-cloud: Synch with default dispatcher configuration from Adobe project archetype 24 to 35.
       </action>
+      <action type="fix" dev="mrozati" issue="WDCONGA-21">
+        Fix sling mappings to avoid generation of reverse mapping for "/". Because it would otherwise match every path that is not caught by sling mappings, even when they are not under a sling mapping root path.
+      </action>
     </release>
 
     <release version="1.11.4" date="2021-12-18">
