@@ -25,10 +25,10 @@
 
     <release version="1.12.0-SNAPSHOT" date="not released">
       <action type="add" dev="nbellack">
-        Roles aem-dispatcher, aem-dispatcher-ams, aem-dispatcher-cloud: Make log level for mod_rewrite configurable.
+        Role aem-dispatcher, aem-dispatcher-ams, aem-dispatcher-cloud: Make log level for mod_rewrite configurable.
       </action>
       <action type="update" dev="sseifert">
-        Roles aem-dispatcher-cloud: Synch with default dispatcher configuration from Adobe project archetype 24 to 35.
+        Role aem-dispatcher-cloud: Synch with default dispatcher configuration from Adobe project archetype 24 to 35.
       </action>
     </release>
 
