@@ -1,6 +1,7 @@
 <img src="https://wcm.io/images/favicon-16@2x.png"/> CONGA AEM Definitions
 ======
 [![Build](https://github.com/wcm-io-devops/conga-aem-definitions/workflows/Build/badge.svg?branch=develop)](https://github.com/wcm-io-devops/conga-aem-definitions/actions?query=workflow%3ABuild+branch%3Adevelop)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.wcm.devops.conga.definitions/io.wcm.devops.conga.definitions.aem/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.wcm.devops.conga.definitions/io.wcm.devops.conga.definitions.aem)
 
 Documentation: https://devops.wcm.io/conga/definitions/aem/<br/>
 Issues: https://wcm-io.atlassian.net/projects/WDCONGA<br/>

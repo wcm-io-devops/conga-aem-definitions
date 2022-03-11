@@ -6,8 +6,6 @@
 # **************************************************************************************
 
 ### BEGIN customized AEM quickstart settings
-export JAVA_HOME="{{jvm.path}}"
-export PATH="$JAVA_HOME/bin:$PATH"
 export CQ_PORT="{{quickstart.port}}"
 export CQ_RUNMODE="{{join quickstart.runmodes ','}}"
 export CQ_JVM_OPTS="-server -Xms{{jvm.heapspace.min}} -Xmx{{jvm.heapspace.max}} -XX:MaxPermSize={{jvm.permgenspace.max}}"
