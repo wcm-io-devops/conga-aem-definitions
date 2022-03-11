@@ -48,6 +48,8 @@ variants:
       - destination
       - Sling-uploadmode
       - x-requested-with
+      - If-Modified-Since
+      - Authorization
 
       # Dispatcher filter rules (use only regex, no glob expressions)
       filter:
@@ -56,24 +58,24 @@ variants:
         type: deny
       # This rule allows content to be accessed [from default_filters.any]
       - url: /content(/.*)?
-        extension: (css|eot|gif|ico|jpeg|jpg|js|gif|pdf|png|svg|swf|ttf|woff|woff2|html)
+        extension: (css|eot|gif|ico|jpeg|jpg|js|gif|pdf|png|svg|swf|ttf|woff|woff2|html|mp4|mov|m4v)
         type: allow
       # Enable clientlibs proxy servlet [from default_filters.any]
       - url: /etc.clientlibs(/.*)?
-        method: "GET"
+        method: GET
         type: allow
       # Basic features: AEM provides a framework aimed at preventing Cross-Site Request Forgery attacks [from default_filters.any]
       - url: /libs/granite/csrf/token.json
-        method: "GET"
+        method: GET
         extension: json
         type: allow
       # Basic features: allow POSTs to form selectors under content [from default_filters.any]
       - url: /content/*.form.html
-        method: "POST"
+        method: POST
         type: allow
       # Basic features: enable personalization [from default_filters.any]
       - url: /libs/cq/personalization(/.*)?
-        method: "GET"
+        method: GET
         type: allow
       # Deny content grabbing for greedy queries and prevent un-intended self DOS attacks [from default_filters.any]
       - selectors: (feed|rss|pages|languages|blueprint|infinity|tidy|sysview|docview|query|[0-9-]+|jcr:content)
@@ -86,6 +88,21 @@ variants:
         type: deny
       # Allow current user [from default_filters.any]
       - url: /libs/granite/security/currentuser.json
+        type: allow
+      # Allow IMS Authentication [from default_filters.any]
+      - url: /callback/j_security_check
+        type: allow
+      # AEM Sites Filters: to allow site30 theme servlet [from default_filters.any]
+      - path: /content/*
+        extension: theme
+        type: allow
+      # Allow GraphQL & preflight requests: GraphQL also supports "GET" requests, if you intend to use "GET" add a rule in filters.any [from default_filters.any]
+      - url: /content/_cq_graphql/*/endpoint.json
+        method: (POST|OPTIONS)
+        type: allow
+      # GraphQL Persisted Queries & preflight requests [from default_filters.any]
+      - url: /graphql/execute.json*
+        method: (GET|POST|OPTIONS)
         type: allow
       # Deny content grabbing for /content - additional selectors not included in default dispatcher.any
       - path: /content(/.*)?
@@ -115,6 +132,12 @@ variants:
         # Exclude .htx extension from caching
         - glob: "*.htx"
           type: deny
+        # Don't cache csrf login tokens [from default_filters.any]
+        - glob: /libs/granite/csrf/token.json
+          type: deny
+        # GraphQL cache rules for persistent queries [from default_filters.any]
+        - glob: /graphql/execute.json/*
+          type: deny
 
         # Defines the pages that are "invalidated" after any activation
         invalidate:
@@ -124,10 +147,6 @@ variants:
         - glob: "*.html"
           type: allow
         - glob: "*.json"
-          type: allow
-        - glob: "/etc/segmentation.segment.js"
-          type: allow
-        - glob: "*/analytics.sitecatalyst.js"
           type: allow
 
 templateDir: aem-dispatcher-cloud
@@ -184,6 +203,10 @@ files:
   - aem-publish
 - file: conf.d/rewrites/default_rewrite.rules
   url: classpath:/aem-sdk-dispatcher/src/conf.d/rewrites/default_rewrite.rules
+  variants:
+  - aem-publish
+- file: opt-in/USE_SOURCES_DIRECTLY
+  url: classpath:/aem-sdk-dispatcher/src/opt-in/USE_SOURCES_DIRECTLY
   variants:
   - aem-publish
 
