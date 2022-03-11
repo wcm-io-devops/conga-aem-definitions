@@ -283,6 +283,11 @@ config:
     serverName:
     serverAliasNames:
 
+    # Logging configuration
+    logging:
+      # Log level for mod_rewrite (Error, Warn, Info, Debug, Trace1-Trace8)
+      rewriteLogLevel: Warn
+
     # Redirecting from "/" (only publish dispatcher)
     rootRedirect:
       #url: /en.html

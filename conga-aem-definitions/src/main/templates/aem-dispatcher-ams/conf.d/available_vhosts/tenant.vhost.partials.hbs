@@ -30,7 +30,7 @@ ServerAlias {{this}}
 
 {{~#block "logSettings"}}
 # Possible values include: debug, info, notice, warn, error, crit, alert, emerg.
-LogLevel {{httpd.logging.level}}
+LogLevel {{httpd.logging.level}} rewrite:{{httpd.logging.rewriteLogLevel}}
 ErrorLog logs/vhost_{{tenant}}_error.log
 CustomLog logs/vhost_{{tenant}}_access.log {{httpd.logging.accessLogFormat}}
 
