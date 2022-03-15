@@ -220,6 +220,7 @@ config:
     logging:
       level: error
       accessLogFormat: '"%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-agent}i\""'
+      rewriteLogLevel: debug
     accessRestriction:
       adminAccessFromIp: 10.0.0.0/255.0.0.0
       adminAccessFromHost: www.example.org
