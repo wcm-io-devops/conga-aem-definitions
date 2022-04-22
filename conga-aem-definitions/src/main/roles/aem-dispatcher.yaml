@@ -331,7 +331,7 @@ config:
       - ^/var
       uriAllowContentAccess:
       - ^/content/dam
-
+^
     # Custom configuration snippets for vhost files (only on publish dispatcher - useful for tenant-specific configurations)
     customVHostConfig:
       # Placed at the top of the vhost config file
@@ -345,6 +345,8 @@ config:
     remoteIPInternalProxies:
     # - 10.0.2.0/24
     # - gateway.localdomain
+    # The name of the header the remoteip module is using for detecting the client IP address
+    remoteIPHeader: X-Forwarded-For
 
   dispatcher:
 

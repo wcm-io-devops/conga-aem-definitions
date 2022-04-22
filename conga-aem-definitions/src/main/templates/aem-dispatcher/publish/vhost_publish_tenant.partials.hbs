@@ -54,10 +54,11 @@ RewriteEngine On
 {{~#block "remoteIPForwarding"}}
 {{~#if httpd.remoteIPInternalProxies}}
 # Trusted remote ip proxies
-<IfModule remoteip>
+<IfModule mod_remoteip.c>
 {{~#each httpd.remoteIPInternalProxies}}
 RemoteIPInternalProxy {{this}}
 {{~/each}}
+RemoteIPHeader {{httpd.remoteIPHeader}}
 </IfModule>
 {{~/if}}
 {{/block}}
