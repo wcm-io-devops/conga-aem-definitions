@@ -38,6 +38,17 @@ CustomLog ${APACHE_LOG_DIR}/vhost_author_access.log {{httpd.logging.accessLogFor
 RewriteEngine On
 {{/block}}
 
+{{~#block "remoteIPForwarding"}}
+{{~#if httpd.remoteIPInternalProxies}}
+# Trusted remote ip proxies
+<IfModule mod_remoteip.c>
+{{~#each httpd.remoteIPInternalProxies}}
+RemoteIPInternalProxy {{this}}
+{{~/each}}
+RemoteIPHeader {{httpd.remoteIPHeader}}
+</IfModule>
+{{~/if}}
+{{/block}}
 
 {{~#block "rewriteEnforcePrimaryHostname"}}
 # Make sure primary hostname is always used - but don't rewrite the dispatcher invalidation URL
