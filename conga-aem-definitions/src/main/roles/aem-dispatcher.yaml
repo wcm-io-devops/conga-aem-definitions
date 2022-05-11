@@ -345,6 +345,8 @@ config:
     remoteIPInternalProxies:
     # - 10.0.2.0/24
     # - gateway.localdomain
+    # The name of the header the remoteip module is using for detecting the client IP address
+    remoteIPHeader: X-Forwarded-For
 
   dispatcher:
 
