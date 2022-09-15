@@ -186,6 +186,10 @@ RewriteRule ^(.*)$ http://{{httpHost httpd.serverName port=httpd.serverPort}}$1 
 # Send CSP header to client
 Header set Content-Security-Policy "{{httpd.headers.contentSecurityPolicy}}"
 {{~/if}}
+{{~#if httpd.headers.permissionsPolicy}}
+# Send permissions policy header to client
+Header set Permissions-Policy "{{httpd.headers.permissionsPolicy}}"
+{{~/if}}
 {{~#if httpd.headers.referrerPolicy}}
 # Send Referrer-Policy header to client
 Header set Referrer-Policy "{{httpd.headers.referrerPolicy}}"
