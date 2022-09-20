@@ -305,6 +305,8 @@ config:
     headers:
       # Enables/Configures the Content-Security-Policy header on publish dispatcher (see https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)
       contentSecurityPolicy:
+      # Enables/Configures the permissions-poicy header on publish dispatcher (see https://w3c.github.io/webappsec-permissions-policy/)
+      permissionsPolicy:
       # Enables/Configures the Referrer-Policy header on publish dispatcher (see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy)
       referrerPolicy: "origin-when-cross-origin"
       # Enables/Configures the X-XSS-Protection header on publish dispatcher (see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection)

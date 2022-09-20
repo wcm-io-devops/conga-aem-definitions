@@ -114,6 +114,7 @@ nodes:
           - _merge_
         headers:
           htmlExpirationTimeMin: 3
+          permissionsPolicy: 'geolocation=(self "https://example.com"), camera=()'
       dispatcher:
         cache:
           rootPath: /var/cache/publish1
@@ -161,6 +162,8 @@ nodes:
               - _merge_
           headers:
             htmlExpirationTimeMin: 6
+            permissionsPolicy: 'geolocation=*'
+
         dispatcher:
           farmName: custom_farm_name
           cache:
@@ -278,6 +281,7 @@ tenants:
       rootRedirect.url: /de.html
       headers:
         contentSecurityPolicy: "script-src 'self' 'unsafe-inline' 'unsafe-eval' *.sample1.com;"
+        permissionsPolicy: "fullscreen=(), geolocation=()"
         xssProtection: "1; mode=block"
         referrerPolicy: "strict-origin-when-cross-origin"
         cacheControl:
