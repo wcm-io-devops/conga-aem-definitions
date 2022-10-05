@@ -375,6 +375,9 @@ config:
     # Defines the path for the DispatcherConfig
     configPath: dispatcher.d/dispatcher.any
 
+    # Controls the DispatcherPassError setting
+    passError: 0
+
     # Configure dispatcher cache
     cache:
 

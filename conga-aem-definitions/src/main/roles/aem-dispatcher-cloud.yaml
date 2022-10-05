@@ -402,6 +402,9 @@ config:
     logging:
       level: Warn
 
+    # Controls the DispatcherPassError setting
+    passError: 0
+
     # Configure dispatcher cache
     cache:
 

@@ -407,6 +407,9 @@ config:
     # Name of the farm
     farmName: publishfarm
 
+    # Controls the DispatcherPassError setting
+    passError: 0
+
     # Configure dispatcher cache
     cache:
 

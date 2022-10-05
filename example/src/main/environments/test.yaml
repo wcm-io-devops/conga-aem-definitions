@@ -68,6 +68,7 @@ nodes:
           - _merge_
       dispatcher:
         configPath: /opt/apache2/dispatcher.d/dispatcher.any
+        passError: 1
         cache:
           rootPath: /var/cache/publish1
           statFilesLevel: 3
@@ -116,6 +117,7 @@ nodes:
           htmlExpirationTimeMin: 3
           permissionsPolicy: 'geolocation=(self "https://example.com"), camera=()'
       dispatcher:
+        passError: 403,404
         cache:
           rootPath: /var/cache/publish1
           statFilesLevel: 3
@@ -166,6 +168,7 @@ nodes:
 
         dispatcher:
           farmName: custom_farm_name
+          passError: 400-599
           cache:
             rootPath: /var/cache/publish1
             statFilesLevel: 3
