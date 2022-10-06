@@ -27,6 +27,9 @@
       <action type="add" dev="trichter">
         Role aem-dispatcher, aem-dispatcher-ams, aem-dispatcher-cloud: Introduce (optional) headers.permissionsPolicy to allow configuration of the Permissions-Policy header.
       </action>
+      <action type="add" dev="trichter">
+        Role aem-dispatcher, aem-dispatcher-ams, aem-dispatcher-cloud: Introduce dispatcher.passError to allow configuration of DispatcherPassError parameter.
+      </action>
     </release>
 
     <release version="1.12.2" date="2022-05-11">

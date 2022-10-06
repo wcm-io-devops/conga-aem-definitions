@@ -407,6 +407,12 @@ config:
     # Name of the farm
     farmName: publishfarm
 
+    # Controls the DispatcherPassError setting
+    # 0 = spool all errors to client
+    # 1 = pass all error coded >= 400 over to apache
+    # code or code range = pass specific errors to apache
+    passError: 0
+
     # Configure dispatcher cache
     cache:
 
