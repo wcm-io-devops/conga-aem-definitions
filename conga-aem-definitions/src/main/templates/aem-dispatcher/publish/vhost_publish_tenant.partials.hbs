@@ -47,6 +47,9 @@ CustomLog ${APACHE_LOG_DIR}/vhost_publish_{{httpd.serverName}}_access.log {{http
 # Do not allow RFC 2616 trace requests
 TraceEnable Off
 
+# Suppress leaking the exact Apache/Dispatcher version
+ServerSignature Off
+
 # Enable rewrite engine
 RewriteEngine On
 {{/block}}
