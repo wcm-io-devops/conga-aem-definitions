@@ -139,6 +139,10 @@ Header set Cache-Control "public, must-revalidate"
 # Send CSP header to client
 Header set Content-Security-Policy "{{httpd.headers.contentSecurityPolicy}}"
 {{~/if}}
+{{~#if httpd.headers.featurePolicy}}
+# Send feature policy header to client
+Header set Feature-Policy "{{httpd.headers.featurePolicy}}"
+{{~/if}}
 {{~#if httpd.headers.permissionsPolicy}}
 # Send permissions policy header to client
 Header set Permissions-Policy "{{httpd.headers.permissionsPolicy}}"
