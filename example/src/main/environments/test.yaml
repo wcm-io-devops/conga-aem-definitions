@@ -115,6 +115,7 @@ nodes:
           - _merge_
         headers:
           htmlExpirationTimeMin: 3
+          featurePolicy: "geolocation 'self' https://example.com; camera 'none';"
           permissionsPolicy: 'geolocation=(self "https://example.com"), camera=()'
       dispatcher:
         passError: 403,404
@@ -164,6 +165,7 @@ nodes:
               - _merge_
           headers:
             htmlExpirationTimeMin: 6
+            featurePolicy: 'geolocation *;'
             permissionsPolicy: 'geolocation=*'
 
         dispatcher:
@@ -284,6 +286,7 @@ tenants:
       rootRedirect.url: /de.html
       headers:
         contentSecurityPolicy: "script-src 'self' 'unsafe-inline' 'unsafe-eval' *.sample1.com;"
+        featurePolicy: "fullscreen 'none'; geolocation 'none';"
         permissionsPolicy: "fullscreen=(), geolocation=()"
         xssProtection: "1; mode=block"
         referrerPolicy: "strict-origin-when-cross-origin"
