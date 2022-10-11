@@ -93,6 +93,9 @@ DocumentRoot "${PUBLISH_DOCROOT}"
 
 # Do not allow RFC 2616 trace requests
 TraceEnable Off
+
+# Suppress leaking the exact Apache/Dispatcher version
+ServerSignature Off
 {{/block}}
 
 {{~#block "customVHostConfigBeforeSslEnforce"}}

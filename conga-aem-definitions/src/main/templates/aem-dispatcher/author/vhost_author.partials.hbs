@@ -34,6 +34,9 @@ CustomLog ${APACHE_LOG_DIR}/vhost_author_access.log {{httpd.logging.accessLogFor
 
 
 {{~#block "generalSettings"}}
+# Suppress leaking the exact Apache/Dispatcher version
+ServerSignature Off
+
 # Enable rewrite engine
 RewriteEngine On
 {{/block}}
