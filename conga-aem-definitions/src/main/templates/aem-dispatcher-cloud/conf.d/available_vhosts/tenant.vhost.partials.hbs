@@ -60,7 +60,7 @@ AllowEncodedSlashes NoDecode
   # Don't compress images & videos
   SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png|webm|mp4)$ no-gzip dont-vary
   # Prevent clickjacking
-  Header always append X-Frame-Options SAMEORIGIN
+  Header always set X-Frame-Options SAMEORIGIN
 </Directory>
 <IfModule disp_apache2.c>
   # Enabled to allow rewrites to take affect and not be ignored by the dispatcher module

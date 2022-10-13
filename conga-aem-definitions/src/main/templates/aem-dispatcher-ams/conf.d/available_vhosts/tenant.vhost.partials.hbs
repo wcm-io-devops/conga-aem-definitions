@@ -72,7 +72,7 @@ DocumentRoot "${PUBLISH_DOCROOT}"
   # Make sure proxies don't deliver the wrong content
   Header append Vary User-Agent env=!dont-vary
   # Prevent clickjacking
-  Header always append X-Frame-Options SAMEORIGIN
+  Header always set X-Frame-Options SAMEORIGIN
 </Directory>
 <Directory "${PUBLISH_DOCROOT}">
   AllowOverride None
