@@ -60,13 +60,13 @@ AllowEncodedSlashes NoDecode
   # Don't compress images & videos
   SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png|webm|mp4)$ no-gzip dont-vary
   # Prevent clickjacking
-  Header always append X-Frame-Options SAMEORIGIN
+  Header always set X-Frame-Options SAMEORIGIN
 </Directory>
 <IfModule disp_apache2.c>
   # Enabled to allow rewrites to take affect and not be ignored by the dispatcher module
   DispatcherUseProcessedURL  On
   # Default setting to allow all errors to come from the aem instance
-  DispatcherPassError    0
+  DispatcherPassError {{dispatcher.passError}}
 </IfModule>
 <IfModule mod_rewrite.c>
   RewriteEngine  on
@@ -75,6 +75,9 @@ AllowEncodedSlashes NoDecode
 
 # Do not allow RFC 2616 trace requests
 TraceEnable Off
+
+# Suppress leaking the exact Apache/Dispatcher version
+ServerSignature Off
 {{/block}}
 
 
@@ -138,6 +141,14 @@ Header set Cache-Control "public, must-revalidate"
 {{~#if httpd.headers.contentSecurityPolicy}}
 # Send CSP header to client
 Header set Content-Security-Policy "{{httpd.headers.contentSecurityPolicy}}"
+{{~/if}}
+{{~#if httpd.headers.featurePolicy}}
+# Send feature policy header to client
+Header set Feature-Policy "{{httpd.headers.featurePolicy}}"
+{{~/if}}
+{{~#if httpd.headers.permissionsPolicy}}
+# Send permissions policy header to client
+Header set Permissions-Policy "{{httpd.headers.permissionsPolicy}}"
 {{~/if}}
 {{~#if httpd.headers.referrerPolicy}}
 # Send Referrer-Policy header to client

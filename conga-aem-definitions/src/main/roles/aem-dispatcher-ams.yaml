@@ -277,6 +277,10 @@ config:
     headers:
       # Enables/Configures the Content-Security-Policy header on publish dispatcher (see https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)
       contentSecurityPolicy:
+      # Enables/Configures the Feature-Policy  header on publish dispatcher (see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Feature-Policy)
+      featurePolicy:
+      # Enables/Configures the Permissions-Policy header on publish dispatcher (see https://w3c.github.io/webappsec-permissions-policy/)
+      permissionsPolicy:
       # Enables/Configures the Referrer-Policy header on publish dispatcher (see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy)
       referrerPolicy: "origin-when-cross-origin"
       # Enables/Configures the X-XSS-Protection header on publish dispatcher (see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection)
@@ -404,6 +408,12 @@ config:
 
     # Name of the farm
     farmName: publishfarm
+
+    # Controls the DispatcherPassError setting
+    # 0 = spool all errors to client
+    # 1 = pass all error coded >= 400 over to apache
+    # code or code range = pass specific errors to apache
+    passError: 0
 
     # Configure dispatcher cache
     cache:
