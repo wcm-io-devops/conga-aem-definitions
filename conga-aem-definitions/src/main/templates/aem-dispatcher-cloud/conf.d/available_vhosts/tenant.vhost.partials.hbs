@@ -40,7 +40,7 @@ AllowEncodedSlashes NoDecode
   # Webserver in AEM cloud service is always terminated with SSL
   RequestHeader set X-Forwarded-SSL "on"
 </IfModule>
-<Directory "${DOCROOT}">
+<Directory />
   <IfModule disp_apache2.c>
     # Some items cache with the wrong mime type
     # Use this option to use the name to auto-detect mime types when cached improperly
@@ -54,13 +54,16 @@ AllowEncodedSlashes NoDecode
   </IfModule>
   Options FollowSymLinks
   AllowOverride None
-  Require all granted
   # Insert filter
   SetOutputFilter DEFLATE
   # Don't compress images & videos
   SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png|webm|mp4)$ no-gzip dont-vary
   # Prevent clickjacking
   Header always set X-Frame-Options SAMEORIGIN
+</Directory>
+<Directory "${DOCROOT}">
+  AllowOverride None
+  Require all granted
 </Directory>
 <IfModule disp_apache2.c>
   # Enabled to allow rewrites to take affect and not be ignored by the dispatcher module

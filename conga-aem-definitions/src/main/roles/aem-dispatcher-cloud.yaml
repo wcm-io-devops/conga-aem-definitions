@@ -50,6 +50,7 @@ variants:
       - x-requested-with
       - If-Modified-Since
       - Authorization
+      - x-request-id
 
       # Dispatcher filter rules (use only regex, no glob expressions)
       filter:
@@ -134,9 +135,6 @@ variants:
           type: deny
         # Don't cache csrf login tokens [from default_filters.any]
         - glob: /libs/granite/csrf/token.json
-          type: deny
-        # GraphQL cache rules for persistent queries [from default_filters.any]
-        - glob: /graphql/execute.json/*
           type: deny
 
         # Defines the pages that are "invalidated" after any activation
