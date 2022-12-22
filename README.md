@@ -4,7 +4,7 @@
 [![Maven Central](https://img.shields.io/maven-central/v/io.wcm.devops.conga.definitions/io.wcm.devops.conga.definitions.aem)](https://repo1.maven.org/maven2/io/wcm/devops/conga/definitions/io.wcm.devops.conga.definitions.aem)
 
 Documentation: https://devops.wcm.io/conga/definitions/aem/<br/>
-Issues: https://wcm-io.atlassian.net/projects/WDCONGA<br/>
+Issues: https://github.com/wcm-io-devops/conga-aem-definitions/issues<br/>
 Wiki: https://wcm-io.atlassian.net/wiki/<br/>
 Continuous Integration: https://github.com/wcm-io-devops/conga-aem-definitions/actions<br/>
 Commercial support: https://wcm.io/commercial-support.html
