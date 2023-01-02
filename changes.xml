@@ -27,6 +27,12 @@
       <action type="add" dev="trichter">
         Role aem-dispatcher, aem-dispatcher-ams, aem-dispatcher-cloud: Introduce dispatcher.filterAppend filter list.
       </action>
+      <action type="update" dev="nbellack">
+        Role aem-dispatcher-cloud: Sync with default dispatcher configuration from Adobe project archetype 36 to 39.
+      </action>
+      <action type="update" dev="sseifert">
+        Switch to Java 11 as minimum version.
+      </action>
     </release>
 
     <release version="1.13.0" date="2022-10-13">
