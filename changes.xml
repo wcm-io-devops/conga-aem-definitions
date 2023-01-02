@@ -25,6 +25,9 @@
 
     <release version="1.14.0" date="not-released">
       <action type="add" dev="trichter">
+        Role aem-dispatcher, aem-dispatcher-ams, aem-dispatcher-cloud: Block form selector with a non-empty suffix on all URLs in order to fix form validator bypass issue.
+      </action>
+      <action type="add" dev="trichter">
         Role aem-dispatcher, aem-dispatcher-ams, aem-dispatcher-cloud: Introduce dispatcher.filterAppend filter list.
       </action>
       <action type="update" dev="nbellack">
