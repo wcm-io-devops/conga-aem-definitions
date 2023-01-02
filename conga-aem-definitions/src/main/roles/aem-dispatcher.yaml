@@ -61,7 +61,7 @@ variants:
         type: allow
 
       # list of filters that will be appended after the "normal" filter list to ensure denied content is not accidentally allowed again by other selectors
-      appendFilter:
+      filterAppend:
       # Deny content grabbing, on all accessible pages [from default dispatcher.any]
       - selectors: ((sys|doc)view|query|[0-9-]+)
         extension: (json|xml)

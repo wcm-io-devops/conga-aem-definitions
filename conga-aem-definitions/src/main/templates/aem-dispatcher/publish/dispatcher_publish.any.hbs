@@ -59,8 +59,8 @@
       /{{@index}}
         {{{aemDispatcherFilter this}}}
 {{~/each}}
-{{~#each dispatcher.appendFilter }}
-      /999{{@index}}
+{{~#each dispatcher.filterAppend }}
+      /append_{{@index}}
         {{{aemDispatcherFilter this}}}
 {{~/each}}
 
