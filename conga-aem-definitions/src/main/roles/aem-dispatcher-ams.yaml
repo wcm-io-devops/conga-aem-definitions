@@ -81,31 +81,31 @@ variants:
 
       # list of filters that will be appended after the "normal" filter list to ensure denied content is not accidentally allowed again by other selectors
       filterAppend:
-        # Deny content grabbing for greedy queries and prevent un-intended self DOS attacks [from default_filters.any]
-        - selectors: (feed|rss|pages|languages|blueprint|infinity|tidy|sysview|docview|query|[0-9-]+|jcr:content)
-          extension: (json|xml|html|feed)
-          type: deny
-        # Deny authoring query params [from default_filters.any]
-        - query: debug=.*
-          type: deny
-        - query: wcmmode=.*
-          type: deny
-        # Deny content grabbing for /content - additional selectors not included in default dispatcher.any
-        - path: /content(/.*)?
-          selectors: (ambits|assetsearch|assignments|childrenlist|cloudservices|contentfinder|context|emailservice|exacttarget|ext|form|media|missingpages|mobileapps|pages|paragraphs|payloadsummary|permissions|publications|referencelist|savedsearch|skippedpages|search|social|style|tags|tagtree|timezones)
-          extension: (json)
-          type: deny
-        - path: /content(/.*)?
-          selectors: (translate|translationRulesEditor)
-          extension: (html)
-          type: deny
-        - path: /content(/.*)?
-          selectors: (emulatorstrip|projectcard|thumb)
-          extension: (gif|jpeg|png)
-          type: deny
-        - path: /content(/.*)?
-          selectors: (overlay)
-          type: deny
+      # Deny content grabbing for greedy queries and prevent un-intended self DOS attacks [from default_filters.any]
+      - selectors: (feed|rss|pages|languages|blueprint|infinity|tidy|sysview|docview|query|[0-9-]+|jcr:content)
+        extension: (json|xml|html|feed)
+        type: deny
+      # Deny authoring query params [from default_filters.any]
+      - query: debug=.*
+        type: deny
+      - query: wcmmode=.*
+        type: deny
+      # Deny content grabbing for /content - additional selectors not included in default dispatcher.any
+      - path: /content(/.*)?
+        selectors: (ambits|assetsearch|assignments|childrenlist|cloudservices|contentfinder|context|emailservice|exacttarget|ext|form|media|missingpages|mobileapps|pages|paragraphs|payloadsummary|permissions|publications|referencelist|savedsearch|skippedpages|search|social|style|tags|tagtree|timezones)
+        extension: (json)
+        type: deny
+      - path: /content(/.*)?
+        selectors: (translate|translationRulesEditor)
+        extension: (html)
+        type: deny
+      - path: /content(/.*)?
+        selectors: (emulatorstrip|projectcard|thumb)
+        extension: (gif|jpeg|png)
+        type: deny
+      - path: /content(/.*)?
+        selectors: (overlay)
+        type: deny
 
       # Configure dispatcher cache
       cache:
