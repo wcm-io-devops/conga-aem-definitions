@@ -27,6 +27,9 @@
       <action type="add" dev="trichter">
         Role aem-dispatcher, aem-dispatcher-ams, aem-dispatcher-cloud: Introduce dispatcher.filterAppend filter list.
       </action>
+      <action type="update" dev="trichter">
+        Role aem-dispatcher, aem-dispatcher-ams, aem-dispatcher-cloud: Move specific existing deny rules to dispatcher.filterAppend filter list.
+      </action>
       <action type="update" dev="nbellack">
         Role aem-dispatcher-cloud: Sync with default dispatcher configuration from Adobe project archetype 36 to 39.
       </action>
