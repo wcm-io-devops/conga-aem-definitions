@@ -124,6 +124,11 @@ variants:
       - path: /content(/.*)?
         selectors: (overlay)
         type: deny
+      # block form validator bypass
+      - url: '/.*'
+        selectors: "(form)"
+        suffix: "/.+"
+        type: deny
 
       # Configure dispatcher cache
       cache:
