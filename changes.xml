@@ -23,7 +23,13 @@
     xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/plugins/maven-changes-plugin/xsd/changes-1.0.0.xsd">
   <body>
 
-    <release version="1.13.2" date="not-released">
+    <release version="1.14.0" date="not released">
+      <action type="add" dev="trichter">
+        Role aem-dispatcher, aem-dispatcher-ams, aem-dispatcher-cloud: Introduce dispatcher.filterAppend filter list.
+      </action>
+      <action type="update" dev="trichter">
+        Role aem-dispatcher, aem-dispatcher-ams, aem-dispatcher-cloud: Move "security-related" existing deny rules e.g. to prevent content grabbing to dispatcher.filterAppend filter list.<br/>
+      </action>
       <action type="update" dev="nbellack">
         Role aem-dispatcher-cloud: Sync with default dispatcher configuration from Adobe project archetype 36 to 39.
       </action>
