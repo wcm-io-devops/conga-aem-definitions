@@ -2,3 +2,7 @@
 /{{@index}}
   {{{aemDispatcherFilter this}}}
 {{~/each}}
+{{~#each dispatcher.filterAppend }}
+/append_{{@index}}
+  {{{aemDispatcherFilter this}}}
+{{~/each}}
