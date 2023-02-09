@@ -75,12 +75,6 @@ variants:
       - url: /libs/cq/personalization(/.*)?
         method: "GET"
         type: allow
-      # Allow current user [from default_filters.any]
-      - url: /libs/granite/security/currentuser.json
-        type: allow
-
-      # list of filters that will be appended after the "normal" filter list to ensure denied content is not accidentally allowed again by other selectors
-      filterAppend:
       # Deny content grabbing for greedy queries and prevent un-intended self DOS attacks [from default_filters.any]
       - selectors: (feed|rss|pages|languages|blueprint|infinity|tidy|sysview|docview|query|[0-9-]+|jcr:content)
         extension: (json|xml|html|feed)
@@ -90,6 +84,9 @@ variants:
         type: deny
       - query: wcmmode=.*
         type: deny
+      # Allow current user [from default_filters.any]
+      - url: /libs/granite/security/currentuser.json
+        type: allow
       # Deny content grabbing for /content - additional selectors not included in default dispatcher.any
       - path: /content(/.*)?
         selectors: (ambits|assetsearch|assignments|childrenlist|cloudservices|contentfinder|context|emailservice|exacttarget|ext|form|media|missingpages|mobileapps|pages|paragraphs|payloadsummary|permissions|publications|referencelist|savedsearch|skippedpages|search|social|style|tags|tagtree|timezones)
@@ -106,6 +103,9 @@ variants:
       - path: /content(/.*)?
         selectors: (overlay)
         type: deny
+
+      # list of filters that will be appended after the "normal" filter list to ensure denied content is not accidentally allowed again by other selectors
+      filterAppend:
       # block form validator bypass
       - url: '/.*'
         selectors: "(form)"
