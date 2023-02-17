@@ -24,16 +24,16 @@
   <body>
 
     <release version="1.14.0" date="2023-01-12">
-      <action type="add" dev="trichter">
+      <action type="add" dev="trichter" issue="83">
         Role aem-dispatcher, aem-dispatcher-ams, aem-dispatcher-cloud: Introduce dispatcher.filterAppend filter list.
       </action>
-      <action type="add" dev="trichter">
+      <action type="add" dev="trichter" issue="84">
         Role aem-dispatcher, aem-dispatcher-ams, aem-dispatcher-cloud: Block form selector with a non-empty suffix on all URLs in order to fix form validator bypass issue.
       </action>
-      <action type="update" dev="trichter">
+      <action type="update" dev="trichter" issue="83">
         Role aem-dispatcher, aem-dispatcher-ams, aem-dispatcher-cloud: Move "security-related" existing deny rules e.g. to prevent content grabbing to dispatcher.filterAppend filter list.
       </action>
-      <action type="update" dev="nbellack">
+      <action type="update" dev="nbellack" issue="82">
         Role aem-dispatcher-cloud: Sync with default dispatcher configuration from Adobe project archetype 36 to 39.
       </action>
       <action type="update" dev="sseifert">
