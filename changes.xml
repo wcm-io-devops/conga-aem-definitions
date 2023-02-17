@@ -24,8 +24,8 @@
   <body>
 
     <release version="1.15.0" date="not released">
-      <action type="fix" dev="trichter">
-        Role aem-dispatcher, aem-dispatcher-ams, aem-dispatcher-cloud: Revert dispatcher.filter filter list to values from 1.13.0
+      <action type="fix" dev="trichter" issue="85">
+        Role aem-dispatcher, aem-dispatcher-ams, aem-dispatcher-cloud: Revert #83, move "security-related" deny rules back to dispatcher.filter.
       </action>
     </release>
 
