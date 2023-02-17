@@ -40,7 +40,12 @@
     <system>GitHub Actions</system>
     <url>https://github.com/wcm-io-devops/conga-aem-definitions/actions</url>
   </ciManagement>
-  
+
+  <issueManagement>
+    <system>GitHub</system>
+    <url>https://github.com/wcm-io-devops/conga-aem-definitions/issues/</url>
+  </issueManagement>
+
   <build>
     <plugins>
 
