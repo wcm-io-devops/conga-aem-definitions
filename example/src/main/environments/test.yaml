@@ -315,6 +315,8 @@ tenants:
 - tenant: cloud-sample4.com
   config:
     httpd:
+      generateEnabledVhost: false
+      generateAvailableVhost: false
       cloudManagerConditional:
         dev:
           serverName: www.dev-sample4.com
