@@ -73,7 +73,9 @@ AllowEncodedSlashes NoDecode
 </IfModule>
 <IfModule mod_rewrite.c>
   RewriteEngine  on
-  Include conf.d/rewrites/rewrite.rules
+  {{~#each httpd.rewriteIncludes}}
+    Include {{ this }}
+  {{~/each}}
 </IfModule>
 
 # Do not allow RFC 2616 trace requests

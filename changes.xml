@@ -24,6 +24,9 @@
   <body>
 
     <release version="1.15.0" date="not released">
+      <action type="fix" dev="trichter" issue="87">
+        Role aem-dispatcher-cloud: Introduce httpd.rewriteIncludes (ported from aem-dispatcher-ams role).
+      </action>
       <action type="fix" dev="trichter" issue="85">
         Role aem-dispatcher, aem-dispatcher-ams, aem-dispatcher-cloud: Revert #83, move "security-related" deny rules back to dispatcher.filter.
       </action>
