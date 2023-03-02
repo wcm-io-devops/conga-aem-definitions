@@ -27,6 +27,9 @@
       <action type="add" dev="trichter" issue="87">
         Role aem-dispatcher-cloud: Introduce httpd.rewriteIncludes (ported from aem-dispatcher-ams role).
       </action>
+      <action type="add" dev="trichter" issue="86">
+        Role aem-dispatcher-cloud: Introduce httpd.generateAvailableVhost and httpd.generateEnabledVhost to control vhost generation.
+      </action>
       <action type="fix" dev="trichter" issue="85">
         Role aem-dispatcher, aem-dispatcher-ams, aem-dispatcher-cloud: Revert #83, move "security-related" deny rules back to dispatcher.filter.
       </action>
