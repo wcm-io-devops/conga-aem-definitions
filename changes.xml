@@ -24,6 +24,9 @@
   <body>
 
     <release version="1.15.0" date="not released">
+      <action type="add" dev="trichter" issue="88">
+        Role aem-dispatcher-cloud: Introduce httpd.rewrites (ported from aem-dispatcher-ams role).
+      </action>
       <action type="add" dev="trichter" issue="87">
         Role aem-dispatcher-cloud: Introduce httpd.rewriteIncludes (ported from aem-dispatcher-ams role).
       </action>

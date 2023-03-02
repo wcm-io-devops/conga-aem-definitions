@@ -363,6 +363,15 @@ config:
     rewriteIncludes:
       - conf.d/rewrites/rewrite.rules
 
+    # Rewrite rules
+    # These rules are evaluated before the mapping rules
+    rewrites: []
+    # examples:
+    #  - rule: ^/crx/(.*)$                 - [R=404,L]
+    #  - conditions:
+    #      - '%{REQUEST_URI} !^/system/sling/logout(.*)$'
+    #    rule: ^/system/(.*)$              - [R=404,L]
+
     # Request URI patterns for Sling maping short URL configuration
     mapping:
       uriExcludeFromMapping:

@@ -173,6 +173,17 @@ Header set X-XSS-Protection "{{httpd.headers.xssProtection}}"
 {{~/if}}
 {{/block}}
 
+{{~#block "rewrites"}}
+{{~#if httpd.rewrites}}
+# Rewrites
+{{~#each httpd.rewrites}}
+{{~#each this.conditions}}
+RewriteCond {{this}}
+{{~/each}}
+RewriteRule {{this.rule}}
+{{~/each}}
+{{/if ~}}
+{{/block}}
 
 {{~#block "rewriteSlingShortUrlMapping"}}
 {{~#if sling.mapping.rootPath}}
