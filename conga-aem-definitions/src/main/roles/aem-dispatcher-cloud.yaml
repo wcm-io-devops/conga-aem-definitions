@@ -363,10 +363,8 @@ config:
     rewriteIncludes:
       - conf.d/rewrites/rewrite.rules
 
-    # Rewrite rules
-    # These rules are evaluated before the mapping rules
-    rewrites: []
-    # examples:
+    # These rewrite rules are evaluated before the mapping rules
+    # rewrites:
     #  - rule: ^/crx/(.*)$                 - [R=404,L]
     #  - conditions:
     #      - '%{REQUEST_URI} !^/system/sling/logout(.*)$'
