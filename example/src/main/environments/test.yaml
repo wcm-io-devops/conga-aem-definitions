@@ -310,6 +310,8 @@ tenants:
         prod:
           serverName: www.prod-sample3.com
       rootRedirect.url: /en.html
+      rewrites:
+        - rule: ^/subpage/?$ /subpage.html [NC,R=301,L]
     sling.mapping.rootPath: /content/sample3
 
 - tenant: cloud-sample4.com
