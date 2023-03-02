@@ -359,6 +359,10 @@ config:
       # Set the default experiation time for text/html responses (enabled by default in AEM Cloud Service webserver)
       htmlExpirationTimeMin: 5
 
+    # List of rewrite rules to include in the vhost
+    rewriteIncludes:
+      - conf.d/rewrites/rewrite.rules
+
     # Request URI patterns for Sling maping short URL configuration
     mapping:
       uriExcludeFromMapping:

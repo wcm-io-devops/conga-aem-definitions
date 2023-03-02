@@ -328,6 +328,9 @@ tenants:
         prod:
           serverName: www.prod-sample4.com
       rootRedirect.url: /content/sample4/en.html
+      rewriteIncludes:
+        - _merge_
+        - conf.d/rewrites/additional_rewrite.rules
 
 - tenant: ams-sample5.com
   config:
