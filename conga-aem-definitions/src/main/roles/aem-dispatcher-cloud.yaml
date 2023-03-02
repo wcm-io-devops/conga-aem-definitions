@@ -169,6 +169,7 @@ files:
   template: conf.d/available_vhosts/tenant.vhost.hbs
   multiply: tenant
   fileHeader: conf
+  condition: ${httpd.generateAvailableVhost}
 
 # enabled vhosts
 - file: ${new('java.text.DecimalFormat','0000').format(multiplyIndex)}_${tenant}.vhost
@@ -177,6 +178,7 @@ files:
   variants:
   - aem-publish
   multiply: tenant
+  condition: ${httpd.generateEnabledVhost}
 
 # global rewrite rules
 - file: rewrite.rules
@@ -384,6 +386,12 @@ config:
       beforeRewrite:
       # Placed at the bottom of the vhost confign file
       after:
+
+    # Controls the generation of available_vhosts files
+    generateAvailableVhost: true
+
+    # Controls the generation of enabled_vhosts files
+    generateEnabledVhost: true
 
     # Allows to define different server names/alias names per environment in a single dispatcher configuration
     #cloudManagerConditional:
