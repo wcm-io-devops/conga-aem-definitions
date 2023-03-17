@@ -310,11 +310,15 @@ tenants:
         prod:
           serverName: www.prod-sample3.com
       rootRedirect.url: /en.html
+      rewrites:
+        - rule: ^/subpage/?$ /subpage.html [NC,R=301,L]
     sling.mapping.rootPath: /content/sample3
 
 - tenant: cloud-sample4.com
   config:
     httpd:
+      generateEnabledVhost: false
+      generateAvailableVhost: false
       cloudManagerConditional:
         dev:
           serverName: www.dev-sample4.com
@@ -326,6 +330,9 @@ tenants:
         prod:
           serverName: www.prod-sample4.com
       rootRedirect.url: /content/sample4/en.html
+      rewriteIncludes:
+        - _merge_
+        - conf.d/rewrites/additional_rewrite.rules
 
 - tenant: ams-sample5.com
   config:

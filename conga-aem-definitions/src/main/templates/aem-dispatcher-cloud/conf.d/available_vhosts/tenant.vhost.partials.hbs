@@ -73,7 +73,9 @@ AllowEncodedSlashes NoDecode
 </IfModule>
 <IfModule mod_rewrite.c>
   RewriteEngine  on
-  Include conf.d/rewrites/rewrite.rules
+  {{~#each httpd.rewriteIncludes}}
+    Include {{ this }}
+  {{~/each}}
 </IfModule>
 
 # Do not allow RFC 2616 trace requests
@@ -171,6 +173,17 @@ Header set X-XSS-Protection "{{httpd.headers.xssProtection}}"
 {{~/if}}
 {{/block}}
 
+{{~#block "rewrites"}}
+{{~#if httpd.rewrites}}
+# Rewrites
+{{~#each httpd.rewrites}}
+{{~#each this.conditions}}
+RewriteCond {{this}}
+{{~/each}}
+RewriteRule {{this.rule}}
+{{~/each}}
+{{/if ~}}
+{{/block}}
 
 {{~#block "rewriteSlingShortUrlMapping"}}
 {{~#if sling.mapping.rootPath}}

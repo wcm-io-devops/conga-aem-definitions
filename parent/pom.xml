@@ -31,7 +31,7 @@
 
   <groupId>io.wcm.devops.conga.definitions</groupId>
   <artifactId>io.wcm.devops.conga.definitions.aem.parent</artifactId>
-  <version>1.14.0</version>
+  <version>1.15.0</version>
   <packaging>pom</packaging>
 
   <name>CONGA AEM Definitions</name>
@@ -40,7 +40,12 @@
     <system>GitHub Actions</system>
     <url>https://github.com/wcm-io-devops/conga-aem-definitions/actions</url>
   </ciManagement>
-  
+
+  <issueManagement>
+    <system>GitHub</system>
+    <url>https://github.com/wcm-io-devops/conga-aem-definitions/issues/</url>
+  </issueManagement>
+
   <build>
     <plugins>
 

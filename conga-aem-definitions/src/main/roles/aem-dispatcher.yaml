@@ -53,15 +53,6 @@ variants:
       # Enable features [from default dispatcher.any]
       - url: /libs/cq/personalization(/.*)?
         type: allow
-      # Allow access to client libraries and designs at /etc
-      - url: (/etc/clientlibs|/etc.clientlibs|/etc/designs/.*/clientlibs)(/.*)?
-        type: allow
-      # open consoles (access is controlled in httpd config)
-      - url: /(admin|crx|system)(/.*)?
-        type: allow
-
-      # list of filters that will be appended after the "normal" filter list to ensure denied content is not accidentally allowed again by other selectors
-      filterAppend:
       # Deny content grabbing, on all accessible pages [from default dispatcher.any]
       - selectors: ((sys|doc)view|query|[0-9-]+)
         extension: (json|xml)
@@ -87,6 +78,15 @@ variants:
       - path: /content(/.*)?
         selectors: (overlay)
         type: deny
+      # Allow access to client libraries and designs at /etc
+      - url: (/etc/clientlibs|/etc.clientlibs|/etc/designs/.*/clientlibs)(/.*)?
+        type: allow
+      # open consoles (access is controlled in httpd config)
+      - url: /(admin|crx|system)(/.*)?
+        type: allow
+
+      # list of filters that will be appended after the "normal" filter list to ensure denied content is not accidentally allowed again by other selectors
+      filterAppend:
       # block form validator bypass
       - url: '/.*'
         selectors: "(form)"
