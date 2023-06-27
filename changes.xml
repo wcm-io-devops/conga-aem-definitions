@@ -28,7 +28,7 @@
         Role aem-dispatcher-cloud: Add httpd.headers.htmlExpirationTimeSec parameter to control the default expiration time for text/html responses.
       </action>
       <action type="remove" dev="sseifert">
-        Role aem-dispatcher-cloud: Remove httpd.headers.htmlExpirationTimeMin parameter which was interperted incorrectly as seconds instead of minutes. Build will fail if this parameters is still in use.
+        Role aem-dispatcher-cloud: Remove httpd.headers.htmlExpirationTimeMin parameter which was interpreted incorrectly as seconds instead of minutes. Build will fail if this parameters is still in use.
       </action>
     </release>
 
