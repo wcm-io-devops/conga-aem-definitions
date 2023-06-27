@@ -23,6 +23,15 @@
     xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/plugins/maven-changes-plugin/xsd/changes-1.0.0.xsd">
   <body>
 
+    <release version="2.0.0" date="not released">
+      <action type="add" dev="sseifert">
+        Role aem-dispatcher-cloud: Add httpd.headers.htmlExpirationTimeSec parameter to control the default expiration time for text/html responses.
+      </action>
+      <action type="remove" dev="sseifert">
+        Role aem-dispatcher-cloud: Remove httpd.headers.htmlExpirationTimeMin parameter which was interperted incorrectly as seconds instead of minutes. Build will fail if this parameters is still in use.
+      </action>
+    </release>
+
     <release version="1.15.0" date="2023-03-17">
       <action type="add" dev="trichter" issue="88">
         Role aem-dispatcher-cloud: Introduce httpd.rewrites (ported from aem-dispatcher-ams role).

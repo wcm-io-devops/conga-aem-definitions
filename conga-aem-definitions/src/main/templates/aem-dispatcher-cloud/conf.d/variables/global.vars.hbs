@@ -1,3 +1,6 @@
+{{disallowProperty
+    "httpd.headers.htmlExpirationTimeMin" "Parameter 'httpd.headers.htmlExpirationTimeMin' is no longer supported, please use 'httpd.headers.htmlExpirationTimeSec' instead."
+~}}
 #
 # This file contains the variables defined for all virtual hosts
 #
@@ -34,5 +37,5 @@ Define REWRITE_LOG_LEVEL {{httpd.logging.rewriteLogLevel}}
 
 {{#httpdCloudManagerConditional}}
 # Set the default expiration time for text/html responses (in minutes)
-Define EXPIRATION_TIME {{httpd.headers.htmlExpirationTimeMin}}
+Define EXPIRATION_TIME {{httpd.headers.htmlExpirationTimeSec}}
 {{/httpdCloudManagerConditional}}
