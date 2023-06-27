@@ -114,7 +114,7 @@ nodes:
             type: allow
           - _merge_
         headers:
-          htmlExpirationTimeMin: 3
+          htmlExpirationTimeSec: 180
           featurePolicy: "geolocation 'self' https://example.com; camera 'none';"
           permissionsPolicy: 'geolocation=(self "https://example.com"), camera=()'
       dispatcher:
@@ -164,7 +164,6 @@ nodes:
                 type: allow
               - _merge_
           headers:
-            htmlExpirationTimeMin: 6
             featurePolicy: 'geolocation *;'
             permissionsPolicy: 'geolocation=*'
 
