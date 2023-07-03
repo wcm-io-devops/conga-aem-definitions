@@ -298,8 +298,6 @@ config:
         # Cache AEM Clientlibs with long cache key for 1 year
         - locationMatch: "\\.lc-.*-lc\\.min\\.(css|js)$"
           directives: "max-age=31536000, public"
-      # Set the default experiation time for text/html responses (enabled by default in AEM Cloud Service webserver)
-      htmlExpirationTimeMin: 5
 
     # List of rewrite rules to include in the vhost
     rewriteIncludes:
@@ -382,7 +380,6 @@ config:
     #    serverAliasNames:
     #    - www.dev-alias3a.com
     #    - www.dev-alias3b.com
-    #    htmlExpirationTimeMin: 3
 
 
   dispatcher:
