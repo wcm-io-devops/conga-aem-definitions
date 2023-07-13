@@ -24,7 +24,7 @@
   <body>
 
     <release version="2.1.0" date="not released">
-      <action type="fix" dev="trichter">
+      <action type="fix" dev="trichter" issue="90">
         Role aem-dispatcher-cloud: Use https in rewriteHomepageRedirect to avoid unnecessary http redirect.
       </action>
     </release>
