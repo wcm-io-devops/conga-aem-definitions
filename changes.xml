@@ -23,6 +23,12 @@
     xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/plugins/maven-changes-plugin/xsd/changes-1.0.0.xsd">
   <body>
 
+    <release version="2.0.4" date="not released">
+      <action type="update" dev="sseifert" issue="91">
+        Role aem-dispatcher-cloud: Sync with default dispatcher configuration from Adobe AEM project archetype 40 to 47.
+      </action>
+    </release>
+
     <release version="2.0.2" date="2023-09-08">
       <action type="fix" dev="trichter" issue="90">
         Role aem-dispatcher-cloud: Use https in rewriteHomepageRedirect to avoid unnecessary http redirect.
