@@ -47,7 +47,7 @@ CustomLog logs/vhost_{{tenant}}_access.log {{httpd.logging.accessLogFormat}}
 DocumentRoot "${PUBLISH_DOCROOT}"
 # Add header breadcrumbs for help in troubleshooting
 <IfModule mod_headers.c>
-  Header add X-Vhost "publish"
+  Header add X-Vhost "{{httpd.serverName}}"
   # Webserver in AEM cloud service is always terminated with SSL
   RequestHeader set X-Forwarded-SSL "on"
 </IfModule>
