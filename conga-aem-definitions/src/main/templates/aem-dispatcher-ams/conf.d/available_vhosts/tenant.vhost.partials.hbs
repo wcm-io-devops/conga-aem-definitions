@@ -47,7 +47,9 @@ CustomLog logs/vhost_{{tenant}}_access.log {{httpd.logging.accessLogFormat}}
 DocumentRoot "${PUBLISH_DOCROOT}"
 <IfModule mod_headers.c>
   # Add header breadcrumbs for help in troubleshooting
+{{#httpdCloudManagerConditional}}
   Header add X-Vhost "{{httpd.serverName}}"
+{{/httpdCloudManagerConditional}}
   # Webserver in AEM cloud service is always terminated with SSL
   RequestHeader set X-Forwarded-SSL "on"
 </IfModule>
