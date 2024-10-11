@@ -24,7 +24,7 @@
   <body>
 
     <release version="2.0.6" date="not released">
-      <action type="update" dev="twolfart">
+      <action type="update" dev="twolfart" issue="93">
         Dynamically generate X-Vhost value.
       </action>
     </release>
