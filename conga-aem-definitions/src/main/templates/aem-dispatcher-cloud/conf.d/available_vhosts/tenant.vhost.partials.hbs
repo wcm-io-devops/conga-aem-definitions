@@ -34,9 +34,11 @@ ServerAlias {{this}}
 DocumentRoot "${DOCROOT}"
 # URI dereferencing algorithm is applied at Sling's level, do not decode parameters here
 AllowEncodedSlashes NoDecode
-# Add header breadcrumbs for help in troubleshooting
 <IfModule mod_headers.c>
-  Header add X-Vhost "publish"
+  # Add header breadcrumbs for help in troubleshooting
+{{#httpdCloudManagerConditional}}
+  Header add X-Vhost "{{httpd.serverName}}"
+{{/httpdCloudManagerConditional}}
   # Webserver in AEM cloud service is always terminated with SSL
   RequestHeader set X-Forwarded-SSL "on"
 </IfModule>
