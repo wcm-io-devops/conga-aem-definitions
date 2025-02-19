@@ -38,7 +38,7 @@ The plugins [CONGA Sling Plugin][conga-sling] and [CONGA AEM Plugin][conga-aem] 
 
 
 [usage]: usage.html
-[changelog]: changes-report.html
+[changelog]: changes.html
 [conga]: https://devops.wcm.io/conga/
 [conga-sling]: https://devops.wcm.io/conga/plugins/sling/
 [conga-aem]: https://devops.wcm.io/conga/plugins/aem/
