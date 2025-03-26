@@ -10,7 +10,8 @@
     {
       "matchFileNames": ["example/**"],
       "matchUpdateTypes": ["minor", "patch"],
-      "automerge": true
+      "automerge": true,
+      "addLabels": ["automerge"]
     }
   ]
 }
