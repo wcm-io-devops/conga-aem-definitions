@@ -64,7 +64,7 @@
           <dependency>
             <groupId>io.wcm.devops.conga.plugins</groupId>
             <artifactId>io.wcm.devops.conga.plugins.sling</artifactId>
-            <version>1.4.0</version>
+            <version>1.4.2</version>
           </dependency>
           <dependency>
             <groupId>io.wcm.devops.conga.plugins</groupId>
