@@ -24,6 +24,12 @@
     xsi:schemaLocation="http://maven.apache.org/changes/2.0.0 https://maven.apache.org/xsd/changes-2.0.0.xsd">
   <body>
 
+    <release version="2.0.10" date="2025-06-18">
+      <action type="update" dev="sseifert" issue="110">
+        Role aem-cms: Mark all content packages that might be generated with dependencyChainIgnore=true - the order of installation is not relevant for those packages.
+      </action>
+    </release>
+
     <release version="2.0.8" date="2025-02-19">
       <action type="update" dev="sseifert" issue="94">
         Role aem-dispatcher-cloud: Sync with default dispatcher configuration from Adobe AEM project archetype 48 to 51.
