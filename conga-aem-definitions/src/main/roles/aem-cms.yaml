@@ -30,6 +30,7 @@ files:
   postProcessors:
   - aem-contentpackage
   postProcessorOptions:
+    dependencyChainIgnore: true
     contentPackage:
       name: aem-cms-publish-slingmapping
       packageType: content
@@ -58,6 +59,7 @@ files:
   postProcessors:
   - aem-contentpackage
   postProcessorOptions:
+    dependencyChainIgnore: true
     contentPackage:
       name: aem-cms-author-replicationagents
       packageType: content
@@ -85,6 +87,7 @@ files:
   postProcessors:
   - aem-contentpackage
   postProcessorOptions:
+    dependencyChainIgnore: true
     contentPackage:
       name: aem-cms-publish-replicationagents
       packageType: content
@@ -109,6 +112,7 @@ files:
   postProcessors:
   - aem-contentpackage-osgiconfig
   postProcessorOptions:
+    dependencyChainIgnore: true
     contentPackage:
       name: aem-cms-system-config
       rootPath: /apps/aem-cms-system-config/config
