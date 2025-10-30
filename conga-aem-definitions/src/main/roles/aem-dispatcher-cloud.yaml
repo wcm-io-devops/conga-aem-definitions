@@ -353,9 +353,27 @@ config:
       xssProtection:
       # Enables/Configures the Cache-Control header on publish dispatcher (see https://developer.mozilla.org/en/docs/Web/HTTP/Headers/Cache-Control)
       cacheControl:
+        # default cache directive
+        - directives: "public, must-revalidate"
+          action: set
         # Cache AEM Clientlibs with long cache key for 1 year
         - locationMatch: "\\.lc-.*-lc\\.min\\.(css|js)$"
           directives: "max-age=31536000, public"
+        # Cache AEM Clientlibs with short cache key for 1 year
+        - locationMatch: "\\.sc-.*-sc\\.min\\.(css|js)$"
+          directives: "max-age=31536000, public"
+        # cache 301 redirects in CDN for 24h
+        - surrogateDirectives: "max-age=86400"
+          condition: "expr=%{REQUEST_STATUS} == '301'"
+          action: always set
+        # cache 302 redirects in CDN for one hour
+        - surrogateDirectives: "max-age=3600"
+          condition: "expr=%{REQUEST_STATUS} == '302'"
+          action: always set
+        # cache error pages in CDN for max 60 seconds
+        - surrogateDirectives: "max-age=60"
+          condition: "expr=%{REQUEST_STATUS} -in {'400','404','500','501','502','503','504','505'}"
+          action: always set
       # Set the default experiation time for text/html responses (enabled by default in AEM Cloud Service webserver)
       htmlExpirationTimeSec: 300
 

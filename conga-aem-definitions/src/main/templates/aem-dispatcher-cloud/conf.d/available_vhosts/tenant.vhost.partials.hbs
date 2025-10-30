@@ -98,11 +98,15 @@ ServerSignature Off
 
 {{~#block "cacheControl"}}
 # Cache-control
-Header set Cache-Control "public, must-revalidate"
 {{#each httpd.headers.cacheControl}}
-<LocationMatch "{{this.locationMatch}}">
-  Header set Cache-Control "{{this.directives}}"
-</LocationMatch>
+{{#if this.locationMatch~}}<LocationMatch "{{this.locationMatch}}">{{~/if}}
+{{#if this.directives~}}
+Header {{defaultIfEmpty this.action "set"}} Cache-Control "{{this.directives}}" {{#if this.condition}}"{{this.condition}}"{{~/if}}
+{{~/if}}
+{{#if this.surrogateDirectives~}}
+  Header {{defaultIfEmpty this.action "set"}} Surrogate-Control "{{this.surrogateDirectives}}" {{#if this.condition}}"{{this.condition}}"{{~/if}}
+{{~/if}}
+{{#if this.locationMatch~}}</LocationMatch>{{~/if}}
 {{~/each}}
 {{/block}}
 
