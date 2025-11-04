@@ -100,6 +100,7 @@ ServerSignature Off
 # Cache-control
 {{#each httpd.headers.cacheControl}}
 {{#if this.locationMatch~}}<LocationMatch "{{this.locationMatch}}">{{~/if}}
+{{#if this.expiresActiveOff~}}ExpiresActive Off{{~/if}}
 {{#if this.directives~}}
 Header {{defaultIfEmpty this.action "set"}} Cache-Control "{{this.directives}}" {{#if this.condition}}"{{this.condition}}"{{~/if}}
 {{~/if}}

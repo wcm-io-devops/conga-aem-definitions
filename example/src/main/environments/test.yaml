@@ -123,6 +123,11 @@ nodes:
             - locationMatch: "/etc.clientlibs/.*\\.woff2"
               directives: "max-age=86400, public"
               surrogateDirectives: "max-age=31536000, public"
+            - locationMatch: "/no-cache/.*\\.html$"
+              expiresActiveOff: true
+              directives: "no-cache, no-store"
+              action: always set
+
       dispatcher:
         passError: 403,404
         cache:
