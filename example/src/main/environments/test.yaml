@@ -127,6 +127,19 @@ nodes:
               expiresActiveOff: true
               directives: "no-cache, no-store"
               action: always set
+          surrogateControl:
+            - _merge_
+            - locationMatch: "/etc.clientlibs/.*\\.woff2"
+              directives: "max-age=31536000, public, must-revalidate"
+            - locationMatch: ".*\\.html"
+              expiresActiveOff: true
+              directives: "max-age=600, public, stale-while-revalidate=60, stale-if-error=3600"
+            - locationMatch: "/no-cache/.*\\.html$"
+              expiresActiveOff: true
+              directives: "no-cache, no-store"
+
+
+
 
       dispatcher:
         passError: 403,404
