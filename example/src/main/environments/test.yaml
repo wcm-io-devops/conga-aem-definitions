@@ -117,6 +117,30 @@ nodes:
           htmlExpirationTimeSec: 180
           featurePolicy: "geolocation 'self' https://example.com; camera 'none';"
           permissionsPolicy: 'geolocation=(self "https://example.com"), camera=()'
+          cacheControl:
+            - _merge_
+            # cache clientlib font resources even longer in CDN (one year)
+            - locationMatch: "/etc.clientlibs/.*\\.woff2"
+              directives: "max-age=86400, public"
+              surrogateDirectives: "max-age=31536000, public"
+            - locationMatch: "/no-cache/.*\\.html$"
+              expiresActiveOff: true
+              directives: "no-cache, no-store"
+              action: always set
+          surrogateControl:
+            - _merge_
+            - locationMatch: "/etc.clientlibs/.*\\.woff2"
+              directives: "max-age=31536000, public, must-revalidate"
+            - locationMatch: ".*\\.html"
+              expiresActiveOff: true
+              directives: "max-age=600, public, stale-while-revalidate=60, stale-if-error=3600"
+            - locationMatch: "/no-cache/.*\\.html$"
+              expiresActiveOff: true
+              directives: "no-cache, no-store"
+
+
+
+
       dispatcher:
         passError: 403,404
         cache:

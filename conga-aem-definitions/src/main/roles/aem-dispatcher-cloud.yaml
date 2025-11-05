@@ -351,11 +351,45 @@ config:
       referrerPolicy: "origin-when-cross-origin"
       # Enables/Configures the X-XSS-Protection header on publish dispatcher (see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection)
       xssProtection:
+      # default cache control directives
+      cacheControlDefault:
+        # action: set
+        directives: public, must-revalidate
       # Enables/Configures the Cache-Control header on publish dispatcher (see https://developer.mozilla.org/en/docs/Web/HTTP/Headers/Cache-Control)
       cacheControl:
-        # Cache AEM Clientlibs with long cache key for 1 year
-        - locationMatch: "\\.lc-.*-lc\\.min\\.(css|js)$"
+        # Cache AEM Clientlibs with long/short cache key for 1 year
+        - locationMatch: "\\.(lc|sc)-.*-(lc|sc)\\.min\\.(css|js)$"
           directives: "max-age=31536000, public"
+
+          # available options
+          # - locationMatch: "<regex>" # optional, <LocationMatch>...</<LocationMatch> will not be rendered when not defined)
+          #   directives: "" # the cache configuration values to define
+          #   action: "" # optional, the action to use - defaults to 'set')
+          #   condition: "" # optional, when defined rendered after the directives
+          #   expiresActiveOff: true # optional, when set to true 'ExpiresActive Off' will be rendered before the directives
+
+      # Enables/Configures the Surrogate-Control header on publish dispatcher (see https://www.fastly.com/documentation/reference/http/http-headers/Surrogate-Control/)
+      surrogateControl:
+        # cache 301 redirects in CDN for 24h
+        - directives: "max-age=86400"
+          condition: "expr=%{REQUEST_STATUS} == '301'"
+          action: always set
+        # cache 302 redirects in CDN for one hour
+        - directives: "max-age=3600"
+          condition: "expr=%{REQUEST_STATUS} == '302'"
+          action: always set
+        # cache error pages in CDN for max 60 seconds
+        - directives: "max-age=60"
+          condition: "expr=%{REQUEST_STATUS} -in {'400','404','500','501','502','503','504','505'}"
+          action: always set
+
+        # available options
+        # - locationMatch: "<regex>" # optional, <LocationMatch>...</<LocationMatch> will not be rendered when not defined)
+        #   directives: "" # the Surrogate-Control configuration values to define
+        #   action: "" # optional, the action to use - defaults to 'set')
+        #   condition: "" # optional, when defined rendered after the directives
+        #   expiresActiveOff: true # optional, when set to true 'ExpiresActive Off' will be rendered before the directives
+
       # Set the default experiation time for text/html responses (enabled by default in AEM Cloud Service webserver)
       htmlExpirationTimeSec: 300
 
