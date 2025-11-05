@@ -113,7 +113,7 @@ Header {{defaultIfEmpty this.action "set"}} Cache-Control "{{this.directives}}" 
 {{#if this.locationMatch~}}<LocationMatch "{{this.locationMatch}}">{{~/if}}
 {{#if this.expiresActiveOff~}}ExpiresActive Off{{~/if}}
 Header {{defaultIfEmpty this.action "set"}} Surrogate-Control "{{this.directives}}" {{#if this.condition}}"{{this.condition}}"{{~/if}}
-{{~#if this.locationMatch~}}</LocationMatch>{{~/if}}
+{{#if this.locationMatch~}}</LocationMatch>{{~/if}}
 {{~/each}}
 {{/block}}
 
