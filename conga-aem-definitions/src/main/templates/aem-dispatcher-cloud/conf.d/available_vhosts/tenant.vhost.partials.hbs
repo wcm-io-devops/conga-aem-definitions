@@ -97,7 +97,7 @@ ServerSignature Off
 
 
 {{~#block "cacheControl"}}
-# Cache-control
+# Cache-Control
 Header {{defaultIfEmpty httpd.headers.cacheControlDefault.action "set"}} Cache-Control "{{httpd.headers.cacheControlDefault.directives}}"
 {{#each httpd.headers.cacheControl~}}
 {{#if this.locationMatch~}}<LocationMatch "{{this.locationMatch}}">{{~/if~}}

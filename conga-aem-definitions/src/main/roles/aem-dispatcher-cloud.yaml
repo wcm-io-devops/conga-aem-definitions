@@ -365,7 +365,7 @@ config:
           # - locationMatch: "<regex>" # optional, <LocationMatch>...</<LocationMatch> will not be rendered when not defined)
           #   directives: "" # the cache configuration values to define
           #   action: "" # optional, the action to use - defaults to 'set')
-          #   condition: "" # optional, when defined rendered after the directives:
+          #   condition: "" # optional, when defined rendered after the directives
           #   expiresActiveOff: true # optional, when set to true 'ExpiresActive Off' will be rendered before the directives
 
       # Enables/Configures the Surrogate-Control header on publish dispatcher (see https://www.fastly.com/documentation/reference/http/http-headers/Surrogate-Control/)
@@ -387,7 +387,7 @@ config:
         # - locationMatch: "<regex>" # optional, <LocationMatch>...</<LocationMatch> will not be rendered when not defined)
         #   directives: "" # the Surrogate-Control configuration values to define
         #   action: "" # optional, the action to use - defaults to 'set')
-        #   condition: "" # optional, when defined rendered after the directives:
+        #   condition: "" # optional, when defined rendered after the directives
         #   expiresActiveOff: true # optional, when set to true 'ExpiresActive Off' will be rendered before the directives
 
       # Set the default experiation time for text/html responses (enabled by default in AEM Cloud Service webserver)

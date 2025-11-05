@@ -25,11 +25,11 @@
   <body>
 
     <release version="2.1.0" date="not released">
+      <action type="add" dev="trichter" issue="127">
+        Role aem-dispatcher-cloud: Enhance httpd.headers.cacheControl, add httpd.headers.surrogateControl. Made locationMatch optional. Allow control about used action. Introduce more defaults.
+      </action>
       <action type="update" dev="sseifert">
         Switch to Java 17.
-      </action>
-      <action type="update" dev="trichter" issue="127">
-        Role aem-dispatcher-cloud: enhance httpd.headers.cacheControl. Add support for Surrogate-Control. Made locationMatch optional. Allow control about used action. Introduce more defaults.
       </action>
     </release>
 
