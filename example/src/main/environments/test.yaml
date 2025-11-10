@@ -127,6 +127,8 @@ nodes:
               expiresActiveOff: true
               directives: "no-cache, no-store"
               action: always set
+            - locationMatch: "/unset/location"
+              action: unset
           surrogateControl:
             - _merge_
             - locationMatch: "/etc.clientlibs/.*\\.woff2"
@@ -137,6 +139,8 @@ nodes:
             - locationMatch: "/no-cache/.*\\.html$"
               expiresActiveOff: true
               directives: "no-cache, no-store"
+            - locationMatch: "/unset/location"
+              action: unset
 
 
 
