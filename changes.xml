@@ -25,6 +25,9 @@
   <body>
 
     <release version="2.1.0" date="not released">
+      <action type="fix" dev="trichter" issue="130">
+        Role aem-dispatcher-cloud: Do not cache 302 responses for dam redirects to blob storage.
+      </action>
       <action type="add" dev="trichter" issue="129">
         Role aem-dispatcher-cloud: Add support for unset with out directives in Cache-Control and Surrograte-Control header.
       </action>
