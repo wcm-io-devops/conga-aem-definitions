@@ -102,7 +102,7 @@ Header {{defaultIfEmpty httpd.headers.cacheControlDefault.action "set"}} Cache-C
 {{#each httpd.headers.cacheControl}}
 {{#if this.locationMatch~}}<LocationMatch "{{this.locationMatch}}">{{~/if}}
 {{#if this.expiresActiveOff~}}ExpiresActive Off{{~/if}}
-Header {{defaultIfEmpty this.action "set"}} Cache-Control {{#if this.directives}}"{{this.directives}}"{{~/if}} {{#if this.condition}}"{{this.condition}}"{{~/if}}
+Header {{defaultIfEmpty this.action "set"}} Cache-Control{{#if this.directives}} "{{this.directives}}"{{~/if}}{{#if this.condition}} "{{this.condition}}"{{~/if}}
 {{#if this.locationMatch~}}</LocationMatch>{{~/if}}
 {{~/each}}
 {{/block}}
@@ -112,7 +112,7 @@ Header {{defaultIfEmpty this.action "set"}} Cache-Control {{#if this.directives}
 {{#each httpd.headers.surrogateControl}}
 {{#if this.locationMatch~}}<LocationMatch "{{this.locationMatch}}">{{~/if}}
 {{#if this.expiresActiveOff~}}ExpiresActive Off{{~/if}}
-Header {{defaultIfEmpty this.action "set"}} Surrogate-Control {{#if this.directives}}"{{this.directives}}"{{~/if}} {{#if this.condition}}"{{this.condition}}"{{~/if}}
+Header {{defaultIfEmpty this.action "set"}} Surrogate-Control{{#if this.directives}} "{{this.directives}}"{{~/if}}{{#if this.condition}} "{{this.condition}}"{{~/if}}
 {{#if this.locationMatch~}}</LocationMatch>{{~/if}}
 {{~/each}}
 {{/block}}
