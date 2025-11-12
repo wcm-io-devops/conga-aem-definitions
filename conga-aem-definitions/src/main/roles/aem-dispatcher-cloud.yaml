@@ -374,8 +374,9 @@ config:
         - directives: "max-age=86400"
           condition: "expr=%{REQUEST_STATUS} == '301'"
           action: always set
-        # cache 302 redirects in CDN for one hour
-        - directives: "max-age=3600"
+        # cache 302 redirects in CDN for one hour, but not for dam redirects to blob storage
+        - locationMatch: "^(?!/content/dam)"
+          directives: "max-age=3600"
           condition: "expr=%{REQUEST_STATUS} == '302'"
           action: always set
         # cache error pages in CDN for max 60 seconds
