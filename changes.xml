@@ -24,6 +24,21 @@
     xsi:schemaLocation="http://maven.apache.org/changes/2.0.0 https://maven.apache.org/xsd/changes-2.0.0.xsd">
   <body>
 
+    <release version="2.1.0" date="2025-11-17">
+      <action type="fix" dev="trichter" issue="130">
+        Role aem-dispatcher-cloud: Do not cache 302 responses for dam redirects to blob storage.
+      </action>
+      <action type="add" dev="trichter" issue="129">
+        Role aem-dispatcher-cloud: Add support for unset with out directives in Cache-Control and Surrograte-Control header.
+      </action>
+      <action type="add" dev="trichter" issue="127">
+        Role aem-dispatcher-cloud: Enhance httpd.headers.cacheControl, add httpd.headers.surrogateControl. Made locationMatch optional. Allow control about used action. Introduce more defaults.
+      </action>
+      <action type="update" dev="sseifert">
+        Switch to Java 17.
+      </action>
+    </release>
+
     <release version="2.0.10" date="2025-06-18">
       <action type="update" dev="sseifert" issue="110">
         Role aem-cms: Mark all content packages that might be generated with dependencyChainIgnore=true - the order of installation is not relevant for those packages.
