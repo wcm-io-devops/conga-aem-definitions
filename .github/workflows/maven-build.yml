@@ -20,15 +20,13 @@ jobs:
         distribution: [temurin]
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v5
-
-      - name: Setup JDK
-        uses: actions/setup-java@v5
+      - name: Maven Build with SonarCloud
+        uses: wcm-io-devops/github-action-maven-build-sonar@v1
         with:
-          distribution: ${{ matrix.distribution }}
+          os: ${{ matrix.os }}
           java-version: ${{ matrix.java }}
-          cache: maven
-
-      - name: Build and verify
-        run: ./mvnw -s ./.maven-settings.xml -Pcontinuous-integration -B -U clean verify
+          maven-executable: ./mvnw
+          sonar-run-on-os: ubuntu-latest
+          sonar-run-on-java-version: 21
+          sonar-token: ${{ secrets.SONAR_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
