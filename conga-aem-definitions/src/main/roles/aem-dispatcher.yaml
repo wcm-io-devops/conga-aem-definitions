@@ -330,17 +330,17 @@ config:
     # Request URI patterns for Sling mapping short URL configuration
     mapping:
       uriExcludeFromMapping:
-      - ^/apps
-      - ^/bin
-      - ^/content
+      - ^/apps/
+      - ^/bin/
+      - ^/content/
       - ^/dispatcher/invalidate.cache
-      - ^/etc
-      - ^/home
-      - ^/libs
-      - ^/services
-      - ^/system
-      - ^/tmp
-      - ^/var
+      - ^/etc/
+      - ^/home/
+      - ^/libs/
+      - ^/services/
+      - ^/system/
+      - ^/tmp/
+      - ^/var/
       uriAllowContentAccess:
       - ^/content/dam
 
