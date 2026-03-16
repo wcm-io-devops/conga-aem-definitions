@@ -338,17 +338,17 @@ config:
     mapping:
       rootPath: /content
       uriExcludeFromMapping:
-      - ^/apps
-      - ^/bin
-      - ^/content
+      - ^/apps/
+      - ^/bin/
+      - ^/content/
       - ^/dispatcher/invalidate.cache
-      - ^/crx
-      - ^/etc
-      - ^/home
-      - ^/libs
-      - ^/system
-      - ^/tmp
-      - ^/var
+      - ^/crx/
+      - ^/etc/
+      - ^/home/
+      - ^/libs/
+      - ^/system/
+      - ^/tmp/
+      - ^/var/
       uriAllowContentAccess:
       - ^/content/dam
 

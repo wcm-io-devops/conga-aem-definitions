@@ -24,6 +24,12 @@
     xsi:schemaLocation="http://maven.apache.org/changes/2.0.0 https://maven.apache.org/xsd/changes-2.0.0.xsd">
   <body>
 
+    <release version="2.1.2" date="2026-03-16">
+      <action type="fix" dev="trichter" issue="138">
+        Role aem-dispatcher-cloud, aem-dispatcher-ams, aem-dispatcher: adjust uriExcludeFromMapping to exclude path segments not substrings.
+      </action>
+    </release>
+
     <release version="2.1.0" date="2025-11-17">
       <action type="fix" dev="trichter" issue="130">
         Role aem-dispatcher-cloud: Do not cache 302 responses for dam redirects to blob storage.

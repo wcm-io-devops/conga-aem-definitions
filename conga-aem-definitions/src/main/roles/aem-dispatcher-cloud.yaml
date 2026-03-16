@@ -408,18 +408,18 @@ config:
     # Request URI patterns for Sling maping short URL configuration
     mapping:
       uriExcludeFromMapping:
-      - ^/apps
-      - ^/bin
-      - ^/content
+      - ^/apps/
+      - ^/bin/
+      - ^/content/
       - ^/dispatcher/invalidate.cache
-      - ^/crx
-      - ^/etc
-      - ^/home
-      - ^/libs
+      - ^/crx/
+      - ^/etc/
+      - ^/home/
+      - ^/libs/
       - ^/saml_login
-      - ^/system
-      - ^/tmp
-      - ^/var
+      - ^/system/
+      - ^/tmp/
+      - ^/var/
       uriAllowContentAccess:
       - ^/content/dam
       - ^/content/test-site
