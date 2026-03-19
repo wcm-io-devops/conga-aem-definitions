@@ -25,7 +25,7 @@
   <body>
 
     <release version="2.1.4" date="not released">
-      <action type="fix" dev="sseifert">
+      <action type="fix" dev="sseifert" issue="139">
         Role aem-dispatcher-cloud, aem-dispatcher-ams, aem-dispatcher: Add /etc.clientlibs/ as default member of uriExcludeFromMapping.
       </action>
     </release>
