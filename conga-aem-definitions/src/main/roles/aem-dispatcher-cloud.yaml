@@ -414,6 +414,7 @@ config:
       - ^/dispatcher/invalidate.cache
       - ^/crx/
       - ^/etc/
+      - ^/etc.clientlibs/
       - ^/home/
       - ^/libs/
       - ^/saml_login
