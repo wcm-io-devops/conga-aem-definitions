@@ -24,6 +24,12 @@
     xsi:schemaLocation="http://maven.apache.org/changes/2.0.0 https://maven.apache.org/xsd/changes-2.0.0.xsd">
   <body>
 
+    <release version="2.1.4" date="2026-03-23">
+      <action type="fix" dev="sseifert" issue="139">
+        Role aem-dispatcher-cloud, aem-dispatcher-ams, aem-dispatcher: Add /etc.clientlibs/ as default member of uriExcludeFromMapping.
+      </action>
+    </release>
+
     <release version="2.1.2" date="2026-03-16">
       <action type="fix" dev="trichter" issue="138">
         Role aem-dispatcher-cloud, aem-dispatcher-ams, aem-dispatcher: adjust uriExcludeFromMapping to exclude path segments not substrings.

@@ -335,6 +335,7 @@ config:
       - ^/content/
       - ^/dispatcher/invalidate.cache
       - ^/etc/
+      - ^/etc.clientlibs/
       - ^/home/
       - ^/libs/
       - ^/services/
