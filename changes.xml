@@ -25,7 +25,7 @@
   <body>
 
     <release version="2.1.6" date="not released">
-      <action type="update" dev="sseifert" issue="94">
+      <action type="update" dev="sseifert" issue="148">
         Role aem-dispatcher-cloud: Sync with default dispatcher configuration from Adobe AEM project archetype 52 to 57.
       </action>
       <action type="update" dev="sseifert">
