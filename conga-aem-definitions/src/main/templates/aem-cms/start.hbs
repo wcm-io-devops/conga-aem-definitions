@@ -8,7 +8,7 @@
 ### BEGIN customized AEM quickstart settings
 export CQ_PORT="{{quickstart.port}}"
 export CQ_RUNMODE="{{join quickstart.runmodes ','}}"
-export CQ_JVM_OPTS="-server -Xms{{jvm.heapspace.min}} -Xmx{{jvm.heapspace.max}} -XX:MaxPermSize={{jvm.permgenspace.max}}"
+export CQ_JVM_OPTS="-server -Xms{{jvm.heapspace.min}} -Xmx{{jvm.heapspace.max}}"
 export CQ_JVM_OPTS="$CQ_JVM_OPTS -Djava.awt.headless=true -XX:+UseG1GC -XX:+UseStringDeduplication"
 {{~#if jvm.timezone}}
 export CQ_JVM_OPTS="$CQ_JVM_OPTS -Duser.timezone={{jvm.timezone}}"
@@ -56,7 +56,7 @@ fi
 
 # default JVM options
 if [ -z "$CQ_JVM_OPTS" ]; then
-  CQ_JVM_OPTS='-server -Xmx1024m -XX:MaxPermSize=256M -Djava.awt.headless=true'
+  CQ_JVM_OPTS='-server -Xmx1024m -Djava.awt.headless=true'
 fi
 
 # file size limit (ulimit)
