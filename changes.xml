@@ -28,11 +28,11 @@
       <action type="update" dev="sseifert" issue="148">
         Role aem-dispatcher-cloud: Sync with default dispatcher configuration from Adobe AEM project archetype 52 to 57.
       </action>
+      <action type="update" dev="trichter" issue="150">
+        Role aem-cms: Remove -XX:MaxPermSize JVM option from start script, it is ignored since Java 8 and not supported anymore in Java 17+. Configuration parameter jvm.permgenspace.max is removed.
+      </action>
       <action type="update" dev="sseifert">
         Switch to Java 21.
-      </action>
-      <action type="fix" dev="trichter">
-        Role aem-cms: Remove -XX:MaxPermSize JVM option from start script, it is ignored since Java 8 and not supported anymore in Java 17+. Configuration parameter jvm.permgenspace.max is removed.
       </action>
     </release>
 
