@@ -24,6 +24,18 @@
     xsi:schemaLocation="http://maven.apache.org/changes/2.0.0 https://maven.apache.org/xsd/changes-2.0.0.xsd">
   <body>
 
+    <release version="2.1.6" date="2026-10-13">
+      <action type="update" dev="sseifert" issue="148">
+        Role aem-dispatcher-cloud: Sync with default dispatcher configuration from Adobe AEM project archetype 52 to 57.
+      </action>
+      <action type="update" dev="trichter" issue="150">
+        Role aem-cms: Remove -XX:MaxPermSize JVM option from start script, it is ignored since Java 8 and not supported anymore in Java 17+. Configuration parameter jvm.permgenspace.max is removed.
+      </action>
+      <action type="update" dev="sseifert">
+        Switch to Java 21.
+      </action>
+    </release>
+
     <release version="2.1.4" date="2026-03-23">
       <action type="fix" dev="sseifert" issue="139">
         Role aem-dispatcher-cloud, aem-dispatcher-ams, aem-dispatcher: Add /etc.clientlibs/ as default member of uriExcludeFromMapping.
