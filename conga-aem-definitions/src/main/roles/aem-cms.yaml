@@ -145,8 +145,6 @@ config:
     heapspace:
       min: 2048m
       max: 2048m
-    permgenspace:
-      max: 256m
     #timezone: Europe/Berlin
     # Additional JVM argument
     #args: arg1

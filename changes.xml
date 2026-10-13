@@ -31,6 +31,9 @@
       <action type="update" dev="sseifert">
         Switch to Java 21.
       </action>
+      <action type="fix" dev="trichter">
+        Role aem-cms: Remove -XX:MaxPermSize JVM option from start script, it is ignored since Java 8 and not supported anymore in Java 17+. Configuration parameter jvm.permgenspace.max is removed.
+      </action>
     </release>
 
     <release version="2.1.4" date="2026-03-23">
